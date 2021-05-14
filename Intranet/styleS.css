@@ -1,0 +1,71 @@
+#un_div { display : none; }
+.modal-title{
+	font-size: 50px;
+}
+.tamañovalores{
+	font-size: 100px;
+}
+.tamañoantes{
+	font-size: 70px;
+}
+.tamañofooter{
+	font-size: 20px;
+}
+*{
+	padding: 0px;
+	margin: 0px;
+}
+video{
+	position: fixed;
+	min-width: 100%;
+	min-height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	z-index: -2;
+	
+}
+.content{
+	
+}
+
+	
+
+
+
+
+@keyframes slider{
+	0%{opacity: 0;animation-timing-function: ease-in;}
+	10%{opacity: 1;animation-timing-function: ease-out;}
+	25%{opacity: 1;transform: scale(1);}
+	50%{opacity: 0;transform: scale(2);}
+	100%{opacity: 0;}
+}
+@-moz-keyframes slider{
+	0%{opacity: 0;animation-timing-function: ease-in;}
+	10%{opacity: 1;animation-timing-function: ease-out;}
+	25%{opacity: 1;transform: scale(1);}
+	50%{opacity: 0;transform: scale(2);}
+	100%{opacity: 0;}
+}
+@-ms-keyframes slider{
+	0%{opacity: 0;animation-timing-function: ease-in;}
+	10%{opacity: 1;animation-timing-function: ease-out;}
+	25%{opacity: 1;transform: scale(1);}
+	50%{opacity: 0;transform: scale(2);}
+	100%{opacity: 0;}
+}
+@-o-keyframes slider{
+	0%{opacity: 0;animation-timing-function: ease-in;}
+	10%{opacity: 1;animation-timing-function: ease-out;}
+	25%{opacity: 1;transform: scale(1);}
+	50%{opacity: 0;transform: scale(2);}
+	100%{opacity: 0;}
+}
+@-webkit-keyframes slider{
+	0%{opacity: 0;animation-timing-function: ease-in;}
+	10%{opacity: 1;animation-timing-function: ease-out;}
+	25%{opacity: 1;transform: scale(1);}
+	50%{opacity: 0;transform: scale(2);}
+	100%{opacity: 0;}
+}

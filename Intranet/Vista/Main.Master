@@ -1,0 +1,1148 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="Intranet.Vista.Main" %>
+
+<!DOCTYPE html>
+<!--
+This is a starRERE EE Eter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <title>Plataforma Web | LcS</title>
+
+    <link rel="apple-touch-icon" href="http://www.supermio.co/wp-content/uploads/2017/06/2.jpg">
+    <link rel="shortcut icon" href="../2a.PNG" type="image/PNG" />
+
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="../bower_components/morris.js/morris.css">
+
+
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link href="../dist/select2/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
+
+
+
+    <%--  <link href="../dist/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../dist/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <link href="../dist/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../dist/bootstrap/dist/css/Style.css" rel="stylesheet" />
+  
+    <link href="../dist/Ionicons/css/ionicons.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">--%>
+    <link href="../dist/DataTables/datatables.css" rel="stylesheet" />
+    <%--  <link href="../dist/css/AdminLTE.css" rel="stylesheet" />
+    <link href="../dist/css/skins/_all-skins.min.css" rel="stylesheet" />--%>
+    <link id="theme" rel="stylesheet" href="assets/css/themes/theme-beige.min.css" />
+
+    <%--<link href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+    <link href="plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link href="plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />--%>
+
+
+
+
+
+    <style type="text/css">
+        *, *::after, *::before {
+            margin: 0;
+            padding: 0;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+
+        .sidermio {
+            background: rgba(212,228,239,1);
+            background: -moz-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,0.5) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, rgba(134,174,204,0.5)));
+            background: -webkit-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,0.5) 100%);
+            background: -o-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,0.5) 100%);
+            background: -ms-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,0.5) 100%);
+            background: linear-gradient(to right, rgba(212,228,239,1) 0%, rgba(134,174,204,0.5) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#86aecc', GradientType=1 );
+            background-image: url('/dist/img/se.jpg');
+        }
+
+        #backgroud {
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            opacity: 0.8;
+            z-index: 100000;
+        }
+
+        #Progress {
+            position: fixed;
+            top: 40%;
+            left: 40%;
+            height: 20%;
+            width: 20%;
+            z-index: 100001;
+            background-image: url('../dist/img/585d0331234507.564a1d239ac5e.gif');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .notifica {
+            position: fixed;
+            float: right;
+            width: 280px;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -webkit-transition: all 1s ease;
+            transition: all 1s ease;
+            z-index: 10000;
+        }
+
+        #contenedor_carga {
+            background-color: rgba(229,224,226,0.9);
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -webkit-transition: all 1s ease;
+            transition: all 1s ease;
+            z-index: 10000;
+        }
+
+        #carga {
+            border: 15px solid #ccc;
+            border-top-color: #088A08;
+            border-top-style: groove;
+            height: 100px;
+            width: 100px;
+            border-radius: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            -webkit-animation: girar 1.5s linear infinite;
+            -o-animation: girar 1.5s linear infinite;
+            animation: girar 1.5s linear infinite;
+        }
+
+        @keyframes girar {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .fondoblanco {
+            margin-right: 2px;
+            background: #CCD1D1;
+            border: solid;
+        }
+
+        .menuabierto {
+            display: block;
+        }
+    </style>
+    <!-- select2 -->
+
+    <style type="text/css">
+      
+
+        .small-box h3 {
+            font-size: 30px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            white-space: nowrap;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        #logosimbolo {
+            display: none;
+        }
+
+        #div_datosempresa {
+            display: none;
+        }
+
+
+        @media print {
+            #data{
+                display: none;
+                overflow: hidden;
+            }
+            /* Contenido del fichero print.css */
+            .c {
+                display: none;
+            }
+
+            p {
+                margin-bottom: 0px;
+                font-weight: bold;
+            }
+
+            #div_numerodeacta {
+                font-weight: bold;
+                top: 5px;
+                left: 50px;
+            }
+
+            #div_datosempresa {
+                display: inline;
+            }
+
+            #div_detalles {
+                top: 50px;
+            }
+
+            #botonera {
+                display: none;
+            }
+
+            #insert {
+                display: none;
+            }
+
+            #botonInsertar {
+                display: none;
+            }
+
+            ButtonField {
+                display: none;
+            }
+
+             .margin {
+                height: 70px;
+                width: 100%;
+                text-align: center;
+            }
+
+            #div_nombredocumento {
+                position: absolute;
+                width: 100%;
+                font-size: 30px;
+                font-weight: bold;
+                top: 5px;
+                left: 5px;
+            }
+
+            #div_tercero {
+                position: absolute;
+                width: 100%;
+                font-size: 20px;
+                font-weight: bold;
+                top: 5px;
+            }
+
+            #div_ubicacion {
+                position: absolute;
+                width: 100%;
+                font-size: 20px;
+                font-weight: bold;
+                top: 5px;
+                left: 5%;
+            }
+
+            #div_area {
+                position: absolute;
+                width: 100%;
+                font-size: 18px;
+                top: 5px;
+                left: 5%;
+            }
+
+            #logosimbolo {
+                position: absolute;
+                top: 0px;
+                left: 25px;
+                display: inline;
+            }
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <%-- <script type="text/javascript">
+      
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".notifica").fadeOut(5000);
+            }, 3000);
+        });
+    </script>--%>
+
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5b72d8eeafc2c34e96e7908b/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<!--Start of Tawk.to Script-->
+
+<!--End of Tawk.to Script-->
+<body runat="server" class="sidebar-mini skin-green sidebar-collapse fixed " id="eltodo" style="height: auto; min-height: 100%;">
+    <div class="box box-warning box-solid notifica" runat="server" id="excepcion">
+        <div class="box-header with-border">
+            <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Excp Controlada</font></font></h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              <label id="error" runat="server"></label>
+            </font></font>
+        </div>
+        <!-- /.box-body -->
+    </div>
+
+    <div class="box box-success box-solid notifica" runat="server" id="notificacion">
+        <div class="box-header with-border">
+            <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Notificacion</font></font></h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              <label id="txtnotifica" runat="server"></label>
+            </font></font>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <div class="wrapper" style="height: auto; min-height: 100%;">
+
+        <!-- Main Header -->
+        <header class="main-header">
+
+            <!-- Logo -->
+            <a href="1.aspx" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>L</b>CS</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>LC</b>SYSTEM`S</span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-success">1</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">Aqui SMS</li>
+                                <li>
+                                    <!-- inner menu: contains the messages -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <!-- User Image -->
+                                                    <img src="../../dist/img/ws.png" class="img-circle" alt="User Image">
+                                                </div>
+                                                <!-- Message title and timestamp -->
+                                                <h4>Support Team
+                        <small><i class="fa fa-clock-o"></i>5 mins</small>
+                                                </h4>
+                                                <!-- The message -->
+                                                <p>Preguntas sistemas@supermio.co</p>
+                                            </a>
+                                        </li>
+                                        <!-- end message -->
+                                    </ul>
+                                    <!-- /.menu -->
+                                </li>
+                                <li class="footer"><a href="#">Envie </a></li>
+                            </ul>
+                        </li>
+                        <!-- /.messages-menu -->
+
+                        <!-- Notifications Menu -->
+                        <li class="dropdown notifications-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">2</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">Registros</li>
+                                <li>
+                                    <!-- Inner Menu: contains the notifications -->
+                                    <ul class="menu">
+                                       
+                                        <li>
+                                            <a href="COVID/inicio.aspx">
+                                                <i class="fa fa-users text-aqua"></i>Formulario registros bioseguridad.
+                                            </a>
+                                        </li>
+                                        <!-- end notification -->
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">Ver mas</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown notifications-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-birthday-cake"></i>
+                                <span class="label label-warning">2+</span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <p id="hay_cumpleañeros" runat="server"></p>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="cumpleañeros.aspx">Ver mas</a></li>
+                            </ul>
+                        </li>
+                        <!-- Tasks Menu -->
+
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="../../dist/img/username.png" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">
+                                    <asp:Label ID="Label2" runat="server"></asp:Label></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="../../dist/img/ws.png" runat="server" id="fotoperfil" class="img-circle" alt="User Image">
+
+                                    <p>
+                                        Luis Carlos Sanchez - Programador Web
+                  <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <label>Perfil:</label>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <label id="perfiles" runat="server"></label>
+                                            <label id="labelcc" runat="server"></label>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <form action="/" method="post">
+                                        <div class="pull-left">
+
+                                            <a href="perfil.aspx" class="btn btn-default btn-flat"><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></span></a>
+                                        </div>
+                                        <div class="pull-right">
+
+                                            <a href="salir.aspx" class="btn btn-default btn-flat">Salir</a>
+
+
+
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar sidermio">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar" style="height: auto;">
+
+                <!-- Sidebar user panel (optional) -->
+               
+
+
+
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu tree" data-widget="tree">
+                    <li class="header">Menu</li>
+                    <!-- Optionally, you can add icons to the links -->
+
+                    <li class="treeview">
+                        <a href="#" id="A" runat="server"><i class="fa fa-industry"></i><span>Activos Fijos</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="Ingactivos.aspx" id="A1" runat="server"><i class="fa fa-circle-o"></i>Ingreso de Activos</a></li>
+                            <li><a href="listadoactivos.aspx" id="A2" runat="server"><i class="fa fa-circle-o"></i>Listado Activos</a></li>
+                            <li><a href="H_VidaEquipos.aspx" id="A4" runat="server"><i class="fa fa-circle-o"></i>Hoja de Vida Activos</a></li>
+                            <li><a href="Depreciacion.aspx" id="A5" runat="server"><i class="fa fa-circle-o"></i>Depreciacion Activos</a></li>
+                            <li><a href="Baja_Activos.aspx" id="A6" runat="server"><i class="fa fa-circle-o"></i>Baja Activos</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" id="K" runat="server"><i class="fa fa-exchange"></i><span>Kardex</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="Kardex.aspx" id="K1" runat="server">Movimientos</a></li>
+                            <li><a href="Reportkardex.aspx" id="K2" runat="server">Reportes</a></li>
+                            <li><a href="Rep_Kardexg.aspx" id="K3" runat="server">Consolidado</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" id="AE" runat="server"><i class="fa fa-book"></i><span>Actas de Entrega</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="Acta_entrega.aspx" id="AE1" runat="server"><i class="fa fa-circle-o"></i>Nueva de Entrega</a></li>
+                            <li><a href="Consecutivos.aspx" id="AE2" runat="server"><i class="fa fa-circle-o"></i>Consecutivos A/E</a></li>
+                            <li><a href="listageneral.aspx" id="AE3" runat="server"><i class="fa fa-circle-o"></i>Activos Asignados</a></li>
+                        </ul>
+
+                    </li>
+                    <li class="treeview">
+                        <a href="#" id="AM" runat="server"><i class="fa fa-support"></i><span>Actas de Mantenimiento</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="Act_Mant.aspx" id="AM1" runat="server"><i class="fa fa-circle-o"></i>Actas de Mantenimiento</a></li>
+                            <li><a href="consecutivosmant.aspx" id="AM2" runat="server"><i class="fa fa-circle-o"></i>Consecutivos A/M</a></li>
+                            <li><a href="OrdenTrabajo.aspx" id="AM3" runat="server"><i class="fa fa-circle-o"></i>Solicitud Mantenimientos</a></li>
+                            <li><a href="Aprova_Manteni.aspx" id="AM4" runat="server"><i class="fa fa-circle-o"></i>Aprobar Mantenimiento</a></li>
+                            <li><a href="GestionOrdenesM.aspx" id="AM5" runat="server"><i class="fa fa-circle-o"></i>Gestion Orden Mant.</a></li>
+
+                        </ul>
+
+                    </li>
+                    <li class="treeview">
+                        <a href="#" id="RH" runat="server"><i class="fa fa-group "></i><span>Recursos Humanos</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+
+                            <li><a href="Incap.aspx" id="RH1" runat="server"><i class="fa fa-circle-o"></i>Ingresar Incapacidad</a></li>
+                            <li><a href="List_incap.aspx" id="RH3" runat="server"><i class="fa fa-circle-o"></i>Gestion Incapacidades. </a></li>
+                            <li><a href="RH/RH2.aspx" id="RH4" runat="server"><i class="fa fa-circle-o"></i>Reporte de Biometrico. </a></li>
+                            <li><a href="Formatos.aspx" id="RH5" runat="server"><i class="fa fa-file-pdf-o "></i>Formatos. </a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" id="V" runat="server"><i class="fa fa-shopping-cart"></i><span>Ventas</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+
+                        <ul class="treeview-menu">
+                            <li><a id="V1" href="infocomparativo.aspx" runat="server">Comparativo Ventas</a></li>
+                            <li><a id="V2" href="VentasXhora.aspx" runat="server">Ventas por Hora</a></li>
+                            <li><a id="v8" href="VentasXLinea.aspx" runat="server">Ventas por Linea</a></li>
+                            <li><a id="V3" href="ventaXhora_linea.aspx" runat="server">Ventas por Hora - Linea</a></li>
+                            <li><a href="Domicilios.aspx" runat="server">Domicilios</a></li>
+                            <li><a id="V4" href="recordcajerasarticulo.aspx" runat="server">Record Cajera X Articulo</a></li>
+                            <li><a id="V5" href="Info_carnes.aspx" runat="server">Comparativo Carnicos</a></li>
+                            <li><a id="V6" href="articulo_Cliente.aspx" runat="server">Ventas Articulo por Cliente</a></li>
+                            <li><a id="V7" href="Recogidas.aspx" runat="server">Recogidas</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" id="rc" runat="server"><i class="fa fa-car"></i><span>Bodega</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+
+                        <ul class="treeview-menu">
+                            <li><a id="rc1" href="R_compras.aspx" runat="server">Recibo</a></li>
+                            <li><a id="rc3" href="Rcostos.aspx" runat="server">Costos</a></li>
+                            <li><a id="rc2" href="Reporte_recibo_mercancia.aspx" runat="server">Reportes</a></li>
+                            <li class="treeview">
+                                <a href="#" id="A3" runat="server"><i class="fa fa-leaf"></i><span>Fruver</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a id="FR1" href="Transform.aspx" runat="server">Tranformaciones</a></li>
+                                     <li><a id="FR2" href="Gtransforma.aspx" runat="server">Gestion Tranformaciones</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="acti_conteos.aspx" id="G" runat="server"><i class="fa fa-shopping-cart"></i><span>Inventario</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+
+                            <li><a href="acti_conteos.aspx " id="G1" runat="server">Abrir y Cerrar conteos</a></li>
+
+                        </ul>
+
+                    </li>
+                    <li class="treeview">
+                        <a href="#" id="LA14" runat="server"><i class="fa fa-line-chart"></i><span>Informes LA 14</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="la14_auxConta.aspx" id="LA141" runat="server">Auxiliar de Contabilidad</a></li>
+                            <li><a href="VentasGla14.aspx" id="LA142" runat="server">Acomulado De Ventas</a></li>
+                            <li><a href="Ventas_.aspx" id="LA143" runat="server">Ventas</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="treeview">
+                        <a id="LCS" runat="server" href="#"><i class="fa  fa-cog"></i>
+                            <span>Sistema</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="Sistema/PermisosApp.aspx" id="LCS1" runat="server">Menu Administrador</a></li>
+                            <li><a id="LCS2" runat="server" href="User.aspx">Gestion Ingreso</a></li>
+                            <li><a id="LCS3" runat="server" href="Sistema/permisosLcs.aspx">Roles</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- /.sidebar-menu -->
+
+
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+
+            <div style="margin-left: 10px">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+            <!-- Main content -->
+
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+         
+
+            <div class="pull-right hidden-xs">
+                <b>Intranet V1.31 </b>
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2017 <a href="#">Luis carlos sanchez</a></strong> todos los derechos son Reservados.
+        </footer>
+
+        <!-- Control Sidebar -->
+
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <%--  <div id="contenedor_carga">   
+        <div id="carga"></div>
+    </div>--%>
+    <div class="modal fade" id="productModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-header-lg dark bg-dark">
+                    <div class="bg-image">
+                        <img src="assets/img/photos/modal-add.jpg" alt="">
+                    </div>
+                    <h4 class="modal-title">Perfil</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ti-close"></i></button>
+                </div>
+                <div class="modal-product-details">
+                    <div class="row align-items-center">
+                        <div class="col-9">
+
+                            <div class="form-group">
+                                <div class="input-group <%--input-group-sm mb-3--%>">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-id-card-o"></i></span>
+                                    </div>
+                                    <input type="text" id="txtnombreP" runat="server" aria-label="Small" placeholder="Nombre" class="form-control" />
+                                </div>
+                            </div>
+                            <%--nombre--%>
+                        </div>
+                        <div class="col-3 text-lg text-right"></div>
+                    </div>
+                </div>
+                <div class="modal-body panel-details-container">
+                    <!-- Panel Details / Size -->
+                    <div class="panel-details">
+                        <h5 class="panel-details-title">
+                            <label class="custom-control custom-radio">
+                                <input name="radio_title_size" type="radio" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                            <a href="#panelDetailsSize" data-toggle="collapse">Descripcion General</a>
+                        </h5>
+                        <div id="panelDetailsSize" class="collapse show">
+                            <div class="panel-details-content">
+                                hola panel content descripcion general
+                                   
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Panel Details / Additions -->
+                    <div class="panel-details">
+                        <h5 class="panel-details-title">
+                            <label class="custom-control custom-radio">
+                                <input name="radio_title_additions" type="radio" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                            <a href="#panelDetailsAdditions" data-toggle="collapse">Detalles</a>
+                        </h5>
+                        <div id="panelDetailsAdditions" class="collapse">
+                            <div class="panel-details-content">
+                                hola panel detail detalles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Panel Details / Other -->
+
+                <a href="#">content</a>
+
+            </div>
+            <%-- <input type="submit" onserverclick="creaPresentacionProducto" runat="server" id="guardapresentacion" class="btn btn btn-secondary btn-block btn-lg" name="name" value="" />--%>
+        </div>
+    </div>
+  
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  
+    <script src="../dist/DataTables/datatables.js"></script>
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="../bower_components/raphael/raphael.min.js"></script>
+    <script src="../bower_components/morris.js/morris.min.js"></script>
+    <!-- Sparkline -->
+    <script src="../bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+
+    <!-- jQuery Knob Chart -->
+    <script src="../bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="../bower_components/moment/min/moment.min.js"></script>
+    <script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="../dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../dist/js/demo.js"></script>
+    <script src="../dist/select2/dist/js/select2.min.js"></script>
+
+
+    <script src="../dist/DataTables/datatables.js"></script>
+  
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+
+        $(document).ready(function () {
+
+
+            var readURL = function (input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.avatar').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+
+            $(".file-upload").on('change', function () {
+                readURL(this);
+            });
+        });
+
+        $(document).ready(function () {
+            $('#gvuser').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'print'
+                ]
+            });
+
+
+
+        });
+
+        $(document).ready(function () {
+            GridGeneral();
+            GridGeneral2();
+            Grid1();
+            Grid2();
+            Grid3();
+            Grid4();
+            Grid5();
+            Grid6();
+            Grid7();
+            Grid8();
+            Grid9();
+            Grid10();
+            Grid11();
+        });
+        var GridGeneral = function () {
+            $(".gvuser3").prepend($("<thead></thead>").append($(".gvuser3").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+                responsive: true
+            });
+        }
+        var GridGeneral = function () {
+            $(".gvuser").prepend($("<thead></thead>").append($(".gvuser").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+                "buttons": botoneraExport,
+                responsive: true
+            });
+        }
+        var GridGeneral2 = function () {
+            $(".gvuser2").prepend($("<thead></thead>").append($(".gvuser2").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+                "buttons": botoneraExport,
+                responsive: true
+            });
+        }
+         var Grid4 = function () {
+            $(".gv4").prepend($("<thead></thead>").append($(".gv4").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+        var Grid3 = function () {
+            $(".gv3").prepend($("<thead></thead>").append($(".gv3").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+         var Grid5 = function () {
+            $(".gv5").prepend($("<thead></thead>").append($(".gv5").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+        var Grid6 = function () {
+            $(".gv6").prepend($("<thead></thead>").append($(".gv6").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+         var Grid2 = function () {
+            $(".gv2").prepend($("<thead></thead>").append($(".gv2").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+         var Grid1 = function () {
+            $(".gv").prepend($("<thead></thead>").append($(".gv").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+        var Grid7 = function () {
+            $(".gv7").prepend($("<thead></thead>").append($(".gv7").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+         var Grid8 = function () {
+            $(".gv8").prepend($("<thead></thead>").append($(".gv8").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+         var Grid9 = function () {
+            $(".gv9").prepend($("<thead></thead>").append($(".gv9").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+         var Grid10 = function () {
+            $(".gv10").prepend($("<thead></thead>").append($(".gv10").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+         var Grid11 = function () {
+            $(".gv11").prepend($("<thead></thead>").append($(".gv11").find("tr:first"))).dataTable({
+                "language": lenguaje_espanol,
+                "dom": "Bfrtip",
+              "buttons": botonera, 
+               
+            });
+        }
+        $(document).ready(function () {
+            $('#gvuser').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+
+
+        // variables comunes
+
+        var lenguaje_espanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados ",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+
+        var botoneraExport =
+            [
+                {
+                    extend: 'copy',
+                    className: 'copyButton',
+                    text: '<i class="fa fa-clone"></i> Copiar'
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="fa fa-file-excel-o"></i> Excel'
+                },
+                  
+                {
+                    extend: 'csv',
+                    text: '<i class="fa fa-file-excel-o"></i> CSV'
+                },
+                 {
+                    extend: 'pdf',
+                    text: '<i class="fa fa-file-pdf-o"></i> PDF'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa fa-print"></i> Imprimir',
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                '<img src="../dist/img/ws.png" style="position:absolute; top:0; left:1;" />'
+
+                            );
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+                
+            ]
+
+         var botonera =
+            [
+               
+               
+            ]
+
+    </script>
+
+    <script type="text/javascript">
+
+        function ComprobarAcentos(inputtext) {
+            if (!inputtext) return false;
+            if (inputtext.value.match('[á,é,í,ó,ú]|[Á,É,Í,Ó,Ú]')) {
+                alert('No se permiten acentos en la casilla');
+                inputtext.value = '';
+                inputtext.focus();
+                return true;
+            }
+            return false;
+        }
+
+    </script>
+    <script>
+
+
+        $('#btnProcesar').on('click', function () {
+
+        });
+
+
+    </script>
+
+</body>
+</html>

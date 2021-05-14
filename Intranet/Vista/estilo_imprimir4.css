@@ -1,0 +1,16 @@
+section {
+    font: 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+    margin: 2 0 2 0px;
+    text-align: center;
+    background-color: #ffffff;
+}
+#botones_barner {
+	visibility:hidden;
+	display: none;
+}
+#boton {
+	visibility:hidden;
+	display: none;
+
+	}
+	

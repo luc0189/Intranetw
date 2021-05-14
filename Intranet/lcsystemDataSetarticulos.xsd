@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="lcsystemDataSetarticulos" targetNamespace="http://tempuri.org/lcsystemDataSetarticulos.xsd" xmlns:mstns="http://tempuri.org/lcsystemDataSetarticulos.xsd" xmlns="http://tempuri.org/lcsystemDataSetarticulos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="lcsystemConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="lcsystemConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.lcsystemConnectionString.ConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="articuloTableAdapter" GeneratorDataComponentClassName="articuloTableAdapter" Name="articulo" UserDataComponentName="articuloTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="lcsystemConnectionString (Web.config)" DbObjectName="lcsystem.articulo" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT idArt, serialArt, nombreArt, modArt, fabriArt, categArt, proveedor, fcompArt, valoruntArt, comentArt, fcreacArt, fmod, timeGarant, data, inactivo, user, usermod FROM articulo</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="lcsystemDataSetarticulos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="lcsystemDataSetarticulos" msprop:Generator_UserDSName="lcsystemDataSetarticulos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="articulo" msprop:Generator_TableClassName="articuloDataTable" msprop:Generator_TableVarName="tablearticulo" msprop:Generator_TablePropName="articulo" msprop:Generator_RowDeletingName="articuloRowDeleting" msprop:Generator_RowChangingName="articuloRowChanging" msprop:Generator_RowEvHandlerName="articuloRowChangeEventHandler" msprop:Generator_RowDeletedName="articuloRowDeleted" msprop:Generator_UserTableName="articulo" msprop:Generator_RowChangedName="articuloRowChanged" msprop:Generator_RowEvArgName="articuloRowChangeEvent" msprop:Generator_RowClassName="articuloRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
