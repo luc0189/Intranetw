@@ -18,10 +18,10 @@
     <div class="content">
 
             <form id="form1" runat="server">
-         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+     <%--    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                   <ContentTemplate>
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">--%>
+              <%--     <ContentTemplate>--%>
                        <div class="content">
                             <div class="row">
                                 <div class="box">
@@ -215,8 +215,8 @@
                 </div>
                        </div>
                            
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                  <%--  </ContentTemplate>--%>
+               <%-- </asp:UpdatePanel>
 
                 <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
                     <ProgressTemplate>
@@ -229,7 +229,7 @@
                         </div>
 
                     </ProgressTemplate>
-                </asp:UpdateProgress>
+                </asp:UpdateProgress>--%>
 
                
             </form>

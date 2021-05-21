@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using Microsoft.Office.Interop.Excel;
 using SpreadsheetLight;
 using System.IO;
-
+using System.Web.Mvc;
 
 namespace Intranet.Vista
 {
@@ -399,10 +399,15 @@ namespace Intranet.Vista
         }
         public void ExportListFromGridView()
         {
-            string pathFile = AppDomain.CurrentDomain.BaseDirectory + "AppLcs.xlsx";
-            string mdoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments );
+            var guid = Guid.NewGuid().ToString();
+
+
+
+            var name = "AppLcsDevoluciones";
+
+            string pathFile = AppDomain.CurrentDomain.BaseDirectory + "text";
             SLDocument osLDocument = new SLDocument();
-            
+            osLDocument.AddWorksheet("inventario");
             for (int i = 0; i < GridviewItemsCompra.Rows.Count; i++)
             {
                 string rowtest = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[11].Text);
@@ -517,9 +522,16 @@ namespace Intranet.Vista
                 
             }
             osLDocument.ImportDataTable(1, 1, table, true);
-
-            osLDocument.SaveAs(mdoc+"\\AppLcs.xlsx");
+     
+            osLDocument.SaveAs(pathFile + $"\\{guid}-{name}.xlsx");
             Session.Remove("Tabla");
+            var file = $"{guid}-{name}.xlsx";
+            Response.ContentType = "text/xml";
+            Response.ContentEncoding = System.Text.Encoding.UTF8;
+            Response.AppendHeader("Content-Disposition", "attachment;filename=LcsApp.xlsx");
+
+            Response.TransmitFile(Server.MapPath("~/text/" + file + ""));
+            Response.End();
 
 
 
@@ -535,9 +547,9 @@ namespace Intranet.Vista
             var name = "AppLcsDevoluciones";
            
             string pathFile = AppDomain.CurrentDomain.BaseDirectory + "text";
-            string mdoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+          
             SLDocument osLDocument = new SLDocument();
-
+            osLDocument.AddWorksheet("inventario");
             for (int i = 0; i < GridviewItemsCompra.Rows.Count; i++)
             {
                 string rowtest = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[11].Text);
@@ -649,24 +661,23 @@ namespace Intranet.Vista
                 }
 
             }
+           
             osLDocument.ImportDataTable(1, 1, table, true);
-
+           
             osLDocument.SaveAs(pathFile + $"\\{guid}-{name}.xlsx");
             Session.Remove("Tabla");
                var file = $"{guid}-{name}.xlsx";
             Response.ContentType = "text/xml";
             Response.ContentEncoding = System.Text.Encoding.UTF8;
-            Response.AppendHeader("NombreCabecera", "MensajeCabecera");
-            Response.TransmitFile(Server.MapPath($"~/{pathFile}/{file}"));
+            Response.AppendHeader("Content-Disposition", "attachment;filename=LcsApp.xlsx");
+
+            Response.TransmitFile(Server.MapPath("~/text/"+file+""));
             Response.End();
 
 
 
         }
-        //public FileResult hola() 
-        //{
-        //}
-
+       
         protected void GridviewItemsCompra_SelectedIndexChanged(object sender, EventArgs e)
         {
          

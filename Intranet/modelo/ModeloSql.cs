@@ -272,7 +272,7 @@ namespace Intranet.modelo
         }
         internal int mabreocierraRangoConteos(string pidinici, string pidfinn, int protejido)
         {
-            sql = "update invenfis set protejido=" + protejido + ", estado='ConteoCerrado'  where id between'" + pidinici + "' and '" + pidfinn + "'";
+            sql = "update invenfis set protejido=" + protejido + ", estado='Conteo Cerrado'  where id between'" + pidinici + "' and '" + pidfinn + "'";
             return dataload.sqlProcedimiento(sql);
         }
         internal int mFecharangoconteos(string pidIni, string pIdfin, string pFecha)
