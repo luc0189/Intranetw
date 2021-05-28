@@ -1117,7 +1117,10 @@ namespace Intranet.modelo
                 "                 open nombreinvenfis" +
                 "                 fetch next from nombreinvenfis into @p_id, @p_nombre while (@@FETCH_STATUS = 0) " +
                 "                 begin" +
-                "                        insert into #tmpX			" +
+                "                        insert into #tmpX		" +
+                "                           SELECT  t2.id1,  ABS(SUM(t2.dif)) AS dif "+
+
+                "                            FROM(" +
                 "                        SELECT t.id1,  ABS(SUM(t.cantidad1 - t.cantidad2)) AS dif" +
                 "                                                 FROM(" +
                 "                                                        SELECT invenfis.nombre as id1, invenfisdet.articuloID, invenfisdet.cantidad AS cantidad1, CAST(0 as numeric(12, 4)) as cantidad2" +
@@ -1127,7 +1130,8 @@ namespace Intranet.modelo
                 "                                                        SELECT invenfis.nombre as id1, invenfisdet.articuloID, CAST(0 as numeric(12, 4)) AS cantidad1, invenfisdet.cantidad as cantidad2" +
                 "                                                        FROM invenfisdet inner join invenfis on invenfisdet.invenfisID = invenfis.id" +
                 "                                                        WHERE invenfis.nombre = @p_nombre AND grupoinvenfisID = 32  AND invenfis.protejido = 1 and invenfis.estado = 'Conteo Cerrado') t" +
-                "                                                group by t.id1" +
+                "                                                group by t.id1,t.articuloID) t2" +
+                "                                                  GROUP BY t2.id1 " +
                 "                                               fetch next from nombreinvenfis into @p_id,@p_nombre" +
                 "                         end" +
                 "                 select id1 as [Nombre Conteo],FORMAT(dif, '##,###.##') as Diferencias  from #tmpX " +
