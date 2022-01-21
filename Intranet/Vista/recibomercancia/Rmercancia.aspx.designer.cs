@@ -60,6 +60,24 @@ namespace Intranet.Vista.recibomercancia
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtdetalle;
 
         /// <summary>
+        /// Control ctoc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ctoc;
+
+        /// <summary>
+        /// Control refprov.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl refprov;
+
+        /// <summary>
         /// Control txtnombreProveedor.
         /// </summary>
         /// <remarks>
@@ -220,6 +238,15 @@ namespace Intranet.Vista.recibomercancia
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Devnamearticulo;
+
+        /// <summary>
+        /// Control Dvctooc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Dvctooc;
 
         /// <summary>
         /// Control DevOc.

@@ -61,6 +61,8 @@
                                             <strong>
                                                 <center>
                                                  <h4><label id="txtdetalle" class="fw-bold" runat="server">descripcion del articulo</label></h4>
+                                                    
+                                                    <label id="ctoc" runat="server">Ct. OC</label>-<label id="refprov" runat="server">RefProv</label>
                                             </center>
                                             </strong>
                                         <div class="shadow p-3 mb-2 bg-body rounded">
@@ -193,6 +195,7 @@
                                             <strong>
                                                 <center>
                                                  <h4><label id="Devnamearticulo" class="fw-bold" runat="server">descripcion del articulo</label></h4>
+                                                     <label id="Dvctooc" runat="server">Ct. OC</label>
                                             </center>
                                             </strong>
                                         <div class="shadow p-3 mb-2 bg-body rounded">

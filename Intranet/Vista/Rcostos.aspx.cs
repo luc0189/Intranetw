@@ -751,7 +751,7 @@ namespace Intranet.Vista
         {
             for (int i = 0; i < GridviewItemsCompra.Rows.Count; i++)
             {
-                string stado = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[3].Text);
+                string stado = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[27].Text);
                 if (stado.Contains(txtbuscadorplu.Value))
                 {
                     GridviewItemsCompra.Rows[i].BackColor = Color.Cyan;

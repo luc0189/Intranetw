@@ -59,7 +59,7 @@
                                          <asp:LinkButton ID="BtnExportar" runat="server" Text="Exportar Recibidos" OnClick="BtnExportar_Click" class="btn btn-primary"> </asp:LinkButton>
                                          <asp:LinkButton ID="BtnExportarDev" runat="server" Text="Exportar Devoluciones" OnClick="BtnExportarDev_Click" class="btn btn-primary"> </asp:LinkButton>
                                         <div class="btn-group">
-                                            <input type="text" name="name" value="" id="txtbuscadorplu" runat="server" placeholder="Digite Plu" />
+                                            <input type="text" name="name" value="" id="txtbuscadorplu" runat="server" placeholder="Digite Ref Prov" />
                                         <asp:LinkButton ID="Btnbuscaitems" runat="server" Text="Buscar" OnClick="Btnbuscaitems_Click" > </asp:LinkButton>
                                         </div> 
                                         
@@ -87,10 +87,10 @@
                                                 <asp:BoundField DataField="CantoC" HeaderText="CantoC">
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="Costo_Ant" HeaderText="Ct. Ant" ReadOnly="True">
+                                                <asp:BoundField DataField="Costo_orden" HeaderText="Ct. OC" ReadOnly="True">
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="Costo_New" HeaderText="Ct. Nuevo">
+                                                <asp:BoundField DataField="Costo_New" HeaderText="Ct. Compra">
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="Observacion" HeaderText="Observacion">
@@ -148,6 +148,9 @@
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="NamePresentacion" HeaderText="Npres" >
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+                                                 <asp:BoundField DataField="RefProveedor" HeaderText="RProv" >
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
                                                 <asp:CommandField ButtonType="Image" SelectImageUrl="../dist/img/plus.png" ShowSelectButton="True" />

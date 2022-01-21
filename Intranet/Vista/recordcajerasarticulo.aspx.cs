@@ -42,7 +42,7 @@ namespace Intranet.Vista
         {
             try
             {
-                var registros = Controlasql.listaventasXarticulotop(txtfechaini.Value.ToUpper(), txtfechafin.Value, txtarticuloid.Value.ToUpper());
+                var registros = Controlasql.listaventasXarticulotop(txtfechaini.Value.ToUpper(), txtfechafin.Value, txtarticuloid.Value.ToUpper(),Select1.Value);
                 if (registros.Tables[0].Rows.Count > 0)
                 {
                     GridViewventascajeraXarticulo.DataSource = registros;

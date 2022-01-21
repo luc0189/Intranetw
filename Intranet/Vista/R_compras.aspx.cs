@@ -110,11 +110,12 @@ namespace Intranet.Vista
                                         string replace = Convert.ToString(row[3]);
                                         string piva = Convert.ToString(row[4]);
                                         string pivacodigo = Convert.ToString(row[5]);
+                                        string prefproveedor = Convert.ToString(row[6]);
                                         var costo = replace.Replace(',', '.');
                                       
                                             try
                                         {
-                                            var Regis = Controlasql.CcreaitemsOC(validador2.ToString(), plu,"0","","P",cantidad,costo,"V","F",piva,pivacodigo,"","",bd);
+                                            var Regis = Controlasql.CcreaitemsOC(validador2.ToString(), plu,"0","","NLL-",cantidad,costo,"V","F",piva,pivacodigo,"0","", costo, prefproveedor, bd);
                                         }
                                         catch (Exception exp)
                                         {

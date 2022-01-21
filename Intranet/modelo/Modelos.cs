@@ -596,14 +596,14 @@ namespace Intranet.modelo
         {
 
             sql = "SELECT dat_ticket_linea.descripcion," +
-                "    SUM(dat_ticket_linea.peso)as Peso " +
-                " FROM dat_ticket_cabecera," +
-                " dat_ticket_linea " +
-                "       where dat_ticket_cabecera.idticket = dat_ticket_linea.idticket " +
-                "        and dat_ticket_cabecera.idbalanzamaestra = dat_ticket_linea.idbalanzamaestra " +
-                "           and dat_ticket_cabecera.fecha between '" + fechaini + " 00:23:23' and '" + fechafin + " 23:01:01' and nombreseccion = '" + pgrupo + "'" +
-                "           and NombreTienda='" + tienda + "' " +
-                " GROUP BY descripcion";
+                "                   SUM(dat_ticket_linea.peso) as Peso" +
+                "                 FROM dat_ticket_linea inner join dat_ticket_cabecera on dat_ticket_cabecera.idticket = dat_ticket_linea.idticket" +
+                "                       where" +
+                "                                dat_ticket_cabecera.idbalanzamaestra = dat_ticket_linea.idbalanzamaestra" +
+                "                           and dat_ticket_cabecera.fecha >= '"+ fechaini + " 00:23:23'" +
+                "                            and dat_ticket_cabecera.fecha <= '"+ fechafin + " 23:01:01' and dat_ticket_linea.nombreseccion = '"+pgrupo+"'" +
+                "                           and dat_ticket_cabecera.NombreTienda = '"+tienda+"' " +
+                "                 GROUP BY dat_ticket_linea.descripcion ";
             return dataload.MySqlQuerycarnesVERSA(sql);
         }
         //----------------------------------------------------------------
@@ -966,6 +966,23 @@ namespace Intranet.modelo
                 "                                          group by final2.VENTAS,final2.VENTAS_METROCUADRADO,final2.cantidad,final2.PROM_COMPRA,final2.VR_META,final2.PROM_VENTAS_DIARIAS,final2.PROYECTADO,final2.PORCENT";
             return dataload.sqlconsulta(sql);
         }
+        internal DataSet MventasLINEA(string fei, string fef, string ccosto)//aquiventas totales para formulario ventas por linea
+        {
+            sql = "   select  ln.nombre AS Linea" +
+                "        ,count(distinct it.documentID)N_fact" +
+                "        ,FORMAT(Sum(it.vrtotal), '$ ###,###.##')AS V_ANTES_IVA" +
+                "        , FORMAT(Sum(it.vrtotal) / count(d.id), '$ ###,###.##')Pr_Venta " +
+                " from documento d inner join itart it on d.id = it.documentID and d.fecha between '"+fei+ "' and '" + fef + "'" +
+                " inner join articulo art ON it.articuloID = art.codigo" +
+                " inner join linea ln on art.lineaID = ln.codigo " +
+                " INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
+                " where" +
+                "    td.clasedoc IN('FV' , 'FP')" +
+                "	AND d.ccostoID = '"+ccosto+"'" +
+                "    and d.anulado = 0 " +
+                " group by ln.nombre ";
+            return dataload.sqlconsulta(sql);
+        }
         internal DataSet Mventascontramesanterior(string fei, string fef, string ccosto)//aqui trae las ventas contra el mes anterior
         {
             sql = "     declare @fecha1 as date='"+fei+"'" +
@@ -1184,16 +1201,30 @@ namespace Intranet.modelo
         }
         internal DataSet MListaprecio(string barra,string lista)
         {
-            sql = "SELECT a.codigo,  a.detalle, cd.codbarra,cast(valormiva as int)as" +
-                "             valormiva,cast(a.peso as int) as peso, cast(condiprom.vrveneficio as int) as descuento from articulo a" +
-                "               left" +
-                "                                                                                                    join dbo.artspromo aprom ON a.codigo = aprom.articuloID" +
-                "                                                                                             left" +
-                "                                                                                                   join dbo.condicionpromo condiprom ON aprom.promocionID = condiprom.promocionID" +
-                "                                                                                              left JOIN dbo.promocion promo ON condiprom.promocionID = promo.id" +
-                "             left join codbar cd on cd.articuloID = a.codigo" +
-                "             left join precio pc on pc.articuloID = a.codigo and(pc.presentacionID = cd.presentacionID or(pc.presentacionID is null and cd.presentacionID is null))" +
-                "             where inactivo = 0 and cd.CODBARRA = '"+barra+"' and pc.listprecioID = '"+ lista + "'; ";
+            sql = " SELECT r.codigo, " +
+                "    r.detalle, " +
+                "	r.codbarra," +
+                "	r.valormiva," +
+                "	r.peso," +
+                "	r.descuento," +
+                "	coalesce(pres.nombrepres, ' ') nombrepres " +
+                " from(" +
+                "    SELECT a.codigo," +
+                "        a.detalle," +
+                "        cd.codbarra," +
+                "        cast(valormiva as int) as valormiva," +
+                "        cast(a.peso as int) as peso," +
+                "        coalesce(cast(condiprom.vrveneficio as int), 0.0) as descuento," +
+                "        cd.presentacionID" +
+                "    from articulo a with(nolock)" +
+                "    left join dbo.artspromo aprom with(nolock)  ON a.codigo = aprom.articuloID" +
+                "    left join dbo.condicionpromo condiprom with(nolock) ON aprom.promocionID = condiprom.promocionID" +
+                "    left JOIN dbo.promocion promo with(nolock) ON condiprom.promocionID = promo.id" +
+                "    left join codbar cd with(nolock) on cd.articuloID = a.codigo" +
+                "    left join precio pc with(nolock) on pc.articuloID = a.codigo and(pc.presentacionID = cd.presentacionID or(pc.presentacionID is null and cd.presentacionID is null))" +
+                "    where cd.CODBARRA = '"+barra+"'" +
+                "    and pc.listprecioID = '"+lista+"'" +
+                "    and inactivo = 0)r left join dbo.presentacion pres with(nolock) on pres.id = r.presentacionID";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet MListasaldo(string articulo,string bodega)
@@ -1283,9 +1314,21 @@ namespace Intranet.modelo
                 " ORDER BY cantidad DESC";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listadoventaXarticulocajeratop(string fei, string fef, string articuloid)
+        internal DataSet listadoventaXarticulocajeratop(string fei, string fef, string articuloid,string ccosto)
         {
-            sql = "SELECT  Top(10) articulo.detalle,documento.logusucreo, SUM(CAST(itart.cantidad AS float)) AS cantidad, SUM(itart.vrtotal) AS valor_total FROM itart INNER JOIN articulo ON itart.articuloID = articulo.codigo INNER JOIN documento ON itart.documentID = documento.id INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "') AND(tipodoc.clasedoc = 'FP') AND(articulo.codigo = '" + articuloid + "') GROUP BY documento.logusucreo,articulo.detalle ORDER BY cantidad DESC";
+            sql = "SELECT  Top(10) articulo.detalle" +
+                " ,documento.logusucreo," +
+                "  SUM(CAST(itart.cantidad AS float)) AS cantidad," +
+                "  SUM(itart.vrtotal) AS valor_total " +
+                " FROM itart " +
+                " INNER JOIN articulo ON itart.articuloID = articulo.codigo " +
+                " INNER JOIN documento ON itart.documentID = documento.id " +
+                " INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo" +
+                " WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
+                " AND(tipodoc.clasedoc = 'FP') " +
+                " AND(articulo.codigo = '" + articuloid + "') and(documento.ccostoID='"+ccosto+"')" +
+                " GROUP BY documento.logusucreo,articulo.detalle" +
+                " ORDER BY cantidad DESC";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listadoventaVERSA(string fei, string fef)
@@ -1415,6 +1458,21 @@ namespace Intranet.modelo
                 " AND d.ccostoID='000002'  " +
                 "GROUP BY DATEPART(HH, d.logfecreo) " +
                 "order by Rango_Hora  ";
+            return dataload.sqlconsulta(sql);
+        }internal DataSet Ventaslinearesumido(string fecha1, string fecha2)
+        {
+            sql = "   select  ln.nombre AS Linea" +
+                "        ,count(distinct it.documentID)N_fact" +
+                "        ,FORMAT(Sum(it.vrtotal), '$ ###,###.##')AS V_ANTES_IVA" +
+                "        , FORMAT(Sum(it.vrtotal) / count(d.id), '$ ###,###.##')Pr_Venta" +
+                " from documento d inner join itart it on d.id = it.documentID and d.fecha between '"+fecha1+"' and '"+ fecha2 + "'" +
+                " inner join articulo art ON it.articuloID = art.codigo " +
+                " inner join linea ln on art.lineaID = ln.codigo " +
+                " INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo " +
+                " where" +
+                "    td.clasedoc IN('FV' , 'FP')" +
+                "	and d.anulado = 0 " +
+                " group by ln.nombre";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet ventashoralineaversalles(string Fecha, string linea)
@@ -1903,6 +1961,8 @@ namespace Intranet.modelo
             String pcodigo,
             String factor,
             String namepres,
+            String costordencompra,
+            String refProv,
             String bd) //RECIBIR MERCANCIA PEDIDA
         {
 
@@ -1918,7 +1978,7 @@ namespace Intranet.modelo
                 "'" + iva + "',"+
                 "'" + pcodigo + "', " +
                 " '"+factor+"'," +
-                " '"+namepres+"')";
+                " '"+namepres+"','"+ costordencompra + "','"+ refProv + "')";
             return dataload.MysqlProcedimiento(sql, bd);
         } 
         internal int Mupdateitemsfactura(String nid, String pCant, String ncostonuevo,String pestado, String pboserva, String bd) //RECIBIR MERCANCIA PEDIDA

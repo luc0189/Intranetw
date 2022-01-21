@@ -366,6 +366,15 @@ namespace Intranet.Vista
         protected global::System.Web.UI.HtmlControls.HtmlAnchor V2;
 
         /// <summary>
+        /// Control A7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A7;
+
+        /// <summary>
         /// Control v8.
         /// </summary>
         /// <remarks>

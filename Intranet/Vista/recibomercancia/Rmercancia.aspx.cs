@@ -56,7 +56,9 @@ namespace Intranet.Vista.recibomercancia
            string piva,
            string pcodigoiva,
            string factor,
-           string namepres)
+           string namepres,
+            string pcostoordencompra,
+           string prefprov)
         {
             try
             {
@@ -76,7 +78,9 @@ namespace Intranet.Vista.recibomercancia
                     }
                     if (validador != 0)
                     {
-                        Insertaritems(pcantoc, pplu, pcantidad,pnombre, pvalorcosto, bd, validador.ToString(), "P",isDev,piva,pcodigoiva,factor,namepres);
+                        Insertaritems(pcantoc, pplu, pcantidad,pnombre, pvalorcosto, bd, validador.ToString(), "P",isDev,piva,pcodigoiva,factor,namepres, pcostoordencompra, prefprov);
+                        txtcodbarra.Value = "";
+                        Dev_barra.Value = "";
                         Listarecibido();
                     }
                     else
@@ -84,7 +88,7 @@ namespace Intranet.Vista.recibomercancia
                         try
                         {
                             Registroitems = Controlasql.Ccreanofactura(tipodoc, oc, usert, bd);
-                            Insertaritems(pcantoc,pplu,pcantidad,pnombre,pvalorcosto,bd, validador.ToString(), "P", isDev, piva, pcodigoiva,factor,namepres);
+                            Insertaritems(pcantoc,pplu,pcantidad,pnombre,pvalorcosto,bd, validador.ToString(), "P", isDev, piva, pcodigoiva,factor,namepres, pcostoordencompra, prefprov);
                             cantrecibo();
                             Listarecibido();
                         }
@@ -124,10 +128,10 @@ namespace Intranet.Vista.recibomercancia
         }
         protected void btnguarda_Click(object sender, EventArgs e)
         {
-            Guarda(txtCantOc.Text,txtplu.Text,txtcant.Value, txtdetalle.InnerText,txtcosto.Text, txtnombreProveedor.Text,"F", Piva.Text, PcodigoIva.Text, pfactor.Text, PnamePres.Text);
+            Guarda(txtCantOc.Text,txtplu.Text,txtcant.Value, txtdetalle.InnerText,txtcosto.Text, txtnombreProveedor.Text,"F", Piva.Text, PcodigoIva.Text, pfactor.Text, PnamePres.Text, ctoc.InnerText, refprov.InnerText);
            
         }
-        protected void Insertaritems(string cantorden,string pPlu,string pcant,string pdetalle,string pcosto,string pbd,string valida,string stateid,string isDev,string piva,string pcodigoiva,string fact,string namep) 
+        protected void Insertaritems(string cantorden,string pPlu,string pcant,string pdetalle,string pcosto,string pbd,string valida,string stateid,string isDev,string piva,string pcodigoiva,string fact,string namep,string pcostoordencompra,string refprov) 
         {
             int cantoc = Convert.ToInt32(cantorden);
             string pedido = ":)";
@@ -141,7 +145,7 @@ namespace Intranet.Vista.recibomercancia
             }
             try
             {
-                var Registroitems = Controlasql.CcreaitemsOC(valida, pPlu, pcant, pdetalle, stateid, cantoc.ToString(), pcosto.Replace(',','.'), pedido, isDev,piva,pcodigoiva,fact,namep,  pbd);
+                var Registroitems = Controlasql.CcreaitemsOC(valida, pPlu, pcant, pdetalle, stateid, cantoc.ToString(), pcosto.Replace(',','.'), pedido, isDev,piva,pcodigoiva,fact,namep,pcostoordencompra,refprov,  pbd);
             }
             catch (Exception e)
             {
@@ -161,13 +165,15 @@ namespace Intranet.Vista.recibomercancia
                     dt = registros2.Tables[0];
                     foreach (DataRow row in dt.Rows)
                     {
-                        txtestado.Value = Convert.ToString(row[1])+" Cant: "+ Convert.ToString(row[2]);
+                        txtestado.Value = Convert.ToString(row[1])+" Cant: "+Convert.ToString(row[2]);
                         txtcant.Focus();
                         int ca = Convert.ToInt32(row[2]);
                         if (ca>0)
                         {
                             txtCantOc.Text = Convert.ToString(ca);
                             Dev_CantOc.Text= Convert.ToString(ca);
+                            ctoc.InnerText = Convert.ToString(row[4]);
+                            Dvctooc.InnerText = Convert.ToString(row[4]);
                         }
                         else
                         {
@@ -177,7 +183,8 @@ namespace Intranet.Vista.recibomercancia
                         }
                         txtCantOc.Text = Convert.ToString(row[2]);
                         Dev_CantOc.Text = Convert.ToString(row[2]);
-
+                        ctoc.InnerText = Convert.ToString(row[4]);
+                        Dvctooc.InnerText = Convert.ToString(row[4]);
                     }
                 }
                 else
@@ -187,12 +194,13 @@ namespace Intranet.Vista.recibomercancia
                     Dev_CantOc.Text  = "0";
                     txtcodbarra.Value = "";
                     txtcant.Value = "";
+                    ctoc.InnerText ="";
                     txtcant.Focus();
                 }
             }
             catch (Exception e)
             {
-                txtestado.InnerText = "Ecepcion no Controlada: " + e.Message;
+                txtestado.InnerText = "Ecepcion no Controlada: " + e.Message; 
             }
 
         }
@@ -304,6 +312,7 @@ namespace Intranet.Vista.recibomercancia
                         Dev_Pfactor.Text = Convert.ToString(row[4]);
                         PnamePres.Text = Convert.ToString(row[5]);
                         Dev_PnamePres.Text = Convert.ToString(row[5]);
+                        refprov.InnerText = Convert.ToString(row[6]);
                     }
                     var registrosde = ControlaSql.Clista_CostoArticulos(barra);
                     if (registrosde.Tables[0].Rows.Count > 0)
@@ -325,7 +334,7 @@ namespace Intranet.Vista.recibomercancia
                     Dev_plu.Text = "N/a";
                     txtdetalle.InnerText = "Articulo No existe";
                     Devnamearticulo.InnerText = "Articulo No existe";
-                   
+                    refprov.InnerText = "";
                     //txtcodbarra.Value = "";
                     txtcodbarra.Focus();
                     
@@ -347,7 +356,7 @@ namespace Intranet.Vista.recibomercancia
 
         protected void Devolucion_Click(object sender, EventArgs e)
         {
-            Guarda("0" ,Dev_plu.Text,Dev_cantidad.Value,Devnamearticulo.InnerText,Dev_Costo.Text, DevOc.Text, "V",Dev_Piva.Text,Dev_PcodigoIva.Text,Dev_Pfactor.Text,Dev_PnamePres.Text);
+            Guarda("0" ,Dev_plu.Text,Dev_cantidad.Value,Devnamearticulo.InnerText,Dev_Costo.Text, DevOc.Text, "V",Dev_Piva.Text,Dev_PcodigoIva.Text,Dev_Pfactor.Text,Dev_PnamePres.Text,Dvctooc.InnerText, refprov.InnerText);
         }
 
         protected void BtnDevbuscar_Click(object sender, EventArgs e)

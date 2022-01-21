@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="box box-default" id="data">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><b>Ventas por - Linea </b></h3>
+                            <h3 class="box-title"><b>Cumplimiento de ventas </b></h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>

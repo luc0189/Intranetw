@@ -14,20 +14,29 @@
         <form method="post" runat="server">
             <div class="box-body">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
 
                         <label>Fecha inicio </label>
                         <input runat="server" id="txtfechaini" type="date" class="form-control" label="Fecha inicio">
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
                         <label>Fecha fin </label>
                         <input runat="server" id="txtfechafin" type="date" class="form-control" placeholder="Fecha fin">
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
                         <label>PLU Articulo </label>
                         <input runat="server" id="txtarticuloid" type="text" class="form-control" placeholder="Articulo ID">
                     </div>
+                     <div class="col-xs-3">
+                        <label>Sala de Ventas </label>
+                         <select id="Select1" runat="server">
+                             <option value="000001">SUPERMIO LA 16 </option>
+                             <option value="000002">SUPERMIO LA 13 </option>
+                             <option value="000004">SUPERMIO VERSALLES </option>
+                             <option value="000005">SUPERMIO CIUDADELA </option>
 
+                         </select>
+                    </div>
                     <div id="btconsulta">
                         <asp:Button ID="Button1" runat="server" Font-Size="Larger" class="btn btn-block btn-success btn-sm " Text="Consulta" OnClick="listaventas" />
                     </div>

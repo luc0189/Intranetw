@@ -386,6 +386,7 @@ namespace Intranet.conexiona
         }
         public DataSet sqlconsulta(String SQL)
         {
+            //SqlConnection sqlconn = new SqlConnection("Data Source=192.168.1.113,7433;Initial Catalog=supermio;Persist Security Info=True;User ID=l.sanchez;Password=Team0103;User Instance=False");
             SqlConnection sqlconn = new SqlConnection("Data Source=192.168.1.113,7433;Initial Catalog=supermio;Persist Security Info=True;User ID=l.sanchez;Password=Team0103;User Instance=False");
             SqlCommand comando = new SqlCommand(SQL, sqlconn);
             comando.CommandTimeout = 0;

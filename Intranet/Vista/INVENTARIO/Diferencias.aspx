@@ -38,8 +38,29 @@
                     <div class="modal-body">
                         <div class="table table-responsive">
                          <asp:GridView ID="Gridarticulos" runat="server" GridLines="None"
-                            CssClass="gvuser table table-striped table-bordered text-sm"
-                            CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros indicados.">
+                            CssClass="gvuser table table-striped table-bordered text-sm" OnRowEditing="Gridarticulos_RowEditing"
+                            CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros indicados."  AutoGenerateColumns="False">
+                            <Columns> 
+                              <asp:CommandField ButtonType="Image" ShowEditButton="True" EditImageUrl="~/dist/img/edit1.png" UpdateImageUrl="~/dist/img/update.png" CancelImageUrl="~/dist/img/cancel.png" />
+                               <asp:BoundField DataField="articuloID" HeaderText="articuloID" >
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+                              <asp:BoundField DataField="detalle" HeaderText="Nombre Articulo" >
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+                              <asp:BoundField DataField="CANT_CONTEO1" HeaderText="Cant. Conteo1" >
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+                              <asp:BoundField DataField="CANT_CONTEO2" HeaderText="Cant. Conteo2" >
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+                              <asp:BoundField DataField="DIF" HeaderText="Diferencias" >
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+                               <asp:BoundField  HeaderText="tercer conteo" >
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+                            </Columns>
                         </asp:GridView>
                         </div>
                     </div>

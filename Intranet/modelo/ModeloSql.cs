@@ -53,7 +53,7 @@ namespace Intranet.modelo
         }
         internal int mlimpiaconteo(string codigo)
         {
-            sql = "delete from invenfisdet where invenfisID='" + codigo + "'";
+            sql = "delete  invenfisdet where invenfisID='" + codigo + "'";
             return dataload.sqlProcedimiento(sql);
         }
         internal int mcierraconteo(string codigo2)
@@ -75,7 +75,7 @@ namespace Intranet.modelo
         // inicia recibo de mercancia
         internal DataSet Mlistaarticulos(string codigo)
         {
-            sql = "select a.codigo,a.detalle,ta.piva,ta.codigo,factor=iif(p.factor is null,1,p.factor),nombre=iif(p.nombrepres is null,'UNIDAD',p.nombrepres)" +
+            sql = "select a.codigo,a.detalle,ta.piva,ta.codigo,factor=iif(p.factor is null,1,p.factor),nombre=iif(p.nombrepres is null,'UNIDAD',p.nombrepres),a.refprovee" +
                 "       from codbar c" +
                 "       left  join presentacion p on p.id = c.presentacionID" +
                 "       inner  join articulo a on a.codigo = c.articuloID" +
@@ -115,7 +115,12 @@ namespace Intranet.modelo
         }
         internal DataSet Mlista_Items_ordencompra(string codigo, string numero)
         {
-            sql = "SELECT it.articuloID,cast(it.cantidadpres as int),a.detalle,vrcosto,ta.piva,ta.codigo " +
+            sql = "SELECT it.articuloID," +
+                "cast(it.cantidadpres as int)," +
+                "a.detalle," +
+                "it.vrcosto," +
+                "ta.piva," +
+                "ta.codigo , a.refprovee " +
                 "                 from itart it" +
                 "                  inner" +
                 "                 join documento d on d.id = it.documentID" +
@@ -130,7 +135,7 @@ namespace Intranet.modelo
         //TODO: AQUI
         internal DataSet mlista_esta_ono(string ptipo,string pnumero,string pcodbar)
         {
-            sql = "SELECT it.articuloID,a.detalle, cast(it.cantidadpres as int) cant,d.numero" +
+            sql = "SELECT it.articuloID,a.detalle, cast(it.cantidadpres as int) cant,d.numero,IT.vrcosto" +
                 "                FROM ITART IT" +
                 "                 inner join documento d on d.id = it.documentID" +
                 "                 INNER join articulo a on a.codigo = it.articuloID" +

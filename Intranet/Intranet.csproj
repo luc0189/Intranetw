@@ -6049,6 +6049,7 @@
     <Content Include="Vista\VentasXLinea.aspx" />
     <Content Include="Vista\Ventas_.aspx" />
     <Content Include="Vista\ventaXhora_linea.aspx" />
+    <Content Include="Vista\V_linea.aspx" />
     <Content Include="Vista\WebForm1.aspx" />
     <Content Include="Warning.html" />
     <Content Include="yarn.lock" />
@@ -6797,6 +6798,13 @@
     </Compile>
     <Compile Include="Vista\ventaXhora_linea.aspx.designer.cs">
       <DependentUpon>ventaXhora_linea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\V_linea.aspx.cs">
+      <DependentUpon>V_linea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\V_linea.aspx.designer.cs">
+      <DependentUpon>V_linea.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>

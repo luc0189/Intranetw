@@ -39,12 +39,12 @@ namespace Intranet.Controlador
             String Ptipoefectivo = "";
             if (pCcosto.Equals("000001"))
             {
-                Ptipoefectivo = "EFECTIVO";
+                Ptipoefectivo = "EFECTIVO CENTRO";
 
             }
             if (pCcosto.Equals("000002"))
             {
-                Ptipoefectivo = "EFECTIVO";
+                Ptipoefectivo = "EFECTIVO CENTRO";
 
             }
             if (pCcosto.Equals("000004"))
@@ -912,12 +912,12 @@ namespace Intranet.Controlador
             }
 
         }
-        public static DataSet listaventasXarticulotop(string fechai, string fechaf, string articuloid)
+        public static DataSet listaventasXarticulotop(string fechai, string fechaf, string articuloid,string pccosto)
         {
             Modelos usu = new Modelos();
             try
             {
-                return usu.listadoventaXarticulocajeratop(fechai, fechaf, articuloid);
+                return usu.listadoventaXarticulocajeratop(fechai, fechaf, articuloid,pccosto);
             }
             catch (Exception ex)
             {
@@ -1098,12 +1098,12 @@ namespace Intranet.Controlador
 
 
         }
-        public static int CcreaitemsOC(string pIdCompra, string pPLU, string pCantidad, string pNameArticulo, string pEstado,string cantOc,string pcosto,string pedido,string pisDev,string iva,string pcodigo,string factor,string namepres ,string pBd)
+        public static int CcreaitemsOC(string pIdCompra, string pPLU, string pCantidad, string pNameArticulo, string pEstado,string cantOc,string pcosto,string pedido,string pisDev,string iva,string pcodigo,string factor,string namepres , string costoordencompra,string refProv, string pBd)
         {
             Modelos usu = new Modelos();
             try
             {
-                return usu.Mcreaitemsfactura(pIdCompra,pPLU,pCantidad,pNameArticulo,pEstado,cantOc,pcosto,pedido, pisDev,iva,pcodigo,factor,namepres, pBd);
+                return usu.Mcreaitemsfactura(pIdCompra,pPLU,pCantidad,pNameArticulo,pEstado,cantOc,pcosto,pedido, pisDev,iva,pcodigo,factor,namepres,costoordencompra,refProv, pBd);
             }
             catch (Exception e)
 
@@ -1977,6 +1977,32 @@ namespace Intranet.Controlador
             try
             {
                 return usu2.ventasXLINEA(fecha1,fecha2,linea,costo);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o compleme
+            }
+        }
+        public static DataSet Cventas_linea(string fecha1, string fecha2,  string costo)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.MventasLINEA(fecha1, fecha2,  costo);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o compleme
+            }
+        }
+        public static DataSet Cventas_linea_general(string fecha1, string fecha2)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.Ventaslinearesumido(fecha1, fecha2);
             }
             catch (Exception ex)
             {

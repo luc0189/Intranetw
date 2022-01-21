@@ -33,6 +33,7 @@ namespace Intranet.Vista.Sistema
                 var detalle = "";
                 var valor = 0;
                 var peso = 1;
+                
                 lbarticulo.Text = "";
                 lbdescuento.Text = "";
                 lbpxunidad.Text = "";
@@ -50,9 +51,10 @@ namespace Intranet.Vista.Sistema
                     foreach (DataRow row in Tablearticulo.Rows)
                     {
                         varArticulo = (Convert.ToString(row["codigo"]));
-                        detalle = (Convert.ToString(row["detalle"]));
+                        detalle = (Convert.ToString(row["detalle"]))+"-"+ (Convert.ToString(row["nombrepres"]));
                         valor = (Convert.ToInt32(row["valormiva"]));
                          peso = (Convert.ToInt32(row["peso"]));
+                         
                         if (peso==0)
                         {
                             peso = 1;
