@@ -36,7 +36,7 @@
                         <asp:LinkButton ID="Adicionar" runat="server" Text="Insertar" CssClass="btn btn-success" OnClick="Adicionar_Click">
                 <span aria-hidden="true" class="fa fa-unlock"> Abrir</span>
                         </asp:LinkButton>
-                        <a class="btn btn-danger" data-toggle="modal" href="#modallimpiaconteos"><i class="fa fa-trash-o"></i>Limpiar</a>
+                        <a class="btn btn-danger" data-toggle="modal" href="#Limpiar"><i class="fa fa-trash-o"></i>Limpiar</a>
 
                         <a class="btn btn-success" data-toggle="modal" href="#modaloperaciones"><i class="fa fa-plus-circle"></i>Operaciones</a>
 
@@ -143,27 +143,6 @@
                 <!-- CERRAR Y ABRIR TODO -->
 
 
-                <div class="modal modal-danger fade in" id="modallimpiaconteos" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span></button>
-                                <h4 class="modal-title">Limpiar Modulo</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Esta seguro de eliminar el contenido de este conteo?</p>
-
-                            </div>
-                            <div class="modal-footer">
-                                <asp:Button ID="Btncancelalimpiar" runat="server" class="btn btn-outline" Text="Cancelar" OnClick="Button4_click" />
-                                  <asp:Button ID="Btnlimpiar" runat="server" class="btn btn-outline" Text="Aceptar" OnClick="si_Click" />
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-
-                </div>
                 <div class="modal modal-info fade in" id="modal2" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -288,6 +267,45 @@
                     </div>
                     <!-- /.modal-content -->
                 </div>
+
+                 <div class="modal modal-danger fade in" id="Limpiar" role="dialog">
+                    <div class="modal-dialog" style="width: 580px">
+                        <div class="modal-content ">
+                            <div class="modal-header">
+                                <div class="box-tools pull-right">
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">X</span></button>
+                                </div>
+
+                                <h4 class="modal-title">Mas Operaciones en Bloque</h4>
+                            </div>
+                            <div class="modal-body">
+
+                               
+                                <div class="row">
+                                    Esta seguro de Eliminar el contenido del Modulo
+                                </div>
+                              
+
+                               
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                              <asp:LinkButton ID="LinkButton6" runat="server" Text="Insertar" CssClass="btn btn-warning" OnClick="si_Click">
+                                             <span aria-hidden="true" class="fa fa-trash"> Eliminar items </span>
+                                            </asp:LinkButton>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+
+
+
+
+
+
                 <div class="modal modal-info fade in" id="Mactivaconteos2" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">

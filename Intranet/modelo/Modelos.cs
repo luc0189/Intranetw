@@ -498,6 +498,20 @@ namespace Intranet.modelo
         //----------------------------------------------------------------
         // aqui consulta carnes todos los puntos  BNET
         //----------------------------------------------------------------
+        internal DataSet ListadocarnesBnet2(String pgrupo, String fechaini, String fechafin, String ccosto)
+        {
+            sql = "select articulo.detalle," +
+                "cast (sum(itart.cantidad)as float) cantidad " +
+                "       from itart, documento, articulo, tipodoc " +
+                "           where articulo.codigo=itart.articuloID " +
+                "               and itart.documentID= documento.id " +
+                "               and documento.tipo= tipodoc.codigo " +
+                "               and fecha between  '" + fechaini + "' and '" + fechafin + "' " +
+                "               and tipodoc.clasedoc='FP' and grupoID='" + pgrupo + "' " +
+                "               and documento.ccostoId='" + ccosto + "' " +
+                "               group by articulo.detalle,documento.ccostoId";
+            return dataload.sqlconsulta(sql);
+        }
         internal DataSet ListadocarnesBnet(String pgrupo, String fechaini, String fechafin,String ccosto)
         {
             sql = "select itart.presentacion ," +
@@ -620,10 +634,11 @@ namespace Intranet.modelo
         }
         internal DataSet validacionUsuario(string usuario, string contraseña, string PBD)
         {
-            sql = " select USUA_NOMBRE,PERS_TIPP_ID,TIPP_NOMBRE,PERS_CC FROM USUARIO " +
-                "INNER JOIN PERSONA ON USUA_IDPERS = PERS_ID " +
-                "INNER JOIN TIPOPERSONA ON PERS_TIPP_ID=TIPP_ID" +
-                "  WHERE USUA_NOMBRE= '" + usuario + "' and USUA_PASS='" + contraseña + "'";
+            sql = "  select USUA_NOMBRE,PERS_TIPP_ID,TIPP_NOMBRE,PERS_CC,S.NOMBRE FROM USUARIO " +
+                "               INNER JOIN PERSONA ON USUA_IDPERS = PERS_ID" +
+                "               INNER JOIN TIPOPERSONA ON PERS_TIPP_ID = TIPP_ID" +
+                "               INNER JOIN SALAS_VENTA S ON USUA_SALAVENTAS = S.ID" +
+                "                  WHERE USUA_NOMBRE= '" + usuario + "' and USUA_PASS='" + contraseña + "'";
             return dataload.oraconsulta(sql, PBD);
         }
         internal DataSet llenatabla(string PBD)
@@ -968,19 +983,24 @@ namespace Intranet.modelo
         }
         internal DataSet MventasLINEA(string fei, string fef, string ccosto)//aquiventas totales para formulario ventas por linea
         {
-            sql = "   select  ln.nombre AS Linea" +
-                "        ,count(distinct it.documentID)N_fact" +
-                "        ,FORMAT(Sum(it.vrtotal), '$ ###,###.##')AS V_ANTES_IVA" +
-                "        , FORMAT(Sum(it.vrtotal) / count(d.id), '$ ###,###.##')Pr_Venta " +
-                " from documento d inner join itart it on d.id = it.documentID and d.fecha between '"+fei+ "' and '" + fef + "'" +
-                " inner join articulo art ON it.articuloID = art.codigo" +
-                " inner join linea ln on art.lineaID = ln.codigo " +
-                " INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
-                " where" +
-                "    td.clasedoc IN('FV' , 'FP')" +
-                "	AND d.ccostoID = '"+ccosto+"'" +
-                "    and d.anulado = 0 " +
-                " group by ln.nombre ";
+            sql = "   select " +
+                " r.Linea," +
+                " r.N_fact," +
+                " format(r.V_ANTES_IVA, '$ ###,###.##')V_ANTES_IVA," +
+                " FORMAT(cast(r.V_ANTES_IVA as int) / cast(r.N_fact as int), '$ ###,###.##')Pr_Venta" +
+                "  from(" +
+                "    select  ln.nombre AS Linea" +
+                "                        , count(distinct it.documentID)N_fact" +
+                "                        , Sum(it.vrtotal) AS V_ANTES_IVA" +
+                "                 from documento d inner join itart it on d.id = it.documentID and d.fecha between '"+fei+"' and '"+fef+"'" +
+                "                 inner join articulo art ON it.articuloID = art.codigo" +
+                "                 inner join linea ln on art.lineaID = ln.codigo" +
+                "                 INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
+                "                 where" +
+                "                    td.clasedoc IN('FV', 'FP')" +
+                "                    AND d.ccostoID = '"+ccosto+"'" +
+                "                    and d.anulado = 0" +
+                "                 group by ln.nombre)r";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet Mventascontramesanterior(string fei, string fef, string ccosto)//aqui trae las ventas contra el mes anterior
@@ -1207,7 +1227,10 @@ namespace Intranet.modelo
                 "	r.valormiva," +
                 "	r.peso," +
                 "	r.descuento," +
-                "	coalesce(pres.nombrepres, ' ') nombrepres " +
+                "	coalesce(pres.nombrepres, ' ') nombrepres," +
+                "   r.lineaID," +
+                "   r.grupoID," +
+                "   r.marcaID " +
                 " from(" +
                 "    SELECT a.codigo," +
                 "        a.detalle," +
@@ -1215,7 +1238,10 @@ namespace Intranet.modelo
                 "        cast(valormiva as int) as valormiva," +
                 "        cast(a.peso as int) as peso," +
                 "        coalesce(cast(condiprom.vrveneficio as int), 0.0) as descuento," +
-                "        cd.presentacionID" +
+                "        cd.presentacionID, " +
+                "        a.lineaID," +
+                "       a.grupoID," +
+                "       a.marcaID" +
                 "    from articulo a with(nolock)" +
                 "    left join dbo.artspromo aprom with(nolock)  ON a.codigo = aprom.articuloID" +
                 "    left join dbo.condicionpromo condiprom with(nolock) ON aprom.promocionID = condiprom.promocionID" +
@@ -1234,7 +1260,7 @@ namespace Intranet.modelo
                 "                                FROM dbo.fnInventInventariosBase(getdate(), NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0) fn where articuloID = '"+articulo+"' and bodegaID = '"+ bodega + "'; ";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet MListadescuento(string plu)
+        internal DataSet MListadescuentoarticuloid(string plu)
         {
             sql = "SELECT ap.articuloID,cast(condip.vrveneficio as int)as vrveneficio" +
                 "                     from artspromo ap inner" +
@@ -1242,6 +1268,45 @@ namespace Intranet.modelo
                 " inner" +
                 "                    join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
                 "                     where (SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde  and activa = 1 and ap.articuloID = '"+plu+"'";
+            return dataload.sqlconsulta(sql);
+        }
+        internal DataSet MListadescuentolinea(string linea)
+        {
+            sql = "SELECT ap.articuloID,cast(condip.vrveneficio as int)as vrveneficio " +
+                " from artspromo ap inner " +
+                " join promocion p on ap.promocionID = p.id inner" +
+                " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
+                " INNER JOIN linea l on l.codigo = ap.lineaID " +
+                " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
+                "        and activa = 1" +
+                "        and l.codigo = '"+linea+"'" +
+                "        ORDER BY  ap.articuloID asc";
+            return dataload.sqlconsulta(sql);
+        }
+        internal DataSet MListadescuentogrupo(string grupo)
+        {
+            sql = "SELECT ap.articuloID,cast(condip.vrveneficio as int)as vrveneficio " +
+                " from artspromo ap inner " +
+                " join promocion p on ap.promocionID = p.id inner" +
+                " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
+                " INNER JOIN grupo g on g.codigo = ap.grupoID " +
+                " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
+                "        and activa = 1" +
+                "        and g.codigo = '" + grupo + "'" +
+                "        ORDER BY  ap.articuloID asc";
+            return dataload.sqlconsulta(sql);
+        }
+        internal DataSet MListadescuentomarca(string marca)
+        {
+            sql = "SELECT ap.articuloID,cast(condip.vrveneficio as int)as vrveneficio " +
+                " from artspromo ap inner " +
+                " join promocion p on ap.promocionID = p.id inner" +
+                " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
+                " INNER JOIN marca m on m.codigo = ap.marcaID " +
+                " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
+                "        and activa = 1" +
+                "        and m.codigo = '" + marca + "'" +
+                "        ORDER BY  ap.articuloID asc";
             return dataload.sqlconsulta(sql);
         }
         internal int Mdeleteitems_kardex(string id,string db)
@@ -1461,18 +1526,23 @@ namespace Intranet.modelo
             return dataload.sqlconsulta(sql);
         }internal DataSet Ventaslinearesumido(string fecha1, string fecha2)
         {
-            sql = "   select  ln.nombre AS Linea" +
-                "        ,count(distinct it.documentID)N_fact" +
-                "        ,FORMAT(Sum(it.vrtotal), '$ ###,###.##')AS V_ANTES_IVA" +
-                "        , FORMAT(Sum(it.vrtotal) / count(d.id), '$ ###,###.##')Pr_Venta" +
-                " from documento d inner join itart it on d.id = it.documentID and d.fecha between '"+fecha1+"' and '"+ fecha2 + "'" +
-                " inner join articulo art ON it.articuloID = art.codigo " +
-                " inner join linea ln on art.lineaID = ln.codigo " +
-                " INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo " +
-                " where" +
-                "    td.clasedoc IN('FV' , 'FP')" +
-                "	and d.anulado = 0 " +
-                " group by ln.nombre";
+            sql = "   select " +
+                " r.Linea," +
+                " r.N_fact," +
+                " format(r.V_ANTES_IVA, '$ ###,###.##')V_ANTES_IVA," +
+                " FORMAT(cast(r.V_ANTES_IVA as BIGINT) / cast(r.N_fact as BIGINT), '$ ###,###.##')Pr_Venta" +
+                "  from(" +
+                " select  ln.nombre AS Linea" +
+                "                        , count(distinct it.documentID)N_fact" +
+                "                        , Sum(it.vrtotal) AS V_ANTES_IVA" +
+                "                 from documento d inner join itart it on d.id = it.documentID and d.fecha between '"+fecha1+"' and '"+fecha2+"'" +
+                "                 inner join articulo art ON it.articuloID = art.codigo" +
+                "                 inner join linea ln on art.lineaID = ln.codigo" +
+                "                 INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
+                "                 where" +
+                "                    td.clasedoc IN('FV', 'FP')" +
+                "                    and d.anulado = 0" +
+                "                 group by ln.nombre)r";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet ventashoralineaversalles(string Fecha, string linea)

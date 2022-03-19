@@ -12,6 +12,9 @@
     <link href="css/sb-admin.css" rel="stylesheet" />
     <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Consultor</title>
 
     <style>
@@ -26,7 +29,7 @@
             opacity: 0.1;
         }
 
-        video {
+        #myCarousel {
             object-fit: cover;
             width: 100vw;
             height: 100vh;
@@ -50,15 +53,68 @@
                 </div>
             </div>
         </nav>
-        <video  autoplay="autoplay" muted="muted" loop="loop" poster="../../dist/img/1.png" id="bgvid">
-            <source src="img/COVID-19.mp4" type="video/webm">
-        </video>
+      
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
+        <li data-target="#myCarousel" data-slide-to="6"></li>
+        <li data-target="#myCarousel" data-slide-to="7"></li>
+    </ol>
 
-        <div class="body">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+          <img src="img/1.png" style="width:100%;" />
+    
+      </div>
 
-            <!-- Header -->
+      <div class="item">
+          <img src="img/2.png" style="width:100%;" />
+      
+      </div>
+    
+      <div class="item">
+          <img src="img/3.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/4.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/5.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/6.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/7.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/8.png" style="width:100%;" />
+        
+      </div>
+    </div>
 
-            <div class="container">
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 
 
 
@@ -72,7 +128,7 @@
 
                 </script>
 
-            </div>
+         
 
             <div class="modal" id="moda" style="display: block; z-index: 2;">
                 <div class=" modal-dialog modal-xl" id="modal" runat="server">
@@ -148,7 +204,7 @@
                 </div>
             </div>
            
-        </div>
+       
     </form>
 
    

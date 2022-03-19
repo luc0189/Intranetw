@@ -402,6 +402,13 @@ desired effect
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
+                <div class="center-block">
+                    <a href="#" class="title" data-toggle="push-menu" role="button">
+                   
+                </a>
+                </div>
+               
+               
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
@@ -640,7 +647,7 @@ desired effect
                             <li><a id="V1" href="infocomparativo.aspx" runat="server">Comparativo Ventas</a></li>
                             <li><a id="V2" href="VentasXhora.aspx" runat="server">Ventas por Hora</a></li>
                               <li><a id="A7" href="V_linea.aspx" runat="server">Ventas por Linea</a></li>
-                            <li><a id="v8" href="VentasXLinea.aspx" runat="server">Cumplimientos</a></li>
+                            <li><a id="V8" href="VentasXLinea.aspx" runat="server">Cumplimientos</a></li>
                             <li><a id="V3" href="ventaXhora_linea.aspx" runat="server">Ventas por Hora - Linea</a></li>
                             <li><a href="Domicilios.aspx" runat="server">Domicilios</a></li>
                             <li><a id="V4" href="recordcajerasarticulo.aspx" runat="server">Record Cajera X Articulo</a></li>

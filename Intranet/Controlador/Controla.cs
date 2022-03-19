@@ -136,12 +136,57 @@ namespace Intranet.Controlador
                 throw e;
             }
         }
-        public static DataSet Clistadesc(string pplu)
+
+
+
+        public static DataSet Clistadescarticuloid(string pplu)
         {
             Modelos usu = new Modelos();
             try
             {
-                return usu.MListadescuento(pplu);
+                return usu.MListadescuentoarticuloid(pplu);
+            }
+            catch (Exception e)
+
+            {
+
+                throw e;
+            }
+        }
+        public static DataSet Clistadeslinea(string linea)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.MListadescuentolinea(linea);
+            }
+            catch (Exception e)
+
+            {
+
+                throw e;
+            }
+        }
+        public static DataSet Clistadesgrupo(string grupo)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.MListadescuentogrupo(grupo);
+            }
+            catch (Exception e)
+
+            {
+
+                throw e;
+            }
+        }
+        public static DataSet Clistadesmarca(string marca)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.MListadescuentomarca(marca);
             }
             catch (Exception e)
 
@@ -164,6 +209,10 @@ namespace Intranet.Controlador
                 throw e;
             }
         }
+
+
+
+
         public static DataSet ClistaRoll(string pbd)
         {
             Modelos usu = new Modelos();
@@ -642,15 +691,30 @@ namespace Intranet.Controlador
             {
                 centroCosto = "000005";
             }
-           
-            try
+            if (grupo=="329")
             {
-                return usu.ListadocarnesBnet(grupo,fi, ff,centroCosto);
+                try
+                {
+                    return usu.ListadocarnesBnet2(grupo, fi, ff, centroCosto);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw ex;
+                try
+                {
+                    return usu.ListadocarnesBnet(grupo, fi, ff, centroCosto);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
+            
+
         }
         public static DataSet Clistadesnomina(string terceroID, string fi, string ff)
         {

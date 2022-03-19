@@ -12,6 +12,9 @@
     <link href="css/sb-admin.css" rel="stylesheet" />
     <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Consultor</title>
 
     <style>
@@ -20,13 +23,76 @@
             font-size: 150%;
             line-height: 1.4;
         }
+        * {
+	margin:0;
+	padding: 0;
+	box-sizing: border-box;
+}
+        
+section {
+	position: relative;
+	width: 100%;
+	height: 100vh;
 
+}
+section video{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+section .navegacion{
+	position: absolute;
+	bottom: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 100;
+	display: flex;
+	justify-content: center;
+	align-items:  center;
+}
+
+section .navegacion li{
+	list-style: none;
+	cursor: pointer;
+	margin: 0 10px;
+	border-radius: 2px;
+	background: #eee;
+	padding: 3px 3px 0;
+	opacity: 0.65;
+	transition: 0.6s;
+}
+
+section .navegacion li:hover{
+	opacity: 1;
+	background: #fff;
+}
+
+section .navegacion li img{
+	width: 150px;
+	transition: 0.6s;
+}
+
+section .navegacion li img:hover{
+	width: 200px;
+}	
         .navbar {
             z-index: 1030;
             opacity: 0.1;
         }
 
-        video {
+        /*video {
+            object-fit: cover;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }*/
+      #myCarousel {
             object-fit: cover;
             width: 100vw;
             height: 100vh;
@@ -35,6 +101,10 @@
             left: 0;
             z-index: 1;
         }
+      modal{
+ width: 50vw;
+            height: 30vh;
+      }
     </style>
 </head>
 <body>
@@ -45,20 +115,77 @@
                  
                         <input class="form-control me-2" type="search" runat="server" id="txtbarra" placeholder="Buscar Articulo" autofocus="autofocus" />
 
-                        <asp:Button ID="ir" type="submit" runat="server" class="btn btn-app" Text=">" OnClick="ir_Click" />
+                        <asp:Button ID="ir" type="submit" runat="server" class="btn btn-app" Text="" OnClick="ir_Click" />
                     
                 </div>
             </div>
         </nav>
-        <video  autoplay="autoplay" muted="muted" loop="loop" poster="../../dist/img/1.png" id="bgvid">
-            <source src="img/COVID-19.mp4" type="video/webm">
-        </video>
+     
 
-        <div class="body">
+             
+ <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
+        <li data-target="#myCarousel" data-slide-to="6"></li>
+        <li data-target="#myCarousel" data-slide-to="7"></li>
+    </ol>
 
-            <!-- Header -->
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+          <img src="img/1.png" style="width:100%;" />
+    
+      </div>
 
-            <div class="container">
+      <div class="item">
+          <img src="img/2.png" style="width:100%;" />
+      
+      </div>
+    
+      <div class="item">
+          <img src="img/3.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/4.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/5.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/6.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/7.png" style="width:100%;" />
+        
+      </div>
+         <div class="item">
+          <img src="img/8.png" style="width:100%;" />
+        
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+         
 
 
 
@@ -71,11 +198,11 @@
                     }
 
                 </script>
-
-            </div>
+        <div class="body">
+      
 
             <div class="modal" id="moda" style="display: block; z-index: 2;">
-                <div class=" modal-dialog modal-xl" id="modal" runat="server">
+                <div class=" modal-dialog modal" id="modal" runat="server">
                     <div class="modal-content">
                         <div class="modal-header">
                             <center>
@@ -147,8 +274,8 @@
                     </div>
                 </div>
             </div>
-           
-        </div>
+           </div>
+      
     </form>
 
    
@@ -157,9 +284,8 @@
      <script type="text/javascript">
          setTimeout(function () {
              document.getElementById('modal').style.display = 'none';
-         }, 5000);
-
-
+         }, 50000);
+        
      </script>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

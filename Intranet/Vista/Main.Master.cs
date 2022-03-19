@@ -27,6 +27,7 @@ namespace Intranet.Vista
                     A4.Visible = false;
                     A5.Visible = false;
                     A6.Visible = false;
+                    A7.Visible = false;
                     AE.Visible = false;
                     AE1.Visible = false;
                     AE2.Visible = false;
@@ -51,6 +52,9 @@ namespace Intranet.Vista
                     V3.Visible = false;
                     V4.Visible = false;
                     V5.Visible = false;
+                    V6.Visible = false;
+                    V7.Visible = false;
+                    V8.Visible = false;
                     K.Visible = false;
                     K1.Visible = false;
                     K2.Visible = false;
@@ -116,7 +120,9 @@ namespace Intranet.Vista
                                     case "A6":
                                         A6.Visible = true;
                                         break;
-
+                                    case "A7":
+                                        A7.Visible = true;
+                                        break;
                                     case "AE":
                                         AE.Visible = true;
                                         break;
@@ -191,6 +197,15 @@ namespace Intranet.Vista
                                         break;
                                     case "V5":
                                         V5.Visible = true;
+                                        break;
+                                    case "V6":
+                                        V6.Visible = true;
+                                        break;
+                                    case "V7":
+                                        V7.Visible = true;
+                                        break;
+                                    case "V8":
+                                        V8.Visible = true;
                                         break;
                                     case "K":
                                         K.Visible = true;

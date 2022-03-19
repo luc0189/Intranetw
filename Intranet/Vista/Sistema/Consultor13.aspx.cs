@@ -50,7 +50,7 @@ namespace Intranet.Vista.Sistema
                     foreach (DataRow row in Tablearticulo.Rows)
                     {
                         varArticulo = (Convert.ToString(row["codigo"]));
-                        detalle = (Convert.ToString(row["detalle"]));
+                        detalle = (Convert.ToString(row["detalle"])) + "-" + (Convert.ToString(row["nombrepres"]));
                         valor = (Convert.ToInt32(row["valormiva"]));
                          peso = (Convert.ToInt32(row["peso"]));
                         if (peso == 0)
@@ -58,7 +58,7 @@ namespace Intranet.Vista.Sistema
                             peso = 1;
                         }
                     }
-                    var descuento = Controlasql.Clistadesc(varArticulo);
+                    var descuento = Controlasql.Clistadescarticuloid(varArticulo);
                     if (descuento.Tables[0].Rows.Count > 0)
                     {
                         DataTable Tdescuento = descuento.Tables[0];

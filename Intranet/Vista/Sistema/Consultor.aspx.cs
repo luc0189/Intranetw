@@ -51,52 +51,16 @@ namespace Intranet.Vista.Sistema
                     foreach (DataRow row in Tablearticulo.Rows)
                     {
                         varArticulo = (Convert.ToString(row["codigo"]));
-                        detalle = (Convert.ToString(row["detalle"]))+"-"+ (Convert.ToString(row["nombrepres"]));
+                        detalle = (Convert.ToString(row["detalle"])) + "-" + (Convert.ToString(row["nombrepres"]));
                         valor = (Convert.ToInt32(row["valormiva"]));
-                         peso = (Convert.ToInt32(row["peso"]));
-                         
-                        if (peso==0)
+                        peso = (Convert.ToInt32(row["peso"]));
+
+                        if (peso == 0)
                         {
                             peso = 1;
                         }
                     }
-                    var descuento = Controlasql.Clistadesc(varArticulo);
-                    if (descuento.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable Tdescuento = descuento.Tables[0];
-
-                        foreach (DataRow row in Tdescuento.Rows)
-                        {
-                           
-                            des = (Convert.ToInt32(row["vrveneficio"]));
-                         
-                        }
-                        lbarticulo.Text = detalle;
-                        boxvalor.Visible = false;
-                        dvalor1.Visible = true;
-                        ddescuento.Visible = true;
-                        dvalor2.Visible = true;
-                        LblPlu.Text = varArticulo;
-                        lbvalor1.Text = valor.ToString();
-                        lbdescuento.Text = des.ToString();
-                        descuentossss = (valor - ((valor * des) / 100));
-                        lbvalordes.Text = descuentossss.ToString();
-                        lbpxunidad.Text = (descuentossss / peso).ToString();
-
-
-                    }
-                    else
-                    {
-                        boxvalor.Visible = true;
-                        dvalor1.Visible = false;
-                        ddescuento.Visible = false;
-                        dvalor2.Visible = false;
-                        LblPlu.Text = varArticulo;
-                        lbvalor.Text= valor.ToString();
-                        lbarticulo.Text = detalle;
-                        lbpxunidad.Text = (valor / peso).ToString();
-                        LblPlu.Text = varArticulo;
-                    }
+                
                     var saldo = Controlasql.Clistasaldo(varArticulo,"015");
                     if (saldo.Tables[0].Rows.Count > 0)
                     {

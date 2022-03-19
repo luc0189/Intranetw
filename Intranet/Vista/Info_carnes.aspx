@@ -49,6 +49,7 @@
                         <option value="360">CARNE DE RES </option>
                         <option value="00000357">POLLO</option>
                         <option value="00000351">MAC-POLLO</option>
+                        <option value="329">PECES Y MAR</option>
                     </select>
                 </div>
                 <div class="col-md-3 ">
