@@ -402,15 +402,19 @@ desired effect
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
-                <div class="center-block">
-                    <a href="#" class="title" data-toggle="push-menu" role="button">
+                <ul class="nav navbar-nav">
                    
-                </a>
-                </div>
-               
-               
+                        <li class="nav-item d-none d-sm-inline-block">
+                            
+                            <a href="#" class="nav-link"><asp:Label CssClass="nav-link" Text="text" runat="server" ID="titlecosto" /></a>
+                        </li>
+                       
+                    </ul>
+
+
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
+                   
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="dropdown messages-menu">
@@ -419,6 +423,7 @@ desired effect
                                 <i class="fa fa-envelope-o"></i>
                                 <span class="label label-success">1</span>
                             </a>
+                        
                             <ul class="dropdown-menu">
                                 <li class="header">Aqui SMS</li>
                                 <li>

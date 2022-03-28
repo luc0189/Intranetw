@@ -29,12 +29,12 @@ namespace Intranet.Vista.Documentos
                 {
                     Gridsuper13.DataSource = null;
                     Gridsuper13.DataBind();
-                }var regtotal16 = Controlasql.listaventa16total(txtfechaini.Value);
-                if(regtotal16.Tables[0].Rows.Count > 0)
-                {
-                    GridViewtotal.DataSource = regtotal16;
-                    GridViewtotal.DataBind();
-                }
+                }//var regtotal16 = Controlasql.listaventa16total(txtfechaini.Value);
+                //if(regtotal16.Tables[0].Rows.Count > 0)
+                //{
+                //    GridViewtotal.DataSource = regtotal16;
+                //    GridViewtotal.DataBind();
+                //}
                 var regtotal13 = Controlasql.listaventa13total(txtfechaini.Value);
                 if (regtotal13.Tables[0].Rows.Count > 0)
                 {
@@ -47,7 +47,7 @@ namespace Intranet.Vista.Documentos
                     GridViewtotalversa.DataSource = regtotalversa;
                     GridViewtotalversa.DataBind();
                 }
-                var registrosv16 = Controlasql.listaventaXhora16(txtfechaini.Value);
+                var registrosv16 = Controlasql.listaventaXhora(txtfechaini.Value,Session["CCOSTO"].ToString());
                 if (registrosv16.Tables[0].Rows.Count > 0)
                 {
                     Gridsuper16.DataSource = registrosv16;

@@ -19,6 +19,7 @@ namespace Intranet.Vista
         {
             if (!Page.IsPostBack)
             {
+                titlecosto.Text = Session["salaventas"].ToString();
                 try
                 {
                     A.Visible = false;

@@ -402,13 +402,13 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
-        public static DataSet listaventa16(string fi, string ff)
+        public static DataSet listaventa(string fi, string ff,string costo)
         {
             Modelos usu = new Modelos();
 
             try
             {
-                return usu.listadoventa16(fi,ff);
+                return usu.listadoventa(fi,ff,costo);
             }
             catch (Exception ex)
             {
@@ -769,13 +769,13 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
-        public static DataSet listaventa16total(string fecha)
+        public static DataSet listaventa(string fecha,string costo)
         {
             Modelos usu = new Modelos();
 
             try
             {
-                return usu.listadoventa16total(fecha);
+                return usu.listadoventatotal(fecha,costo);
             }
             catch (Exception ex)
             {
@@ -877,12 +877,12 @@ namespace Intranet.Controlador
             }
 
         }
-        public static DataSet listaventaXhora16(string fecha)
+        public static DataSet listaventaXhora(string fecha,string costo)
         {
             Modelos usu = new Modelos();
             try
             {
-                return usu.listaventashora16(fecha);
+                return usu.listaventashora(fecha,costo);
             }
             catch (Exception ex)
             {
@@ -2156,19 +2156,19 @@ namespace Intranet.Controlador
         {
             Modelos usu2 = new Modelos();
             string metros="0";
-            if (pcosto.Equals("000001 "))
+            if (pcosto.Equals("000001"))
             {
                 metros = "674";
             }
-            if (pcosto.Equals("000002 "))
+            if (pcosto.Equals("000002"))
             {
                 metros = "180";
             }
-            if (pcosto.Equals("000004 "))
+            if (pcosto.Equals("000004"))
             {
                 metros = "735";
             }
-            if (pcosto.Equals("000005 "))
+            if (pcosto.Equals("000005"))
             {
                 metros = "660";
             }

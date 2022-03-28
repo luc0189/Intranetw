@@ -634,7 +634,7 @@ namespace Intranet.modelo
         }
         internal DataSet validacionUsuario(string usuario, string contraseña, string PBD)
         {
-            sql = "  select USUA_NOMBRE,PERS_TIPP_ID,TIPP_NOMBRE,PERS_CC,S.NOMBRE FROM USUARIO " +
+            sql = "  select USUA_NOMBRE,PERS_TIPP_ID,TIPP_NOMBRE,PERS_CC,S.NOMBRE,S.CCOSTO FROM USUARIO " +
                 "               INNER JOIN PERSONA ON USUA_IDPERS = PERS_ID" +
                 "               INNER JOIN TIPOPERSONA ON PERS_TIPP_ID = TIPP_ID" +
                 "               INNER JOIN SALAS_VENTA S ON USUA_SALAVENTAS = S.ID" +
@@ -646,9 +646,18 @@ namespace Intranet.modelo
             sql = "select PERS_ID AS ID,PERS_NOMBRE1 AS PRIMER_NOMBRE,PERS_APELLIDO1 AS PRIMER_APELLIDO FROM PERSONA";
             return dataload.oraconsulta(sql, PBD);
         }
-        internal DataSet listadoventa16(string fei, string fef)//aquiventas la 16
+        internal DataSet listadoventa(string fei, string fef,string costo)//aquiventas la 16
         {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS, format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR,COUNT(vrsubtotal) AS Facturas FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')  AND(td.clasedoc = 'FP')  AND do.ccostoID = '000001'  and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
+            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS," +
+                " format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR," +
+                " COUNT(vrsubtotal) AS Facturas" +
+                " FROM  dbo.documento AS do" +
+                " INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
+                " WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
+                "  AND td.clasedoc in('FP','FV')" +
+                "  AND do.ccostoID = '"+costo+"'" +
+                "  and do.anulado=0" +
+                " GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet Mlista_acom_ventasla16(string fei, string fef)//aquiventas la 16
@@ -1024,14 +1033,14 @@ namespace Intranet.modelo
                 "                                 select FORMAT(((@mesctual -@mesanterior)/ @mesanterior)*100, '###,###.###')  as dato  ";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listadoventa16total(string fecha)
+        internal DataSet listadoventatotal(string fecha, string ccosto)
         {
             sql = "SELECT   format(Sum(do.vrsubtotal), '$ #,###.##') AS Total_Ventas, " +
                 "COUNT(vrsubtotal) AS Total_Facturas" +
                 " FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo " +
                 "WHERE fecha='" + fecha + "' " +
-                " AND(td.clasedoc = 'FP')" +
-                "  AND do.ccostoID = '000001'" +
+                " AND td.clasedoc in('FP','FV')" +
+                "  AND do.ccostoID = '"+ccosto+"'" +
                 "  and do.anulado=0 ";
             return dataload.sqlconsulta(sql);
         }
@@ -1562,9 +1571,19 @@ namespace Intranet.modelo
                 "order by Rango_Hora  ";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listaventashora16(string Fecha)
+        internal DataSet listaventashora(string Fecha,string costo)
         {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(HH, do.logfecreo) AS HORA,format(Sum(do.vrsubtotal), '$ #,###.##') AS V_Facturas,COUNT(*) AS Cant, COUNT(DISTINCT do.logusucreo) AS Users FROM dbo.documento AS do INNER JOIN dbo.tipodoc AS td ON do.tipo = td.codigo WHERE (do.fecha = '" + Fecha + "') AND (td.clasedoc = 'FP') AND do.ccostoID='000001' and do.anulado=0 GROUP BY DATEPART(HH, do.logfecreo)";
+            sql = "SELECT  TOP (100) PERCENT DATEPART(HH, do.logfecreo) AS HORA " +
+                ",format(Sum(do.vrsubtotal), '$ #,###.##') AS V_Facturas " +
+                ",COUNT(*) AS Cant " +
+                ", COUNT(DISTINCT do.logusucreo) AS Users" +
+                " FROM dbo.documento AS do" +
+                " INNER JOIN dbo.tipodoc AS td ON do.tipo = td.codigo " +
+                "WHERE (do.fecha = '" + Fecha + "')" +
+                " AND td.clasedoc IN ('FP','FV')" +
+                " AND do.ccostoID='"+costo+"'" + 
+                " and do.anulado=0" +
+                " GROUP BY DATEPART(HH, do.logfecreo)";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listaventashora13(string Fecha)

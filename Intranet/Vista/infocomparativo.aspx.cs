@@ -32,7 +32,7 @@ namespace Intranet.Vista.Documentos
                     Gridsuper13.DataSource = null;
                     Gridsuper13.DataBind();
                 }
-                var registros16 = Controlasql.listaventa16(txtfechaini.Value.ToUpper(), txtfechafin.Value);
+                var registros16 = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,Session["CCOSTO"].ToString());
                 if (registros16.Tables[0].Rows.Count > 0)
                 {
                     Gridsuper16.DataSource = registros16;
@@ -77,7 +77,7 @@ namespace Intranet.Vista.Documentos
         {
             try
             {
-                var registros16 = Controlasql.listaventa16(txtfechaini.Value.ToUpper(), txtfechafin.Value);
+                var registros16 = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,Session["CCOSTO"].ToString());
                 if (registros16.Tables[0].Rows.Count > 0)
                 {
                     Gridsuper16.DataSource = registros16;
