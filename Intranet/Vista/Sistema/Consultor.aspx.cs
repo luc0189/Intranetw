@@ -97,6 +97,7 @@ namespace Intranet.Vista.Sistema
                         txtbarra.Value = "";
                     }
 
+
                     var descuentolinea = Controlasql.Clistadeslinea(varlinea);//consulta por linea
                     if (descuentolinea.Tables[0].Rows.Count > 0)
                     {
@@ -121,18 +122,7 @@ namespace Intranet.Vista.Sistema
 
 
                     }
-                    else
-                    {
-                        boxvalor.Visible = true;
-                        dvalor1.Visible = false;
-                        ddescuento.Visible = false;
-                        dvalor2.Visible = false;
-                        lbvalor.Text = valor.ToString();
-                        lbarticulo.Text = detalle;
-                        lbpxunidad.Text = (valor / peso).ToString();
-                        LblPlu.Text = varArticulo;
-                        txtbarra.Value = "";
-                    }
+                    
                     var descuentogrupo = Controlasql.Clistadesgrupo(vargrupo);//consulta por linea
                     if (descuentogrupo.Tables[0].Rows.Count > 0)
                     {
@@ -157,18 +147,7 @@ namespace Intranet.Vista.Sistema
 
 
                     }
-                    else
-                    {
-                        boxvalor.Visible = true;
-                        dvalor1.Visible = false;
-                        ddescuento.Visible = false;
-                        dvalor2.Visible = false;
-                        lbvalor.Text = valor.ToString();
-                        lbarticulo.Text = detalle;
-                        lbpxunidad.Text = (valor / peso).ToString();
-                        LblPlu.Text = varArticulo;
-                        txtbarra.Value = "";
-                    }
+                   
                     var descuentomarca = Controlasql.Clistadesmarca(varmarca);//consulta por linea
                     if (descuentomarca.Tables[0].Rows.Count > 0)
                     {
@@ -196,18 +175,19 @@ namespace Intranet.Vista.Sistema
 
 
                     }
-                    else
-                    {
-                        boxvalor.Visible = true;
-                        dvalor1.Visible = false;
-                        ddescuento.Visible = false;
-                        dvalor2.Visible = false;
-                        lbvalor.Text = valor.ToString();
-                        lbarticulo.Text = detalle;
-                        lbpxunidad.Text = (valor / peso).ToString();
-                        LblPlu.Text = varArticulo;
-                        txtbarra.Value = "";
-                    } 
+
+                }
+                else
+                {
+                    boxvalor.Visible = true;
+                    dvalor1.Visible = false;
+                    ddescuento.Visible = false;
+                    dvalor2.Visible = false;
+                    lbvalor.Text = valor.ToString();
+                    lbarticulo.Text = detalle;
+                    lbpxunidad.Text = (valor / peso).ToString();
+                    LblPlu.Text = varArticulo;
+                    txtbarra.Value = "";
                 }
                 var saldo = Controlasql.Clistasaldo(varArticulo, "015");
                 if (saldo.Tables[0].Rows.Count > 0)
