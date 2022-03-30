@@ -1,11 +1,7 @@
 ﻿using Intranet.Controlador;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Intranet.Vista.Sistema
 {
@@ -13,6 +9,7 @@ namespace Intranet.Vista.Sistema
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!Page.IsPostBack)
             {
                 modal.Visible = true;
@@ -56,10 +53,10 @@ namespace Intranet.Vista.Sistema
                         detalle = (Convert.ToString(row["detalle"])) + "-" + (Convert.ToString(row["nombrepres"]));
                         valor = (Convert.ToInt32(row["valormiva"]));
                         peso = (Convert.ToInt32(row["peso"]));
-                        varlinea = (Convert.ToString(row["lineaID"]));
-                        varmarca = (Convert.ToString(row["marcaID"]));
-                        vargrupo = (Convert.ToString(row["grupoID"]));
-                       
+                        varlinea = (Convert.ToString(row["nombrelinea"]));
+                        varmarca = (Convert.ToString(row["nombremarca"]));
+                        vargrupo = (Convert.ToString(row["nombregrupo"]));
+
                         if (peso == 0)
                         {
                             peso = 1;
@@ -184,6 +181,8 @@ namespace Intranet.Vista.Sistema
 
                             des = (Convert.ToInt32(row["vrveneficio"]));
                         }
+                        modal.Visible = true;
+                        
                         lbarticulo.Text = detalle;
                         boxvalor.Visible = false;
                         dvalor1.Visible = true;
@@ -214,7 +213,7 @@ namespace Intranet.Vista.Sistema
 
 
                 }
-              
+
                 var saldo = Controlasql.Clistasaldo(varArticulo, "011");
                 if (saldo.Tables[0].Rows.Count > 0)
                 {
@@ -224,10 +223,10 @@ namespace Intranet.Vista.Sistema
                     {
                         lbsaldo.Text = (Convert.ToString(row["saldocant"]));
                     }
-                   
+
 
                 }
-               
+
 
                 else
                 {
@@ -246,7 +245,7 @@ namespace Intranet.Vista.Sistema
                     ddescuento.Visible = false;
                     dvalor2.Visible = false;
                 }
-               
+                txtbarra.Value = "";
             }
             catch (Exception EX)
             {

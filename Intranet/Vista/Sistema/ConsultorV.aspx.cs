@@ -1,11 +1,7 @@
 ﻿using Intranet.Controlador;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Intranet.Vista.Sistema
 {
@@ -41,8 +37,11 @@ namespace Intranet.Vista.Sistema
                 lbvalor1.Text = "";
                 lbvalordes.Text = "";
                 LblPlu.Text = "";
+                var varlinea = "";
+                var vargrupo = "";
+                var varmarca = "";
                 var descuentossss = (valor - ((valor * des) / 100));
-                var articulo = Controlasql.Clistaprecio(txtbarra.Value,"002");
+                var articulo = Controlasql.Clistaprecio(txtbarra.Value, "002");
                 if (articulo.Tables[0].Rows.Count > 0)
                 {
                     DataTable Tablearticulo = articulo.Tables[0];
@@ -52,7 +51,10 @@ namespace Intranet.Vista.Sistema
                         varArticulo = (Convert.ToString(row["codigo"]));
                         detalle = (Convert.ToString(row["detalle"])) + "-" + (Convert.ToString(row["nombrepres"]));
                         valor = (Convert.ToInt32(row["valormiva"]));
-                         peso = (Convert.ToInt32(row["peso"]));
+                        peso = (Convert.ToInt32(row["peso"]));
+                        varlinea = (Convert.ToString(row["nombrelinea"]));
+                        varmarca = (Convert.ToString(row["nombremarca"]));
+                        vargrupo = (Convert.ToString(row["nombregrupo"]));
                         if (peso == 0)
                         {
                             peso = 1;
@@ -65,7 +67,7 @@ namespace Intranet.Vista.Sistema
 
                         foreach (DataRow row in Tdescuento.Rows)
                         {
-                           
+
                             des = (Convert.ToInt32(row["vrveneficio"]));
                         }
                         lbarticulo.Text = detalle;
@@ -80,6 +82,7 @@ namespace Intranet.Vista.Sistema
                         lbvalordes.Text = descuentossss.ToString();
                         lbpxunidad.Text = (descuentossss / peso).ToString();
 
+
                     }
                     else
                     {
@@ -87,12 +90,126 @@ namespace Intranet.Vista.Sistema
                         dvalor1.Visible = false;
                         ddescuento.Visible = false;
                         dvalor2.Visible = false;
-                        LblPlu.Text = varArticulo;
                         lbvalor.Text = valor.ToString();
                         lbarticulo.Text = detalle;
                         lbpxunidad.Text = (valor / peso).ToString();
+                        LblPlu.Text = varArticulo;
+                        txtbarra.Value = "";
                     }
-                    var saldo = Controlasql.Clistasaldo(varArticulo,"014");
+
+                    var descuentolinea = Controlasql.Clistadeslinea(varlinea);//consulta por linea
+                    if (descuentolinea.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable Tdescuento = descuentolinea.Tables[0];
+
+                        foreach (DataRow row in Tdescuento.Rows)
+                        {
+
+                            des = (Convert.ToInt32(row["vrveneficio"]));
+                        }
+                        lbarticulo.Text = detalle;
+                        boxvalor.Visible = false;
+                        dvalor1.Visible = true;
+                        ddescuento.Visible = true;
+                        dvalor2.Visible = true;
+                        LblPlu.Text = varArticulo;
+                        lbvalor1.Text = valor.ToString();
+                        lbdescuento.Text = des.ToString();
+                        descuentossss = (valor - ((valor * des) / 100));
+                        lbvalordes.Text = descuentossss.ToString();
+                        lbpxunidad.Text = (descuentossss / peso).ToString();
+
+
+                    }
+                    else
+                    {
+                        boxvalor.Visible = true;
+                        dvalor1.Visible = false;
+                        ddescuento.Visible = false;
+                        dvalor2.Visible = false;
+                        lbvalor.Text = valor.ToString();
+                        lbarticulo.Text = detalle;
+                        lbpxunidad.Text = (valor / peso).ToString();
+                        LblPlu.Text = varArticulo;
+                        txtbarra.Value = "";
+                    }
+                    var descuentogrupo = Controlasql.Clistadesgrupo(vargrupo);//consulta por linea
+                    if (descuentogrupo.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable Tdescuento = descuentogrupo.Tables[0];
+
+                        foreach (DataRow row in Tdescuento.Rows)
+                        {
+
+                            des = (Convert.ToInt32(row["vrveneficio"]));
+                        }
+                        lbarticulo.Text = detalle;
+                        boxvalor.Visible = false;
+                        dvalor1.Visible = true;
+                        ddescuento.Visible = true;
+                        dvalor2.Visible = true;
+                        LblPlu.Text = varArticulo;
+                        lbvalor1.Text = valor.ToString();
+                        lbdescuento.Text = des.ToString();
+                        descuentossss = (valor - ((valor * des) / 100));
+                        lbvalordes.Text = descuentossss.ToString();
+                        lbpxunidad.Text = (descuentossss / peso).ToString();
+
+
+                    }
+                    else
+                    {
+                        boxvalor.Visible = true;
+                        dvalor1.Visible = false;
+                        ddescuento.Visible = false;
+                        dvalor2.Visible = false;
+                        lbvalor.Text = valor.ToString();
+                        lbarticulo.Text = detalle;
+                        lbpxunidad.Text = (valor / peso).ToString();
+                        LblPlu.Text = varArticulo;
+                        txtbarra.Value = "";
+                    }
+                    var descuentomarca = Controlasql.Clistadesmarca(varmarca);//consulta por linea
+                    if (descuentomarca.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable Tdescuento = descuentomarca.Tables[0];
+
+                        foreach (DataRow row in Tdescuento.Rows)
+                        {
+
+                            des = (Convert.ToInt32(row["vrveneficio"]));
+                        }
+                        modal.Visible = true;
+
+                        lbarticulo.Text = detalle;
+                        boxvalor.Visible = false;
+                        dvalor1.Visible = true;
+                        ddescuento.Visible = true;
+                        dvalor2.Visible = true;
+                        LblPlu.Text = varArticulo;
+                        lbvalor1.Text = valor.ToString();
+                        lbdescuento.Text = des.ToString();
+                        descuentossss = (valor - ((valor * des) / 100));
+                        lbvalordes.Text = descuentossss.ToString();
+                        lbpxunidad.Text = (descuentossss / peso).ToString();
+                        txtbarra.Value = "";
+
+
+                    }
+                    else
+                    {
+                        boxvalor.Visible = true;
+                        dvalor1.Visible = false;
+                        ddescuento.Visible = false;
+                        dvalor2.Visible = false;
+                        lbvalor.Text = valor.ToString();
+                        lbarticulo.Text = detalle;
+                        lbpxunidad.Text = (valor / peso).ToString();
+                        LblPlu.Text = varArticulo;
+                        txtbarra.Value = "";
+                    } 
+                }
+                    var saldo = Controlasql.Clistasaldo(varArticulo, "014");
                     if (saldo.Tables[0].Rows.Count > 0)
                     {
                         DataTable Tsaldo = saldo.Tables[0];
@@ -104,7 +221,6 @@ namespace Intranet.Vista.Sistema
 
                     }
 
-                }
                 else
                 {
                     lbarticulo.Text = "Articulo No existe";

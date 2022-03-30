@@ -17,82 +17,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Consultor</title>
 
-    <style>
+ <style>
         html {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             font-size: 150%;
             line-height: 1.4;
         }
-        * {
-	margin:0;
-	padding: 0;
-	box-sizing: border-box;
-}
-        
-section {
-	position: relative;
-	width: 100%;
-	height: 100vh;
 
-}
-section video{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-section .navegacion{
-	position: absolute;
-	bottom: 40px;
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 100;
-	display: flex;
-	justify-content: center;
-	align-items:  center;
-}
-
-section .navegacion li{
-	list-style: none;
-	cursor: pointer;
-	margin: 0 10px;
-	border-radius: 2px;
-	background: #eee;
-	padding: 3px 3px 0;
-	opacity: 0.65;
-	transition: 0.6s;
-}
-
-section .navegacion li:hover{
-	opacity: 1;
-	background: #fff;
-}
-
-section .navegacion li img{
-	width: 150px;
-	transition: 0.6s;
-}
-
-section .navegacion li img:hover{
-	width: 200px;
-}	
         .navbar {
             z-index: 1030;
             opacity: 0.1;
         }
 
-        /*video {
-            object-fit: cover;
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }*/
-      #myCarousel {
+       #myCarousel {
             object-fit: cover;
             width: 100vw;
             height: 100vh;
@@ -101,10 +38,7 @@ section .navegacion li img:hover{
             left: 0;
             z-index: 1;
         }
-      modal{
- width: 50vw;
-            height: 30vh;
-      }
+      
     </style>
 </head>
 <body>
@@ -120,9 +54,6 @@ section .navegacion li img:hover{
                 </div>
             </div>
         </nav>
-     
-
-             
  <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -198,12 +129,11 @@ section .navegacion li img:hover{
                     }
 
                 </script>
-        <div class="body">
+       
       
-
-            <div class="modal" id="moda" style="display: block; z-index: 2;">
-                <div class=" modal-dialog modal" id="modal" runat="server">
-                    <div class="modal-content">
+                 <div class="modal" id="moda" style="display: block;  z-index: 2;">
+                <div class=" modal-dialog modal-xl" style="width: 800px;"  id="modal" runat="server">
+                    <div class="modal-content" style="width: 800px;">
                         <div class="modal-header">
                             <center>
                             <h1> <asp:LABEL text="Articulo" runat="server" ID="lbarticulo" /></h1>
@@ -224,7 +154,7 @@ section .navegacion li img:hover{
                                         <div class="card-body ">
 
                                             <h1 class="tamañoantes"><strong>$ 
-                                                <asp:Label Text="-" runat="server" id="lbvalor1"/></strong></h1>
+                                                <asp:Label Text="-" runat="server" ID="lbvalor1" /></strong></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -234,8 +164,11 @@ section .navegacion li img:hover{
                                             <strong>Descuento</strong>
                                         </div>
                                         <div class="card-body ">
-                                            <h1><strong>
-                                                <asp:Label Text="-" runat="server"  ID="lbdescuento"/></strong></h1>
+                                            <center>
+                                                <h1><strong>
+                                                <asp:Label Text="-" runat="server" ID="lbdescuento" />%</strong></h1>
+                                            </center>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -245,10 +178,10 @@ section .navegacion li img:hover{
                                             <strong>Ahora</strong>
                                         </div>
                                         <div class="card-body ">
-
-                                            <h1><strong>
+                                           
+                                            <h1><strong> $
                                                 <asp:Label Text="-" ID="lbvalordes" runat="server" />
-                                                </strong></h1>
+                                            </strong></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -256,7 +189,7 @@ section .navegacion li img:hover{
                         </div>
                         <div class="card-footer">
                             <div class="row">
-                                 <div class="col-md-4">
+                                <div class="col-md-4">
                                     PLU: 
                                 <asp:Label Text="-" ID="LblPlu" runat="server" />
                                 </div>
@@ -269,24 +202,24 @@ section .navegacion li img:hover{
                                 <asp:Label Text="-" ID="lbpxunidad" runat="server" />
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
             </div>
-           </div>
+          
       
     </form>
 
    
 </body>
+<script type="text/javascript">
+    setTimeout(function () {
+        document.getElementById('modal').style.display = 'none';
+    }, 5000);
 
-     <script type="text/javascript">
-         setTimeout(function () {
-             document.getElementById('modal').style.display = 'none';
-         }, 50000);
-        
-     </script>
+
+</script>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

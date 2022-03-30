@@ -131,9 +131,10 @@
 
         
 
-            <div class="modal" id="moda" style="display: block; z-index: 2;">
-                <div class=" modal-dialog modal-xl" id="modal" runat="server">
-                    <div class="modal-content">
+           
+         <div class="modal" id="moda" style="display: block;  z-index: 2;">
+                <div class=" modal-dialog modal-xl" style="width: 800px;"  id="modal" runat="server">
+                    <div class="modal-content" style="width: 800px;">
                         <div class="modal-header">
                             <center>
                             <h1> <asp:LABEL text="Articulo" runat="server" ID="lbarticulo" /></h1>
@@ -154,7 +155,7 @@
                                         <div class="card-body ">
 
                                             <h1 class="tamañoantes"><strong>$ 
-                                                <asp:Label Text="-" runat="server" id="lbvalor1"/></strong></h1>
+                                                <asp:Label Text="-" runat="server" ID="lbvalor1" /></strong></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -164,8 +165,11 @@
                                             <strong>Descuento</strong>
                                         </div>
                                         <div class="card-body ">
-                                            <h1><strong>
-                                                <asp:Label Text="-" runat="server"  ID="lbdescuento"/></strong></h1>
+                                            <center>
+                                                <h1><strong>
+                                                <asp:Label Text="-" runat="server" ID="lbdescuento" />%</strong></h1>
+                                            </center>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -175,10 +179,10 @@
                                             <strong>Ahora</strong>
                                         </div>
                                         <div class="card-body ">
-
-                                            <h1><strong>
+                                           
+                                            <h1><strong> $
                                                 <asp:Label Text="-" ID="lbvalordes" runat="server" />
-                                                </strong></h1>
+                                            </strong></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -199,7 +203,7 @@
                                 <asp:Label Text="-" ID="lbpxunidad" runat="server" />
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>

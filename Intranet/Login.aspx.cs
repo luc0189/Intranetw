@@ -74,7 +74,11 @@ namespace Intranet
                         Session["CCOSTO"] = valor5;
 
                         Session["BD"] = selectbd.Value;
-                        Response.Redirect("Vista/1.aspx");
+                        if (Session["perfilnombre"].ToString().Equals("LIDER PUNTO DE VENTA"))
+                        {
+                            Response.Redirect("Vista/1.aspx");
+                        }
+                        Response.Redirect("Vista/2.aspx");
 
                     }
 

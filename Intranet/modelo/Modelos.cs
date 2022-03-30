@@ -1230,43 +1230,46 @@ namespace Intranet.modelo
         }
         internal DataSet MListaprecio(string barra,string lista)
         {
-            sql = " SELECT r.codigo, " +
-                "    r.detalle, " +
-                "	r.codbarra," +
-                "	r.valormiva," +
-                "	r.peso," +
-                "	r.descuento," +
-                "	coalesce(pres.nombrepres, ' ') nombrepres," +
-                "   r.lineaID," +
-                "   r.grupoID," +
-                "   r.marcaID " +
-                " from(" +
-                "    SELECT a.codigo," +
-                "        a.detalle," +
-                "        cd.codbarra," +
-                "        cast(valormiva as int) as valormiva," +
-                "        cast(a.peso as int) as peso," +
-                "        coalesce(cast(condiprom.vrveneficio as int), 0.0) as descuento," +
-                "        cd.presentacionID, " +
-                "        a.lineaID," +
-                "       a.grupoID," +
-                "       a.marcaID" +
-                "    from articulo a with(nolock)" +
-                "    left join dbo.artspromo aprom with(nolock)  ON a.codigo = aprom.articuloID" +
-                "    left join dbo.condicionpromo condiprom with(nolock) ON aprom.promocionID = condiprom.promocionID" +
-                "    left JOIN dbo.promocion promo with(nolock) ON condiprom.promocionID = promo.id" +
-                "    left join codbar cd with(nolock) on cd.articuloID = a.codigo" +
-                "    left join precio pc with(nolock) on pc.articuloID = a.codigo and(pc.presentacionID = cd.presentacionID or(pc.presentacionID is null and cd.presentacionID is null))" +
-                "    where cd.CODBARRA = '"+barra+"'" +
-                "    and pc.listprecioID = '"+lista+"'" +
-                "    and inactivo = 0)r left join dbo.presentacion pres with(nolock) on pres.id = r.presentacionID";
+            sql = "  SELECT r.codigo, " +
+                "                    r.detalle, " +
+                "                	r.codbarra," +
+                "                	r.valormiva," +
+                "                	r.peso," +
+                "                	r.descuento," +
+                "                	coalesce(pres.nombrepres, ' ') nombrepres," +
+                "                   r.nombrelinea," +
+                "                   r.nombregrupo," +
+                "                   r.nombremarca" +
+                "                 from(" +
+                "                    SELECT a.codigo," +
+                "                        a.detalle," +
+                "                        cd.codbarra," +
+                "                        cast(valormiva as int) as valormiva," +
+                "                        cast(a.peso as int) as peso," +
+                "                        coalesce(cast(condiprom.vrveneficio as int), 0.0) as descuento," +
+                "                        cd.presentacionID," +
+                "                        l.nombre as nombrelinea," +
+                "                       g.nombre as nombregrupo," +
+                "                       m.nombre as nombremarca" +
+                "                    from articulo a with(nolock)" +
+                "                    left join dbo.artspromo aprom with(nolock)  ON a.codigo = aprom.articuloID" +
+                "                    left join dbo.condicionpromo condiprom with(nolock) ON aprom.promocionID = condiprom.promocionID" +
+                "                    left JOIN dbo.promocion promo with(nolock) ON condiprom.promocionID = promo.id" +
+                "                    left join codbar cd with(nolock) on cd.articuloID = a.codigo" +
+                "                    LEFT JOIN marca m with(nolock) on m.codigo = a.marcaID" +
+                "                    LEFT JOIN linea l with(nolock) on l.codigo = a.lineaID" +
+                "                    LEFT JOIN grupo g with(nolock) on g.codigo = a.grupoID" +
+                "                    left join precio pc with(nolock) on pc.articuloID = a.codigo and(pc.presentacionID = cd.presentacionID or(pc.presentacionID is null and cd.presentacionID is null))" +
+                "                    where cd.CODBARRA = '"+barra+"'" +
+                "                    and pc.listprecioID = '"+lista+"'" +
+                "                    and inactivo = 0)r left join dbo.presentacion pres with(nolock) on pres.id = r.presentacionID";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet MListasaldo(string articulo,string bodega)
         {
             sql = "SELECT articuloID ," +
                 "                                        cast(saldocant as int) as saldocant" +
-                "                                FROM dbo.fnInventInventariosBase(getdate(), NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0) fn where articuloID = '"+articulo+"' and bodegaID = '"+ bodega + "'; ";
+                "                                FROM dbo.fnInventInventariosBaseInventariosConBodegas(getdate(), NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0) fn where articuloID = '" + articulo+"' and bodegaID = '"+ bodega + "'; ";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet MListadescuentoarticuloid(string plu)
@@ -1288,7 +1291,7 @@ namespace Intranet.modelo
                 " INNER JOIN linea l on l.codigo = ap.lineaID " +
                 " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
                 "        and activa = 1" +
-                "        and l.codigo = '"+linea+"'" +
+                "        and l.nombre = '"+linea+"'" +
                 "        ORDER BY  ap.articuloID asc";
             return dataload.sqlconsulta(sql);
         }
@@ -1301,7 +1304,7 @@ namespace Intranet.modelo
                 " INNER JOIN grupo g on g.codigo = ap.grupoID " +
                 " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
                 "        and activa = 1" +
-                "        and g.codigo = '" + grupo + "'" +
+                "        and g.nombre = '" + grupo + "'" +
                 "        ORDER BY  ap.articuloID asc";
             return dataload.sqlconsulta(sql);
         }
@@ -1314,7 +1317,7 @@ namespace Intranet.modelo
                 " INNER JOIN marca m on m.codigo = ap.marcaID " +
                 " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
                 "        and activa = 1" +
-                "        and m.codigo = '" + marca + "'" +
+                "        and m.nombre = '" + marca + "'" +
                 "        ORDER BY  ap.articuloID asc";
             return dataload.sqlconsulta(sql);
         }
