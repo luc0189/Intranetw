@@ -1,12 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="1.aspx.cs" Inherits="Intranet.Vista._1" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <form runat="server">
-
-
-        <div class="row">
+        <div class="content-wrapper" style="min-height: 1113.69px;">
+              <div class="container-fluid">
+             <div class="row">
             <div class="box">
                 <div class="box-header no-border">
                     <div class="col-md-4">
@@ -39,17 +43,17 @@
                     </div>
 
                     <div class="box-body p-0">
-                        <table class="table table-striped table-valign-middle">
+                        <table class="table table-striped table-valign-middle" id="tendencias">
                             <thead>
                                 <tr>
                                     <th>Detalle</th>
-                                    <th>Valor</th>
+                                    <th>Tendencias</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Variacion Mensual
+                                    <td>%
                                     </td>
                                     <td>
                                         <small class="text-success mr-1">
@@ -75,20 +79,7 @@
                                     </td>
 
                                 </tr>
-                                <tr>
-                                    <td>Promedio de Venta diaria
-                                    </td>
-
-                                    <td>
-                                        <small class="text-danger mr-1">
-                                            <h5 class="description-header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                                <label runat="server" id="lblpromventadiaria"></label>
-                                            </font></font></h5>
-                                        </small>
-
-                                    </td>
-
-                                </tr>
+                            
                                 <tr>
                                     <td>Ventas por Metro Cuadrado
                   
@@ -120,6 +111,13 @@
 
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                                                        <th></th>
+                                                                        <th></th>
+                                                                   
+                                                                    </tr>
+                            </tfoot>
                         </table>
 
                     </div>
@@ -170,7 +168,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Meta
+                                    <td>Presupuesto
                                     </td>
                                     <td>
                                         <small class="text-success mr-1">
@@ -258,6 +256,56 @@
 
 
         </div>
+        </div>
+        </div>
+      
+
+       
 
     </form>
+
+
+    
+    <script type="text/javascript">
+        // Delete item
+
+
+        $(document).ready(function () {
+            var table = $('#tendencias').DataTable({
+                "createdRow": function (row, data, index) {
+                   
+                    console.log(data[3]);
+                 
+                }
+            });
+
+        
+
+
+
+            var item_to_delete;
+            var action_to_delete;
+
+
+            $('.deleteProductBon').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 1;
+            });
+
+            $('.deleteExam').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 2;
+            });
+
+
+            $("#btnYesDelete").click(function () {
+                if (action_to_delete == 1) {
+                    window.location.href = '/Negociations/DeleteProductBon/' + item_to_delete;
+                }
+
+            });
+        });
+    </script>asp:Content>
+
+
 </asp:Content>

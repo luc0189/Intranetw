@@ -24,7 +24,7 @@ namespace Intranet.Vista
         {
             if (!Page.IsPostBack)
             {
-                textid.Disabled = true;
+                textid.Enabled = false;
                 llenamodelos();
                 llenafabricante();
                 llenaCategoria();
@@ -107,7 +107,7 @@ namespace Intranet.Vista
         {
            
             GridViewRow gr = GridViewNovedades.SelectedRow;
-            textid.Value = gr.Cells[1].Text;
+            textid.Text = gr.Cells[1].Text;
             txtserial.Value = gr.Cells[2].Text;
            
             txtnombre.Value = Page.Server.HtmlDecode(gr.Cells[3].Text) ;
@@ -668,7 +668,7 @@ namespace Intranet.Vista
             String Varserial = txtserial.Value.ToUpper();
             try
             {
-                var registros = Controlasql.cupdateactivo(textid.Value, txtserial.Value.ToUpper(), txtnombre.Value.ToUpper(), txtcoment.Value.ToUpper()
+                var registros = Controlasql.cupdateactivo(textid.Text, txtserial.Value.ToUpper(), txtnombre.Value.ToUpper(), txtcoment.Value.ToUpper()
                , txtgarantia.Value, Selectmodelo.Value, SelectFabricante.Value, SelectCategoria.Value,
                 SelectTercero.Value.ToString(),  txtfechacompra.Value, txtvalor.Value,
                 Session["USUARIO"].ToString(), Session["BD"].ToString());

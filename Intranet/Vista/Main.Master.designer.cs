@@ -78,15 +78,6 @@ namespace Intranet.Vista
         protected global::System.Web.UI.WebControls.Label titlecosto;
 
         /// <summary>
-        /// Control hay_cumpleañeros.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hay_cumpleañeros;
-
-        /// <summary>
         /// Control Label2.
         /// </summary>
         /// <remarks>
@@ -96,31 +87,13 @@ namespace Intranet.Vista
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Control fotoperfil.
+        /// Control hay_cumpleañeros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage fotoperfil;
-
-        /// <summary>
-        /// Control perfiles.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl perfiles;
-
-        /// <summary>
-        /// Control labelcc.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelcc;
+        protected global::System.Web.UI.WebControls.Label hay_cumpleañeros;
 
         /// <summary>
         /// Control A.
@@ -598,6 +571,33 @@ namespace Intranet.Vista
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+
+        /// <summary>
+        /// Control fotoperfil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage fotoperfil;
+
+        /// <summary>
+        /// Control perfiles.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl perfiles;
+
+        /// <summary>
+        /// Control labelcc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl labelcc;
 
         /// <summary>
         /// Control txtnombreP.

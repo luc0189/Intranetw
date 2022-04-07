@@ -289,12 +289,12 @@ namespace Intranet.Vista
                     foreach (DataRow row in dt.Rows)
                     {
 
-                        hay_cumpleañeros.InnerText = Convert.ToString(row[2]) + " y Otros mas cumplen Años hoy";
+                        hay_cumpleañeros.Text = Convert.ToString(row[2]) + " y Otros mas cumplen Años hoy";
                     }
                 }
                 else
                 {
-                    hay_cumpleañeros.InnerText = "No hay Cumpleañeros por Hoy";
+                    hay_cumpleañeros.Text = "No hay Cumpleañeros por Hoy";
                 }
             }
             catch (Exception e)

@@ -62,7 +62,7 @@ namespace Intranet.Vista
                     lblvrproyectado.InnerText = row[1].ToString();
                     porcentaje.InnerText = row[2].ToString();
                     Int32 valor1 = Convert.ToInt32(row[2]);
-                    lblpromventadiaria.InnerText = row[3].ToString();
+                   
                     lblproyectado.InnerText = row[4].ToString();
                     lblporcen_Proyectado.InnerText = row[5].ToString();
                     lblproyectado.InnerText = row[4].ToString();
