@@ -2,22 +2,39 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Listado de Activos</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                            <li class="breadcrumb-item active">Activos Fijos</li>
+                            <li class="breadcrumb-item active">Listado de Activos</li>
+                            
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
      <section class="content">
-         <div class="container bootstrap snippet"> 
+         <div class="container-fluid"> 
               
          <form  method="post" runat="server">
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>                 
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
-        <div class="box">
-            <div class="box-header with-border">
-                <label class="box-title">Listado Activos</label>
-                <div class="box-tools pull-right">
-                       <a href="1.aspx" class="fa fa-home">Inicio</a>
-                    </div>
-            </div>
-             <div class="box-body">
-                <div class="table-responsive">
+                            <div class="row">
+                                <div class="card card-dark">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Mas</h3>
+                                    </div>
+                                    <div class="card-body">
+                                         <div class="table-responsive">
 
                     <asp:GridView ID="GridViewGactivos" runat="server" GridLines="None"
                         CssClass="table gvuser  table-hover table-responsive text-sm"
@@ -25,10 +42,11 @@
                     </asp:GridView> 
             
             </div>
-                  <asp:Button ID="Button3" runat="server" class="btn btn-block btn-success btn-sm " Text="Nuevo Activo" OnClick="Nuevo" />
-           
-            </div>
-        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+     
 
        
                             </ContentTemplate>

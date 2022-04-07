@@ -5363,7 +5363,7 @@
     <Content Include="Vista\Sistema\Menush.aspx" />
     <Content Include="Vista\Sistema\PermisosApp.aspx" />
     <Content Include="Vista\Sistema\PermisosLC.aspx" />
-    <Content Include="Vista\Sistema\permisosLcs.aspx" />
+    <Content Include="Vista\permisosLcs.aspx" />
     <Content Include="Vista\Sistema\Registro.aspx" />
     <Content Include="Vista\Sistema\Renumerar.aspx" />
     <Content Include="Vista\Sistema\User.aspx" />
@@ -7084,11 +7084,11 @@
     <Compile Include="Vista\Sistema\PermisosLC.aspx.designer.cs">
       <DependentUpon>PermisosLC.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Sistema\permisosLcs.aspx.cs">
+    <Compile Include="Vista\permisosLcs.aspx.cs">
       <DependentUpon>permisosLcs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Sistema\permisosLcs.aspx.designer.cs">
+    <Compile Include="Vista\permisosLcs.aspx.designer.cs">
       <DependentUpon>permisosLcs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Sistema\Registro.aspx.cs">

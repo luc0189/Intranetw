@@ -720,7 +720,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item"><a id="LCS2" runat="server" href="User.aspx" class="nav-link">
                                     <p>Gestion Ingreso</p>
                                 </a></li>
-                                <li class="nav-item"><a id="LCS3" runat="server" href="Sistema/permisosLcs.aspx" class="nav-link">
+                                <li class="nav-item"><a id="LCS3" runat="server" href="permisosLcs.aspx" class="nav-link">
                                     <p>Roles</p>
                                 </a></li>
                                 <%--    

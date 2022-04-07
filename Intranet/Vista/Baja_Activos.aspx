@@ -17,11 +17,11 @@
         }
 </style>
      <section class="content">
-    <div class="container bootstrap snippet">
+    <div class="container-fluid">
     <form method="post" runat="server">
         
    
-        <div class="box">
+        <div class="card card-dark">
             <div class="box-header with-border">
                 <label style="width:300px;">ACTA BAJA DE ACTIVOS FIJOS</label>
                 
