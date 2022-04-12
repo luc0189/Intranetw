@@ -677,43 +677,37 @@ namespace Intranet.Controlador
         public static DataSet listaventascarnesBnet( string grupo,string fi, string ff,string tienda)
         {
             Modelos usu = new Modelos();
-            string centroCosto = "";
-            if (tienda.Equals("SUPERMIO LA 16"))
-            {
-                centroCosto = "000001";
-            } if (tienda.Equals("SUPERMIO LA 13"))
-            {
-                centroCosto = "000002";
-            } if (tienda.Equals("SUPERMIO VERSALLES"))
-            {
-                centroCosto = "000004";
-            } if (tienda.Equals("SUPERMIO CIUDADELA"))
-            {
-                centroCosto = "000005";
-            }
-            if (grupo=="329")
-            {
-                try
-                {
-                    return usu.ListadocarnesBnet2(grupo, fi, ff, centroCosto);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            else
-            {
-                try
-                {
-                    return usu.ListadocarnesBnet(grupo, fi, ff, centroCosto);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
             
+            
+                try
+                {
+                    return usu.ListadocarnesBnet(grupo, fi, ff, tienda);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            
+            
+            
+
+        }
+        public static DataSet ListaventascarnesBnetDev(string grupo, string fi, string ff, string tienda)
+        {
+            Modelos usu = new Modelos();
+
+
+            try
+            {
+                return usu.ListadodVBnet(grupo, fi, ff, tienda);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+
 
         }
         public static DataSet Clistadesnomina(string terceroID, string fi, string ff)
@@ -2189,6 +2183,19 @@ namespace Intranet.Controlador
             try
             {
                 return usu2.Mventascontramesanterior(pfechaini, pfechahasta, pcosto);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o compleme
+            }
+        }
+        public static DataSet CventasAñoanterior(string pfechaini, string pfechahasta, string pcosto)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.MventascontraAñoanterior(pfechaini, pfechahasta, pcosto);
             }
             catch (Exception ex)
             {

@@ -4740,6 +4740,16 @@
     <Content Include="Vista\plugins\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Vista\plugins\bootstrap\js\bootstrap.js" />
     <Content Include="Vista\plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Vista\plugins\datatables-bs4\css\dataTables.bootstrap4.css" />
+    <Content Include="Vista\plugins\datatables-bs4\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Vista\plugins\datatables-bs4\js\dataTables.bootstrap4.js" />
+    <Content Include="Vista\plugins\datatables-bs4\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Vista\plugins\datatables-responsive\css\responsive.bootstrap4.css" />
+    <Content Include="Vista\plugins\datatables-responsive\css\responsive.bootstrap4.min.css" />
+    <Content Include="Vista\plugins\datatables-responsive\js\dataTables.responsive.js" />
+    <Content Include="Vista\plugins\datatables-responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Vista\plugins\datatables-responsive\js\responsive.bootstrap4.js" />
+    <Content Include="Vista\plugins\datatables-responsive\js\responsive.bootstrap4.min.js" />
     <Content Include="Vista\plugins\datatables\dataTables.bootstrap4.css" />
     <Content Include="Vista\plugins\datatables\dataTables.bootstrap4.js" />
     <Content Include="Vista\plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.css" />

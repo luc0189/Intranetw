@@ -13,6 +13,7 @@ namespace Intranet.Vista
     {
         DataTable dt = null;
         String profi = "";
+        Ccodemas sb = new Ccodemas();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -22,20 +23,43 @@ namespace Intranet.Vista
                 Ventasmesanterior();
 
 
+                Llenaselectgrupo();
 
-
-                //if (Session["USUARIO"] != null)
-                //{
-                  
-                   
-                //}
-               
                
               
                
             }
         }
+        public void Llenaselectgrupo()
+        {
+            try
+            {
+                String bd = Session["BD"].ToString();
+                DataSet res2 = sb.CListaGruposBenet(bd);
+                if (res2.Tables[0].Rows.Count > 0)
+                {
 
+                    select_Grupo.Items.Clear();
+                    foreach (DataRow row in res2.Tables[0].Rows)
+                    {
+                        select_Grupo.Items.Add(Convert.ToString(row["NOMBRE"]));
+                        select_Grupo.DataBind();
+                    }
+
+
+
+                }
+                else
+                {
+                    select_Grupo.DataSource = null;
+                    select_Grupo.DataBind();
+                }
+            }
+            catch (Exception E)
+            {
+               
+            }
+        }
         public void Ventasmesanterior()
         {
             string desde;
@@ -58,7 +82,7 @@ namespace Intranet.Vista
                 {
 
                     lblventasr.InnerText = row[0].ToString();
-                    Label1.InnerText = row[0].ToString();
+                    Label1.InnerText = row[1].ToString();
                     lblvrproyectado.InnerText = row[1].ToString();
                     porcentaje.InnerText = row[2].ToString();
                     Int32 valor1 = Convert.ToInt32(row[2]);
@@ -97,7 +121,21 @@ namespace Intranet.Vista
 
                 throw exp;
             }
+            try
+            {
+                var registros = Controlasql.CventasAñoanterior(txtdesde.Value, txthasta.Value, Session["CCOSTO"].ToString());
+                DataTable dt = registros.Tables[0];
+                foreach (DataRow row in dt.Rows)
+                {
+                    Label2.InnerText = row[0].ToString();
+                    ventasañoanterior.Text = row[1].ToString();
+                }
+            }
+            catch (Exception exp)
+            {
 
+                throw exp;
+            }
         }
 
         protected void Btnconsulta_Click(object sender, EventArgs e)
@@ -142,6 +180,79 @@ namespace Intranet.Vista
             {
 
                 Response.Redirect("Exceptionnet.aspx");
+            }
+        }
+
+        protected void Ventaslinea_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                var res = Controlasql.Cventasresumidolinea(txtdesde.Value, txthasta.Value, Session["CCOSTO"].ToString());
+                if (res.Tables[0].Rows.Count > 0)
+                {
+                    Gridviewresumido.DataSource = res;
+                    Gridviewresumido.DataBind();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+      
+
+        protected void Ventasgrupo_Click(object sender, EventArgs e)
+        {
+            var grupo = select_Grupo.Value;
+            string[] palabras = grupo.Split('/');
+            string codigo = Page.Server.HtmlDecode(palabras[0]);
+            try
+            {
+                var registrosm = Controlasql.listaventascarnesBnet(codigo, txtdesde.Value, txthasta.Value, Session["CCOSTO"].ToString());
+                if (registrosm.Tables[0].Rows.Count > 0)
+                {
+
+
+                    GridviewVentas.DataSource = registrosm;
+                    GridviewVentas.DataBind();
+
+                }
+                else
+                {
+                    GridviewVentas.DataSource = null;
+                    GridviewVentas.DataBind();
+                }
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+            try
+            {
+                var registrosm = Controlasql.ListaventascarnesBnetDev(Session["CCOSTO"].ToString(), txtdesde.Value, txthasta.Value, codigo);
+                if (registrosm.Tables[0].Rows.Count > 0)
+                {
+                    GridviewDev.DataSource = registrosm;
+                    GridviewDev.DataBind();
+
+                }
+                else
+                {
+                    GridviewDev.DataSource = null;
+                    GridviewDev.DataBind();
+                }
+
+            }
+            catch (Exception)
+            {
+
+
             }
         }
     }

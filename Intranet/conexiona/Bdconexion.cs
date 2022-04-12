@@ -58,6 +58,7 @@ namespace Intranet.conexiona
             }
             return datos;
         }
+
         public MySqlConnection conexion;
         public OracleConnection conexionoracle;
 

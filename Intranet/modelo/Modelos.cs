@@ -67,6 +67,11 @@ namespace Intranet.modelo
 
                 throw ex;
             }
+        } 
+        internal DataSet MlistagruposBnet(string db)
+        {
+            sql = "SELECT CODIGOGRUPO ||'/'|| NOMBRE_GRUPO AS NOMBRE FROM GRUPOSBNET";
+            return dataload.oraconsulta(sql, db);
         }
         internal DataSet listadotrans_pendientes(string PBD)
         {
@@ -514,16 +519,35 @@ namespace Intranet.modelo
         }
         internal DataSet ListadocarnesBnet(String pgrupo, String fechaini, String fechafin,String ccosto)
         {
-            sql = "select itart.presentacion ," +
-                "cast (sum(itart.cantidad)as float) cantidad " +
-                "       from itart, documento, articulo, tipodoc " +
-                "           where articulo.codigo=itart.articuloID " +
-                "               and itart.documentID= documento.id " +
-                "               and documento.tipo= tipodoc.codigo " +
-                "               and fecha between  '" + fechaini + "' and '" + fechafin + "' " +
-                "               and tipodoc.clasedoc='FP' and grupoID='" + pgrupo + "' " +
-                "               and documento.ccostoId='"+ ccosto + "' " +
-                "               group by presentacion,documento.ccostoId";
+            sql = "    select itart.articuloID, itart.presentacion ," +
+                "                cast(sum(itart.cantidad) as float) cantidad,cast(sum(itart.vrtotal) as float)precio" +
+                "                       from itart, documento, articulo, tipodoc" +
+                "                           where articulo.codigo = itart.articuloID" +
+                "                               and itart.documentID = documento.id" +
+                "                               and documento.tipo = tipodoc.codigo" +
+                "                               and fecha between  '"+ fechaini + "' and '"+ fechafin + "'" +
+                "                                and tipodoc.clasedoc in ('FP', 'FV')" +
+                "                                and grupoID = '"+ pgrupo + "'" +
+                "                               and documento.ccostoId = '"+ ccosto + "'" +
+                "                               AND documento.anulado = 0" +
+                "                               group by presentacion,documento.ccostoId,itart.articuloID";
+            return dataload.sqlconsulta(sql);
+        }
+
+        internal DataSet ListadodVBnet(String pgrupo, String fechaini, String fechafin, String ccosto)
+        {
+            sql = "   select itart.articuloID, itart.presentacion ," +
+                "                cast(sum(itart.cantidad) as float) cantidad,cast(sum(itart.vrtotal) as float)precio" +
+                "                       from itart, documento, articulo, tipodoc" +
+                "                           where articulo.codigo = itart.articuloID" +
+                "                               and itart.documentID = documento.id" +
+                "                               and documento.tipo = tipodoc.codigo" +
+                "                               and fecha between  '"+ fechaini + "' and '"+ fechafin + "'" +
+                "                                and tipodoc.clasedoc in ('DV', 'DP')" +
+                "                                and grupoID = '"+ ccosto + "'" +
+                "                               and documento.ccostoId = '"+pgrupo+"'" +
+                "                               AND documento.anulado = 0" +
+                "                               group by presentacion,documento.ccostoId,itart.articuloID";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet datosempresa_nomina()
@@ -1030,7 +1054,28 @@ namespace Intranet.modelo
                 "                                AND td.clasedoc in('FP', 'FV')" +
                 "                                 AND do.ccostoID = '"+ccosto+"'" +
                 "                                  and do.anulado = 0)" +
-                "                                 select FORMAT(((@mesctual -@mesanterior)/ @mesanterior)*100, '###,###.###')  as dato  ";
+                "                                 select FORMAT(((@mesctual -@mesanterior)/ @mesanterior)*100, '###,###.#')  as dato  ";
+            return dataload.sqlconsulta(sql);
+        }
+        internal DataSet MventascontraAñoanterior(string fei, string fef, string ccosto)//aqui trae las ventas contra el mes anterior
+        {
+            sql = "     declare @fecha1 as date='" + fei + "'" +
+                " declare @fecha2 as date = '" + fef + "'" +
+                "    Declare @mesctual as float = (SELECT      Sum(do.vrsubtotal) AS V_ANTES_IVA" +
+                "                       FROM dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
+                "                           WHERE fecha between @fecha1 and @fecha2" +
+                "                               AND td.clasedoc in('FP', 'FV')" +
+                "                                 AND do.ccostoID = '" + ccosto + "'" +
+                "                                  and do.anulado = 0)" +
+                "                                  declare @fanterior1 as date = (SELECT DATEADD(yy, -1, @fecha1))" +
+                "                                   declare @fanterior2 as date = (SELECT DATEADD(yy, -1, @fecha2))                                  " +
+                "        Declare @añoanterior as float = (SELECT      Sum(do.vrsubtotal) AS V_ANTES_IVA" +
+                "                       FROM dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
+                "                           WHERE fecha between @fanterior1 and @fanterior2" +
+                "                                AND td.clasedoc in('FP', 'FV')" +
+                "                                 AND do.ccostoID = '" + ccosto + "'" +
+                "                                  and do.anulado = 0)" +
+                "                                 select FORMAT(((@mesctual -@añoanterior)/ @añoanterior)*100, '###,###.#')  as dato,format(@añoanterior,'###,###.#') as dato2  ";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listadoventatotal(string fecha, string ccosto)

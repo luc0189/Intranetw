@@ -96,6 +96,20 @@ namespace Intranet.Controlador
                 throw e;
             }
         }
+
+        internal DataSet CListaGruposBenet(string db)
+        {
+            try
+            {
+                return sb.MlistagruposBnet(db);
+            }
+            catch (Exception e)
+
+            {
+
+                throw e;
+            }
+        }
         internal DataTable clistaCC_IDCOBI(string pcc,string db)
         {
             try

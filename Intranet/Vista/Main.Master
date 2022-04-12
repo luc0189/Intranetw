@@ -23,7 +23,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="plugins/select3/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="dist/css/adminlte.min.css?v=3.2.0">
-
+    <link href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="plugins/datatables/jquery.dataTables.css" rel="stylesheet" />
     <style type="text/css">
         /* Chart.js */
         @keyframes chartjs-render-animation {
@@ -482,7 +484,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Kardex
-                                    <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
@@ -506,10 +507,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         <li class="nav-item">
                             <a href="#" id="AE" runat="server" class="nav-link">
-                                <i class="fa fa-book"></i>
+                                <i class="nav-icon fa fa-book"></i>
                                 <p>
                                     Actas de Entrega
-                                       <span class="right badge badge-danger">New</span>
+                                       
                                 </p>
 
                             </a>
@@ -982,10 +983,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap4.js"></script>
 
-    <script src="../dist/DataTables/datatables.js"></script>
-
-
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
@@ -1060,13 +1063,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Grid10();
             Grid11();
         });
-        var GridGeneral = function () {
-            $(".gvuser3").prepend($("<thead></thead>").append($(".gvuser3").find("tr:first"))).dataTable({
-                "language": lenguaje_espanol,
-                "dom": "Bfrtip",
-                responsive: true
-            });
-        }
+       
         var GridGeneral = function () {
             $(".gvuser").prepend($("<thead></thead>").append($(".gvuser").find("tr:first"))).dataTable({
                 "language": lenguaje_espanol,
@@ -1241,7 +1238,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         $(win.document.body).find('table')
                             .addClass('compact')
-                            .css('font-size', 'inherit');
+                            .css('font-size', 'inherit') ;
                     }
                 }
 

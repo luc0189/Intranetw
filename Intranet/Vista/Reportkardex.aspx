@@ -139,7 +139,7 @@
                                         </div>
                                         <!-- /.box-header -->
                                         <div class="box-body">
-                                            <div class="table-responsive">
+                                            <div class="table table-responsive">
                                                 <asp:GridView ID="Gridkardex" runat="server" GridLines="None" OnSelectedIndexChanged="GridViewnovedades_SelectedIndexChanged"
 
                                                     CssClass="table gvuser table-striped table-bordered text-sm" EmptyDataText="No se encontraron Registros con los parametros indicados.">

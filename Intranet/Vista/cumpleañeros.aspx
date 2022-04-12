@@ -56,7 +56,7 @@
                     <div class="box">
                         <div class="box-header">
                             
-                            <div class="fade in" id="Ingreso" runat="server" role="dialog" >
+                            <div  id="Ingreso" runat="server" role="dialog" >
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
