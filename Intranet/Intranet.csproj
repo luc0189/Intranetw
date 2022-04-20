@@ -5277,6 +5277,7 @@
     <Content Include="Vista\RH\Rh2.aspx" />
     <Content Include="Vista\RH\WebForm1.aspx" />
     <Content Include="Vista\Rotacion.aspx" />
+    <Content Include="Vista\RotacionDias.aspx" />
     <Content Include="Vista\R_compras.aspx" />
     <Content Include="Vista\salir.aspx" />
     <Content Include="Vista\Sistema\Consultor13.aspx" />
@@ -7030,6 +7031,13 @@
     </Compile>
     <Compile Include="Vista\Rotacion.aspx.designer.cs">
       <DependentUpon>Rotacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\RotacionDias.aspx.cs">
+      <DependentUpon>RotacionDias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\RotacionDias.aspx.designer.cs">
+      <DependentUpon>RotacionDias.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\R_compras.aspx.cs">
       <DependentUpon>R_compras.aspx</DependentUpon>

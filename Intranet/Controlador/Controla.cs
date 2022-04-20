@@ -525,6 +525,18 @@ namespace Intranet.Controlador
             {
                 throw ex; // para lanzar la exception o complementar la capturada
             }
+        } public static DataSet CRotaciondias(string fechai,string fechaf,string salav)//espacio para cumpleañeros
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.Rotaciondias(fechai,fechaf,salav);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
         }
         public static DataSet Clistadoasistencia(string fechaini,string fechafin)//espacio para asistencia biometrico
         {

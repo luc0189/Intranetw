@@ -71,7 +71,7 @@ namespace Intranet.Vista
             ReportViewer1.Reset();
 
             //datasou
-            DataTable dt = GetData(txtidacta.Value);
+            DataTable dt = GetData(txtidacta.Text);
             ReportDataSource rds = new ReportDataSource("DataSet1", dt);
             ReportViewer1.LocalReport.DataSources.Add(rds);
 
@@ -183,10 +183,10 @@ namespace Intranet.Vista
                 if (registroNUEVO.Tables[0].Rows.Count > 0)
                 {
                     DataTable dt = registroNUEVO.Tables[0];
-                    txtidacta.Value = "";
+                    txtidacta.Text = "";
                     foreach (DataRow row in dt.Rows)
                     {
-                        txtidacta.Value=(Convert.ToString(row["id"]));
+                        txtidacta.Text=(Convert.ToString(row["id"]));
                         
                     }
                     }
@@ -270,7 +270,7 @@ namespace Intranet.Vista
             {
                 try
                 {
-                    var registrosapruebaasig = Controlasql.ccreaaprueba_asignac(txtidacta.Value, SelectProveedor.Value, OBSERVACIONG.Value,
+                    var registrosapruebaasig = Controlasql.ccreaaprueba_asignac(txtidacta.Text, SelectProveedor.Value, OBSERVACIONG.Value,
                    FECHAMANT.Value, Session["USUARIO"].ToString(), "", "", Session["BD"].ToString());
                     if (registrosapruebaasig > 0)
                     {
@@ -295,7 +295,7 @@ namespace Intranet.Vista
                                 string nombrearticulo = palabras[1];
                                 try
                                 {
-                                    var registros3 = Controlasql.Ccrea_detalles_mant_conArticulo(txtidacta.Value, serial,
+                                    var registros3 = Controlasql.Ccrea_detalles_mant_conArticulo(txtidacta.Text, serial,
                                         r_utilizados, mano_obra, v_repuestos, detallemant, tipomant,
                                         clasemante, garant, nexterno, Session["BD"].ToString());
                                     string script = @"<script type='text/javascript'>
@@ -328,7 +328,7 @@ namespace Intranet.Vista
 
                                 try
                                 {
-                                    var registros3 = Controlasql.ccreadeta_Act_Mant_Na(txtidacta.Value, r_utilizados, mano_obra
+                                    var registros3 = Controlasql.ccreadeta_Act_Mant_Na(txtidacta.Text, r_utilizados, mano_obra
                                         , v_repuestos, detallemant, tipomant, clasemante, garant, nexterno, Session["BD"].ToString());
                                     if (registros3 > 0)
                                     {

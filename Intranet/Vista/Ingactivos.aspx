@@ -220,7 +220,7 @@
                    
                 </div>
 
-                <div class="modal modal-info fade in" id="modal" style="display: block;" runat="server">
+                <div class="modal modal-info " id="modal" style="display: block;" runat="server">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -244,7 +244,7 @@
                     <!-- /.modal-dialog -->
                 </div>
 
-                <div class="modal modal-warning fade in" id="Nuevomodelo" role="dialog">
+                <div class="modal modal-warning " id="Nuevomodelo" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -287,7 +287,7 @@
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
-                <div class="modal modal-warning fade in" id="NuevoCategoria" role="dialog">
+                <div class="modal modal-warning " id="NuevoCategoria" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -310,7 +310,7 @@
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
-                <div class="modal modal-warning fade in" id="NuevaLinea" role="dialog">
+                <div class="modal modal-warning " id="NuevaLinea" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -333,7 +333,7 @@
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
-                <div class="modal modal-warning fade left" id="Buscador" role="dialog">
+                <div class="modal modal-warning " id="Buscador" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -366,7 +366,7 @@
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
-                <div class="modal modal-warning fade in" id="Nuevotercero" role="dialog">
+                <div class="modal modal-warning" id="Nuevotercero" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

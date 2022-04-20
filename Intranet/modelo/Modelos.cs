@@ -1089,6 +1089,128 @@ namespace Intranet.modelo
                 "  and do.anulado=0 ";
             return dataload.sqlconsulta(sql);
         }
+        internal DataSet Rotaciondias(string fecha, string fechaf,string sala)
+        {
+            sql = $"SET NOCOUNT ON; " +
+                $"declare @fecha1 as date = '{fecha}'" +
+                $" ,@fecha2 as date = '{fechaf}'" +
+                $" select" +
+                $"            fin.articuloID," +
+                $"			fin.Articulo," +
+                $"			 CAST(CantidadInicial AS INT)as [cantidad Inicial]," +
+                $"			CAST(fin.cantventa AS INT) as[Ventas]," +
+                $"			CAST(fin.saldocant AS INT)as [cantidad Final]," +
+                $"			format(round(fin.saldocant * fin.costoPromedio, 2), '###.###,##') as CostoFinal," +
+                $"			fin.dias_sin_venta as [Dias sin Venta]," +
+                $"					(fin.saldocant / fin.PromedioCantidadVentaDia) DiasInventario" +
+                $"					,FechaUltimoTraslado" +
+                $"					,FechaUltimaVENTA," +
+              
+                $"			fin.Marca," +
+                $"			fin.Grupo," +
+                $"			fin.Linea," +
+                $"			fin.nombre as Proveedor " +
+                $"from" +
+                $"(" +
+                $"    SELECT  t.articuloID," +
+                $"            a.detalle[Articulo]," +
+                $"            t.cantventa," +
+                $"            t.cantventa / DATEDIFF(dd, @fecha1, @fecha2) as PromedioCantidadVentaDia," +
+                $"            t.saldocant," +
+                $"            t.saldocosto," +
+                $"            b.nombre[Nombre Bodega]," +
+                $"            ma.nombre[Marca]," +
+                $"            gr.nombre[Grupo]," +
+                $"            ln.nombre[Linea]," +
+                $"                        lc.proveedorID," +
+                $"			ter.nombre," +
+                $"			lc.fechadesde," +
+                $"			CantidadInicial," +
+                $"			UltimoTraslado.FechaUltimoTraslado," +
+                $"			UltimaCompra.FechaUltimaVENTA," +
+                $"			costoPromedio," +
+                $"			DATEDIFF(dd, UltimaCompra.FechaUltimaVENTA, getdate()) as dias_sin_venta" +
+                $"    FROM(" +
+                $"        SELECT COALESCE(venta.articuloID, s.articuloID) articuloID," +
+                $"            COALESCE(venta.bodegaID, s.bodegaID) bodegaID," +
+                $"            venta.cantventa," +
+                $"            s.saldocant," +
+                $"            venta.vrtotal," +
+                $"            s.saldocosto," +
+                $"            costoPromedio" +
+                $"        FROM(" +
+                $"                SELECT itventa.articuloID," +
+                $"                        itventa.bodegaID," +
+                $"                        SUM(itventa.vrtotal) vrtotal," +
+                $"                        SUM(itventa.cantidad) cantventa" +
+                $"                FROM dbo.itart itventa INNER JOIN dbo.documento venta ON itventa.documentID = venta.id" +
+                $"                        INNER JOIN dbo.tipodoc td ON venta.tipo = td.codigo" +
+                $"                WHERE venta.fecha BETWEEN @fecha1 AND @fecha2" +
+                $"                        AND venta.anulado = 0" +
+                $"                        AND td.clasedoc IN('FV', 'FP', 'DV', 'DP')" +
+                $"                GROUP BY itventa.articuloID" +
+                $"                        , itventa.bodegaID" +
+                $"            ) venta FULL JOIN" +
+                $"                (SELECT articuloID" +
+                $"                        , bodegaID" +
+                $"                        , saldocant" +
+                $"                        , saldocosto" +
+                $"                        , fn.costoPromedio" +
+                $"                FROM dbo.fnInventInventariosBaseRotacion(@fecha1, @fecha2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0) fn" +
+                $"               ) s ON venta.articuloID = s.articuloID AND venta.bodegaID = s.bodegaID" +
+                $"        ) t" +
+                $"            OUTER APPLY(" +
+                $"            select top 1 d.fecha as FechaUltimoTraslado" +
+                $"            from dbo.documento d inner" +
+                $"            join itart it on it.documentID = d.id inner" +
+                $"            join tipodoc td on td.codigo = d.tipo" +
+                $"            where td.clasedoc = 'NT'" +
+                $"                    and it.articuloID = t.articuloID" +
+                $"                    and it.bodegaID = t.bodegaID" +
+                $"                    and d.fecha <= @fecha2" +
+                $"                    order by d.fecha desc" +
+                $"                )UltimoTraslado" +
+                $"            OUTER APPLY(" +
+                $"            select top 1 d.fecha as FechaUltimaVENTA" +
+                $"            from dbo.documento d inner" +
+                $"            join itart it on it.documentID = d.id inner" +
+                $"            join tipodoc td on td.codigo = d.tipo" +
+                $"            where td.clasedoc = 'FP'" +
+                $"                    and it.articuloID = t.articuloID" +
+                $"                    and it.bodegaID = t.bodegaID" +
+                $"                    and d.fecha <= @fecha2" +
+                $"                    order by d.fecha desc" +
+                $"                )UltimaCompra" +
+                $"            inner join dbo.bodega b on b.codigo = t.bodegaID" +
+                $"            inner join articulo a on t.articuloID = a.codigo" +
+                $"            inner join dbo.grupo as gr on a.grupoID = gr.codigo" +
+                $"            inner join dbo.linea as ln on a.lineaID = ln.codigo" +
+                $"            inner join dbo.marca as ma on a.marcaID = ma.codigo" +
+                $"            left join(select SUM(it.cantidad) as CantidadInicial" +
+                $"							  ,it.articuloID" +
+                $"							  ,it.bodegaID" +
+                $"                       FROM dbo.itinvent it" +
+                $"                                INNER JOIN dbo.documento venta ON it.documentID = venta.id" +
+                $"                                INNER JOIN dbo.tipodoc td ON venta.tipo = td.codigo" +
+                $"                            WHERE venta.fecha < @fecha1" +
+                $"                                AND venta.anulado = 0" +
+                $"                                GROUP BY" +
+                $"                                it.articuloID,it.bodegaID" +
+                $"						)salini on salini.articuloID = t.articuloID and t.bodegaID = salini.bodegaID" +
+                $"            LEFT JOIN(SELECT t.articuloID, t.proveedorID, t.fechadesde" +
+                $"                        FROM (" +
+                $"                            SELECT ROW_NUMBER() OVER(PARTITION BY articuloID ORDER BY articuloID, fechadesde desc) rnum," +
+                $"						articuloID, " +
+                $"							proveedorID," +
+                $"							fechadesde" +
+                $"                            from arthistocompra lc" +
+                $"                            WHERE @fecha2>= lc.fechadesde AND @fecha2<= lc.fechahasta) T" +
+                $"                          where T.rnum = 1 ) lc ON lc.articuloID = t.articuloID" +
+                $"            left join dbo.tercero as ter on ter.id = lc.proveedorID" +
+                $"            where a.inactivo = 0" +
+                $"			)fin where fin.[Nombre Bodega] = '{sala}' order by [Dias sin Venta] desc";
+            return dataload.sqlconsulta(sql);
+        }
         internal DataSet listadoventa13total(string fecha)
         {
             sql = "SELECT   format(Sum(do.vrsubtotal)," +

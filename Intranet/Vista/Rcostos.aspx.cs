@@ -1,17 +1,11 @@
 ﻿
 using Intranet.Controlador;
+using SpreadsheetLight;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.Office.Interop.Excel;
-using SpreadsheetLight;
-using System.IO;
-using System.Web.Mvc;
 
 namespace Intranet.Vista
 {
@@ -116,7 +110,7 @@ namespace Intranet.Vista
             try
             {
 
-                var registrosm = Controlasql.ClistaitemsRecibo_compra(Ltipo.Value, Lnumero.Value,Session["BD"].ToString());
+                var registrosm = Controlasql.ClistaitemsRecibo_compra(Ltipo.Value, Lnumero.Value, Session["BD"].ToString());
                 if (registrosm.Tables[0].Rows.Count > 0)
                 {
                     GridviewItemsCompra.DataSource = registrosm;
@@ -126,12 +120,12 @@ namespace Intranet.Vista
                     foreach (DataRow row in dt.Rows)
                     {
                         validador = Convert.ToString(row[9]);
-                        
+
                     }
-                  
-                  
+
+
                     GridviewItemsCompra.DataBind();
-                  
+
                 }
                 else
                 {
@@ -140,13 +134,13 @@ namespace Intranet.Vista
                 }
             }
             catch (Exception ex)
-                {
+            {
                 alerta.MessageBox(this, "Excepcion Interna:" + ex.Message);
 
             }
         }
 
-    
+
 
         protected void GridviewItemsCompra_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
@@ -214,7 +208,7 @@ namespace Intranet.Vista
 
                     GridviewItemsCompra.DataSource = registrosm;
                     this.Page.Session["ds"] = registrosm;
-                 
+
                     GridviewItemsCompra.DataBind();
                 }
                 else
@@ -236,8 +230,8 @@ namespace Intranet.Vista
             {
                 var id = e.NewValues[0].ToString();
                 var pcant = e.NewValues[2].ToString();
-                  
-                var pcostonuevo = e.NewValues[4].ToString().Replace(',','.');
+
+                var pcostonuevo = e.NewValues[4].ToString().Replace(',', '.');
                 //string pestado =Select  ;
                 var pobserva = e.NewValues[5].ToString();
                 var estate = e.NewValues[6].ToString();
@@ -249,8 +243,8 @@ namespace Intranet.Vista
                 {
                     estate = "R";
                 }
-               
-                var regis = Controlasql.CupdateitemsOC(id, pcant, pcostonuevo,estate,pobserva, Session["BD"].ToString());
+
+                var regis = Controlasql.CupdateitemsOC(id, pcant, pcostonuevo, estate, pobserva, Session["BD"].ToString());
                 //if (regis.Tables[0].Rows.Count > 0)
                 //{
 
@@ -266,7 +260,7 @@ namespace Intranet.Vista
 
                 GridviewItemsCompra.EditIndex = -1;
                 Llenatabla();
-                lbestado.Text = id+" - Registro actualizado";
+                lbestado.Text = id + " - Registro actualizado";
             }
             catch (Exception ex)
             {
@@ -277,7 +271,7 @@ namespace Intranet.Vista
 
         protected void GridviewItemsCompra_DataBound(object sender, EventArgs e)
         {
-           
+
             double f = 0;
             double np = 0;
             double mav = 0;
@@ -290,23 +284,23 @@ namespace Intranet.Vista
                 string stado = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[10].Text);
                 string stadodev = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[11].Text);
 
-                
-               
 
-                f += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[15].Text.Replace('.',','));
-                    np += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[16].Text.Replace('.', ','));
-                    mav += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[17].Text.Replace('.', ','));
-                    mev += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[18].Text.Replace('.', ','));
-                    nll += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[19].Text.Replace('.', ','));
-                    dev += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[20].Text.Replace('.', ','));
+
+
+                f += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[15].Text.Replace('.', ','));
+                np += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[16].Text.Replace('.', ','));
+                mav += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[17].Text.Replace('.', ','));
+                mev += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[18].Text.Replace('.', ','));
+                nll += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[19].Text.Replace('.', ','));
+                dev += Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[20].Text.Replace('.', ','));
                 var dato = GridviewItemsCompra.Rows[i].Cells[21].Text.Replace('.', ',');
-                if (dato=="")
+                if (dato == "")
                 {
                     dato = "0";
                 }
-                   sll += Convert.ToDouble(dato);
-              
-            
+                sll += Convert.ToDouble(dato);
+
+
                 txtF.Value = f.ToString();
                 txtNP.Value = np.ToString();
                 txtMaV.Value = mav.ToString();
@@ -335,7 +329,7 @@ namespace Intranet.Vista
                 }
 
             }
-           
+
         }
         public void renderisado()
         {
@@ -411,7 +405,7 @@ namespace Intranet.Vista
             for (int i = 0; i < GridviewItemsCompra.Rows.Count; i++)
             {
                 string rowtest = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[11].Text);
-                if ( rowtest != "DEV")
+                if (rowtest != "DEV")
                 {
                     if (rowtest != "NLL-")
                     {
@@ -446,7 +440,7 @@ namespace Intranet.Vista
                         string Bodega_ID = "30";
                         string Tercero_ID = "";
                         string CCostoID = "";
-                        string factorpres = Page.Server.HtmlDecode(GridviewItemsCompra.Rows[i].Cells[25].Text) ;
+                        string factorpres = Page.Server.HtmlDecode(GridviewItemsCompra.Rows[i].Cells[25].Text);
                         string peso = "0";
                         string Dto_comercial = "0";
                         string Dto_Especial = "";
@@ -513,16 +507,16 @@ namespace Intranet.Vista
 
                         Session.Add("Tabla", table);
                     }
-                   
+
                 }
                 else
                 {
                     lbestado.Text = "algunos items sin datos";
                 }
-                
+
             }
             osLDocument.ImportDataTable(1, 1, table, true);
-     
+
             osLDocument.SaveAs(pathFile + $"\\{guid}-{name}.xlsx");
             Session.Remove("Tabla");
             var file = $"{guid}-{name}.xlsx";
@@ -542,12 +536,12 @@ namespace Intranet.Vista
         {
             var guid = Guid.NewGuid().ToString();
 
-          
+
 
             var name = "AppLcsDevoluciones";
-           
+
             string pathFile = AppDomain.CurrentDomain.BaseDirectory + "text";
-          
+
             SLDocument osLDocument = new SLDocument();
             osLDocument.AddWorksheet("inventario");
             for (int i = 0; i < GridviewItemsCompra.Rows.Count; i++)
@@ -555,105 +549,105 @@ namespace Intranet.Vista
                 string rowtest = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[11].Text);
                 if (rowtest == "DEV")
                 {
-                   
-                        string areadato = "0";
-                        string plu = Page.Server.HtmlDecode(GridviewItemsCompra.Rows[i].Cells[3].Text);
-                        string detalle = "";
-                        string presentacion = Page.Server.HtmlDecode(GridviewItemsCompra.Rows[i].Cells[26].Text);
+
+                    string areadato = "0";
+                    string plu = Page.Server.HtmlDecode(GridviewItemsCompra.Rows[i].Cells[3].Text);
+                    string detalle = "";
+                    string presentacion = Page.Server.HtmlDecode(GridviewItemsCompra.Rows[i].Cells[26].Text);
                     string cantidadpres = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[5].Text.Replace('.', ','));
-                        string vrunit = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[8].Text);
-                        string vrcosto = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[8].Text);
-                        string vrprecio = "";
-                        string vrtotal = "0";
-                        string vrcostototal = Convert.ToString(
+                    string vrunit = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[8].Text);
+                    string vrcosto = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[8].Text);
+                    string vrprecio = "";
+                    string vrtotal = "0";
+                    string vrcostototal = Convert.ToString(
 
-                                                (Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[5].Text)) *
-                                                (Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[8].Text))
+                                            (Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[5].Text)) *
+                                            (Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[8].Text))
 
-                                                );
-                        string vr_unit_extranjero = "";
-                        string total_extranjero = "";
-                        string vriva = Convert.ToString(
-                                                 (
-                                                (Convert.ToDouble(vrcostototal)) *
-                                                (Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[23].Text.Replace(',', '.')))
-                                                / 100)
-                                                );
+                                            );
+                    string vr_unit_extranjero = "";
+                    string total_extranjero = "";
+                    string vriva = Convert.ToString(
+                                             (
+                                            (Convert.ToDouble(vrcostototal)) *
+                                            (Convert.ToDouble(GridviewItemsCompra.Rows[i].Cells[23].Text.Replace(',', '.')))
+                                            / 100)
+                                            );
 
-                        string piva = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[23].Text.Replace(',', '.'));
-                        string vrico = "";
-                        string vricouni = "";
-                        string vrdto = "";
-                        string Bodega_ID = "30";
-                        string Tercero_ID = "";
-                        string CCostoID = "";
-                        string factorpres = Page.Server.HtmlDecode(GridviewItemsCompra.Rows[i].Cells[25].Text);
+                    string piva = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[23].Text.Replace(',', '.'));
+                    string vrico = "";
+                    string vricouni = "";
+                    string vrdto = "";
+                    string Bodega_ID = "30";
+                    string Tercero_ID = "";
+                    string CCostoID = "";
+                    string factorpres = Page.Server.HtmlDecode(GridviewItemsCompra.Rows[i].Cells[25].Text);
                     string peso = "0";
-                        string Dto_comercial = "0";
-                        string Dto_Especial = "";
-                        string ref1 = "";
-                        string ref2 = "";
-                        string ref3 = "";
-                        Boolean otroscostos = false;
-                        string Lista_precios_ID = "";
-                        string Cantidad_sugerida = "";
-                        string Cuenta_Salida_ID = "";
-                        string Cant_Cruza = "";
-                        string Cruzado_Item = "";
-                        string Especial = "";
-                        string Promos_aplicadas = "";
-                        string No_aplicar_promociones = "";
-                        string Producto_ID = "";
-                        string Cajas = "";
-                        string Unid_Sueltas = "";
-                        string TarifadeID = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[24].Text);
-                        table = (System.Data.DataTable)(Session["Tabla"]);
-                        row = table.NewRow();
-                        row["areadato"] = areadato;
-                        row["plu"] = plu;
-                        row["detalle"] = detalle;
-                        row["presentacion"] = presentacion;
-                        row["cantidadpres"] = cantidadpres;
-                        row["vrunit"] = vrunit;
-                        row["vrcosto"] = vrcosto;
-                        row["vrprecio"] = vrprecio;
-                        row["vrtotal"] = vrtotal;
-                        row["vrcostototal"] = vrcostototal;
-                        row["vr_unit_extranjero"] = vr_unit_extranjero;
-                        row["total_extranjero"] = total_extranjero;
-                        row["vriva"] = vriva;
-                        row["piva"] = piva;
-                        row["vrico"] = vrico;
-                        row["vricouni"] = vricouni;
-                        row["vrdto"] = vrdto;
-                        row["Bodega_ID"] = Bodega_ID;
-                        row["Tercero_ID"] = Tercero_ID;
-                        row["CCostoID"] = CCostoID;
-                        row["factorpres"] = factorpres;
-                        row["peso"] = peso;
-                        row["Dto_comercial"] = Dto_comercial;
-                        row["Dto_Especial"] = Dto_Especial;
-                        row["ref1"] = ref1;
-                        row["ref2"] = ref2;
-                        row["ref3"] = ref3;
-                        row["otroscostos"] = otroscostos;
-                        row["Lista_precios_ID"] = Lista_precios_ID;
-                        row["Cantidad_sugerida"] = Cantidad_sugerida;
-                        row["Cuenta_Salida_ID"] = Cuenta_Salida_ID;
-                        row["Cant_Cruza"] = Cant_Cruza;
-                        row["Cruzado_Item"] = Cruzado_Item;
-                        row["Especial"] = Especial;
-                        row["Promos_aplicadas"] = Promos_aplicadas;
-                        row["No_aplicar_promociones"] = No_aplicar_promociones;
-                        row["Producto_ID"] = Producto_ID;
-                        row["Cajas"] = Cajas;
-                        row["Unid_Sueltas"] = Unid_Sueltas;
-                        row["TarifadeID"] = TarifadeID;
+                    string Dto_comercial = "0";
+                    string Dto_Especial = "";
+                    string ref1 = "";
+                    string ref2 = "";
+                    string ref3 = "";
+                    Boolean otroscostos = false;
+                    string Lista_precios_ID = "";
+                    string Cantidad_sugerida = "";
+                    string Cuenta_Salida_ID = "";
+                    string Cant_Cruza = "";
+                    string Cruzado_Item = "";
+                    string Especial = "";
+                    string Promos_aplicadas = "";
+                    string No_aplicar_promociones = "";
+                    string Producto_ID = "";
+                    string Cajas = "";
+                    string Unid_Sueltas = "";
+                    string TarifadeID = Convert.ToString(GridviewItemsCompra.Rows[i].Cells[24].Text);
+                    table = (System.Data.DataTable)(Session["Tabla"]);
+                    row = table.NewRow();
+                    row["areadato"] = areadato;
+                    row["plu"] = plu;
+                    row["detalle"] = detalle;
+                    row["presentacion"] = presentacion;
+                    row["cantidadpres"] = cantidadpres;
+                    row["vrunit"] = vrunit;
+                    row["vrcosto"] = vrcosto;
+                    row["vrprecio"] = vrprecio;
+                    row["vrtotal"] = vrtotal;
+                    row["vrcostototal"] = vrcostototal;
+                    row["vr_unit_extranjero"] = vr_unit_extranjero;
+                    row["total_extranjero"] = total_extranjero;
+                    row["vriva"] = vriva;
+                    row["piva"] = piva;
+                    row["vrico"] = vrico;
+                    row["vricouni"] = vricouni;
+                    row["vrdto"] = vrdto;
+                    row["Bodega_ID"] = Bodega_ID;
+                    row["Tercero_ID"] = Tercero_ID;
+                    row["CCostoID"] = CCostoID;
+                    row["factorpres"] = factorpres;
+                    row["peso"] = peso;
+                    row["Dto_comercial"] = Dto_comercial;
+                    row["Dto_Especial"] = Dto_Especial;
+                    row["ref1"] = ref1;
+                    row["ref2"] = ref2;
+                    row["ref3"] = ref3;
+                    row["otroscostos"] = otroscostos;
+                    row["Lista_precios_ID"] = Lista_precios_ID;
+                    row["Cantidad_sugerida"] = Cantidad_sugerida;
+                    row["Cuenta_Salida_ID"] = Cuenta_Salida_ID;
+                    row["Cant_Cruza"] = Cant_Cruza;
+                    row["Cruzado_Item"] = Cruzado_Item;
+                    row["Especial"] = Especial;
+                    row["Promos_aplicadas"] = Promos_aplicadas;
+                    row["No_aplicar_promociones"] = No_aplicar_promociones;
+                    row["Producto_ID"] = Producto_ID;
+                    row["Cajas"] = Cajas;
+                    row["Unid_Sueltas"] = Unid_Sueltas;
+                    row["TarifadeID"] = TarifadeID;
 
-                        table.Rows.Add(row);
+                    table.Rows.Add(row);
 
-                        Session.Add("Tabla", table);
-                  
+                    Session.Add("Tabla", table);
+
                 }
                 else
                 {
@@ -661,34 +655,34 @@ namespace Intranet.Vista
                 }
 
             }
-           
+
             osLDocument.ImportDataTable(1, 1, table, true);
-           
+
             osLDocument.SaveAs(pathFile + $"\\{guid}-{name}.xlsx");
             Session.Remove("Tabla");
-               var file = $"{guid}-{name}.xlsx";
+            var file = $"{guid}-{name}.xlsx";
             Response.ContentType = "text/xml";
             Response.ContentEncoding = System.Text.Encoding.UTF8;
             Response.AppendHeader("Content-Disposition", "attachment;filename=LcsApp.xlsx");
 
-            Response.TransmitFile(Server.MapPath("~/text/"+file+""));
+            Response.TransmitFile(Server.MapPath("~/text/" + file + ""));
             Response.End();
 
 
 
         }
-       
+
         protected void GridviewItemsCompra_SelectedIndexChanged(object sender, EventArgs e)
         {
-         
+
             GridViewRow gr = GridviewItemsCompra.SelectedRow;
             var idCompra = Page.Server.HtmlDecode(gr.Cells[2].Text);
             var plu = Page.Server.HtmlDecode(gr.Cells[3].Text);
             var detalle = Page.Server.HtmlDecode(gr.Cells[4].Text);
             try
             {
-                var registro = Controlasql.CInsertitemsbonificado(idCompra, plu, detalle,Session["BD"].ToString());
-                if (registro >0)
+                var registro = Controlasql.CInsertitemsbonificado(idCompra, plu, detalle, Session["BD"].ToString());
+                if (registro > 0)
                 {
                     lbestado.Text = "bonificado ok";
                     try
@@ -709,7 +703,7 @@ namespace Intranet.Vista
 
 
                             GridviewItemsCompra.DataBind();
-                            
+
                         }
                         else
                         {
@@ -727,19 +721,19 @@ namespace Intranet.Vista
             catch (Exception ex)
             {
 
-                lbestado.Text =  "Excepcion no Controlada= "+ex.Message ;
+                lbestado.Text = "Excepcion no Controlada= " + ex.Message;
             }
-            
+
         }
 
-       
+
         protected void BtnExportar_Click(object sender, EventArgs e)
         {
             ExportListFromGridView();
         }
         public void Exportardata()
         {
-           
+
         }
 
         protected void BtnExportarDev_Click(object sender, EventArgs e)
@@ -765,7 +759,7 @@ namespace Intranet.Vista
 
 
         }
-       
+
 
     }
 }

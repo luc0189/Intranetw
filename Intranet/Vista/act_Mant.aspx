@@ -9,42 +9,60 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <section class="content">
-    <div class="container bootstrap snippet">
-    <form method="post" runat="server">
-        
-        <div class="margin">
-            <div class="box-header">
+     <section class="content wrapper">
+             <form method="post" runat="server">
+    <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Acta de Mantenimiento</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            
 
-                <table class="auto-style5">
-                    <tr>
-                        <td class="auto-style4">
-                            <div class="btn-group" id="botonera">
-                                <button type="button" class="btn btn-success">Opciones</button>
-                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                          
+                            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                            <li class="breadcrumb-item active">Actas Mactenimiento</li>
+                            <li class="breadcrumb-item active">ActaID:   <asp:Label Text="text" runat="server" name="name" id="txtidacta" /></li>
+                            
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <div class="content ">
+        <div class="card card-dark">
+            <div class="card-header">
+                <div class="card-tools">
+                  
+                       <div class="btn-group">
+                                <button type="button" class="btn btn-dark">Opciones</button>
+                                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
                                     <span class="sr-only"></span>
                                 </button>
-                                <ul class="dropdown-menu" role="menu">
+                                <ul class="dropdown-menu">
                                     <!-- /ir a inicio-->
-                                    <li><a href="1.aspx" class="fa fa-home">Inicio</a></li>
-                                    <li>
+                                    <li class="dropdown-item dark-mode"><a href="1.aspx" class="fa fa-home dropdown-item ">Inicio</a> </li>
+                                    
+                                    <li class="dropdown-item dark-mode">
                                         <asp:LinkButton ID="btnNuevo" runat="server" Text="Nuevo" OnClick="nuevonumeroacta">
-                                        <span aria-hidden="true" class="fa fa-magic"> Nuevo</span>
+                                        <span aria-hidden="true" class="fa fa-magic dark-mode"> Nuevo</span>
                                         </asp:LinkButton></li>
-                                    <li>
+                                    <li class="dropdown-item dark-mode">
                                         <asp:LinkButton ID="LinkButton7" runat="server" Text="Nuevo" OnClick="LinkButton7_Click">
-                                        <span aria-hidden="true" class="fa fa-magic"> imprime</span>
+                                        <span aria-hidden="true" class="fa fa-magic dark-mode"> imprime</span>
                                         </asp:LinkButton></li>
                                     <li class="divider"></li>
-                                    <li>
-                                        <asp:LinkButton ID="guardar" runat="server" Text="Insertar" OnClick="Guardar">
-                                         <span aria-hidden="true" class="fa  fa-hdd-o"> Guardar Mantenimiento</span>
+                                    <li class="dropdown-item dark-mode">
+                                        <asp:LinkButton ID="guardar" CssClass="item" runat="server" Text="Insertar" OnClick="Guardar">
+                                         <span aria-hidden="true" class=" fa  fa-hdd-o "> Guardar Mantenimiento</span>
                                         </asp:LinkButton>
 
                                     </li>
                                     <li class="divider"></li>
-                                    <li>
+                                    <li class="dropdown-item dark-mode">
                                         <asp:LinkButton ID="LinkButton3" runat="server" Text="Nuevo" OnClick="mostrarmenutercero">
                                          <span aria-hidden="true" class="fa  fa-user-circle">Nuevo Tercero</span>
                                         </asp:LinkButton>
@@ -53,31 +71,9 @@
                                 </ul>
 
                             </div>
-                        </td>
-
-                        <td class="auto-style4">
-                            <div id="div_nombredocumento">
-                                <h3 class="box-title"><b>Acta de Mantenimiento</b></h3>
-                            </div>
-                        </td>
-                        <td style="width: 20px;"></td>
-                        <td class="auto-style3">
-                            <div id="div_numerodeacta">
-                                <b>Acta No. </b>
-                                <input id="txtidacta" runat="server" type="text" name="name" value="" />
-                            </div>
-
-                        </td>
-
-
-                    </tr>
-                </table>
+                </div>
             </div>
-
-
-        </div>
-        <div class="box-body">
-
+            <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
 
@@ -101,47 +97,38 @@
                         <input id="FECHAMANT" runat="server" type="date" class="form-control" />
                     </div>
                 </div>
-
+               
             </div>
-        </div>
-        <div class="box" id="insert">
-            <div class="box-body">
-                <div class="col-md-4">
-
-                    <!-- /clases mante-->
-                    <div class="box">
-                        <!-- <div class="box-header">
-             <h3 class="box-title">Trabajos</h3>
-            </div>-->
-                        <div class="box-body">
-
-
-
-                            <div class="input-group ">
+                <div class="row">
+                    
+                    <div class="col-md-4">
+                         <div class="card card-default">
+                    <div class="card-body">
+                         <div class="input-group ">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                         Seleccione
                     <span class="fa fa-caret-down"></span>
                                     </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <asp:LinkButton ID="LinkButton5" runat="server" Text="Elect." CssClass="btn btn-primary"  OnClick="btnselectelectrico_Click">
-                                <span aria-hidden="true" class="fa fa-bolt">Electrico</span>
+                                    <ul class="dropdown-menu ">
+                                        <li class="dropdown-item dark-mode">
+                                            <asp:LinkButton ID="LinkButton5" runat="server" Text="Elect." CssClass="btn btn-primary"   OnClick="btnselectelectrico_Click">
+                               <span aria-hidden="true" class="fa fa-bolt"> Electrico</span>
                                             </asp:LinkButton>
                                         </li>
-                                        <li><asp:LinkButton ID="LinkButton1" runat="server" Text="Elect." CssClass="btn btn-primary"  OnClick="btnobracivil_Click">
-                                <span aria-hidden="true" class="fa fa-bolt">Obra Civil</span>
+                                        <li class="dropdown-item dark-mode"><asp:LinkButton ID="LinkButton1" runat="server" Text="Elect." CssClass="btn btn-primary"  OnClick="btnobracivil_Click">
+                                <span aria-hidden="true" class="fa fa-home"> Obra Civil</span>
                                             </asp:LinkButton></li>
-                                        <li><asp:LinkButton ID="LinkButton2" runat="server" Text="Elect." CssClass="btn btn-primary"  OnClick="btnornamentacion_Click">
-                                <span aria-hidden="true" class="fa fa-bolt">Ornamentacion</span>
+                                        <li class="dropdown-item dark-mode"><asp:LinkButton ID="LinkButton2" runat="server" Text="Elect." CssClass="btn btn-primary"  OnClick="btnornamentacion_Click">
+                                <span aria-hidden="true" class="fa fa-sun"> Ornamentacion</span>
                                             </asp:LinkButton></li>
-                                        <li><asp:LinkButton ID="LinkButton6" runat="server" Text="Elect." CssClass="btn btn-primary"  OnClick="btnPintura_Click">
-                                <span aria-hidden="true" class="fa fa-bolt">Pintura</span>
+                                        <li class="dropdown-item dark-mode"><asp:LinkButton ID="LinkButton6" runat="server" Text="Elect." CssClass="btn btn-primary"  OnClick="btnPintura_Click">
+                                <span aria-hidden="true" class="fa fa-paint-brush"> Pintura</span>
                                             </asp:LinkButton></li>
                                         <li class="divider"></li>
-                                        <li>
+                                        <li class="dropdown-item dark-mode">
                                             <asp:LinkButton ID="LinkButton4" runat="server" Text="Insertar" CssClass="btn btn-primary" OnClick="mostrarselect">
-                                <span aria-hidden="true" class="fa  fa-bolt">Activos Fijos</span>
+                                <span aria-hidden="true" class="fa  fa-slack">Activos Fijos</span>
                                             </asp:LinkButton></li>
                                     </ul>
                                 </div>
@@ -170,16 +157,14 @@
                         <span class="input-group-addon">Repuestos:</span>
                         <input id="txtRepuestos" runat="server" type="text" placeholder="Repuestos Utilizados" class="form-control" />
                     </div>
-                        </div>
-                        <!-- /.box-body -->
                     </div>
+                    
                 </div>
-
-
-
-                <div class="col-md-3">
-
-                   <div class="input-group">
+                    </div>
+                    <div class="col-md-3">
+                          <div class="card card-default">
+                              <div class="card-body">
+                                  <div class="input-group">
                         <span class="input-group-addon">$_Mano Obra:</span>
 
                         <input id="valorManObra" runat="server" type="number" placeholder="Valor Mano de Obra" value="0" class="form-control" />
@@ -198,29 +183,40 @@
                         <span class="input-group-addon">Garantia:</span>
                         <input id="Textgarantia" runat="server" type="number" placeholder="Meses Garantia" class="form-control" />
                     </div>
+                              </div>
+                    
                 </div>
-                <div class="col-md-5">
-                    <!-- /detalle del mantenimiento-->
-                    <div class="form-group ">
-                        <textarea id="txtobserva" runat="server" type="text" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Descripcion del Mantenimiento" class="form-control" ></textarea>
+                    </div> 
+                    <div class="col-md-5">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                 <div class="form-group ">
+                        <textarea id="txtobserva" runat="server" rows="6" type="text" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Descripcion del Mantenimiento" class="form-control" ></textarea>
                     </div>
+                            </div>
+                    
                    
-                    <div id="botonInsertar">
-
-                        <asp:LinkButton ID="Adicionar" runat="server" Text="Insertar" CssClass="btn btn-primary" OnClick="agregarow">
-                <span aria-hidden="true" class="fa  fa-hand-o-down"> Insertar</span>
-                        </asp:LinkButton>
-
+                </div>
                     </div>
                 </div>
 
             </div>
+            <div class="card-footer">
+                 <asp:LinkButton ID="Adicionar" runat="server" Text="Insertar" CssClass="btn btn-dark" OnClick="agregarow">
+                <span aria-hidden="true" class="fa  fa-hand-o-down"> Insertar</span>
+                        </asp:LinkButton>
+            </div>
+        </div>
+        
+     
+        <div class="box-body">
 
         </div>
+     
 
-        <div class="box">
-            <div class="box-header" id="div_detalles">
-                <h3 class="box-title">Detalles</h3>
+        <div class="card card-default">
+            <div class="card-header" id="div_detalles">
+                <h3 class="card-title">Detalles</h3>
 
             </div>
 
@@ -230,7 +226,7 @@
 
 
                     <!-- /.box-header -->
-                    <div class="box-body">
+                    <div class="card-body">
 
                         <div class="table-responsive">
 
@@ -257,7 +253,7 @@
 
 
         <label id="txtahora" runat="server"></label>
-        <div class="modal modal-warning fade in" id="Nuevotercero" style="display: block;" runat="server">
+        <div class="modal modal-warning" id="Nuevotercero" style="display: block;" runat="server">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -285,7 +281,7 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-         <div class="modal modal-warning fade in " id="Imprime" style="display: block;" runat="server">
+         <div class="modal modal-warning " id="Imprime" style="display: block;" runat="server">
             <div class="modal-dialog modalprint "  runat="server" >
                 <div class="modal-content">
                     <div class="modal-header">
@@ -308,8 +304,9 @@
         </div>
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-    </form>
+   
         </div>
+                  </form>
          </section>
     <script>
 

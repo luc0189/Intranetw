@@ -44,7 +44,7 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">Proyectado</span>
                                 <span class="info-box-number">Proyecta:
-                                        <label runat="server" id="lblproyectado"></label></span>
+                                      <label runat="server" id="lblproyectado"></label> </span>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 70%"></div>
                                 </div>
@@ -62,14 +62,14 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">Tendencia</span>
                                 <span class="info-box-number">
-                                    <h2><label runat="server" id="txtporcentaMesAnterior"></label>%</h2>
+                                    <h1><label runat="server" id="txtporcentaMesAnterior"></label>%</h1>
                                     
                                         </span>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 70%"></div>
                                 </div>
-                                <span class="progress-description"> Mes Anterior:
-                                    <label runat="server" id="Label3">$ ---------</label>
+                                <span class="progress-description"> 
+                                   -
                                 </span>
                             </div>
 
@@ -143,18 +143,7 @@
 
                             </div>
                             <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <span class="info-box-number">Año Actual: </span>
-                                        20.000.000
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="info-box-number">Año Anterior: </span>
-                                        <strong>19.000.000</strong>
-                                    </div>
-                                </div>
-
-
+                               
                             </div>
                         </div>
 

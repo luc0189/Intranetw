@@ -1,11 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Acta_entrega.aspx.cs" Inherits="Intranet.Vista.Acta_entrega" %>
+﻿<%@ Page Title="Actas de Entrega" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Acta_entrega.aspx.cs" Inherits="Intranet.Vista.Acta_entrega" %>
 
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
-
+ 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+   
+
+ 
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style type="text/css">
         .auto-style1 {
             height: 16px;
@@ -39,12 +45,6 @@
 
         }
     </style>
-
-    <!-- data tabless -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.dataTables.min.css" />
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section class="content">
         <div class="container bootstrap snippet">
             <form method="post" runat="server">
@@ -253,7 +253,7 @@
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
 
-                            <div class="modal modal-warning fade in" id="Nuevotercero" style="display: block;" runat="server">
+                            <div class="modal modal-warning " id="Nuevotercero" style="display: block;" runat="server">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -281,7 +281,7 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
-                            <div class="modal modal-warning fade in" id="panelubicacion" style="display: block;" runat="server">
+                            <div class="modal modal-warning" id="panelubicacion" style="display: block;" runat="server">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">

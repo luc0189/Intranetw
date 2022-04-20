@@ -33,7 +33,7 @@
         <input type="date" name="name" value="" id="fechaFin" runat="server" />
         <asp:Label Text="Nit" runat="server" />
         <input type="text" name="name" value="" id="nits" runat="server" />
-        <asp:Button runat="server" ID="UploadButton" Text="Consultar" CssClass="btn btn-success" OnClick="UploadButton_Click" />
+      <%--  <asp:Button runat="server" ID="UploadButton" Text="Consultar" CssClass="btn btn-success" OnClick="UploadButton_Click" />--%>
 
         <div class="card card">
             <div class="card-body">

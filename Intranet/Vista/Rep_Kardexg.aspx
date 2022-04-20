@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Rep_Kardexg.aspx.cs" Inherits="Intranet.Vista.Rep_Kardexg" %>
+﻿<%@ Page Title="Kardex" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Rep_Kardexg.aspx.cs" Inherits="Intranet.Vista.Rep_Kardexg" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
