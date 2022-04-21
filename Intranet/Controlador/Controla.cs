@@ -2131,6 +2131,19 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o compleme
             }
         }
+        public static DataSet CBajasFruver(string pfechaini, string pfechahasta,string pcosto)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.MBajasFruver(pfechaini, pfechahasta, pcosto);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o compleme
+            }
+        }
         public static DataSet CRotacionInventarioProveedor(string pfechaini, string pfechahasta, string pproveedor)
         {
             Modelos usu2 = new Modelos();

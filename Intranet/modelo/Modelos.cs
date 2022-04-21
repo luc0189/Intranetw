@@ -962,6 +962,27 @@ namespace Intranet.modelo
                 "where lc.proveedorID = '"+nit+"'";
             return dataload.sqlconsulta(sql);
         }
+
+
+        internal DataSet MBajasFruver(string fechadesde, string hasta,string ccosto)//AQUI ROTACION DE INVENTARIOS
+        {
+            sql = $" declare @fecha1 as date='{fechadesde}'" +
+             $"  declare @fecha2 as date = '{hasta}'" +
+             $"  select a.codigo,a.detalle, SUM(i.cantidadpres) from itart i" +
+             $"        INNER" +
+             $"                                                 join documento d on d.id = i.documentID" +
+             $"                                          inner" +
+             $"                                                 join tipodoc td on d.tipo = td.codigo" +
+             $"                                         inner" +
+             $"                                                join articulo a on a.codigo = i.articuloID" +
+             $"        where" +
+             $"        d.fecha between @fecha1 and @fecha2" +
+             $"                          AND td.clasedoc in('NJ')" +
+             $"                                        AND d.ccostoID = '{ccosto}'" +
+             $"                                              and d.anulado = 0" +
+             $"                                              group by a.codigo,a.detalle";
+            return dataload.sqlconsulta(sql);
+        }
         internal DataSet Mventastotalesporlinea(string fei, string fef, string ccosto,string metrosc)//aquiventas totales para formulario ventas por linea
         {
             sql = " declare @fecha1 as date='"+fei+"'" +

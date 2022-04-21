@@ -5270,6 +5270,7 @@
     <Content Include="Vista\recogidas.aspx" />
     <Content Include="Vista\recordcajerasarticulo.aspx" />
     <Content Include="Vista\infocomparativo.aspx" />
+    <Content Include="Vista\BajasFruver.aspx" />
     <Content Include="Vista\reportes\PLANTILLA1.aspx" />
     <Content Include="Vista\Reporte_recibo_mercancia.aspx" />
     <Content Include="Vista\Reportkardex.aspx" />
@@ -6974,6 +6975,13 @@
     </Compile>
     <Compile Include="Vista\infocomparativo.aspx.designer.cs">
       <DependentUpon>infocomparativo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\BajasFruver.aspx.cs">
+      <DependentUpon>BajasFruver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\BajasFruver.aspx.designer.cs">
+      <DependentUpon>BajasFruver.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\reportes\DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>

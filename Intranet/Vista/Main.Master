@@ -7,9 +7,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <head>
-    <link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9hZG1pbmx0ZS5pby90aGVtZXMvdjMvaW5kZXgzLmh0bWw">
-    <script defer="" src="/cdn-cgi/zaraz/s.js?z=JTdCJTIyZXhlY3V0ZWQlMjIlM0ElNUIlNUQlMkMlMjJ0cmFja3MlMjIlM0ElNUIlNUQlMkMlMjJ0JTIyJTNBJTIyQWRtaW5MVEUlMjAzJTIwJTdDJTIwRGFzaGJvYXJkJTIwMyUyMiUyQyUyMnclMjIlM0ExOTIwJTJDJTIyaCUyMiUzQTEwODAlMkMlMjJqJTIyJTNBOTI5JTJDJTIyZSUyMiUzQTE5MjAlMkMlMjJsJTIyJTNBJTIyaHR0cHMlM0ElMkYlMkZhZG1pbmx0ZS5pbyUyRnRoZW1lcyUyRnYzJTJGaW5kZXgzLmh0bWwlMjMlMjIlMkMlMjJyJTIyJTNBJTIyaHR0cHMlM0ElMkYlMkZhZG1pbmx0ZS5pbyUyRnRoZW1lcyUyRnYzJTJGaW5kZXgyLmh0bWwlMjIlMkMlMjJrJTIyJTNBMjQlMkMlMjJuJTIyJTNBJTIyVVRGLTglMjIlMkMlMjJvJTIyJTNBMzAwJTdE"></script>
-    <script nonce="60d6f795-ff6a-4ee4-b295-432239670921">(function (w, d) { !function (a, e, t, r) { a.zarazData = a.zarazData || {}, a.zarazData.executed = [], a.zarazData.tracks = [], a.zaraz = { deferred: [] }, a.zaraz.track = (e, t) => { for (key in a.zarazData.tracks.push(e), t) a.zarazData["z_" + key] = t[key] }, a.zaraz._preSet = [], a.zaraz.set = (e, t, r) => { a.zarazData["z_" + e] = t, a.zaraz._preSet.push([e, t, r]) }, a.addEventListener("DOMContentLoaded", (() => { var t = e.getElementsByTagName(r)[0], z = e.createElement(r), n = e.getElementsByTagName("title")[0]; n && (a.zarazData.t = e.getElementsByTagName("title")[0].text), a.zarazData.w = a.screen.width, a.zarazData.h = a.screen.height, a.zarazData.j = a.innerHeight, a.zarazData.e = a.innerWidth, a.zarazData.l = a.location.href, a.zarazData.r = e.referrer, a.zarazData.k = a.screen.colorDepth, a.zarazData.n = e.characterSet, a.zarazData.o = (new Date).getTimezoneOffset(), z.defer = !0, z.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(a.zarazData))), t.parentNode.insertBefore(z, t) })) }(w, d, 0, "script"); })(window, document);</script>
+   
+    
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LCSystem 3 | Dashboard 3</title>
@@ -23,7 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="plugins/select3/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<%--    <link href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />--%>
     <link href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
     <link href="plugins/datatables/jquery.dataTables.css" rel="stylesheet" />
   
@@ -429,6 +429,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                                     
                                 </li>
+                                <li class="nav-item"><a id="A8" href="BajasFruver.aspx" runat="server" class="nav-link">
+                                    <p>Acomulado Bajas de Fruver</p>
+                                </a>
+                                    
+                                </li>
                             </ul>
                         </li>
 
@@ -631,12 +636,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="min-height: 763px;">
-            <!-- Content Header (Page header) -->
+  
 
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
             </asp:ContentPlaceHolder>
 
 
@@ -772,17 +777,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="dist/js/adminlte.js"></script>
  
-    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap4.js"></script>
+    <%--<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>--%>
+   <%-- <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.js"></script>--%>
+   <%-- <script src="plugins/datatables/dataTables.bootstrap4.js"></script>--%>
 
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button);
-    </script>
-
+  
+   
 
     <!-- FastClick -->
     <script src="../bower_components/fastclick/lib/fastclick.js"></script>
