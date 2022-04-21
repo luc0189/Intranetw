@@ -1121,7 +1121,7 @@ namespace Intranet.modelo
                 $"			 CAST(CantidadInicial AS INT)as [cantidad Inicial]," +
                 $"			CAST(fin.cantventa AS INT) as[Ventas]," +
                 $"			CAST(fin.saldocant AS INT)as [cantidad Final]," +
-                $"			format(round(fin.saldocant * fin.costoPromedio, 2), '###.###,##') as CostoFinal," +
+              
                 $"			fin.dias_sin_venta as [Dias sin Venta]," +
                 $"					(fin.saldocant / fin.PromedioCantidadVentaDia) DiasInventario" +
                 $"					,FechaUltimoTraslado" +
