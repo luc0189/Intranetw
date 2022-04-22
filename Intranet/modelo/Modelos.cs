@@ -665,6 +665,11 @@ namespace Intranet.modelo
                 "                  WHERE USUA_NOMBRE= '" + usuario + "' and USUA_PASS='" + contraseña + "'";
             return dataload.oraconsulta(sql, PBD);
         }
+        internal DataSet Salasventas( string PBD)
+        {
+            sql = "SELECT CCOSTO ||'/'||NOMBRE AS NOMBRE FROM SALAS_VENTA";
+            return dataload.oraconsulta(sql, PBD);
+        }
         internal DataSet llenatabla(string PBD)
         {
             sql = "select PERS_ID AS ID,PERS_NOMBRE1 AS PRIMER_NOMBRE,PERS_APELLIDO1 AS PRIMER_APELLIDO FROM PERSONA";

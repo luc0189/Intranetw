@@ -30,8 +30,23 @@ namespace Intranet.Controlador
             }
        }
 
+        public static DataSet CSalaventas(string pbd)
+        {
+            Modelos sb = new Modelos();
+            try
+            {
+                return sb.Salasventas( pbd);
+            }
+            catch (Exception ex)
 
-        
+
+            {
+                throw ex;
+
+
+            }
+        }
+
 
         public static DataSet listaRecogida(string pCcosto)
         {
