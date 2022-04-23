@@ -3,7 +3,9 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-   <%-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />--%>
+  <head>
+        <title>LCSystem 3 | Hoja de Vida Activos</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 

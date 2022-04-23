@@ -5360,12 +5360,6 @@
     <Content Include="Vista\Sistema\dist\js\pages\dashboard.js" />
     <Content Include="Vista\Sistema\dist\js\pages\dashboard2.js" />
     <Content Include="Vista\Sistema\gulpfile.js" />
-    <Content Include="Vista\Sistema\img\1.png" />
-    <Content Include="Vista\Sistema\img\2.png" />
-    <Content Include="Vista\Sistema\img\3.png" />
-    <Content Include="Vista\Sistema\img\4.png" />
-    <Content Include="Vista\Sistema\img\5.png" />
-    <Content Include="Vista\Sistema\img\6.png" />
     <Content Include="Vista\Sistema\js\demo\chart-area-demo.js" />
     <Content Include="Vista\Sistema\js\demo\chart-bar-demo.js" />
     <Content Include="Vista\Sistema\js\demo\chart-pie-demo.js" />
@@ -7244,6 +7238,7 @@
     <Folder Include="pages\" />
     <Folder Include="text\" />
     <Folder Include="Vista\INVENTARIO\Datasource\" />
+    <Folder Include="Vista\Sistema\img\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="actas.rdlc" />

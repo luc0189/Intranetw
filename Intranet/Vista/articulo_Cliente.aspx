@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="articulo_Cliente.aspx.cs" Inherits="Intranet.Vista.articulo_Cliente" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <head>
+        <title>LCSystem 3 | Articulo -Cliente</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section class="content-header">

@@ -9,6 +9,9 @@
         }
             }
         </style>
+      <head>
+        <title>LCSystem 3 | Comparativo Ventas</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
          <section class="content SNIP" >

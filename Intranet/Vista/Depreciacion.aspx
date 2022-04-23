@@ -1,5 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Depreciacion.aspx.cs" Inherits="Intranet.Vista.Depreciacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+     <head>
+        <title>LCSystem 3 | Depreciacion Activos</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <section class="content">

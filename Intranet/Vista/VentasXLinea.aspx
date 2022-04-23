@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="VentasXLinea.aspx.cs" Inherits="Intranet.Vista.VentasXLinea" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      <head>
+        <title>LCSystem 3 | Ventas por Linea</title>
+    </head>
     <style type="text/css">
         .auto-style2 {
             width: 184px;

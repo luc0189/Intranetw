@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="cumpleañeros.aspx.cs" Async="true" Inherits="Intranet.Vista.cumpleañeros" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <head>
+        <title>LCSystem 3 | Cumpleañeros</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <section class="content">

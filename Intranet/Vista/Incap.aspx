@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Incap.aspx.cs" Inherits="Intranet.Vista.Incap" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      <head>
+        <title>LCSystem 3 | Incapacidades</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">

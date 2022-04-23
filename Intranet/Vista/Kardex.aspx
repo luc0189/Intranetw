@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Kardex.aspx.cs" Inherits="Intranet.Vista.Kardex" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      <head>
+        <title>LCSystem 3 | kardex</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link rel="stylesheet" type="text/css" href="estilo_imprimir.css" media="print">

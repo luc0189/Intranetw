@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Consecutivos.aspx.cs" Inherits="Intranet.Vista.Consecutivos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <head>
+        <title>LCSystem 3 | Consecutivos Actas</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <section class="content">

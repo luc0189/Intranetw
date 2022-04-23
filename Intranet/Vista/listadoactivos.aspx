@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="listadoactivos.aspx.cs" Inherits="Intranet.Vista.listadoactivos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <head>
+        <title>LCSystem 3 | Listado Activos</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <section class="content-header">

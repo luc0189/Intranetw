@@ -7,7 +7,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
    
-
+   <head>
+        <title>LCSystem 3 | Actas de Entrega</title>
+    </head>
  
 </asp:Content>
 

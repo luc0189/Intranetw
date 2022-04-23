@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="VentasXhora.aspx.cs" Inherits="Intranet.Vista.Documentos.VentasXhora" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      <head>
+        <title>LCSystem 3 | Ventas por Hora</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
           <section class="content">

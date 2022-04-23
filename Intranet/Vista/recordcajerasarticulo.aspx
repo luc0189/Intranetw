@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="recordcajerasarticulo.aspx.cs" Inherits="Intranet.Vista.recordcajerasarticulo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      <head>
+        <title>LCSystem 3 | Ventas Aux-Registro</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section class="content-header">

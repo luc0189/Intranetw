@@ -50,6 +50,9 @@
         }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <head>
+        <title>LCSystem 3 | Ingreso de Activos</title>
+    </head>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

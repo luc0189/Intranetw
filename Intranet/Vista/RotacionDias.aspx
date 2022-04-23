@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="Dias Sin Rotacion" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="RotacionDias.aspx.cs" Inherits="Intranet.Vista.RotacionDias" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <head>
+        <title>LCSystem 3 | Dias sin Venta</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style>
@@ -128,61 +131,91 @@
     <section class="content">
         <div class="container-fluid">
             <form runat="server">
-               <div class="row"> 
-                   
-                   <div class="col-md-6">
-                        
+                <div class="row">
 
-      
-        <div class="card card-dark">
-            <div class="card-header">
-                Parametros
-            </div>
-            <div class="card-body">
-               
-                    <div class="form-group row">
-                        <Label  for="date1" runat="server" class="col-sm-3 col-form-label"> Fecha Inicio:</Label>
-                        <input type="date" class="col-sm-9 form-control" name="name" value="" runat="server" id="date1" />
-                       
+                    <div class="col-md-6">
+
+
+
+                        <div class="card card-dark">
+                            <div class="card-header">
+                                Parametros
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group row">
+                                    <label for="date1" runat="server" class="col-sm-3 col-form-label">Fecha Inicio:</label>
+                                    <input type="date" class="col-sm-9 form-control" name="name" value="" runat="server" id="date1" />
+
+
+                                </div>
+                                <div class="form-group row">
+                                    <label for="date1" runat="server" class="col-sm-3 col-form-label">Fecha Fin:</label>
+                                    <input type="date" name="name" class="col-sm-9 form-control" value="" runat="server" id="date2" />
+                                </div>
+
+
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <asp:Button ID="LinkButton3" runat="server" class="btn btn-dark" Text="Consultar" OnClick="Consultar_Click" />
+                                     <button type="button" id="consultaadmon" runat="server" class="btn btn-dark"  data-toggle="modal" data-target="#modal-default">
+                                        Consultar
+                                    </button>
+                                </div>
+                                      <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Seleccione la Sala de Ventas</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                           <select runat="server" id="Selectsala" class="js-example-basic-single form-control">
+                                               
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+                                             <asp:LinkButton ID="Consultadmon" runat="server" Text="Nuevo" OnClick="Consultaadmon_Click">
+                                         <span aria-hidden="true" class="btn btn-dark">Consultar</span>
+                                    </asp:LinkButton>
+                                         
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                           
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="form-group row">
-                          <Label  for="date1" runat="server" class="col-sm-3 col-form-label"> Fecha Fin:</Label>
-                         <input type="date" name="name" class="col-sm-9 form-control" value="" runat="server" id="date2" />
-                    </div>
-                   
-
-            </div>
-            <div class="card-footer">
-                 <div class="form-group">
-                        <asp:Button ID="Consultar" runat="server" class="btn btn-dark" Text="Consultar" OnClick="Consultar_Click" />
-                    </div>
-            </div>
-        </div>
-       
-     </div>
-   <div class="col-md-6">
-                       <div class="card card-dark">
-                           <div class="card-header">
-                               Datos
-                           </div>
-                           <div class="card-body">
+                    <div class="col-md-6">
+                        <div class="card card-dark">
+                            <div class="card-header">
+                                Datos
+                            </div>
+                            <div class="card-body">
                                 <div class="table-responsive">
-                    <asp:GridView runat="server" ID="GridviewRotacion" GridLines="None" ShowFooter="true"
-                        CssClass="gvuser table table-striped dysplay" EmptyDataText="No se encontraron Registros con los parametros indicados.">
-                    </asp:GridView>
+                                    <asp:GridView runat="server" ID="GridviewRotacion" GridLines="None" ShowFooter="true"
+                                        CssClass="gvuser table table-striped dysplay" EmptyDataText="No se encontraron Registros con los parametros indicados.">
+                                    </asp:GridView>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                           </div>
-                       </div>
-                   </div>
-  
-                   </div>
-                  </form>
-             
+            </form>
+
         </div>
-      
-     
-       
+
+
+
     </section>
-  
+
 </asp:Content>

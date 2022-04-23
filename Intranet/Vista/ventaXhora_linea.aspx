@@ -1,11 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="ventaXhora_linea.aspx.cs" Inherits="Intranet.Vista.ventaXhora_linea" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      <head>
+        <title>LCSystem 3 | Ventas/Hora por linea</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <section class="content">
     <div class="container bootstrap snippet">
     <form runat="server" method="post">
+       
         <div class="box box-warning box-solid " runat="server" id="notificacion">
                     <div class="box-header with-border">
                         <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Notificacion</font></font></h3>
