@@ -229,6 +229,7 @@ namespace Intranet.Vista
 
             while (dr.Read())
             {
+                txtidacta2.Text = dr[0].ToString();
                 txtidacta.Value = dr[0].ToString();
                 txtidacta.DataBind();
             }

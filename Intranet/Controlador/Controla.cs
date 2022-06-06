@@ -816,6 +816,19 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
+        public static DataSet listaventa16total(string fecha)
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.listadoventa16total(fecha);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
         public static DataSet listaventaversatotal(string fecha)
         {
             Modelos usu = new Modelos();

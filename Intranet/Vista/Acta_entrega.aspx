@@ -14,97 +14,24 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <style type="text/css">
-        .auto-style1 {
-            height: 16px;
-            text-align: right;
-        }
-
-        .auto-style3 {
-            height: 16px;
-            width: 180px;
-        }
-
-        .auto-style4 {
-            height: 16px;
-            width: 250px;
-        }
-
-        .auto-style5 {
-            width: 99%
-        }
-
-        @media screen and (min-width: 575px) {
-            .modalprint {
-                width: 80%;
-            }
-        }
-
-        @media screen and (min-width: 999px) {
-            .modalprint {
-                width: 825px;
-            }
-
-        }
-    </style>
-    <section class="content">
-        <div class="container bootstrap snippet">
-            <form method="post" runat="server">
-                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
-                <div class="margin">
-                    <div class="box-header">
-                         <b>ACTA DE ENTREGA</b>
-                        <div class="box-tools">
-                             <table >
-                            <tr>
-                                <td class="auto-style4">
-                                    <div class="btn-group" id="botonera">
-                                        <button type="button" class="btn btn-dark">Opciones</button>
-                                        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
-                                            <span class="caret"></span>
-                                            <span class="sr-only"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="1.aspx" class="fa fa-home">Inicio</a></li>
-
-                                            <li>
-                                                <asp:LinkButton ID="btnNuevo" runat="server" Text="Nuevo" OnClick="nuevonumeroacta">
-                                        <span aria-hidden="true" class="fa fa-magic"> Nuevo</span>
-                                                </asp:LinkButton></li>
-
-                                            <li>
-
-                                                <asp:LinkButton ID="btnimprime" runat="server" Text="Insertar" OnClick="btnimprime_Click">
-                                             <span aria-hidden="true" class="fa  fa-hdd-o"> Imprimir</span>
-                                                </asp:LinkButton></li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <asp:LinkButton ID="guardar" runat="server" Text="Insertar" OnClick="Button3_Click">
-                                             <span aria-hidden="true" class="fa  fa-hdd-o"> Guardar acta</span>
-                                                </asp:LinkButton></li>
-                                            <li class="divider"></li>
-                                            <li>
-                                                <asp:LinkButton ID="LinkButton3" runat="server" Text="Nuevo" OnClick="mostrarmenutercero">
-                                         <span aria-hidden="true" class="fa  fa-user-circle">Nuevo Usuario</span>
-                                                </asp:LinkButton>
-
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </td>
-                                
-                            </tr>
-                        </table>
-                        </div>
-                        
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Actas de Entrega</h1>
                     </div>
-
-
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                            <li class="breadcrumb-item active">Activos Fijos</li>
+                            <li class="breadcrumb-item active">Acta ID: <asp:Label Text="text" runat="server" name="name" id="txtidacta2" /></li>
+                            
+                        </ol>
+                    </div>
                 </div>
-
-                <div class="modal fade show " id="Imprime" style="display: block;" runat="server">
+            </div>
+        </section>
+       <div class="modal fade show " id="Imprime" style="display: block;" runat="server">
                     <div class="modal-dialog modal-lg modalprint " runat="server">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -133,10 +60,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="box">
-                      <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-4">
+    <section class="content">
+        <div class="container-fluid">
+            <form method="post" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-dark">
+                           
+                            <div class="card-header">
+                                Nueva Acta
+                                <div class="card-tools">
+                                    <asp:LinkButton ID="btnNuevo" runat="server" Text="Nuevo" OnClick="nuevonumeroacta">
+                                        <span aria-hidden="true" class="fa fa-magic"> Nuevo</span>
+                                                </asp:LinkButton> |
+                                    <asp:LinkButton ID="btnimprime" runat="server" Text="Imprimir" OnClick="btnimprime_Click">
+                                             <span aria-hidden="true" class="fa  fa-print"> Imprimir</span>
+                                                </asp:LinkButton> |
+                                    <asp:LinkButton ID="guardar" runat="server" Text="Guardar" OnClick="Button3_Click">
+                                             <span aria-hidden="true" class="fa  fa-save"> Guardar acta</span>
+                                                </asp:LinkButton> |
+                                    <asp:LinkButton ID="LinkButton3" runat="server" Text="Nuevo" OnClick="mostrarmenutercero">
+                                         <span aria-hidden="true" class="fa  fa-user-circle">Nuevo Usuario</span>
+                                                </asp:LinkButton>
+                                   
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                 <div class="row">
+                                         <div class="col-md-4">
                             <div class="form-group has-feedback" id="div_tercero">
                                 <div class="input-group">
                                     <span class="input-group-addon">Empleado:</span>
@@ -155,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group has-feedback" id="div_area">
                                 <div class="input-group">
                                     <span class="input-group-addon">Area:</span>
@@ -164,15 +116,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                </div>
-              
-                <div class="box">
-                    <div class="box-body">
-
-                        <div class="row" id="insert">
-                            <div class="col-md-12">
+                            </div>
+                                     <div class="col-md-12">
 
                                 <div class="form-group has-feedback">
                                     <div class="input-group">
@@ -190,34 +135,25 @@
 
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-      <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            </div>
+                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                 <ContentTemplate>
-           
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="box">
-                                        <div class="box-header">
-                                            <h3 class="box-title"><b>Detalles</b></h3>
-                                            <div class="box-tools">
-                                                 <div id="div_numerodeacta">
-                                                    <asp:LinkButton ID="Adicionar" runat="server" Text="Insertar" CssClass="btn btn-dark" OnClick="agregarow">
+                            <div class="card-footer">
+                                
+
+                    <div class="card-dark">
+                        <div class="card-header">
+                            Detalles
+                            <div class="card-tools">
+                                <asp:LinkButton ID="Adicionar" runat="server" Text="Insertar" CssClass="btn btn-dark" OnClick="agregarow">
                                                     <i aria-hidden="true"  class="fa fa-hand-o-down"></i>Insertar
                                                     </asp:LinkButton>
-                                                    <b>Acta No. </b>
-                                                    <input id="txtidacta" runat="server" type="text" name="name" value="" />
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!-- /.box-header -->
-                                        <div class="box-body">
-
-
-
-                                            <asp:GridView ID="GridViewdetalle" runat="server" OnRowDeleting="OnRowDeleting" GridLines="None"
+                                <input type="text" name="name" value="" id="txtidacta" runat="server" />
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table table-responsive">
+                                    <asp:GridView ID="GridViewdetalle" runat="server" OnRowDeleting="OnRowDeleting" GridLines="None"
                                                 CssClass="gvuser table table-striped dysplay"
                                                 CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros indicados.">
                                                 <Columns>
@@ -226,22 +162,31 @@
                                                 </Columns>
 
                                             </asp:GridView>
-
-
-
-                                        </div>
-                                        <!-- /.box-body -->
-                                    </div>
-                                    <!-- /.box -->
-
-
-
-                                </div>
-
                             </div>
-                                </ContentTemplate>
+                          
+                                </div>
+                        </div>
+                  
+                </div>
+                                <div class="row">
+                                   
+                            </div>
+                                     </ContentTemplate>
 
                             </asp:UpdatePanel>
+                        </div>
+                    </div>
+                </div>
+              
+                
+             
+              
+              
+               
+     
+           
+                    
+                               
                             <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
                                 <ProgressTemplate>
                                     <div id="backgroud">

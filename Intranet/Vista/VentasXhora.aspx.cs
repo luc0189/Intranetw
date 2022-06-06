@@ -29,12 +29,13 @@ namespace Intranet.Vista.Documentos
                 {
                     Gridsuper13.DataSource = null;
                     Gridsuper13.DataBind();
-                }//var regtotal16 = Controlasql.listaventa16total(txtfechaini.Value);
-                //if(regtotal16.Tables[0].Rows.Count > 0)
-                //{
-                //    GridViewtotal.DataSource = regtotal16;
-                //    GridViewtotal.DataBind();
-                //}
+                }
+                var regtotal16 = Controlasql.listaventa16total(txtfechaini.Value);
+                if (regtotal16.Tables[0].Rows.Count > 0)
+                {
+                    GridViewtotal.DataSource = regtotal16;
+                    GridViewtotal.DataBind();
+                }
                 var regtotal13 = Controlasql.listaventa13total(txtfechaini.Value);
                 if (regtotal13.Tables[0].Rows.Count > 0)
                 {

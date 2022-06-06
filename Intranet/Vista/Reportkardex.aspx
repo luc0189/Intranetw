@@ -5,19 +5,7 @@
     <link rel="stylesheet" type="text/css" href="estilo_imprimir.css" media="print">      
     <section class="content">
     <div class="container bootstrap snippet">  
-    <div id="div_datosempresa">
-        <div id="logosimbolo">
-            <img src="../../dist/img/logo.png" alt="Alternate Text" />
-        </div>
-            <center>
-             <p>SUPERMIO SAS</p> 
-            <label>Nit: 900618398-4</label>
-            <br />
-            <label>Calle 16 No 13-53 FLORENCIA PBX-4344737</label>
-           <br />
-              <br />
-               </center>
-        </div>
+   
     <section class="content">
                 
         

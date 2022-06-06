@@ -1,6 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="BajasFruver.aspx.cs" Inherits="Intranet.Vista.reportes.BajasFruver" %>
+﻿<%@ Page Title="Bajas Fruver" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="BajasFruver.aspx.cs" Inherits="Intranet.Vista.reportes.BajasFruver" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <head>
+        <title>Bajas Fruver</title>
+    </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -23,7 +26,7 @@
         <div class="container-fluid">
             <form runat="server">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
 
 
                         <div class="card card-dark">
@@ -88,7 +91,7 @@
 
 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="card card-dark">
                             <div class="card-header">
                                 Datos

@@ -133,7 +133,7 @@
             <form runat="server">
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
 
 
 
@@ -194,14 +194,14 @@
                         </div>
 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="card card-dark">
                             <div class="card-header">
                                 Datos
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <asp:GridView runat="server" ID="GridviewRotacion" GridLines="None" ShowFooter="true"
+                                    <asp:GridView runat="server" ID="GridviewRotacion" GridLines="None" 
                                         CssClass="gvuser table table-striped dysplay" EmptyDataText="No se encontraron Registros con los parametros indicados.">
                                     </asp:GridView>
                                 </div>

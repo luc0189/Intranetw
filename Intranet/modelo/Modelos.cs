@@ -683,7 +683,7 @@ namespace Intranet.modelo
                 " FROM  dbo.documento AS do" +
                 " INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
                 " WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
-                "  AND td.clasedoc in('FP','FV')" +
+                "  AND td.clasedoc in('FP','FV','FE')" +
                 "  AND do.ccostoID = '"+costo+"'" +
                 "  and do.anulado=0" +
                 " GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
@@ -708,7 +708,7 @@ namespace Intranet.modelo
                 "                INNER JOIN  dbo.tipodoc AS" +
                 "                td ON do.tipo = td.codigo" +
                 "                       WHERE(do.fecha BETWEEN '"+ fei + "' AND '"+ fef + "')" +
-                "                          AND td.clasedoc IN('FP','FV')  AND do.ccostoID = '"+ ccosto + "'  and do.anulado = 0 ";
+                "                          AND td.clasedoc in('FP','FV','FE')  AND do.ccostoID = '" + ccosto + "'  and do.anulado = 0 ";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet MventasResmidoporlinea(string fei, string fef,string ccosto)//aqui ventas resumido tabla ventas por linea
@@ -973,7 +973,7 @@ namespace Intranet.modelo
         {
             sql = $" declare @fecha1 as date='{fechadesde}'" +
              $"  declare @fecha2 as date = '{hasta}'" +
-             $"  select a.codigo,a.detalle, SUM(i.cantidadpres) from itart i" +
+             $"  select a.codigo,a.detalle, cast(SUM(i.cantidadpres)as varchar )Cantidad from itart i" +
              $"        INNER" +
              $"                                                 join documento d on d.id = i.documentID" +
              $"                                          inner" +
@@ -982,7 +982,7 @@ namespace Intranet.modelo
              $"                                                join articulo a on a.codigo = i.articuloID" +
              $"        where" +
              $"        d.fecha between @fecha1 and @fecha2" +
-             $"                          AND td.clasedoc in('NJ')" +
+             $"                           AND td.codigo in('4025','4027','4029')" +
              $"                                        AND d.ccostoID = '{ccosto}'" +
              $"                                              and d.anulado = 0" +
              $"                                              group by a.codigo,a.detalle";
@@ -1056,7 +1056,7 @@ namespace Intranet.modelo
                 "                 inner join linea ln on art.lineaID = ln.codigo" +
                 "                 INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
                 "                 where" +
-                "                    td.clasedoc IN('FV', 'FP')" +
+                "                    AND td.clasedoc in('FP','FV','FE')" +
                 "                    AND d.ccostoID = '"+ccosto+"'" +
                 "                    and d.anulado = 0" +
                 "                 group by ln.nombre)r";
@@ -1127,8 +1127,8 @@ namespace Intranet.modelo
                 $"			CAST(fin.cantventa AS INT) as[Ventas]," +
                 $"			CAST(fin.saldocant AS INT)as [cantidad Final]," +
               
-                $"			fin.dias_sin_venta as [Dias sin Venta]," +
-                $"					(fin.saldocant / fin.PromedioCantidadVentaDia) DiasInventario" +
+                $"			cast(fin.dias_sin_venta as Float) as [Dias sin Venta]," +
+                $"					cast(cast((fin.saldocant / fin.PromedioCantidadVentaDia)as DECIMAL(20,2))as varchar) DiasInventario" +
                 $"					,FechaUltimoTraslado" +
                 $"					,FechaUltimaVENTA," +
               
@@ -1244,15 +1244,34 @@ namespace Intranet.modelo
                 " COUNT(vrsubtotal) AS Total_Facturas" +
                 " FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo " +
                 " WHERE fecha='" + fecha + "' " +
-                " AND(td.clasedoc = 'FP')" +
+                " AND td.clasedoc in('FP','FV')" +
                 "  AND do.ccostoID = '000002'" +
+                "  and do.anulado=0 ";
+
+            return dataload.sqlconsulta(sql);
+        }
+        internal DataSet listadoventa16total(string fecha)
+        {
+            sql = "SELECT   format(Sum(do.vrsubtotal)," +
+                " '$ #,###.##') AS Total_Ventas," +
+                " COUNT(vrsubtotal) AS Total_Facturas" +
+                " FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo " +
+                " WHERE fecha='" + fecha + "' " +
+                " AND td.clasedoc in('FP','FV')" +
+                "  AND do.ccostoID = '000001'" +
                 "  and do.anulado=0 ";
 
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listadoventaversatotal(string fecha)
         {
-            sql = "SELECT format(Sum(do.vrsubtotal), '$ #,###.##') AS Total_Ventas,COUNT(vrsubtotal) AS Total_Facturas FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE fecha='" + fecha + "'  AND(td.clasedoc = 'FP')  AND do.ccostoID = '000004'  and do.anulado=0 ";
+            sql = "SELECT format(Sum(do.vrsubtotal), '$ #,###.##') AS Total_Ventas," +
+                "COUNT(vrsubtotal) AS Total_Facturas FROM  dbo.documento AS do " +
+                "INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo " +
+                "WHERE fecha='" + fecha + "'" +
+                "  AND td.clasedoc in('FP','FV')" +
+                "  AND do.ccostoID = '000004' " +
+                " and do.anulado=0 ";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listadoventaciudadelatotal(string fecha)
@@ -1260,12 +1279,20 @@ namespace Intranet.modelo
             sql = "SELECT format(Sum(do.vrsubtotal), '$ #,###.##') AS Total_Ventas, " +
                 "COUNT(vrsubtotal) AS Total_Facturas " +
                 " FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE fecha='" + fecha + "' " +
-                " AND(td.clasedoc = 'FP')  AND do.ccostoID = '000005'  and do.anulado=0 ";
+                " AND td.clasedoc in('FP','FV')  AND do.ccostoID = '000005'  and do.anulado=0 ";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listadoventa13(string fei, string fef)
         {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS, format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR,COUNT(vrsubtotal) AS Facturas FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')  AND(td.clasedoc = 'FP')  AND do.ccostoID = '000002'  and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
+            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS," +
+                " format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR" +
+                " ,COUNT(vrsubtotal) AS Facturas " +
+                "FROM  dbo.documento AS do " +
+                " INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo " +
+                "WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
+                "  AND td.clasedoc in('FP','FV')" +
+                "  AND do.ccostoID = '000002' " +
+                " and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
             return dataload.sqlconsulta(sql);
         }
 
