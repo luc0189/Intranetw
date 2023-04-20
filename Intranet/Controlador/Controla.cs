@@ -1782,12 +1782,12 @@ namespace Intranet.Controlador
 
         //TERMINA ACTAS DE MANTENIMIENTOS
         //-----------------------------------------------------------------------------------
-        public static int cupdatefiscal(string pid, string pubica, string pidarea, string pserial, string pbd)
+        public static int cupdatefiscal(string pid, string pubica, string pidarea, string pserial,string idacta, string pbd)
         {
             Modelos usu = new Modelos();
             try
             {
-                return usu.Mupdatefiscal(pid, pubica, pidarea,pserial,pbd);
+                return usu.Mupdatefiscal(pid, pubica, pidarea,pserial,idacta,pbd);
             }
             catch (Exception e)
             {

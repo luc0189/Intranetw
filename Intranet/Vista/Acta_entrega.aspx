@@ -14,6 +14,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+      <form method="post" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -62,8 +64,7 @@
                 </div>
     <section class="content">
         <div class="container-fluid">
-            <form method="post" runat="server">
-                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+          
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-dark">
@@ -178,15 +179,7 @@
                     </div>
                 </div>
               
-                
-             
-              
-              
-               
-     
-           
-                    
-                               
+                  
                             <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
                                 <ProgressTemplate>
                                     <div id="backgroud">
@@ -278,9 +271,10 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
-            </form>
+            
         </div>
     </section>
+          </form>
     <script type="text/javascript">
 
         function ComprobarAcentos(inputtext) {

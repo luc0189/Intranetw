@@ -58,7 +58,7 @@
                     <!-- PROGRESS BAR -->
                     <div class="col-md-6">
 
-                        <div class="box box" style="background-color: #343a40; color: white;">
+                        <div class="box box" style=" color: white;">
                             <div class="box-header">
                                 <div class="box-title">
                                     <span class="badge badge-danger">Conteo 1 =
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="box box" style="background-color: #343a40; color: white;">
+                        <div class="box box" style=" color: white;">
                             <div class="box-header">
                                 <div class="box-title">
                                     <span class="badge badge-danger">Conteo 2 =
@@ -116,7 +116,7 @@
 
                         <!-- DIRECT CHAT -->
                         <div class="col-md-6">
-                            <div class="box box" style="background-color: #343a40; color: white">
+                            <div class="box box" style=" color: white">
                                 <div class="box-body">
                                     <div class="table table-responsive">
                                         <asp:GridView ID="GridViewabiertos1" runat="server" GridLines="None" CssClass="gv3 table table-striped table-bordered text-sm" EmptyDataText="No se encontraron Registros con los parametros <b>indicados</b>." AllowCustomPaging="True" CellPadding="4" ForeColor="#333333">
@@ -127,7 +127,7 @@
                         </div>
                         <div class="col-md-6">
                             <!-- small box -->
-                            <div class="box box" style="background-color: #343a40; color: white">
+                            <div class="box box" style=" color: white">
                                 <div class="box-body">
                                     <div class="table table-responsive">
                                         <asp:GridView ID="GridViewconteos2" runat="server" GridLines="None"
@@ -293,13 +293,13 @@
 
                                
                             </div>
-
+                            <div class="modal-footer">
+                                <asp:LinkButton ID="LinkButton6" runat="server" Text="Insertar" CssClass="btn btn-warning" OnClick="Si_Click">
+                                             <span aria-hidden="true" class="fa fa-trash"> Eliminar items ?</span>
+                                </asp:LinkButton>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                              <asp:LinkButton ID="LinkButton6" runat="server" Text="Insertar" CssClass="btn btn-warning" OnClick="si_Click">
-                                             <span aria-hidden="true" class="fa fa-trash"> Eliminar items </span>
-                                            </asp:LinkButton>
-                        </div>
+                        
                     </div>
                     <!-- /.modal-content -->
                 </div>

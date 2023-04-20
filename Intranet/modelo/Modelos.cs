@@ -2426,9 +2426,13 @@ namespace Intranet.modelo
             return dataload.MySqlQuery(sql,bd);
         }
        
-        internal int Mupdatefiscal(String pid, String pidubica, String pidar,String pidartic,String bd)
+        internal int Mupdatefiscal(String pid, String pidubica, String pidar,String pidartic,String pidacta,String bd)
         {
-            sql = "update fiscal set idresponsable = (select idResp from persona where nomb='" + pid+ "'), idubicacion = (select idubica from ubicacion where nombUbica= '" + pidubica + "'), idarea =(select id from area where nombrearea='" + pidar + "') where idarticulo = (select idArt from articulo where serialArt='" + pidartic + "')";
+            sql = "update fiscal set idresponsable = (select idResp from persona where nomb='" + pid+ "')" +
+                " , idubicacion = (select idubica from ubicacion where nombUbica= '" + pidubica + "')" +
+                " , idarea =(select id from area where nombrearea='" + pidar + "')" +
+                " , idacta='"+pidacta+"'" +
+                "  where idarticulo = (select idArt from articulo where serialArt='" + pidartic + "')";
             return dataload.MysqlProcedimiento(sql,bd);
         }
         internal int Mcreamodelo(String nombre,String usuario,String bd)

@@ -123,7 +123,6 @@ namespace Intranet.Vista
         }
 
        
-
         protected void Button2_click(object sender, EventArgs e)
         {
           
@@ -199,7 +198,7 @@ namespace Intranet.Vista
         }
 
         //aqui termina
-        protected void si_Click(object sender, EventArgs e)
+        protected void Si_Click(object sender, EventArgs e)
         {
             try
             {

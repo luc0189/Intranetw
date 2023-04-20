@@ -159,7 +159,7 @@ namespace Intranet.Vista
                             {
                                 // si esta asignado entonces aplica un update a la tabla fiscal
                                 var registros = Controlasql.cupdatefiscal(Select1.Value, Selectubicacion.Value, 
-                                    Selectarea.Value, serial, Session["BD"].ToString());
+                                    Selectarea.Value, serial, txtidacta.Value, Session["BD"].ToString());
                             }
                             catch (Exception ext)
                             {
