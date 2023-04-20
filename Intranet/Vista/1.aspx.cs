@@ -152,7 +152,7 @@ namespace Intranet.Vista
                 Gridsuper.DataSource = registrosv16;
                 Gridsuper.DataBind();
             }
-            var regtotal16 = Controlasql.listaventa(txtdesde.Value, Session["CCOSTO"].ToString());
+            var regtotal16 = Controlasql.listaventa(txtdesde.Value, txtdesde.Value, Session["CCOSTO"].ToString());
             if (regtotal16.Tables[0].Rows.Count > 0)
             {
                 grid.DataSource = regtotal16;

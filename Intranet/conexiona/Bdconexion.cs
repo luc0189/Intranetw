@@ -73,15 +73,15 @@ namespace Intranet.conexiona
         }
         public void cadenaConexioncarnes()
         {
-            conexion = new MySqlConnection("server=192.168.1.133;port=3306;database=sys_datos_dfs;Uid=root;pwd=dibal;SslMode=none");
+            conexion = new MySqlConnection("server=192.168.1.219;port=3306;database=sys_datos_dfs;Uid=root;pwd=dibal;SslMode=none");
         }
         public void cadenaConexioncarnesVERSA()
         {
-            conexion = new MySqlConnection("server=192.168.2.115;port=3306;database=sys_datos_dfs;Uid=root;pwd=dibal;SslMode=none");
+            conexion = new MySqlConnection("server=192.168.1.219;port=3306;database=sys_datos_dfs;Uid=root;pwd=dibal;SslMode=none");
         }
         public void cadenaConexioncarnesLA13()
         {
-            conexion = new MySqlConnection("server=192.168.1.40;port=3306;database=sys_datos_dfs;Uid=root;pwd=dibal;SslMode=none");
+            conexion = new MySqlConnection("server=192.168.1.219;port=3306;database=sys_datos_dfs;Uid=root;pwd=dibal;SslMode=none");
         }
         public void cadenaConexionOra()
         {

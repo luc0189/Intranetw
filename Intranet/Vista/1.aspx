@@ -231,8 +231,8 @@
                                                                 </div>
 
                                                                 <div class="table table-responsive">
-                                                                    <asp:GridView runat="server" ID="grid" AllowCustomPaging="True" ShowFooter="true" AllowPaging="True" CssClass="table table-bordered table-hover dataTable dtr-inline">
-                                                                        <RowStyle CssClass="nav-link" />
+                                                                    <asp:GridView runat="server" ID="grid" CssClass="table table-bordered table-striped dataTable dtr-inline">
+                                                                        
 
                                                                     </asp:GridView>
                                                                 </div>

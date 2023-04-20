@@ -20,10 +20,45 @@ namespace Intranet.Vista
                 normalestado();
                 llenaubicacion();
                 llenaarea();
+                llenatiposolicitud();
                 llenatipomantenimiento();
                 Imprime_R.Visible = false;
             }
         }
+
+        private void llenatiposolicitud()
+        {
+            try
+            {
+                String bd = Session["BD"].ToString();
+                var registroubica = Controlasql.ClistaTiposolicitud(bd);
+
+                if (registroubica.Tables[0].Rows.Count > 0)
+                {
+                    DataTable dt = registroubica.Tables[0];
+                    SelectTiposolicitud.Items.Clear();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        SelectTiposolicitud.Items.Add(Convert.ToString(row["Nombre"]));
+                        SelectTiposolicitud.DataBind();
+                    }
+
+
+
+                }
+                else
+                {
+                    SelectTiposolicitud.DataSource = null;
+                    SelectTiposolicitud.DataBind();
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
         private DataTable GetData(string acta)
         {
             
@@ -135,7 +170,7 @@ namespace Intranet.Vista
                 try
                 {
                     var registros3 = Controlasql.Ccreaorden( Selectubicacion.Value, Selectarea.Value, Selecttipo.Value,
-                        txtDescripcion.Value.ToUpper(), var_stado, Session["USUARIO"].ToString(), Session["BD"].ToString());
+                        txtDescripcion.Value.ToUpper(), var_stado, Session["USUARIO"].ToString(),SelectTiposolicitud.Value, Session["BD"].ToString());
                     if (registros3 > 0)
                     {
                         string script = @"<script type='text/javascript'>

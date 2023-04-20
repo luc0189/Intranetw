@@ -42,24 +42,23 @@
             </div>
             <!-- /.box-body -->
         </div>--%>
-        <asp:scriptmanager runat="server"></asp:scriptmanager>
-
-        <div class="box">
-             <div class="box-header with-border">
+        
+        <div class="card">
+             <div class="card-header with-border">
                             <div class=" pull-left">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Click Aqui">
                                     <b><h3 class="box-title">Pendientes Asignar</h3></b>
                                     
                                 </button>
                             </div>
-                            <div class="box-tools pull-right">
+                            <div class="card-tools pull-right">
                                <asp:LinkButton ID="btnbuscarpendientes" runat="server" Text="Volver" class="form-control" OnClick="btnbuscarpendientes_Click">
                                                     <i aria-hidden="true"  class="fa fa-search"></i>
                                             </asp:LinkButton>
                               
                             </div>
                         </div>
-                  <div class="box-body">
+                  <div class="card-body">
                           <div class="table-responsive">
                                         <asp:GridView ID="GridViewpendientes" runat="server" GridLines="None"
                                             CssClass="gvuser table table-striped table-bordered text-sm"
@@ -74,20 +73,20 @@
 
                                 </div>
             
-            <div class="box">
-                   <div class="box-header with-border">
+            <div class="card">
+                   <div class="card-header with-border">
                             <div class=" pull-left">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Click Aqui">
                                     <h3 class="box-title">Asignados y pendientes por ejecutar la labor</h3>
                                 </button>
                             </div>
-                            <div class="box-tools pull-right">
+                            <div class="card-tools pull-right">
                                             <asp:LinkButton ID="btnbuscarasignados" runat="server" Text="Volver" class="form-control" OnClick="btnbuscarasignados_Click">
                                                     <i aria-hidden="true"  class="fa fa-search"></i>
                                             </asp:LinkButton>
                                         </div>
                         </div>
-                <div class="box-body">
+                <div class="card-body">
                      <div class="table-responsive">
                                         <asp:GridView ID="GridViewasignados" runat="server" GridLines="None"
                                             CssClass=" table table-striped table-bordered text-sm"
@@ -99,10 +98,9 @@
             </div>
            
 
-              <asp:updatepanel runat="server" id="UpdatePanel1">
-             <ContentTemplate>
-        <div class="box">
-                  <div class="box-header with-border">
+            
+        <div class="card">
+                  <div class="card-header with-border">
                             <div class=" pull-left">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Click Aqui">
                                     <h3 class="box-title">Agregar Novedades y Finalizar Mantenimiento</h3>
@@ -115,7 +113,7 @@
                         </div>
 
                 
-             <div class="box-body">
+             <div class="card-body">
                  <div class="col-md-6">
                       <input runat="server" id="Selectordenes" class="form-control" type="text" name="state" disabled tyle="width: 100%" />
                   <div class="form-group">
@@ -145,16 +143,16 @@
                                             </div>
                  
              </div>
-             <div class="fade in" id="view_detalles" runat="server" role="dialog"  >
-            <div class="modal-dialog" style="width:90%;">
-                <div class="modal-content" >
-                    <div class="modal-header">
-                        <b class="box-title">Detalles del Mantenimiento</b>
-                        <div class="box-tools pull-right">
+           
+            <div class="card" id="view_detalles" runat="server" style="width: 90%;">
+                <div class="card-default" >
+                    <div class="card-header">
+                        <b class="card-title">Detalles del Mantenimiento</b>
+                        <div class="card-tools pull-right">
                            <input type="text" disabled runat="server" id="txtid" class="box-tools" name="name" value="" />
                         </div>
                     </div>
-                    <div class="modal-body">
+                    <div class="card-body">
                         <div class="col-md-6">
 
                     
@@ -234,7 +232,7 @@
                         
                         
                     </div>
-                    <div class="modal-footer">
+                    <div class="card-footer">
                         
                         <asp:LinkButton ID="btnactualizar" runat="server" Text="Volver" class="btn btn-app" OnClick="btnactualizar_Click" >
                               Actualizar
@@ -245,7 +243,7 @@
                 <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
-        </div> 
+     
               <div class="table-responsive">
                                                             <asp:GridView ID="GridViewlista" runat="server" GridLines="None"
                                                                 CssClass="table table-striped table-bordered  text-sm"
@@ -257,14 +255,11 @@
                                                         </div>
             
         </div>
-           </ContentTemplate>
-            </asp:updatepanel>  
-           
+         
            
                 
                     
-            <asp:updateprogress id="UpdateProgress1" runat="server" associatedupdatepanelid="UpdatePanel1">
-                <ProgressTemplate>
+            
                     <div id="backgroud">
 
                     </div>
@@ -273,81 +268,75 @@
                             <p style="text-align:center"><b>Espere por favor...</b></p>
                         </h6>
                     </div>
+                
+                  
+                            <div class="card card" id="panelAsignaciones" runat="server">
+                                <div class="card-header">
+
+                                    <h4 class="card-title">Asignacion Ordenes de Trabajo</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p>
+                                        <label id="lbltarea" runat="server">#</label>
+                                    </p>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">ID Orden: </span>
+                                        <input id="textidorden" runat="server" type="text" class="form-control" disabled>
+                                    </div>
+
+                                    <div class="form-group has-feedback">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Proveedor</span>
+                                            <select runat="server" id="SelectProveedores" class="js-example-basic-single" name="state" style="width: 100%">
+                                            </select>
+                                            <span class="input-group-btn">
+                                                <asp:LinkButton ID="btnnuevoproveedor" runat="server" Text="Nuevo" class="btn btn-success btn-flat">+</asp:LinkButton>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Programar Fecha</span>
+                                        <input id="txtfecha" runat="server" min="" type="date" class="form-control">
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <asp:Button ID="Button7" runat="server" class="btn btn-outline" Text="Cancelar" OnClick="Button7_Click" />
+
+                                    <asp:Button ID="Button5" runat="server" class="btn btn-outline" Text="Guardar" OnClick="Button5_Click" />
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
                     
-                </ProgressTemplate>
-            </asp:updateprogress>
-            <div class="modal modal-info fade in" id="panelAsignaciones" style="display: block;" runat="server">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+                        <!-- /.modal-dialog -->
+                  
+                   
+           
+        <div class="modal modal-info fade in" >
+            <div class="card"  id="panelEditardetalles" style="display: block;" runat="server">
+                <div class="card-default">
+                    <div class="card-header">
 
-                        <h4 class="modal-title">Asignacion Ordenes de Trabajo</h4>
+                        <h4 class="card-title">Detalles De Items</h4>
                     </div>
-                    <div class="modal-body">
-                        <p>
-                            <label id="lbltarea" runat="server">#</label>
-                        </p>
-                        <div class="input-group">
-                            <span class="input-group-addon">ID Orden: </span>
-                            <input id="textidorden" runat="server" type="text" class="form-control" disabled>
-                        </div>
+                    <div class="card-body">
+                        <p>#</p>
+                        <div class="card" id="insert">
+                            <div class="card-header with-border">
+                                <h3 class="box-title"><b>Insertar Datos</b></h3>
 
-                        <div class="form-group has-feedback">
-                            <div class="input-group">
-                                <span class="input-group-addon">Proveedor</span>
-                                <select runat="server" id="SelectProveedores" class="js-example-basic-single" name="state" style="width: 100%">
-                                </select>
-                                <span class="input-group-btn">
-                                    <asp:LinkButton ID="btnnuevoproveedor" runat="server" Text="Nuevo" class="btn btn-success btn-flat">+</asp:LinkButton>
-                                </span>
+
+                            </div>
+                            <div class="card-body">
                             </div>
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">Programar Fecha</span>
-                            <input id="txtfecha" runat="server" min="" type="date" class="form-control">
-                        </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <asp:Button ID="Button7" runat="server" class="btn btn-outline" Text="Cancelar" OnClick="Button7_Click" />
-
-                        <asp:Button ID="Button5" runat="server" class="btn btn-outline" Text="Guardar" OnClick="Button5_Click" />
-
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-           <div class="modal modal-info fade in" id="panelEditardetalles" style="display: block;" runat="server">
-            <div class="modal-dialog" style="width: 70%;">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <h4 class="modal-title">Detalles De Items</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>#</p>
-                                <div class="box" id="insert">
-            <div class="box-header with-border">
-                <h3 class="box-title"> <b>Insertar Datos</b></h3>
-                
-                
-            </div>
-            <div class="box-body">
-                
-                
-
-            </div>
-        </div>
-
-                    </div>
-                    <div class="modal-footer">
+                    <div class="card-footer">
                         <asp:Button ID="btncancela_detalles" runat="server" class="btn btn-outline" Text="Cancelar" OnClick="btncancela_detalles_Click" />
 
-<%--                        <asp:Button ID="Button2" runat="server" class="btn btn-outline" Text="Guardar" OnClick="Button5_Click" />--%>
-                         
-
+                        <%--                        <asp:Button ID="Button2" runat="server" class="btn btn-outline" Text="Guardar" OnClick="Button5_Click" />--%>
                     </div>
                 </div>
                 <!-- /.modal-content -->

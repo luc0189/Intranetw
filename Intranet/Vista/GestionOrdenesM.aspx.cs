@@ -37,17 +37,51 @@ namespace Intranet.Vista
         {
             view_detalles.Visible = false;
         }
-        public async Task SendSms(string tel, string sms,string dia)
+        //public async Task SendSms(string tel, string sms,string dia)
+        //{
+        //    try
+        //    {
+        //        var send = $"http://api.hablame.co/sms/envio/?api=LyRMarMdWrdCIkxPCONFCg6Hbr6AcQ&cliente=10011043&numero= {tel}&sms=Trabajo Asignado en Supermio:{sms} Programado para el {dia}.";
+        //        var client = new HttpClient();
+        //        var res = await client.GetAsync(send);
+        //        var json = await res.Content.ReadAsStringAsync();
+               
+        //        //var rest = JsonConvert.DeserializeObject<List<smsobjet>>(json);
+              
+
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        alerta.MessageBox(this, $" {e}");
+        //    }
+
+           
+        //}
+
+        public async Task SendSmsGOrdenes(string tel, string nombre, string sms)
         {
             try
             {
-                var send = $"http://api.hablame.co/sms/envio/?api=bjwx2FEYM1AKC1NWYMlWmdbx2EXX8D&cliente=10011043&numero= {tel}&sms=Trabajo Asignado en Supermio:{sms} Programado para el {dia}.";
+                var send = $"https://api101.hablame.co/api/sms/v2.1/send/?apiKey=LyRMarMdWrdCIkxPCONFCg6Hbr6AcQ&account=10011043&token=f94dd6bde1f654cab0e08c90cd64981e&toNumber= {tel}&sms= {nombre}, {sms}";
                 var client = new HttpClient();
                 var res = await client.GetAsync(send);
                 var json = await res.Content.ReadAsStringAsync();
-               
+                try
+                {
+                    String bd = Session["BD"].ToString();
+                    var registros = Controlasql.CClog_cumples(nombre, tel, sms, Session["USUARIO"].ToString(), bd);
+
+                }
+                catch (Exception EX)
+                {
+
+                    alerta.MessageBox(this, $" {EX}");
+                }
                 //var rest = JsonConvert.DeserializeObject<List<smsobjet>>(json);
-              
+                alerta.MessageBox(this, "Mensaje Enviado Exitosamente");
+
+                Debug.WriteLine(await res.Content.ReadAsStringAsync());//Stifen
 
             }
             catch (Exception e)
@@ -62,9 +96,7 @@ namespace Intranet.Vista
             //var messagePost = Newtonsoft.Json.JsonConvert.SerializeObject(r);
             //Debug.WriteLine(messagePost);
         }
-       
-       
-      
+
         public void llenaubicacion()
         {
             try
@@ -313,9 +345,12 @@ namespace Intranet.Vista
         protected async void Button5_Click(object sender, EventArgs e)
         {
             string test = SelectProveedores.Value;
+          
             string[] palabras = test.Split('/');
             string nombre = palabras[0];
             string telefono = palabras[1];
+            string telefono2 = Session["TEL"].ToString();
+            string fecha = txtfecha.Value;
             if (txtfecha.Value.Equals("") || SelectProveedores.Value.Equals("") || textidorden.Value.Equals(""))
             {
                 string script = @"<script type='text/javascript'>
@@ -342,7 +377,8 @@ namespace Intranet.Vista
                         </script>";
 
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
-                        await SendSms(telefono,lbltarea.InnerText, txtfecha.Value);
+                        await SendSmsGOrdenes(telefono,"Hola; "+nombre, "tienes una tarea asignada en Supermio -"+lbltarea.InnerText+"para la fecha:"+fecha);
+                        await SendSmsGOrdenes(telefono2,"Hola; "+ Session["USUARIO"].ToString()," Se asigno la Tarea -"+lbltarea.InnerText+" a " +nombre+" la fecha: "+fecha );
                         consultaradicados();
 
                     }

@@ -400,9 +400,9 @@ namespace Intranet.modelo
             sql = "select CONCAT(serialArt, ' / ', nombreArt) As Nombre  FROM articulo where inactivo=1";
             return dataload.MySqlQuery(sql, bd);
         }
-        internal int Mcreaordentrabajo(string Pubicacion, string parea, string Pclasemante, string Pdescripcion, string pstado, string puser, String bd)
+        internal int Mcreaordentrabajo(string Pubicacion, string parea, string Pclasemante, string Pdescripcion, string pstado, string puser,string tiposolicitud, String bd)
         {
-            sql = "call creaordentrabajo('" + Pubicacion + "', '" + parea + "', '" + Pclasemante + "', '" + Pdescripcion + "','" + pstado + "','" + puser + "'); ";
+            sql = "call creaordentrabajo('" + Pubicacion + "', '" + parea + "', '" + Pclasemante + "', '" + Pdescripcion + "','" + pstado + "','" + puser + "','"+tiposolicitud+"'); ";
             return dataload.MysqlProcedimiento(sql, bd);
         }
         internal int Mcreaasigtrabajo(string idorden, string pproveedor, string fecha, string puser, String bd)
@@ -418,6 +418,11 @@ namespace Intranet.modelo
         internal DataSet listaubicacion(String bd)
         {
             sql = "select nombUbica As Nombre  FROM ubicacion";
+            return dataload.MySqlQuery(sql, bd);
+        }
+        internal DataSet mlistatiposolicitud(String bd)
+        {
+            sql = "select Name As Nombre  FROM tiposolicitudordentrabajo";
             return dataload.MySqlQuery(sql, bd);
         }
         internal DataSet maxidmantenimientos(String bd)
@@ -633,7 +638,7 @@ namespace Intranet.modelo
         internal DataSet ListadocarnesBasculas(String pgrupo, String fechaini, String fechafin,string tienda)
         {
 
-            sql = "SELECT dat_ticket_linea.descripcion," +
+            sql = "SET SQL_BIG_SELECTS=1; SELECT dat_ticket_linea.descripcion," +
                 "                   SUM(dat_ticket_linea.peso) as Peso" +
                 "                 FROM dat_ticket_linea inner join dat_ticket_cabecera on dat_ticket_cabecera.idticket = dat_ticket_linea.idticket" +
                 "                       where" +
@@ -658,7 +663,7 @@ namespace Intranet.modelo
         }
         internal DataSet validacionUsuario(string usuario, string contraseña, string PBD)
         {
-            sql = "  select USUA_NOMBRE,PERS_TIPP_ID,TIPP_NOMBRE,PERS_CC,S.NOMBRE,S.CCOSTO FROM USUARIO " +
+            sql = "  select USUA_NOMBRE,PERS_TIPP_ID,TIPP_NOMBRE,PERS_CC,S.NOMBRE,S.CCOSTO,PERS_TEL FROM USUARIO " +
                 "               INNER JOIN PERSONA ON USUA_IDPERS = PERS_ID" +
                 "               INNER JOIN TIPOPERSONA ON PERS_TIPP_ID = TIPP_ID" +
                 "               INNER JOIN SALAS_VENTA S ON USUA_SALAVENTAS = S.ID" +
@@ -675,20 +680,7 @@ namespace Intranet.modelo
             sql = "select PERS_ID AS ID,PERS_NOMBRE1 AS PRIMER_NOMBRE,PERS_APELLIDO1 AS PRIMER_APELLIDO FROM PERSONA";
             return dataload.oraconsulta(sql, PBD);
         }
-        internal DataSet listadoventa(string fei, string fef,string costo)//aquiventas la 16
-        {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS," +
-                " format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR," +
-                " COUNT(vrsubtotal) AS Facturas" +
-                " FROM  dbo.documento AS do" +
-                " INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
-                " WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
-                "  AND td.clasedoc in('FP','FV','FE')" +
-                "  AND do.ccostoID = '"+costo+"'" +
-                "  and do.anulado=0" +
-                " GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
-            return dataload.sqlconsulta(sql);
-        }
+       
         internal DataSet Mlista_acom_ventasla16(string fei, string fef)//aquiventas la 16
         {
             sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS, format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR,COUNT(vrsubtotal) AS Facturas FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')  AND(td.clasedoc = 'FP')  AND do.ccostoID = '000001'  and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
@@ -699,18 +691,7 @@ namespace Intranet.modelo
             sql = "select id,tercero.nombrecompleto,tercero.telefono from  tercero where id='"+cc+"'";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet Mlista_acom_Ventaspuntos(string fei, string fef, string ccosto)//aquiventas la 16
-        {
-            sql = "SELECT  "+
-                "                format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR," +
-                "                COUNT(vrsubtotal) AS Facturas" +
-                "                FROM dbo.documento AS do" +
-                "                INNER JOIN  dbo.tipodoc AS" +
-                "                td ON do.tipo = td.codigo" +
-                "                       WHERE(do.fecha BETWEEN '"+ fei + "' AND '"+ fef + "')" +
-                "                          AND td.clasedoc in('FP','FV','FE')  AND do.ccostoID = '" + ccosto + "'  and do.anulado = 0 ";
-            return dataload.sqlconsulta(sql);
-        }
+        
         internal DataSet MventasResmidoporlinea(string fei, string fef,string ccosto)//aqui ventas resumido tabla ventas por linea
         {
             sql = " declare @pro as int=(   select Sum(it.vrtotal) AS V_ANTES_IVA " +
@@ -1104,17 +1085,7 @@ namespace Intranet.modelo
                 "                                 select FORMAT(((@mesctual -@añoanterior)/ @añoanterior)*100, '###,###.#')  as dato,format(@añoanterior,'###,###.#') as dato2  ";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listadoventatotal(string fecha, string ccosto)
-        {
-            sql = "SELECT   format(Sum(do.vrsubtotal), '$ #,###.##') AS Total_Ventas, " +
-                "COUNT(vrsubtotal) AS Total_Facturas" +
-                " FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo " +
-                "WHERE fecha='" + fecha + "' " +
-                " AND td.clasedoc in('FP','FV')" +
-                "  AND do.ccostoID = '"+ccosto+"'" +
-                "  and do.anulado=0 ";
-            return dataload.sqlconsulta(sql);
-        }
+       
         internal DataSet Rotaciondias(string fecha, string fechaf,string sala)
         {
             sql = $"SET NOCOUNT ON; " +
@@ -1282,17 +1253,45 @@ namespace Intranet.modelo
                 " AND td.clasedoc in('FP','FV')  AND do.ccostoID = '000005'  and do.anulado=0 ";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listadoventa13(string fei, string fef)
+        internal DataSet listadoventa(string fei, string fef,string ccosto)
         {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS," +
-                " format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR" +
-                " ,COUNT(vrsubtotal) AS Facturas " +
-                "FROM  dbo.documento AS do " +
-                " INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo " +
-                "WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
-                "  AND td.clasedoc in('FP','FV')" +
-                "  AND do.ccostoID = '000002' " +
-                " and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
+            sql = $"    declare @fecha1 as date='{ fei}' "+
+                $"      declare @fecha2 as date = '{fef}'" +
+                $"   Declare @devoluciones as float = (SELECT      Sum(do.vrsubtotal) AS V_ANTES_IVA" +
+                $"                                       FROM dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
+                $"                                        WHERE fecha between @fecha1 and @fecha2" +
+                $"                                               AND td.clasedoc in('DP', 'DV')" +
+                $"                                                 AND do.ccostoID = '{ccosto}' " +
+                $"                                                  and do.anulado = 0)" +
+                $" select ahorasi.DIA" +
+                $",format(SUM(ahorasi.VALOR - ahorasi.DEV), '$ ###,###.##')Valor" +
+                $" ,sum(ahorasi.Facturas + ahorasi.CantDev)Documentos" +
+                $"       FROM(SELEct final.VALOR" +
+                $"                , (SELECT      Sum(do.vrsubtotal) AS V_ANTES_IVA" +
+                $"                                       FROM dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
+                $"                                           WHERE fecha between @fecha1 and @fecha2" +
+                $"                                                AND td.clasedoc in('DP', 'DV')" +
+                $"                                                 AND do.ccostoID = '{ccosto}'" +
+                $"                                                  and do.anulado = 0)DEV" +
+                $"               ,(SELECT      count(do.vrsubtotal) AS cantidad" +
+                $"                                       FROM dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
+                $"                                           WHERE fecha between @fecha1 and @fecha2" +
+                $"                                                AND td.clasedoc in('DP', 'DV')" +
+                $"                                                 AND do.ccostoID = '{ccosto}'" +
+                $"                                                 and do.anulado = 0)CantDev" +
+                $"                ,final.Facturas" +
+                $"                ,final.DIA" +
+                $"                        FROM" +
+                $"                                 (SELECT  TOP(100) PERCENT DATEPART(DD, do.logfecreo) AS DIA" +
+                $"                                        , Sum(do.vrsubtotal) AS VALOR" +
+                $"                                        , COUNT(vrsubtotal) AS Facturas" +
+                $"                                                FROM dbo.documento AS do" +
+                $"                                               INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
+                $"                                               WHERE(do.fecha BETWEEN @fecha1 AND @fecha2)" +
+                $"                                                  AND td.clasedoc in('FP', 'FV')" +
+                $"                                                  AND do.ccostoID = '{ccosto}'" +
+                $"                                                  and do.anulado = 0 GROUP BY DATEPART(DD, do.logfecreo) order by DIA)final)ahorasi" +
+                $"                                                     group by ahorasi.Facturas,ahorasi.DIA,ahorasi.CantDev order by ahorasi.DIA";
             return dataload.sqlconsulta(sql);
         }
 
@@ -1300,7 +1299,15 @@ namespace Intranet.modelo
         internal DataSet MClista_la14aux(string fei, string fef, string fcuenta)
         {
             string H = ".,";
-            sql = "SELECT * FROM (SELECT COD_CUENTA as CUENTA,I.FCH_DOCUMENTO,TIPO_DOCUMENTO(ID_TIPO_DOCUMENTO) TIPO, NUM_DOCUMENTO as NO_DOCU,'$'||TO_CHAR(VALOR,'999G999G999G999G999','NLS_NUMERIC_CHARACTERS = " + H + "')  VALOR, NIT_TERCERO(I.ID_TERCERO) TERCERO,I.OBSER AS OBSERVACIONES_DOCU FROM CO_CUENTAS C,CO_DOCUMENTOS D, CO_DOCUMENTO_ITEMS I WHERE D.ID_DOCUMENTO = I.ID_DOCUMENTO  AND C.ID_CUENTA    = I.ID_CUENTA  AND COD_CUENTA LIKE('" + fcuenta + "'||'%')  AND I.FCH_DOCUMENTO BETWEEN TO_DATE('" + fei + "','YYYY-MM-DD') AND TO_DATE('" + fef + "','YYYY-MM-DD') AND C.ID_SISTEMA = '1'ORDER BY COD_CUENTA,I.FCH_DOCUMENTO)";
+            sql = "SELECT * FROM (SELECT COD_CUENTA as" +
+                " CUENTA,I.FCH_DOCUMENTO,TIPO_DOCUMENTO(ID_TIPO_DOCUMENTO)" +
+                " TIPO, NUM_DOCUMENTO as NO_DOCU,'$'||TO_CHAR(VALOR,'999G999G999G999G999','NLS_NUMERIC_CHARACTERS = " + H + "') " +
+                " VALOR, NIT_TERCERO(I.ID_TERCERO) TERCERO,I.OBSER AS OBSERVACIONES_DOCU FROM CO_CUENTAS C,CO_DOCUMENTOS D," +
+                " CO_DOCUMENTO_ITEMS I WHERE D.ID_DOCUMENTO = I.ID_DOCUMENTO  AND C.ID_CUENTA" +
+                "    = I.ID_CUENTA  AND COD_CUENTA LIKE('" + fcuenta + "'||'%')" +
+                "  AND I.FCH_DOCUMENTO BETWEEN TO_DATE('" + fei + "','YYYY-MM-DD')" +
+                " AND TO_DATE('" + fef + "','YYYY-MM-DD')" +
+                " AND C.ID_SISTEMA = '1'ORDER BY COD_CUENTA,I.FCH_DOCUMENTO)";
             return dataload.orala14consulta(sql);
         }
         internal DataSet MClista_la14VENTAS(string fei, string fef)
@@ -1555,14 +1562,14 @@ namespace Intranet.modelo
         {
             sql = "SELECT Checkinout.Userid as Id," +
                 " Format([CheckTime], 'yyyy-mm-dd') as Dia_Hora,  format([Checkinout.CheckTime],'hh:nn:ss')as Hora, " +
-                "Userinfo.Name as Empleado," +
-                " Dept.DeptName as Departamento," +
-                " FingerClient.ClientName as Biometrico, " +
-                "Status.StatusText as Tipo " +
-                "FROM(((Checkinout LEFT JOIN Userinfo ON Checkinout.Userid = Userinfo.Userid) " +
-                "LEFT JOIN Dept ON Userinfo.Deptid = Dept.Deptid)" +
-                " LEFT JOIN FingerClient ON Checkinout.Sensorid = FingerClient.ClientNumber)" +
-                " LEFT JOIN Status ON Checkinout.CheckType = Status.StatusChar " +
+                    "Userinfo.Name as Empleado," +
+                    " Dept.DeptName as Departamento," +
+                    " FingerClient.ClientName as Biometrico, " +
+                    "Status.StatusText as Tipo " +
+                    "FROM(((Checkinout LEFT JOIN Userinfo ON Checkinout.Userid = Userinfo.Userid) " +
+                    "LEFT JOIN Dept ON Userinfo.Deptid = Dept.Deptid)" +
+                    " LEFT JOIN FingerClient ON Checkinout.Sensorid = FingerClient.ClientNumber)" +
+                    " LEFT JOIN Status ON Checkinout.CheckType = Status.StatusChar " +
                 "WHERE(((Format([CheckTime], 'yyyy-mm-dd')) Between '" + dateini + "' And '" + datefin + "'))";
             return dataload.accesconsulta(sql);
         }
@@ -1628,22 +1635,8 @@ namespace Intranet.modelo
                 " ORDER BY cantidad DESC";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listadoventaVERSA(string fei, string fef)
-        {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS, format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR,COUNT(vrsubtotal) AS Facturas FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')  AND(td.clasedoc = 'FP')  AND do.ccostoID = '000004'  and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
-            return dataload.sqlconsulta(sql);
-        }
-        internal DataSet listadoventaCiudadela(string fei, string fef)
-        {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS," +
-                " format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR, " +
-                "COUNT(vrsubtotal) AS Facturas " +
-                "FROM  dbo.documento AS do" +
-                " INNER JOIN  dbo.tipodoc AS" +
-                " td ON do.tipo = td.codigo WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
-                "  AND(td.clasedoc = 'FP')  AND do.ccostoID = '000005'  and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
-            return dataload.sqlconsulta(sql);
-        }
+       
+     
         internal DataSet listadoventaDomicilio(string fei, string fef)
         {
             sql = "SELECT TOP (100) PERCENT DATEPART(DD, documento.logfecreo) AS DIAS," +

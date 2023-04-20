@@ -19,6 +19,7 @@ namespace Intranet
         string valor3 = "";
         string valor4 = "";
         string valor5 = "";
+        string valor6 = "";
         DataTable dt = null;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,7 @@ namespace Intranet
                 Session["perfil"] = valor1;
                 Session["salaventas"] = valor4;
                 Session["CCCOSTO"] = valor5;
+               
 
                 notificacion.Visible = false;
             }
@@ -64,6 +66,7 @@ namespace Intranet
                         valor3 = Convert.ToString(row[3]);
                         valor4 = Convert.ToString(row[4]);
                         valor5 = Convert.ToString(row[5]);
+                        valor6 = Convert.ToString(row[6]);
 
 
                         Session["USUARIO"] = txtususario.Value.ToUpper();
@@ -72,6 +75,7 @@ namespace Intranet
                         Session["CC"]= valor3;
                         Session["salaventas"] = valor4;
                         Session["CCOSTO"] = valor5;
+                        Session["TEL"] = valor6;
 
                         Session["BD"] = selectbd.Value;
                         if (Session["perfilnombre"].ToString().Equals("LIDER PUNTO DE VENTA"))

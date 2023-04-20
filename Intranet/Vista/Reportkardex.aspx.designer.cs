@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Intranet.Vista {
-    
-    
-    public partial class Reportkardex {
-        
+namespace Intranet.Vista
+{
+
+
+    public partial class Reportkardex
+    {
+
         /// <summary>
         /// Control txtfechaini.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtfechaini;
-        
+
         /// <summary>
         /// Control txtfechafin.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtfechafin;
-        
+
         /// <summary>
         /// Control Select1.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect Select1;
-        
+
         /// <summary>
         /// Control selectbodega.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect selectbodega;
-        
+
         /// <summary>
         /// Control activos.
         /// </summary>
@@ -56,25 +58,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton activos;
-        
-        /// <summary>
-        /// Control lblalerta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblalerta;
-        
-        /// <summary>
-        /// Control alertant.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertant;
-        
+
         /// <summary>
         /// Control sald.
         /// </summary>
@@ -83,7 +67,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl sald;
-        
+
         /// <summary>
         /// Control saldoactual.
         /// </summary>
@@ -92,7 +76,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl saldoactual;
-        
+
         /// <summary>
         /// Control Gridkardex.
         /// </summary>
@@ -101,7 +85,25 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView Gridkardex;
-        
+
+        /// <summary>
+        /// Control lblalerta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblalerta;
+
+        /// <summary>
+        /// Control alertant.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertant;
+
         /// <summary>
         /// Control excepcion.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl excepcion;
-        
+
         /// <summary>
         /// Control error.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl error;
-        
+
         /// <summary>
         /// Control notificacion.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl notificacion;
-        
+
         /// <summary>
         /// Control txtnotifica.
         /// </summary>

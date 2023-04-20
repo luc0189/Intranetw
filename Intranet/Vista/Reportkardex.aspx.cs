@@ -120,7 +120,7 @@ namespace Intranet.Vista
                 cn = new MySqlConnection();
                 cn.ConnectionString = "server=192.168.1.133;port=3306;database='"+ Session["BD"].ToString() + "';Uid=root;pwd=dibal;SslMode=none ";
                 cn.Open();
-                cm = new MySqlCommand("select sum(kard_entrada)-SUM(kard_salida) as saldo from kardex where kard_fecha<='" + txtfechaini.Value + "' and kard_idarticulo= (select idArt from articulo where serialArt='" + serial + "') and kard_bodegaid=(select idUbica from ubicacion where nombUbica='" + selectbodega.Value + "')", cn);
+                cm = new MySqlCommand("select sum(kard_entrada)-SUM(kard_salida) as saldo from kardex where kard_fechamovimiento<='" + txtfechaini.Value + "' and kard_idarticulo= (select idArt from articulo where serialArt='" + serial + "') and kard_bodegaid=(select idUbica from ubicacion where nombUbica='" + selectbodega.Value + "')", cn);
                 dr = cm.ExecuteReader();
                 sald.InnerText="";
                 while (dr.Read())

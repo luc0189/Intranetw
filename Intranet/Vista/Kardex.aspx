@@ -25,95 +25,98 @@
     <form method="post" runat="server">
         <div class="margin">
         </div>
-        <div class="box">
-            <div class="box-body" id="contenido">
-                <div class="box-header with-border ">
-                    <h3 class="box-title"><b>Kardex Consumibles</b></h3>
+        <div class="card">
+            <div class="card-body" id="contenido">
+                <div class="card-header with-border ">
+                    <h3 class="card-title"><b>Kardex Consumibles</b></h3>
                 </div>
-                <div class="col-md-3">
-                    <div class="box box-danger">
-                        <div class="box-body -info">
-                            <div class="small-box bg-red-active">
-                                <div class="inner">
-                                    <asp:LinkButton runat="server" Text="Volver" data-toggle="modal" data-target="#Ingreso" class="btn btn-app">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card card-danger">
+                            <div class="card-body -info">
+                                <div class="small-box bg-red-active">
+                                    <div class="inner">
+                                        <asp:LinkButton runat="server" Text="Volver" data-toggle="modal" data-target="#Ingreso" class="btn btn-app">
                                  <i aria-hidden="true"  class="fa fa-plus-circle"></i>Nuevo Ingreso
-                                    </asp:LinkButton>
-                                    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-android-arrow-down"></i>
-                                </div>
-                                <a href="#" role="button" data-toggle="modal" data-target="#Ingreso" class=" small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nueva Entrada</font></font></a>
-                                <%-- <input type="button" 
+                                        </asp:LinkButton>
+                                        <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-android-arrow-down"></i>
+                                    </div>
+                                    <a href="#" role="button" data-toggle="modal" data-target="#Ingreso" class=" small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nueva Entrada</font></font></a>
+                                    <%-- <input type="button" 
 onclick="miFuncion()" 
 value="Activar Función">--%>
-                            </div>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="box box-success">
+                    <div class="col-md-3">
+                        <div class="card card-success">
 
-                        <div class="box-body">
-                            <div class="small-box bg-green">
-                                <div class="inner">
-                                    <asp:LinkButton runat="server" Text="Volver" class="btn btn-app" role="button" data-toggle="modal" data-target="#translados">
+                            <div class="card-body">
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <asp:LinkButton runat="server" Text="Volver" class="btn btn-app" role="button" data-toggle="modal" data-target="#translados">
                               <i aria-hidden="true"  class="fa fa-plus-circle"></i>Nuevo Traslado
-                                    </asp:LinkButton>
-                                    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></p>
+                                        </asp:LinkButton>
+                                        <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-reply"></i>
+                                    </div>
+                                    <a href="#" role="button" data-toggle="modal" data-target="#translados" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Traslados</font></font></a>
                                 </div>
-                                <div class="icon">
-                                    <i class="ion ion-reply"></i>
-                                </div>
-                                <a href="#" role="button" data-toggle="modal" data-target="#translados" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Traslados</font></font></a>
+
+
                             </div>
-
-
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="box box-warning">
+                    <div class="col-md-3">
+                        <div class="card card-warning">
 
-                        <div class="box-body">
-                            <div class="small-box bg-orange">
-                                <div class="inner">
-                                    <asp:LinkButton runat="server" Text="Volver" class="btn btn-app" role="button" data-toggle="modal" data-target="#Consumo">
+                            <div class="card-body">
+                                <div class="small-box bg-orange">
+                                    <div class="inner">
+                                        <asp:LinkButton runat="server" Text="Volver" class="btn btn-app" role="button" data-toggle="modal" data-target="#Consumo">
                                     <i aria-hidden="true"  class="fa fa-plus-circle"></i>Nuevo Consumo
-                                    </asp:LinkButton>
+                                        </asp:LinkButton>
 
-                                    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></p>
+                                        <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-ios-arrow-back"></i>
+                                    </div>
+                                    <a href="#" role="button" data-toggle="modal" data-target="#Consumo" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Consumo</font></font></a>
                                 </div>
-                                <div class="icon">
-                                    <i class="ion ion-ios-arrow-back"></i>
-                                </div>
-                                <a href="#" role="button" data-toggle="modal" data-target="#Consumo" class="small-box-footer"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Consumo</font></font></a>
+
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="box">
+                    <div class="col-md-3">
+                        <div class="card">
 
-                        <div class="box-body">
-                            <a href="1.aspx" class="btn btn-app">
-                                <i aria-hidden="true" class="fa fa-home"></i>Inicio 
-                            </a>
-                            <asp:LinkButton ID="LinkButton7" role="button" data-toggle="modal" data-target="#NuevaUbicacion" runat="server" Text="Volver" class="btn btn-app" >
+                            <div class="card-body">
+                                <a href="1.aspx" class="btn btn-app">
+                                    <i aria-hidden="true" class="fa fa-home"></i>Inicio 
+                                </a>
+                                <asp:LinkButton ID="LinkButton7" role="button" data-toggle="modal" data-target="#NuevaUbicacion" runat="server" Text="Volver" class="btn btn-app">
                                     <i aria-hidden="true"  class="fa fa-plane"></i>Nueva Ubic.
-                            </asp:LinkButton>
+                                </asp:LinkButton>
 
+                            </div>
                         </div>
                     </div>
                 </div>
+                
 
             </div>
-            <div class="box box-danger ">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><b>Saldos...</b></h3>
-                    <div class="box-tools pull-right">
+            <div class="card card-danger ">
+                <div class="card-header with-border">
+                    <h3 class="card-title"><b>Saldos...</b></h3>
+                    <div class="card-tools pull-right">
                         <!-- <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">3</span>-->
                         <button type="button" class="btn btn-box-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
@@ -125,13 +128,16 @@ value="Activar Función">--%>
                     </div>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="table-responsive">
-                        <asp:GridView ID="Gridsaldos" runat="server" GridLines="None"
-                            CssClass="gvuser table table-striped table-bordered text-sm"
-                            CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros indicados.">
-                        </asp:GridView>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="table table-responsive">
+                            <asp:GridView ID="Gridsaldos" runat="server" GridLines="None"
+                                CssClass="gvuser table table-striped table-bordered text-sm"
+                                CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros indicados.">
+                            </asp:GridView>
+                        </div>
                     </div>
+                   
                 </div>
             </div>
 

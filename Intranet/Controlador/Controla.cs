@@ -417,19 +417,7 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
-        public static DataSet listaventa(string fi, string ff,string costo)
-        {
-            Modelos usu = new Modelos();
-
-            try
-            {
-                return usu.listadoventa(fi,ff,costo);
-            }
-            catch (Exception ex)
-            {
-                throw ex; // para lanzar la exception o complementar la capturada
-            }
-        }
+  
         // aqui inicia modulo de inventarios
         public static int Cabreconteo(string pid)
         {
@@ -677,6 +665,23 @@ namespace Intranet.Controlador
         {
             Modelos usu = new Modelos();
             string dato = "";
+            string Sucursal = "";
+            switch (tienda)
+            {
+                case "000001" : Sucursal= "SUPERMIO LA 16";
+                    break;
+                case "000002":
+                    Sucursal = "SUPERMIO LA 13";
+                    break;
+                case "000004":
+                    Sucursal = "SUPERMIO VERSALLES";
+                    break;
+                case "000005":
+                    Sucursal = "SUPERMIO CIUDADELA";
+                    break;
+                default:
+                    break;
+            }
             if (grupo == "00000357")
             {
                 dato = "POLLO";
@@ -689,9 +694,17 @@ namespace Intranet.Controlador
             {
                 dato = "RES";
             }
+            if (grupo == "368")
+            {
+                dato = "VISCERAS";
+            }
+            if (grupo == "329")
+            {
+                dato = "PEZ Y MAR";
+            }
             try
             {
-                return usu.ListadocarnesBasculas(dato, fi, ff,tienda);
+                return usu.ListadocarnesBasculas(dato, fi, ff,Sucursal);
             }
             catch (Exception ex)
             {
@@ -777,32 +790,20 @@ namespace Intranet.Controlador
             }
         }
         //------------------------------------------------------------------------
-        public static DataSet listaventa13(string fi, string ff)
+        public static DataSet listaventa(string fi, string ff,string centrocosto)
         {
             Modelos usu = new Modelos();
 
             try
             {
-                return usu.listadoventa13(fi,ff);
+                return usu.listadoventa(fi,ff,centrocosto);
             }
             catch (Exception ex)
             {
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
-        public static DataSet listaventa(string fecha,string costo)
-        {
-            Modelos usu = new Modelos();
-
-            try
-            {
-                return usu.listadoventatotal(fecha,costo);
-            }
-            catch (Exception ex)
-            {
-                throw ex; // para lanzar la exception o complementar la capturada
-            }
-        }
+  
         public static DataSet listaventa13total(string fecha)
         {
             Modelos usu = new Modelos();
@@ -855,34 +856,8 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
-        public static DataSet listaventaVERSA(string fi, string ff)
-        {
-            Modelos usu = new Modelos();
-
-            try
-            {
-                return usu.listadoventaVERSA(fi,ff);
-            }
-            catch (Exception ex)
-            {
-                throw ex; // para lanzar la exception o complementar la capturada
-            }
-
-        }
-        public static DataSet listaventaCiudadela(string fi, string ff)
-        {
-            Modelos usu = new Modelos();
-
-            try
-            {
-                return usu.listadoventaCiudadela(fi, ff);
-            }
-            catch (Exception ex)
-            {
-                throw ex; // para lanzar la exception o complementar la capturada
-            }
-
-        }
+     
+      
         public static DataSet listaventalocalVERSA(string useri,string fi, string ff)
         {
             Modelos usu = new Modelos();
@@ -1478,12 +1453,12 @@ namespace Intranet.Controlador
         //    }
         //}
         public static int Ccreaorden( string bodega, string area, string clase, string descripcion,
-            string stado,string usuario, string pbd)
+            string stado,string usuario,string ptiposolicitud, string pbd)
         {
             Modelos usu = new Modelos();
             try
             {
-                return usu.Mcreaordentrabajo(bodega,area, clase, descripcion,stado,usuario,pbd
+                return usu.Mcreaordentrabajo(bodega,area, clase, descripcion,stado,usuario,ptiposolicitud,pbd
                     );
             }
             catch (Exception e)
@@ -1638,7 +1613,19 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
-     
+        public static DataSet ClistaTiposolicitud(string pbd)
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.mlistatiposolicitud(pbd);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
         public static DataSet Clistaubicacion(string pbd)
         {
             Modelos usu = new Modelos();
@@ -2029,19 +2016,7 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o compleme
             }
         }
-        public static DataSet CSale_supermarkets(string pfecha, string plinea, string pcosto)
-        {
-            Modelos usu2 = new Modelos();
-
-            try
-            {
-                return usu2.Mlista_acom_Ventaspuntos(pfecha, plinea, pcosto);
-            }
-            catch (Exception ex)
-            {
-                throw ex; // para lanzar la exception o compleme
-            }
-        }
+       
         public static DataSet Ccosto()
         {
             Modelos usu2 = new Modelos();

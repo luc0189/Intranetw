@@ -13,9 +13,15 @@
                            <Columns>
                                 <asp:CommandField ShowSelectButton="true" ButtonType="Button" SelectText="Print"  ControlStyle-CssClass="btn btn-success" />                                                                                                                        
                            </Columns>
-                  <Columns>
+                         <Columns>
                                       
                             <asp:CommandField ShowDeleteButton="true" ButtonType="Image" DeleteImageUrl="~/dist/img/ok.png" ControlStyle-CssClass="btn btn-info"  />
+                          <%-- <asp:BoundField  HeaderText="Conteo 1">
+                             <ItemStyle HorizontalAlign="Center" />
+                           </asp:BoundField>
+                           <asp:BoundField HeaderText="Conteo 2">
+                             <ItemStyle HorizontalAlign="Center" />
+                           </asp:BoundField>--%>
                                       </Columns>
                      
                         </asp:GridView>
@@ -38,11 +44,12 @@
                     <div class="modal-body">
                         <div class="table table-responsive">
                          <asp:GridView ID="Gridarticulos" runat="server" GridLines="None"
-                            CssClass="gvuser table table-striped table-bordered text-sm" OnRowEditing="Gridarticulos_RowEditing"
+                            CssClass="gvuser table table-striped table-bordered text-sm" 
                             CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros indicados."  AutoGenerateColumns="False">
                             <Columns> 
-                              <asp:CommandField ButtonType="Image" ShowEditButton="True" EditImageUrl="~/dist/img/edit1.png" UpdateImageUrl="~/dist/img/update.png" CancelImageUrl="~/dist/img/cancel.png" />
-                               <asp:BoundField DataField="articuloID" HeaderText="articuloID" >
+                              
+                              <asp:CommandField HeaderText="Accion" ShowSelectButton="true" ButtonType="Button" SelectText="Nivelar" ControlStyle-CssClass="btn btn-success" />
+                              <asp:BoundField DataField="articuloID" HeaderText="articuloID" >
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
                               <asp:BoundField DataField="detalle" HeaderText="Nombre Articulo" >
@@ -57,9 +64,7 @@
                               <asp:BoundField DataField="DIF" HeaderText="Diferencias" >
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
-                               <asp:BoundField  HeaderText="tercer conteo" >
-                                                    <ItemStyle HorizontalAlign="Center" />
-                                                </asp:BoundField>
+                             
                             </Columns>
                         </asp:GridView>
                         </div>

@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Intranet.Vista {
-    
-    
-    public partial class OrdenTrabajo {
-        
+namespace Intranet.Vista
+{
+
+
+    public partial class OrdenTrabajo
+    {
+
         /// <summary>
         /// Control Selectubicacion.
         /// </summary>
@@ -20,16 +22,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect Selectubicacion;
-        
-        /// <summary>
-        /// Control LinkButton11.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton11;
-        
+
         /// <summary>
         /// Control Selectarea.
         /// </summary>
@@ -38,16 +31,16 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect Selectarea;
-        
+
         /// <summary>
-        /// Control LinkButton1.
+        /// Control SelectTiposolicitud.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlSelect SelectTiposolicitud;
+
         /// <summary>
         /// Control Selecttipo.
         /// </summary>
@@ -56,16 +49,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect Selecttipo;
-        
-        /// <summary>
-        /// Control LinkButton2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-        
+
         /// <summary>
         /// Control txtDescripcion.
         /// </summary>
@@ -74,7 +58,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtDescripcion;
-        
+
         /// <summary>
         /// Control btnguardar.
         /// </summary>
@@ -83,7 +67,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnguardar;
-        
+
         /// <summary>
         /// Control LinkButton3.
         /// </summary>
@@ -92,7 +76,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
-        
+
         /// <summary>
         /// Control GridViewPENDIENTES.
         /// </summary>
@@ -101,7 +85,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewPENDIENTES;
-        
+
         /// <summary>
         /// Control btnasignadas.
         /// </summary>
@@ -110,7 +94,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnasignadas;
-        
+
         /// <summary>
         /// Control GridViewASIGNADO.
         /// </summary>
@@ -119,7 +103,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewASIGNADO;
-        
+
         /// <summary>
         /// Control ScriptManager1.
         /// </summary>
@@ -128,7 +112,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// Control Imprime_R.
         /// </summary>
@@ -137,7 +121,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Imprime_R;
-        
+
         /// <summary>
         /// Control btncerrarimprime.
         /// </summary>
@@ -146,7 +130,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btncerrarimprime;
-        
+
         /// <summary>
         /// Control ReportViewer1.
         /// </summary>

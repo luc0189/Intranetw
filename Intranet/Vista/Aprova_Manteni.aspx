@@ -7,8 +7,8 @@
     <div class="container bootstrap snippet">
     <form method="post" runat="server">
           <asp:scriptmanager runat="server"></asp:scriptmanager>
-        <div class="box">
-            <div class="box-header with-border">
+        <div class="card">
+            <div class="card-header with-border">
                 <div class=" pull-left">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Click Aqui">
                                     <Strong><h3 class="box-title"><b>ordenes de trabajo</b></h3></Strong>
@@ -16,18 +16,18 @@
                                 </button>
                 </div>
         </div>
-            <div class="box-body">
+            <div class="card-body">
               
 
-                 <div class="fade in" id="view_detalles" runat="server" role="dialog"  >
-            <div class="modal-dialog" style="width:90%;">
-                <div class="modal-content" >
-                    <div class="modal-header">
-                        <b class="box-title">Detalles</b>
+                
+            <div class="card" style="width: 90%;" id="view_detalles" runat="server">
+                <div class="card-default" >
+                    <div class="card-header">
+                        <b class="card-title">Detalles</b>
                      <input type="text" id="txtnumeromanteni" disabled name="name" value="" runat="server" style="width:40px;"/> -
                 <input type="text" id="txtnumeroOrden" disabled name="name" value="" runat="server" style="width:40px;"/> -
                 <input type="text" id="txtnumeroAsg" disabled name="name" value="" runat="server" style="width:40px;"/> 
-                <div class="box-tools pull-right">
+                <div class="card-tools pull-right">
                     <input id="Txtfechamantenimiento" class="box-tools" runat="server" type="date" />
                   
                 </div>
@@ -36,7 +36,7 @@
 
                         </div>
                   
-                    <div class="modal-body">
+                    <div class="card-body">
 
                           <div class="row">
                     <div class="col-md-6">
@@ -131,7 +131,7 @@
                         
                         
                     </div>
-                    <div class="modal-footer">
+                    <div class="card-footer">
                         
                        <div class="btn-group">
                             <asp:LinkButton ID="btnguardar" runat="server" Text="Volver" class="btn btn-app" OnClick="btnguardar_Click">
@@ -143,7 +143,7 @@
                 </div>
                 <!-- /.modal-content -->
             </div>
-                </div>
+               
             <!-- /.modal-dialog -->
                  <div class="table-responsive">
                                         <asp:GridView ID="GridView_Ord_Work" runat="server" GridLines="None"

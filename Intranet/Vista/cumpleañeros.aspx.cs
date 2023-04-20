@@ -109,16 +109,16 @@ namespace Intranet.Vista
                 var res = await client.GetAsync(send);
                 var json = await res.Content.ReadAsStringAsync();
                 try
-                {
-                    String bd = Session["BD"].ToString();
-                    var registros = Controlasql.CClog_cumples(nombre, tel,sms,Session["USUARIO"].ToString(),bd);
+                    {
+                        String bd = Session["BD"].ToString();
+                        var registros = Controlasql.CClog_cumples(nombre, tel,sms,Session["USUARIO"].ToString(),bd);
                    
-                }
+                    }
                 catch (Exception EX)
-                {
+                    {
 
-                    alerta.MessageBox(this,$" {EX}");
-                }
+                        alerta.MessageBox(this,$" {EX}");
+                    }
                 //var rest = JsonConvert.DeserializeObject<List<smsobjet>>(json);
                 alerta.MessageBox(this, "Mensaje Enviado Exitosamente");
 

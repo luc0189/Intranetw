@@ -21,7 +21,7 @@ namespace Intranet.Vista.Documentos
         {
             try
             {
-                var registros13 = Controlasql.listaventa13(txtfechaini.Value.ToUpper(), txtfechafin.Value);
+                var registros13 = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,"000002");
                 if (registros13.Tables[0].Rows.Count > 0)
                 {
                     Gridsuper13.DataSource = registros13;
@@ -32,7 +32,7 @@ namespace Intranet.Vista.Documentos
                     Gridsuper13.DataSource = null;
                     Gridsuper13.DataBind();
                 }
-                var registros16 = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,Session["CCOSTO"].ToString());
+                var registros16 = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,"000001");
                 if (registros16.Tables[0].Rows.Count > 0)
                 {
                     Gridsuper16.DataSource = registros16;
@@ -43,7 +43,7 @@ namespace Intranet.Vista.Documentos
                     Gridsuper16.DataSource = null;
                     Gridsuper16.DataBind();
                 }
-                var registrosVERSA = Controlasql.listaventaVERSA(txtfechaini.Value.ToUpper(), txtfechafin.Value);
+                var registrosVERSA = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,"000004");
                 if (registrosVERSA.Tables[0].Rows.Count > 0)
                 {
                     GridsuperVERSA.DataSource = registrosVERSA;
@@ -54,7 +54,7 @@ namespace Intranet.Vista.Documentos
                     GridsuperVERSA.DataSource = null;
                     GridsuperVERSA.DataBind();
                 }
-                var registrosciudadela = Controlasql.listaventaCiudadela(txtfechaini.Value.ToUpper(), txtfechafin.Value);
+                var registrosciudadela = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,"000005");
                 if (registrosciudadela.Tables[0].Rows.Count > 0)
                 {
                     GridViewCiudadela.DataSource = registrosciudadela;
@@ -71,7 +71,7 @@ namespace Intranet.Vista.Documentos
 
                 Response.Redirect("Exceptionnet.aspx");
             }
-            Listarventastotal();
+            
         }
         public void Listarventas16(object sender, EventArgs e)
         {
@@ -100,7 +100,7 @@ namespace Intranet.Vista.Documentos
         {
             try
             {
-                var registros13 = Controlasql.listaventa13(txtfechaini.Value.ToUpper(), txtfechafin.Value);
+                var registros13 = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,"000002");
                 if (registros13.Tables[0].Rows.Count > 0)
                 {
                     Gridsuper13.DataSource = registros13;
@@ -119,91 +119,12 @@ namespace Intranet.Vista.Documentos
             }
             
         }
-        public void Listarventastotal()
-        {
-            try
-            {
-                var registros16 = Controlasql.CSale_supermarkets(txtfechaini.Value.ToUpper(), txtfechafin.Value,"000001");
-                if (registros16.Tables[0].Rows.Count > 0)
-                {
-                    Gridsuper16total.DataSource = registros16;
-                    Gridsuper16total.DataBind();
-                }
-                else
-                {
-                    Gridsuper16total.DataSource = null;
-                    Gridsuper16total.DataBind();
-                }
-            }
-            catch (Exception e)
-            {
-                notificacion.Visible = true;
-                txtnotifica.InnerText = "" + e.Message;
-            }
-            try
-            {
-                var registros13 = Controlasql.CSale_supermarkets(txtfechaini.Value.ToUpper(), txtfechafin.Value, "000002");
-                if (registros13.Tables[0].Rows.Count > 0)
-                {
-                    GridViewtotal13.DataSource = registros13;
-                    GridViewtotal13.DataBind();
-                }
-                else
-                {
-                    GridViewtotal13.DataSource = null;
-                    GridViewtotal13.DataBind();
-                }
-            }
-            catch (Exception e)
-            {
-                notificacion.Visible = true;
-                txtnotifica.InnerText = "" + e.Message;
-            }
-            try
-            {
-                var registrosversa = Controlasql.CSale_supermarkets(txtfechaini.Value.ToUpper(), txtfechafin.Value, "000004");
-                if (registrosversa.Tables[0].Rows.Count > 0)
-                {
-                    GridViewtotalversa.DataSource = registrosversa;
-                    GridViewtotalversa.DataBind();
-                }
-                else
-                {
-                    GridViewtotalversa.DataSource = null;
-                    GridViewtotalversa.DataBind();
-                }
-            }
-            catch (Exception e)
-            {
-                notificacion.Visible = true;
-                txtnotifica.InnerText = "" + e.Message;
-            }
-            try
-            {
-                var registrosciud = Controlasql.CSale_supermarkets(txtfechaini.Value.ToUpper(), txtfechafin.Value, "000005");
-                if (registrosciud.Tables[0].Rows.Count > 0)
-                {
-                    GridViewtotalCiudadela.DataSource = registrosciud;
-                    GridViewtotalCiudadela.DataBind();
-                }
-                else
-                {
-                    GridViewtotalCiudadela.DataSource = null;
-                    GridViewtotalCiudadela.DataBind();
-                }
-            }
-            catch (Exception e )
-            {
-                notificacion.Visible = true;
-                txtnotifica.InnerText = "" + e.Message;
-            }
-
-        }
+   
         protected void ListarventasVERSA(object sender, EventArgs e)
         {
             try
             {
-                var registrosVERSA = Controlasql.listaventaVERSA(txtfechaini.Value.ToUpper(), txtfechafin.Value);
+                var registrosVERSA = Controlasql.listaventa(txtfechaini.Value.ToUpper(), txtfechafin.Value,"00005");
                 if (registrosVERSA.Tables[0].Rows.Count > 0)
                 {
                     GridsuperVERSA.DataSource = registrosVERSA;

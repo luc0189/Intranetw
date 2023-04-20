@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Intranet.Vista {
-    
-    
-    public partial class GestionOrdenesM {
-        
+namespace Intranet.Vista
+{
+
+
+    public partial class GestionOrdenesM
+    {
+
         /// <summary>
         /// Control btnbuscarpendientes.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnbuscarpendientes;
-        
+
         /// <summary>
         /// Control GridViewpendientes.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewpendientes;
-        
+
         /// <summary>
         /// Control btnbuscarasignados.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnbuscarasignados;
-        
+
         /// <summary>
         /// Control GridViewasignados.
         /// </summary>
@@ -47,16 +49,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewasignados;
-        
-        /// <summary>
-        /// Control UpdatePanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control Textidacta.
         /// </summary>
@@ -65,7 +58,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText Textidacta;
-        
+
         /// <summary>
         /// Control fechaacta.
         /// </summary>
@@ -74,7 +67,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl fechaacta;
-        
+
         /// <summary>
         /// Control Selectordenes.
         /// </summary>
@@ -83,7 +76,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText Selectordenes;
-        
+
         /// <summary>
         /// Control Selectproveedor.
         /// </summary>
@@ -92,7 +85,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText Selectproveedor;
-        
+
         /// <summary>
         /// Control OBSERVACIONG.
         /// </summary>
@@ -101,7 +94,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea OBSERVACIONG;
-        
+
         /// <summary>
         /// Control view_detalles.
         /// </summary>
@@ -110,7 +103,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl view_detalles;
-        
+
         /// <summary>
         /// Control txtid.
         /// </summary>
@@ -119,7 +112,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtid;
-        
+
         /// <summary>
         /// Control clasetrabajo.
         /// </summary>
@@ -128,7 +121,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText clasetrabajo;
-        
+
         /// <summary>
         /// Control Selectarticulodiv.
         /// </summary>
@@ -137,7 +130,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Selectarticulodiv;
-        
+
         /// <summary>
         /// Control Selectarticulo.
         /// </summary>
@@ -146,7 +139,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText Selectarticulo;
-        
+
         /// <summary>
         /// Control SelecttipoMant.
         /// </summary>
@@ -155,7 +148,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText SelecttipoMant;
-        
+
         /// <summary>
         /// Control Textgarantia.
         /// </summary>
@@ -164,7 +157,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Textgarantia;
-        
+
         /// <summary>
         /// Control txtobserva.
         /// </summary>
@@ -173,7 +166,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtobserva;
-        
+
         /// <summary>
         /// Control Textmano_obra.
         /// </summary>
@@ -182,7 +175,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Textmano_obra;
-        
+
         /// <summary>
         /// Control txtRepuestos.
         /// </summary>
@@ -191,7 +184,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtRepuestos;
-        
+
         /// <summary>
         /// Control Valor_Repuestos.
         /// </summary>
@@ -200,7 +193,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Valor_Repuestos;
-        
+
         /// <summary>
         /// Control txtnumeroexterno_act.
         /// </summary>
@@ -209,7 +202,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtnumeroexterno_act;
-        
+
         /// <summary>
         /// Control cancel.
         /// </summary>
@@ -218,7 +211,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button cancel;
-        
+
         /// <summary>
         /// Control consultar.
         /// </summary>
@@ -227,7 +220,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button consultar;
-        
+
         /// <summary>
         /// Control GridViewdetalles_preaprob.
         /// </summary>
@@ -236,7 +229,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewdetalles_preaprob;
-        
+
         /// <summary>
         /// Control btnactualizar.
         /// </summary>
@@ -245,7 +238,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnactualizar;
-        
+
         /// <summary>
         /// Control GridViewlista.
         /// </summary>
@@ -254,16 +247,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewlista;
-        
-        /// <summary>
-        /// Control UpdateProgress1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// Control panelAsignaciones.
         /// </summary>
@@ -272,7 +256,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAsignaciones;
-        
+
         /// <summary>
         /// Control lbltarea.
         /// </summary>
@@ -281,7 +265,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbltarea;
-        
+
         /// <summary>
         /// Control textidorden.
         /// </summary>
@@ -290,7 +274,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText textidorden;
-        
+
         /// <summary>
         /// Control SelectProveedores.
         /// </summary>
@@ -299,7 +283,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlSelect SelectProveedores;
-        
+
         /// <summary>
         /// Control btnnuevoproveedor.
         /// </summary>
@@ -308,7 +292,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnnuevoproveedor;
-        
+
         /// <summary>
         /// Control txtfecha.
         /// </summary>
@@ -317,7 +301,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtfecha;
-        
+
         /// <summary>
         /// Control Button7.
         /// </summary>
@@ -326,7 +310,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button7;
-        
+
         /// <summary>
         /// Control Button5.
         /// </summary>
@@ -335,7 +319,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button5;
-        
+
         /// <summary>
         /// Control panelEditardetalles.
         /// </summary>
@@ -344,7 +328,7 @@ namespace Intranet.Vista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelEditardetalles;
-        
+
         /// <summary>
         /// Control btncancela_detalles.
         /// </summary>
