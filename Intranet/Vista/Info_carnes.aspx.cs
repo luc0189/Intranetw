@@ -23,7 +23,7 @@ namespace Intranet.Vista
             //AQUI ESTA LO DE BNET 
             try
             {
-                var registrosm = Controlasql.listaventascarnesBnet(selectgrupo.Value,txtfechaini.Value,txtfechafin.Value,selectSucursal.Value);
+                var registrosm = Controlasql.listaventascarnesBnet(selectgrupo.Value,txtfechaini.Value,txtfechafin.Value,selectSucursal.Value, "'FV', 'FP'");
                 if (registrosm.Tables[0].Rows.Count > 0)
                 {
 
@@ -44,8 +44,31 @@ namespace Intranet.Vista
 
                 
             }
-           
 
+            try
+            {
+                var registrosdv = Controlasql.listaventascarnesBnet(selectgrupo.Value, txtfechaini.Value, txtfechafin.Value, selectSucursal.Value, "'DV', 'DP'");
+                if (registrosdv.Tables[0].Rows.Count > 0)
+                {
+
+
+                    GridViewdV.DataSource = registrosdv;
+                    GridViewdV.DataBind();
+
+                }
+                else
+                {
+                    GridViewdV.DataSource = null;
+                    GridViewdV.DataBind();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
         public void BuscaBasculas(object sender,EventArgs e)
         {

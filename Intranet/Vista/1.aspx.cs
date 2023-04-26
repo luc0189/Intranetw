@@ -212,7 +212,7 @@ namespace Intranet.Vista
             string codigo = Page.Server.HtmlDecode(palabras[0]);
             try
             {
-                var registrosm = Controlasql.listaventascarnesBnet(codigo, txtdesde.Value, txthasta.Value, Session["CCOSTO"].ToString());
+                var registrosm = Controlasql.listaventascarnesBnet(codigo, txtdesde.Value, txthasta.Value, Session["CCOSTO"].ToString(), "'FV', 'FP'");
                 if (registrosm.Tables[0].Rows.Count > 0)
                 {
 

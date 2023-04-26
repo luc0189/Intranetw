@@ -522,20 +522,20 @@ namespace Intranet.modelo
                 "               group by articulo.detalle,documento.ccostoId";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet ListadocarnesBnet(String pgrupo, String fechaini, String fechafin,String ccosto)
+        internal DataSet ListadocarnesBnet(String pgrupo, String fechaini, String fechafin,String ccosto,string param)
         {
-            sql = "    select itart.articuloID, itart.presentacion ," +
-                "                cast(sum(itart.cantidad) as float) cantidad,cast(sum(itart.vrtotal) as float)precio" +
-                "                       from itart, documento, articulo, tipodoc" +
-                "                           where articulo.codigo = itart.articuloID" +
-                "                               and itart.documentID = documento.id" +
-                "                               and documento.tipo = tipodoc.codigo" +
-                "                               and fecha between  '"+ fechaini + "' and '"+ fechafin + "'" +
-                "                                and tipodoc.clasedoc in ('FP', 'FV')" +
-                "                                and grupoID = '"+ pgrupo + "'" +
-                "                               and documento.ccostoId = '"+ ccosto + "'" +
-                "                               AND documento.anulado = 0" +
-                "                               group by presentacion,documento.ccostoId,itart.articuloID";
+            sql = "   select i.articuloID, i.presentacion ," +
+                "                                cast(sum(i.cantidad) as float) cantidad,cast(sum(i.vrtotal) as float)precio" +
+                "                              from itart i inner join documento d on i.documentID = d.id" +
+                "                                       inner join articulo a on a.codigo = i.articuloID" +
+                "                                       inner join tipodoc td on td.codigo = d.tipo" +
+                "                                          where" +
+                "                                               fecha between  '"+ fechaini + "' and '"+ fechafin + "'" +
+                "                                               and td.clasedoc in ("+param+")" +
+                "                                                and grupoID = '"+ pgrupo + "'" +
+                "                                               and d.ccostoId = '"+ ccosto + "'" +
+                "                                               AND d.anulado = 0" +
+                "                                               group by presentacion,d.ccostoId,i.articuloID";
             return dataload.sqlconsulta(sql);
         }
 
@@ -632,21 +632,47 @@ namespace Intranet.modelo
         internal DataSet listadocarnesBS13(String pgrupo, String fechaini, String fechafin)
         {
 
-            sql = "SELECT dat_ticket_linea.descripcion, SUM(dat_ticket_linea.peso)as Peso FROM dat_ticket_cabecera, dat_ticket_linea where dat_ticket_cabecera.idticket = dat_ticket_linea.idticket  and dat_ticket_cabecera.idbalanzamaestra = dat_ticket_linea.idbalanzamaestra and dat_ticket_cabecera.fecha between '" + fechaini + " 00:23:23' and '" + fechafin + " 23:01:01'and nombreseccion = '" + pgrupo + "' GROUP BY descripcion";
+            sql = "SELECT dat_ticket_linea.descripcion," +
+                " SUM(dat_ticket_linea.peso)as Peso " +
+                "FROM dat_ticket_cabecera, dat_ticket_linea where" +
+                " dat_ticket_cabecera.idticket = dat_ticket_linea.idticket" +
+                "  and dat_ticket_cabecera.idbalanzamaestra =" +
+                " dat_ticket_linea.idbalanzamaestra and dat_ticket_cabecera.fecha between '" + fechaini + " 00:23:23' and '" + fechafin + " 23:01:01'and nombreseccion = '" + pgrupo + "' GROUP BY descripcion";
             return dataload.MySqlQuerycarnesLA13(sql);
         }
         internal DataSet ListadocarnesBasculas(String pgrupo, String fechaini, String fechafin,string tienda)
         {
+            string idtienda="" ;
+            string idgrupo="" ;
+            switch (tienda)
+            {
+                case "SUPERMIO LA 13": idtienda = "3"; break;
+                case "SUPERMIO LA 16": idtienda= "4"; break;
+                case "SUPERMIO VERSALLES": idtienda= "1"; break;
+                case "SUPERMIO CIUDADELA": idtienda="2"; break;
+                default:
+                    break;
+            }
+            switch (pgrupo)
+            {
+                case "POLLO": idgrupo = "0"; break;
+                case "RES": idgrupo = "1"; break;
+                case "PEZ Y MAR": idgrupo = "2"; break;
+                case "VISCERAS": idgrupo = "3"; break;
+                case "CERDO": idgrupo = "4"; break;
+                default:
+                    break;
+            }
 
-            sql = "SET SQL_BIG_SELECTS=1; SELECT dat_ticket_linea.descripcion," +
-                "                   SUM(dat_ticket_linea.peso) as Peso" +
-                "                 FROM dat_ticket_linea inner join dat_ticket_cabecera on dat_ticket_cabecera.idticket = dat_ticket_linea.idticket" +
-                "                       where" +
-                "                                dat_ticket_cabecera.idbalanzamaestra = dat_ticket_linea.idbalanzamaestra" +
-                "                           and dat_ticket_cabecera.fecha >= '"+ fechaini + " 00:23:23'" +
-                "                            and dat_ticket_cabecera.fecha <= '"+ fechafin + " 23:01:01' and dat_ticket_linea.nombreseccion = '"+pgrupo+"'" +
-                "                           and dat_ticket_cabecera.NombreTienda = '"+tienda+"' " +
-                "                 GROUP BY dat_ticket_linea.descripcion ";
+
+            sql = "SET SQL_BIG_SELECTS=1;SELECT l.descripcion as Articulo,sum(l.peso) as Peso,count(l.idticket) as Tickets FROM dat_ticket_cabecera d " +
+                " inner join dat_ticket_linea l on d.idticket = l.idticket" +
+                "    where d.idtienda = '"+ idtienda +"' " +
+                "   and l.idtienda = '"+idtienda+"' " +
+                "    and l.idseccion = '"+idgrupo+"' " +
+                "    and date(d.fecha) BETWEEN '"+fechaini+"' AND '"+fechafin+"' " +
+                "     and date(l.TimeStamp) between '" + fechaini + "' AND '" + fechafin + "' " +
+                "    group by l.descripcion ";
             return dataload.MySqlQuerycarnesVERSA(sql);
         }
         //----------------------------------------------------------------

@@ -2674,8 +2674,8 @@
     <Content Include="Vista\Baja_Activos.aspx" />
     <Content Include="Vista\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Vista\bootstrap\css\bootstrap-grid.min.css" />
-    <Content Include="Vista\bootstrap\css\bootstrap-reboot.css" />
-    <Content Include="Vista\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Vista\bootstrap\css\fdfdf\bootstrap-reboot.css" />
+    <Content Include="Vista\bootstrap\css\fdfdf\bootstrap-reboot.min.css" />
     <Content Include="Vista\bootstrap\css\bootstrap.css" />
     <Content Include="Vista\bootstrap\css\bootstrap.min.css" />
     <Content Include="Vista\bootstrap\js\bootstrap.bundle.js" />
@@ -5966,8 +5966,8 @@
     <Content Include="Vista\COVID\dist\css\adminlte.min.css.map" />
     <Content Include="Vista\bootstrap\css\bootstrap-grid.css.map" />
     <Content Include="Vista\bootstrap\css\bootstrap-grid.min.css.map" />
-    <Content Include="Vista\bootstrap\css\bootstrap-reboot.css.map" />
-    <Content Include="Vista\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Vista\bootstrap\css\fdfdf\bootstrap-reboot.css.map" />
+    <Content Include="Vista\bootstrap\css\fdfdf\bootstrap-reboot.min.css.map" />
     <Content Include="Vista\bootstrap\css\bootstrap.css.map" />
     <Content Include="Vista\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="Vista\bootstrap\js\bootstrap.bundle.js.map" />

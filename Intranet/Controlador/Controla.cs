@@ -714,14 +714,14 @@ namespace Intranet.Controlador
         //-----------------------------------------------------------------------
         //aquii inicia carnes BNET
         //-----------------------------------------------------------------------
-        public static DataSet listaventascarnesBnet( string grupo,string fi, string ff,string tienda)
+        public static DataSet listaventascarnesBnet( string grupo,string fi, string ff,string tienda,string tipo)
         {
             Modelos usu = new Modelos();
             
             
                 try
                 {
-                    return usu.ListadocarnesBnet(grupo, fi, ff, tienda);
+                    return usu.ListadocarnesBnet(grupo, fi, ff, tienda,tipo);
                 }
                 catch (Exception ex)
                 {
