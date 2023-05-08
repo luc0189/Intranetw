@@ -1532,7 +1532,7 @@ namespace Intranet.modelo
                 "                     join promocion p on ap.promocionID = p.id" +
                 " inner" +
                 "                    join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
-                "                     where (SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde  and activa = 1 and ap.articuloID = '"+plu+"'";
+                "                     where (SELECT CONVERT(datetime, GETDATE())) <= p.fhasta AND(SELECT CONVERT(datetime, GETDATE())) >= p.fdesde  and activa = 1 and ap.articuloID = '"+plu+"'";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet MListadescuentolinea(string linea)
@@ -1542,7 +1542,7 @@ namespace Intranet.modelo
                 " join promocion p on ap.promocionID = p.id inner" +
                 " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
                 " INNER JOIN linea l on l.codigo = ap.lineaID " +
-                " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
+                " where(SELECT CONVERT(datetime, GETDATE())) <= p.fhasta AND(SELECT CONVERT(datetime, GETDATE())) >= p.fdesde" +
                 "        and activa = 1" +
                 "        and l.nombre = '"+linea+"'" +
                 "        ORDER BY  ap.articuloID asc";
@@ -1555,7 +1555,7 @@ namespace Intranet.modelo
                 " join promocion p on ap.promocionID = p.id inner" +
                 " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
                 " INNER JOIN grupo g on g.codigo = ap.grupoID " +
-                " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
+                " where(SELECT CONVERT(datetime, GETDATE())) <= p.fhasta AND(SELECT CONVERT(datetime, GETDATE())) >= p.fdesde" +
                 "        and activa = 1" +
                 "        and g.nombre = '" + grupo + "'" +
                 "        ORDER BY  ap.articuloID asc";
@@ -1568,7 +1568,7 @@ namespace Intranet.modelo
                 " join promocion p on ap.promocionID = p.id inner" +
                 " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
                 " INNER JOIN marca m on m.codigo = ap.marcaID " +
-                " where(SELECT CONVERT(date, GETDATE())) <= p.fhasta AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde" +
+                " where(SELECT CONVERT(datetime, GETDATE())) <= p.fhasta AND(SELECT CONVERT(datetime, GETDATE())) >= p.fdesde" +
                 "        and activa = 1" +
                 "        and m.nombre = '" + marca + "'" +
                 "        ORDER BY  ap.articuloID asc";
@@ -1638,7 +1638,7 @@ namespace Intranet.modelo
                 " INNER JOIN documento ON itart.documentID = documento.id " +
                 " INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo " +
                 " WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "') " +
-                " AND(tipodoc.clasedoc = 'FP') " +
+                " AND(tipodoc.clasedoc in ('FV', 'FP')) " +
                 " AND(articulo.codigo = '" + articuloid + "')" +
                 " GROUP BY documento.logusucreo,articulo.detalle " +
                 " ORDER BY cantidad DESC";
@@ -1655,7 +1655,7 @@ namespace Intranet.modelo
                 " INNER JOIN documento ON itart.documentID = documento.id " +
                 " INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo" +
                 " WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
-                " AND(tipodoc.clasedoc = 'FP') " +
+                " AND(tipodoc.clasedoc in ('FV', 'FP')) " +
                 " AND(articulo.codigo = '" + articuloid + "') and(documento.ccostoID='"+ccosto+"')" +
                 " GROUP BY documento.logusucreo,articulo.detalle" +
                 " ORDER BY cantidad DESC";
@@ -1679,14 +1679,19 @@ namespace Intranet.modelo
                 "        inner join bodega on bodega.codigo = documento.bodegaID" +
                 "                WHERE" +
                 "                        (documento.fecha BETWEEN '"+ fei + "' AND '"+ fef + "')" +
-                "                        AND(tipodoc.clasedoc = 'FP')   AND(articulo.codigo in ('22221', '22233', '22234'))" +
+                "                        AND(tipodoc.clasedoc in ('FV', 'FP'))   AND(articulo.codigo in ('22221', '22233', '22234'))" +
                 "                        GROUP BY DATEPART(DD, documento.logfecreo), tercero.nombrecompleto,bodega.nombre,articulo.detalle" +
                 "                        ORDER BY DIAS DESC";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listaventalocalVERSA(string useri, string fei, string fef)
         {
-            sql = "select format(Sum(vrtotal), '$ #,###.##') AS VALOR,count(*) as Facturas,logusucreo from documento where logusucreo LIKE ('%" + useri + "%')  AND fecha BETWEEN '" + fei + "' AND '" + fef + "' AND anulado=0 AND ccostoID = '000004' group by logusucreo";
+            sql = "select format(Sum(vrtotal)," +
+                "  '$ #,###.##') AS VALOR,count(*) as Facturas, " +
+                " logusucreo from documento " +
+                " where logusucreo LIKE ('%" + useri + "%') " +
+                "  AND fecha BETWEEN '" + fei + "' AND '" + fef + "' " +
+                " AND anulado=0 AND ccostoID = '000004' group by logusucreo";
             return dataload.sqlconsultaversalles(sql);
         }
         internal DataSet ventalocalVERSAreco(string fecha, string ccosto)
