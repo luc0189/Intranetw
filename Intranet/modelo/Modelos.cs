@@ -307,7 +307,7 @@ namespace Intranet.modelo
               "     WHERE fp.detalle = '" + tipoefectivo + "' " +
                "     AND do.fecha = CONVERT(date, GETDATE()) " +
                 "     AND anulado = 0 " +
-                 "  AND td.clasedoc = 'FP' " +
+                 "  AND td.clasedoc in ('FV', 'FP') " +
                   "    AND do.ccostoID = '" + Ccosto + "'" +
                    " GROUP BY fp.detalle,do.logusucreo " +
                    "order by EnCaja";
@@ -517,7 +517,7 @@ namespace Intranet.modelo
                 "               and itart.documentID= documento.id " +
                 "               and documento.tipo= tipodoc.codigo " +
                 "               and fecha between  '" + fechaini + "' and '" + fechafin + "' " +
-                "               and tipodoc.clasedoc='FP' and grupoID='" + pgrupo + "' " +
+                "               and tipodoc.clasedoc in ('FV', 'FP') and grupoID='" + pgrupo + "' " +
                 "               and documento.ccostoId='" + ccosto + "' " +
                 "               group by articulo.detalle,documento.ccostoId";
             return dataload.sqlconsulta(sql);
@@ -610,12 +610,12 @@ namespace Intranet.modelo
         }
         internal DataSet listadocarnes13(String pgrupo, String fechaini, String fechafin)
         {
-            sql = "select itart.presentacion ,cast (sum(itart.cantidad)as float) cantidad from itart, documento, articulo, tipodoc where articulo.codigo=itart.articuloID and itart.documentID= documento.id and documento.tipo= tipodoc.codigo and fecha between  '" + fechaini + "' and '" + fechafin + "' and tipodoc.clasedoc='FP' and grupoID='" + pgrupo + "' and documento.ccostoId='000002' group by presentacion,documento.ccostoId";
+            sql = "select itart.presentacion ,cast (sum(itart.cantidad)as float) cantidad from itart, documento, articulo, tipodoc where articulo.codigo=itart.articuloID and itart.documentID= documento.id and documento.tipo= tipodoc.codigo and fecha between  '" + fechaini + "' and '" + fechafin + "' and tipodoc.clasedoc in ('FV', 'FP') and grupoID='" + pgrupo + "' and documento.ccostoId='000002' group by presentacion,documento.ccostoId";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listadocarnesversa(String pgrupo, String fechaini, String fechafin)
         {
-            sql = "select itart.presentacion ,cast (sum(itart.cantidad)as float) cantidad from itart, documento, articulo, tipodoc where articulo.codigo=itart.articuloID and itart.documentID= documento.id and documento.tipo= tipodoc.codigo and fecha between  '" + fechaini + "' and '" + fechafin + "' and tipodoc.clasedoc='FP' and grupoID='" + pgrupo + "' and documento.ccostoId='000004' group by presentacion,documento.ccostoId";
+            sql = "select itart.presentacion ,cast (sum(itart.cantidad)as float) cantidad from itart, documento, articulo, tipodoc where articulo.codigo=itart.articuloID and itart.documentID= documento.id and documento.tipo= tipodoc.codigo and fecha between  '" + fechaini + "' and '" + fechafin + "' and tipodoc.clasedoc in ('FV', 'FP') and grupoID='" + pgrupo + "' and documento.ccostoId='000004' group by presentacion,documento.ccostoId";
             return dataload.sqlconsulta(sql);
         }
         //----------------------------------------------------------------
@@ -709,7 +709,7 @@ namespace Intranet.modelo
        
         internal DataSet Mlista_acom_ventasla16(string fei, string fef)//aquiventas la 16
         {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS, format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR,COUNT(vrsubtotal) AS Facturas FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')  AND(td.clasedoc = 'FP')  AND do.ccostoID = '000001'  and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
+            sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS, format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR,COUNT(vrsubtotal) AS Facturas FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')  AND(td.clasedoc in ('FV', 'FP'))  AND do.ccostoID = '000001'  and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet Mlista_tercerosBnet(string cc)//lista terceros bnet para guardar listados de covid
@@ -1198,7 +1198,7 @@ namespace Intranet.modelo
                 $"            from dbo.documento d inner" +
                 $"            join itart it on it.documentID = d.id inner" +
                 $"            join tipodoc td on td.codigo = d.tipo" +
-                $"            where td.clasedoc = 'FP'" +
+                $"            where td.clasedoc in ('FV', 'FP')" +
                 $"                    and it.articuloID = t.articuloID" +
                 $"                    and it.bodegaID = t.bodegaID" +
                 $"                    and d.fecha <= @fecha2" +
@@ -1625,7 +1625,7 @@ namespace Intranet.modelo
         //cierra espacio modulo inventario
         internal DataSet listadoventaXarticulocliente(string fei, string fef, string articuloid)
         {
-            sql = "SELECT  Top(100) tercero.nombrecompleto as NOMBRE_COMPLETO,documento.terceroID1 AS CC,tercero.telefono AS TEL1,tercero.movil as MOVIL,SUM(CAST(itart.cantidad AS float)) AS cantidad, SUM(itart.vrtotal) AS valor_total  FROM itart INNER JOIN articulo ON itart.articuloID = articulo.codigo  INNER JOIN documento ON itart.documentID = documento.id  INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo INNER JOIN tercero on tercero.id=documento.terceroID1  WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "')   AND(tipodoc.clasedoc = 'FP')   AND(articulo.codigo = '" + articuloid + "')   GROUP BY documento.terceroID1,tercero.telefono,tercero.movil,tercero.nombrecompleto   ORDER BY cantidad DESC";
+            sql = "SELECT  Top(100) tercero.nombrecompleto as NOMBRE_COMPLETO,documento.terceroID1 AS CC,tercero.telefono AS TEL1,tercero.movil as MOVIL,SUM(CAST(itart.cantidad AS float)) AS cantidad, SUM(itart.vrtotal) AS valor_total  FROM itart INNER JOIN articulo ON itart.articuloID = articulo.codigo  INNER JOIN documento ON itart.documentID = documento.id  INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo INNER JOIN tercero on tercero.id=documento.terceroID1  WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "')   AND(tipodoc.clasedoc in ('FV', 'FP'))   AND(articulo.codigo = '" + articuloid + "')   GROUP BY documento.terceroID1,tercero.telefono,tercero.movil,tercero.nombrecompleto   ORDER BY cantidad DESC";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listadoventaXarticulocajera(string fei, string fef, string articuloid)
@@ -1835,12 +1835,12 @@ namespace Intranet.modelo
         }
         internal DataSet listaventashora13(string Fecha)
         {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(HH, do.logfecreo) AS HORA,format(Sum(do.vrsubtotal), '$ #,###.##') AS V_Facturas,COUNT(*) AS Cant, COUNT(DISTINCT do.logusucreo) AS Users FROM dbo.documento AS do INNER JOIN dbo.tipodoc AS td ON do.tipo = td.codigo WHERE (do.fecha = '" + Fecha + "') AND (td.clasedoc = 'FP') AND do.ccostoID='000002' and do.anulado=0 GROUP BY DATEPART(HH, do.logfecreo)";
+            sql = "SELECT  TOP (100) PERCENT DATEPART(HH, do.logfecreo) AS HORA,format(Sum(do.vrsubtotal), '$ #,###.##') AS V_Facturas,COUNT(*) AS Cant, COUNT(DISTINCT do.logusucreo) AS Users FROM dbo.documento AS do INNER JOIN dbo.tipodoc AS td ON do.tipo = td.codigo WHERE (do.fecha = '" + Fecha + "') AND (td.clasedoc in ('FV', 'FP')) AND do.ccostoID='000002' and do.anulado=0 GROUP BY DATEPART(HH, do.logfecreo)";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listaventashoraVERSA(string Fecha)
         {
-            sql = "SELECT  TOP (100) PERCENT DATEPART(HH, do.logfecreo) AS HORA,format(Sum(do.vrsubtotal), '$ #,###.##') AS V_Facturas,COUNT(*) AS Cant, COUNT(DISTINCT do.logusucreo) AS Users FROM dbo.documento AS do INNER JOIN dbo.tipodoc AS td ON do.tipo = td.codigo WHERE (do.fecha = '" + Fecha + "') AND (td.clasedoc = 'FP') AND do.ccostoID='000004' and do.anulado=0 GROUP BY DATEPART(HH, do.logfecreo)";
+            sql = "SELECT  TOP (100) PERCENT DATEPART(HH, do.logfecreo) AS HORA,format(Sum(do.vrsubtotal), '$ #,###.##') AS V_Facturas,COUNT(*) AS Cant, COUNT(DISTINCT do.logusucreo) AS Users FROM dbo.documento AS do INNER JOIN dbo.tipodoc AS td ON do.tipo = td.codigo WHERE (do.fecha = '" + Fecha + "') AND (td.clasedoc in ('FV', 'FP')) AND do.ccostoID='000004' and do.anulado=0 GROUP BY DATEPART(HH, do.logfecreo)";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listaventashoraCiudadela(string Fecha)
@@ -1849,7 +1849,7 @@ namespace Intranet.modelo
                 "format(Sum(do.vrsubtotal), '$ #,###.##') AS V_Facturas,COUNT(*) AS Cant, " +
                 " COUNT(DISTINCT do.logusucreo) AS Users " +
                 " FROM dbo.documento AS do INNER JOIN dbo.tipodoc AS td ON do.tipo = td.codigo " +
-                " WHERE (do.fecha = '" + Fecha + "') AND (td.clasedoc = 'FP') AND do.ccostoID='000005' and do.anulado=0 GROUP BY DATEPART(HH, do.logfecreo)";
+                " WHERE (do.fecha = '" + Fecha + "') AND (td.clasedoc in ('FV', 'FP')) AND do.ccostoID='000005' and do.anulado=0 GROUP BY DATEPART(HH, do.logfecreo)";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet listSalesDomicilios(string fecha1,string fecha2)
@@ -1868,7 +1868,7 @@ namespace Intranet.modelo
                 "        inner join bodega on bodega.codigo = documento.bodegaID" +
                 "                WHERE" +
                 "                        (documento.fecha BETWEEN '"+fecha1+"' AND '"+fecha2+"')" +
-                "                        AND(tipodoc.clasedoc = 'FP')  " +
+                "                        AND(tipodoc.clasedoc in ('FV', 'FP'))  " +
                 "                        AND(articulo.codigo in ('22221', '22233', '22234', '22266', '22267', '22268'))" +
                 "                        group by documento.logfecreo,documento.numero,bodega.nombre," +
                 "                          tercero.nombrecompleto,  articulo.detalle " +
