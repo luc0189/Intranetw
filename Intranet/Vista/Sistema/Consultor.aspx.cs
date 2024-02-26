@@ -40,7 +40,9 @@ namespace Intranet.Vista.Sistema
                 var varlinea = "";
                 var vargrupo = "";
                 var varmarca = "";
-                var descuentossss = (valor - ((valor * des) / 100));
+                var esDesvalor = "";
+                var descuentossss =  0;
+                var lbtxtvalor = "";
                 var articulo = Controlasql.Clistaprecio(txtbarra.Value, "005");
                 if (articulo.Tables[0].Rows.Count > 0)
                 {
@@ -55,6 +57,7 @@ namespace Intranet.Vista.Sistema
                         varlinea = (Convert.ToString(row["nombrelinea"]));
                         varmarca = (Convert.ToString(row["nombremarca"]));
                         vargrupo = (Convert.ToString(row["nombregrupo"]));
+                        esDesvalor = (Convert.ToString(row["dtocomovalor"]));
                         if (peso == 0)
                         {
                             peso = 1;
@@ -77,11 +80,21 @@ namespace Intranet.Vista.Sistema
                         dvalor2.Visible = true;
                         LblPlu.Text = varArticulo;
                         lbvalor1.Text = valor.ToString();
-                        lbdescuento.Text = des.ToString();
-                        descuentossss = (valor - ((valor * des) / 100));
+                        if (esDesvalor == "False" || esDesvalor == "")
+                        {
+                            descuentossss = (valor - ((valor * des) / 100));
+                            lbtxtvalor = String.Format("{0}%", des);
+                        }
+                        else
+                        {
+                            descuentossss = valor - des;
+                            lbtxtvalor = String.Format("${0}", des);
+                        }
+
+                        lbdescuento.Text = lbtxtvalor;
                         lbvalordes.Text = descuentossss.ToString();
                         lbpxunidad.Text = (descuentossss / peso).ToString();
-                        txtbarra.Value = "";
+
 
                     }
                     else
@@ -96,7 +109,6 @@ namespace Intranet.Vista.Sistema
                         LblPlu.Text = varArticulo;
                         txtbarra.Value = "";
                     }
-
 
                     var descuentolinea = Controlasql.Clistadeslinea(varlinea);//consulta por linea
                     if (descuentolinea.Tables[0].Rows.Count > 0)
@@ -115,14 +127,24 @@ namespace Intranet.Vista.Sistema
                         dvalor2.Visible = true;
                         LblPlu.Text = varArticulo;
                         lbvalor1.Text = valor.ToString();
-                        lbdescuento.Text = des.ToString();
-                        descuentossss = (valor - ((valor * des) / 100));
+                        if (esDesvalor == "False" || esDesvalor == "")
+                        {
+                            descuentossss = (valor - ((valor * des) / 100));
+                            lbtxtvalor = String.Format("{0}%", des);
+                        }
+                        else
+                        {
+                            descuentossss = valor - des;
+                            lbtxtvalor = String.Format("${0}", des);
+                        }
+
+                        lbdescuento.Text = lbtxtvalor;
                         lbvalordes.Text = descuentossss.ToString();
                         lbpxunidad.Text = (descuentossss / peso).ToString();
 
 
                     }
-                    
+
                     var descuentogrupo = Controlasql.Clistadesgrupo(vargrupo);//consulta por linea
                     if (descuentogrupo.Tables[0].Rows.Count > 0)
                     {
@@ -140,14 +162,24 @@ namespace Intranet.Vista.Sistema
                         dvalor2.Visible = true;
                         LblPlu.Text = varArticulo;
                         lbvalor1.Text = valor.ToString();
-                        lbdescuento.Text = des.ToString();
-                        descuentossss = (valor - ((valor * des) / 100));
+                        if (esDesvalor == "False")
+                        {
+                            descuentossss = (valor - ((valor * des) / 100));
+                            lbtxtvalor = String.Format("{0}%", des);
+                        }
+                        else
+                        {
+                            descuentossss = valor - des;
+                            lbtxtvalor = String.Format("${0}", des);
+                        }
+
+                        lbdescuento.Text = lbtxtvalor;
                         lbvalordes.Text = descuentossss.ToString();
                         lbpxunidad.Text = (descuentossss / peso).ToString();
 
 
                     }
-                   
+
                     var descuentomarca = Controlasql.Clistadesmarca(varmarca);//consulta por linea
                     if (descuentomarca.Tables[0].Rows.Count > 0)
                     {
@@ -167,8 +199,18 @@ namespace Intranet.Vista.Sistema
                         dvalor2.Visible = true;
                         LblPlu.Text = varArticulo;
                         lbvalor1.Text = valor.ToString();
-                        lbdescuento.Text = des.ToString();
-                        descuentossss = (valor - ((valor * des) / 100));
+                        if (esDesvalor == "False" || esDesvalor == "")
+                        {
+                            descuentossss = (valor - ((valor * des) / 100));
+                            lbtxtvalor = String.Format("{0}%", des);
+                        }
+                        else
+                        {
+                            descuentossss = valor - des;
+                            lbtxtvalor = String.Format("${0}", des);
+                        }
+
+                        lbdescuento.Text = lbtxtvalor;
                         lbvalordes.Text = descuentossss.ToString();
                         lbpxunidad.Text = (descuentossss / peso).ToString();
                         txtbarra.Value = "";
@@ -176,6 +218,23 @@ namespace Intranet.Vista.Sistema
 
                     }
 
+                    var saldo = Controlasql.Clistasaldo(varArticulo, "015");
+                    if (saldo.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable Tsaldo = saldo.Tables[0];
+
+                        foreach (DataRow row in Tsaldo.Rows)
+                        {
+                            lbsaldo.Text = (Convert.ToString(row["saldocant"]));
+                        }
+
+
+                    }
+                    else
+                    {
+
+                        lbsaldo.Text = "Articulo Sin Saldo";
+                    }
                 }
                 else
                 {
@@ -188,35 +247,14 @@ namespace Intranet.Vista.Sistema
                     lbpxunidad.Text = (valor / peso).ToString();
                     LblPlu.Text = varArticulo;
                     txtbarra.Value = "";
-                }
-                var saldo = Controlasql.Clistasaldo(varArticulo, "015");
-                if (saldo.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable Tsaldo = saldo.Tables[0];
-
-                        foreach (DataRow row in Tsaldo.Rows)
-                        {
-                            lbsaldo.Text = (Convert.ToString(row["saldocant"]));
-                        }
-
-                }
-
-                else
-                {
-                    lbarticulo.Text = "Articulo No existe";
-                    txtbarra.Value = "";
-                    lbdescuento.Text = "";
-                    lbpxunidad.Text = "";
-                    lbsaldo.Text = "";
-                    lbvalor.Text = "";
-                    lbvalor1.Text = "";
-                    lbvalordes.Text = "";
-                    LblPlu.Text = "";
                     modal.Visible = true;
                     dvalor1.Visible = false;
                     ddescuento.Visible = false;
                     dvalor2.Visible = false;
                 }
+
+
+
                 txtbarra.Value = "";
             }
             catch (Exception EX)

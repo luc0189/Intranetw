@@ -5267,6 +5267,9 @@
     <Content Include="Vista\Rcostos.aspx" />
     <Content Include="Vista\recibomercancia\Rmercancia.aspx" />
     <Content Include="Vista\recogidas.aspx" />
+    <Content Include="Vista\Comprasrecibidas.aspx" />
+    <Content Include="Vista\RVtop.aspx" />
+    <Content Include="Vista\recordcajerasmarca.aspx" />
     <Content Include="Vista\recordcajerasarticulo.aspx" />
     <Content Include="Vista\infocomparativo.aspx" />
     <Content Include="Vista\BajasFruver.aspx" />
@@ -5277,6 +5280,7 @@
     <Content Include="Vista\RH\Rh2.aspx" />
     <Content Include="Vista\RH\WebForm1.aspx" />
     <Content Include="Vista\Rotacion.aspx" />
+    <Content Include="Vista\Ventasgrupo.aspx" />
     <Content Include="Vista\RotacionDias.aspx" />
     <Content Include="Vista\R_compras.aspx" />
     <Content Include="Vista\salir.aspx" />
@@ -5803,6 +5807,7 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
     <Content Include="README.md" />
+    <EmbeddedResource Include="BajaActivos.rdlc" />
     <EmbeddedResource Include="proveedores.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -6949,6 +6954,27 @@
     <Compile Include="Vista\recogidas.aspx.designer.cs">
       <DependentUpon>recogidas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Comprasrecibidas.aspx.cs">
+      <DependentUpon>Comprasrecibidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Comprasrecibidas.aspx.designer.cs">
+      <DependentUpon>Comprasrecibidas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\RVtop.aspx.cs">
+      <DependentUpon>RVtop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\RVtop.aspx.designer.cs">
+      <DependentUpon>RVtop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\recordcajerasmarca.aspx.cs">
+      <DependentUpon>recordcajerasmarca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\recordcajerasmarca.aspx.designer.cs">
+      <DependentUpon>recordcajerasmarca.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\recordcajerasarticulo.aspx.cs">
       <DependentUpon>recordcajerasarticulo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7026,6 +7052,13 @@
     </Compile>
     <Compile Include="Vista\Rotacion.aspx.designer.cs">
       <DependentUpon>Rotacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Ventasgrupo.aspx.cs">
+      <DependentUpon>Ventasgrupo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\Ventasgrupo.aspx.designer.cs">
+      <DependentUpon>Ventasgrupo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\RotacionDias.aspx.cs">
       <DependentUpon>RotacionDias.aspx</DependentUpon>

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
 using Intranet.conexiona;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using DataTable = System.Data.DataTable;
 
 namespace Intranet.modelo
 {
@@ -38,7 +38,7 @@ namespace Intranet.modelo
                 throw ex;
             }
         }
-        internal DataTable MlistaCC_IDCOBI(string cc,string db)
+        internal DataTable MlistaCC_IDCOBI(string cc, string db)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Intranet.modelo
 
                 throw ex;
             }
-        } 
+        }
         internal DataSet MlistagruposBnet(string db)
         {
             sql = "SELECT CODIGOGRUPO ||'/'|| NOMBRE_GRUPO AS NOMBRE FROM GRUPOSBNET";
@@ -85,7 +85,7 @@ namespace Intranet.modelo
             return dataload.oraconsulta(sql, PBD);
         }
         internal DataTable McreaTranformacion(String pid, String pdetalle, String pcantidad,
-         String pfecha, String pcosto, String usuario,String pvalorcosto, String pbd)
+         String pfecha, String pcosto, String usuario, String pvalorcosto, String pbd)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace Intranet.modelo
                 crearp.Add(new parametro("PDATOIN", pdatoIn, "NUMBER", ParameterDirection.Input));
                 crearp.Add(new parametro("PDATOOUT", pdatoOut, "NUMBER", ParameterDirection.Input));
                 crearp.Add(new parametro("PUSUCREA", pusucrea, "VARCHAR", ParameterDirection.Input));
-              
+
                 return con.ProcedureSelectDB("PRCREA_DETALLEREGISTROS", crearp, pbd);
 
 
@@ -146,7 +146,7 @@ namespace Intranet.modelo
                 throw ex;
             }
         }
-        internal DataTable MupdateDetalleRegistro(String pid, String parea, String pout,String pusucrea, String pbd)
+        internal DataTable MupdateDetalleRegistro(String pid, String parea, String pout, String pusucrea, String pbd)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace Intranet.modelo
                 throw ex;
             }
         }
-        internal DataTable Mupdateuser(String pid, String pUser,String pPass,String pPor, String pbd)
+        internal DataTable Mupdateuser(String pid, String pUser, String pPass, String pPor, String pbd)
         {
             try
             {
@@ -184,7 +184,7 @@ namespace Intranet.modelo
                 throw ex;
             }
         }
-        internal DataTable Mlistausercc(string cc,string db)
+        internal DataTable Mlistausercc(string cc, string db)
         {
             try
             {
@@ -235,12 +235,12 @@ namespace Intranet.modelo
                 "                AND ARTICULO.grupoID IN('00000373','381','340')";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet Mlistacosto_Articulo(string plu,string fecha)// TODO: AQUI LLEVO EL COSTO DEL ARTICULO ACTUAL
+        internal DataSet Mlistacosto_Articulo(string plu, string fecha)// TODO: AQUI LLEVO EL COSTO DEL ARTICULO ACTUAL
         {
             sql = "SELECT top(1) arthistocompra.vrcostounitneto " +
                 "        FROM dbo.arthistocompra" +
-                "                WHERE arthistocompra.articuloID = '"+plu+"'" +
-                "                        and arthistocompra.fechahasta < '"+fecha+"'" +
+                "                WHERE arthistocompra.articuloID = '" + plu + "'" +
+                "                        and arthistocompra.fechahasta < '" + fecha + "'" +
                 "                         order by arthistocompra.fechahasta desc";
             return dataload.sqlconsulta(sql);
         }
@@ -258,14 +258,14 @@ namespace Intranet.modelo
                 throw ex;
             }
         }
-        internal DataTable MdeleteTranformacion(String pid,  String pbd)
+        internal DataTable MdeleteTranformacion(String pid, String pbd)
         {
             try
             {
                 List<parametro> crearp = new List<parametro>();
                 crearp.Add(new parametro("VALIDAREGISTRO", "", "CURSOR", ParameterDirection.Output));
                 crearp.Add(new parametro("PRID", pid, "VARCHAR", ParameterDirection.Input));
-            
+
                 return con.ProcedureSelectDB("PRDELETE_TRANSFORMACION", crearp, pbd);
 
 
@@ -367,14 +367,15 @@ namespace Intranet.modelo
         {
             sql = "CALL P_LISTA_ACTIVOS_SERIAL  ('" + ser + "')";
             return dataload.MySqlQuery(sql, bd);
-        } internal DataSet MlistDeployeeDelivery(string cc, String bd)
+        }
+        internal DataSet MlistDeployeeDelivery(string cc, String bd)
         {
             sql = "CALL P_LISTA_ASIGNADOS  ('" + cc + "')";
             return dataload.MySqlQuery(sql, bd);
         }
-        internal DataSet listadokardex(String id,String pf_ini,String pf_fin,String pubicacion, String bd)
+        internal DataSet listadokardex(String id, String pf_ini, String pf_fin, String pubicacion, String bd)
         {
-            sql = "CALL REPOR_KARDEX('"+ id + "', '"+ pf_ini + "', '"+pf_fin+" 23:59:00', '"+ pubicacion + "')";
+            sql = "CALL REPOR_KARDEX('" + id + "', '" + pf_ini + "', '" + pf_fin + " 23:59:00', '" + pubicacion + "')";
             return dataload.MySqlQuery(sql, bd);
         }
         internal DataSet listadonombre(string nom, String bd)
@@ -400,9 +401,9 @@ namespace Intranet.modelo
             sql = "select CONCAT(serialArt, ' / ', nombreArt) As Nombre  FROM articulo where inactivo=1";
             return dataload.MySqlQuery(sql, bd);
         }
-        internal int Mcreaordentrabajo(string Pubicacion, string parea, string Pclasemante, string Pdescripcion, string pstado, string puser,string tiposolicitud, String bd)
+        internal int Mcreaordentrabajo(string Pubicacion, string parea, string Pclasemante, string Pdescripcion, string pstado, string puser, string tiposolicitud, String bd)
         {
-            sql = "call creaordentrabajo('" + Pubicacion + "', '" + parea + "', '" + Pclasemante + "', '" + Pdescripcion + "','" + pstado + "','" + puser + "','"+tiposolicitud+"'); ";
+            sql = "call creaordentrabajo('" + Pubicacion + "', '" + parea + "', '" + Pclasemante + "', '" + Pdescripcion + "','" + pstado + "','" + puser + "','" + tiposolicitud + "'); ";
             return dataload.MysqlProcedimiento(sql, bd);
         }
         internal int Mcreaasigtrabajo(string idorden, string pproveedor, string fecha, string puser, String bd)
@@ -522,7 +523,7 @@ namespace Intranet.modelo
                 "               group by articulo.detalle,documento.ccostoId";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet ListadocarnesBnet(String pgrupo, String fechaini, String fechafin,String ccosto,string param)
+        internal DataSet ListadocarnesBnet(String pgrupo, String fechaini, String fechafin, String ccosto, string param)
         {
             sql = "   select i.articuloID, i.presentacion ," +
                 "                                cast(sum(i.cantidad) as float) cantidad,cast(sum(i.vrtotal) as float)precio" +
@@ -530,10 +531,10 @@ namespace Intranet.modelo
                 "                                       inner join articulo a on a.codigo = i.articuloID" +
                 "                                       inner join tipodoc td on td.codigo = d.tipo" +
                 "                                          where" +
-                "                                               fecha between  '"+ fechaini + "' and '"+ fechafin + "'" +
-                "                                               and td.clasedoc in ("+param+")" +
-                "                                                and grupoID = '"+ pgrupo + "'" +
-                "                                               and d.ccostoId = '"+ ccosto + "'" +
+                "                                               fecha between  '" + fechaini + "' and '" + fechafin + "'" +
+                "                                               and td.clasedoc in (" + param + ")" +
+                "                                                and grupoID = '" + pgrupo + "'" +
+                "                                               and d.ccostoId = '" + ccosto + "'" +
                 "                                               AND d.anulado = 0" +
                 "                                               group by presentacion,d.ccostoId,i.articuloID";
             return dataload.sqlconsulta(sql);
@@ -547,10 +548,10 @@ namespace Intranet.modelo
                 "                           where articulo.codigo = itart.articuloID" +
                 "                               and itart.documentID = documento.id" +
                 "                               and documento.tipo = tipodoc.codigo" +
-                "                               and fecha between  '"+ fechaini + "' and '"+ fechafin + "'" +
+                "                               and fecha between  '" + fechaini + "' and '" + fechafin + "'" +
                 "                                and tipodoc.clasedoc in ('DV', 'DP')" +
-                "                                and grupoID = '"+ ccosto + "'" +
-                "                               and documento.ccostoId = '"+pgrupo+"'" +
+                "                                and grupoID = '" + ccosto + "'" +
+                "                               and documento.ccostoId = '" + pgrupo + "'" +
                 "                               AND documento.anulado = 0" +
                 "                               group by presentacion,documento.ccostoId,itart.articuloID";
             return dataload.sqlconsulta(sql);
@@ -640,16 +641,16 @@ namespace Intranet.modelo
                 " dat_ticket_linea.idbalanzamaestra and dat_ticket_cabecera.fecha between '" + fechaini + " 00:23:23' and '" + fechafin + " 23:01:01'and nombreseccion = '" + pgrupo + "' GROUP BY descripcion";
             return dataload.MySqlQuerycarnesLA13(sql);
         }
-        internal DataSet ListadocarnesBasculas(String pgrupo, String fechaini, String fechafin,string tienda)
+        internal DataSet ListadocarnesBasculas(String pgrupo, String fechaini, String fechafin, string tienda)
         {
-            string idtienda="" ;
-            string idgrupo="" ;
+            string idBascula = "";
+            string idgrupo = "";
             switch (tienda)
             {
-                case "SUPERMIO LA 13": idtienda = "3"; break;
-                case "SUPERMIO LA 16": idtienda= "4"; break;
-                case "SUPERMIO VERSALLES": idtienda= "1"; break;
-                case "SUPERMIO CIUDADELA": idtienda="2"; break;
+                case "SUPERMIO LA 13": idBascula = "11,12"; break;
+                case "SUPERMIO LA 16": idBascula = "5,6,7"; break;
+                case "SUPERMIO VERSALLES": idBascula = "1,2,3,4"; break;
+                case "SUPERMIO CIUDADELA": idBascula = "8,9,10"; break;
                 default:
                     break;
             }
@@ -665,14 +666,23 @@ namespace Intranet.modelo
             }
 
 
-            sql = "SET SQL_BIG_SELECTS=1;SELECT l.descripcion as Articulo,sum(l.peso) as Peso,count(l.idticket) as Tickets FROM dat_ticket_cabecera d " +
-                " inner join dat_ticket_linea l on d.idticket = l.idticket" +
-                "    where d.idtienda = '"+ idtienda +"' " +
-                "   and l.idtienda = '"+idtienda+"' " +
-                "    and l.idseccion = '"+idgrupo+"' " +
-                "    and date(d.fecha) BETWEEN '"+fechaini+"' AND '"+fechafin+"' " +
-                "     and date(l.TimeStamp) between '" + fechaini + "' AND '" + fechafin + "' " +
-                "    group by l.descripcion ";
+            sql = "   select " +
+                "         l.Descripcion," +
+                "          count(c.IdTicket) as Operaciones," +
+                "           sum(l.Peso) as Peso," +
+                "            sum(l.ImporteConDtoTotal) as Importe" +
+                "                 from dat_ticket_cabecera c" +
+                "                 left" +
+                "                 join dat_ticket_linea l on (c.IdEmpresa = l.IdEmpresa and c.IdTienda = l.IdTienda and c.IdBalanzaMaestra = l.IdBalanzaMaestra and c.IdBalanzaEsclava = l.IdBalanzaEsclava and c.TipoVenta = l.TipoVenta and c.IdTicket = l.IdTicket)" +
+                "                  left join dat_tienda t on(c.`IdTienda`= t.`IdTienda` and c.`IdEmpresa`= t.`IdEmpresa`)" +
+                "                   where" +
+                "                    c.IdEmpresa = 1" +
+                "                    AND c.IdTienda = 1" +
+                "                     and l.EstadoLinea = 0" +
+                "                      and(c.Fecha >= '"+fechaini+" 00:00:00' and c.Fecha <= '"+fechafin+" 23:59:59')" +
+                "                       and c.IdBalanzaMaestra IN("+idBascula+")" +
+                "                        and(l.IdSeccion = "+ idgrupo + ")" +
+                "                         group by c.IdTienda, l.IdArticulo, t.DecimalesPrecio order by l.IdArticulo";
             return dataload.MySqlQuerycarnesVERSA(sql);
         }
         //----------------------------------------------------------------
@@ -696,7 +706,7 @@ namespace Intranet.modelo
                 "                  WHERE USUA_NOMBRE= '" + usuario + "' and USUA_PASS='" + contraseña + "'";
             return dataload.oraconsulta(sql, PBD);
         }
-        internal DataSet Salasventas( string PBD)
+        internal DataSet Salasventas(string PBD)
         {
             sql = "SELECT CCOSTO ||'/'||NOMBRE AS NOMBRE FROM SALAS_VENTA";
             return dataload.oraconsulta(sql, PBD);
@@ -706,7 +716,7 @@ namespace Intranet.modelo
             sql = "select PERS_ID AS ID,PERS_NOMBRE1 AS PRIMER_NOMBRE,PERS_APELLIDO1 AS PRIMER_APELLIDO FROM PERSONA";
             return dataload.oraconsulta(sql, PBD);
         }
-       
+
         internal DataSet Mlista_acom_ventasla16(string fei, string fef)//aquiventas la 16
         {
             sql = "SELECT  TOP (100) PERCENT DATEPART(DD, do.logfecreo) AS DIAS, format(Sum(do.vrsubtotal), '$ #,###.##') AS VALOR,COUNT(vrsubtotal) AS Facturas FROM  dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo WHERE(do.fecha BETWEEN '" + fei + "' AND '" + fef + "')  AND(td.clasedoc in ('FV', 'FP'))  AND do.ccostoID = '000001'  and do.anulado=0 GROUP BY DATEPART(DD, do.logfecreo) order by DIAS";
@@ -714,11 +724,11 @@ namespace Intranet.modelo
         }
         internal DataSet Mlista_tercerosBnet(string cc)//lista terceros bnet para guardar listados de covid
         {
-            sql = "select id,tercero.nombrecompleto,tercero.telefono from  tercero where id='"+cc+"'";
+            sql = "select id,tercero.nombrecompleto,tercero.telefono from  tercero where id='" + cc + "'";
             return dataload.sqlconsulta(sql);
         }
-        
-        internal DataSet MventasResmidoporlinea(string fei, string fef,string ccosto)//aqui ventas resumido tabla ventas por linea
+
+        internal DataSet MventasResmidoporlinea(string fei, string fef, string ccosto)//aqui ventas resumido tabla ventas por linea
         {
             sql = " declare @pro as int=(   select Sum(it.vrtotal) AS V_ANTES_IVA " +
                 "                                         from documento d " +
@@ -728,11 +738,11 @@ namespace Intranet.modelo
                 "                                         join articulo art ON it.articuloID = art.codigo" +
                 "                 inner join linea ln on art.lineaID = ln.codigo" +
                 "                                   INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
-             
+
                 "                                                         where d.anulado = 0" +
-                "                                                          and d.fecha between '"+fei+"' and '"+fef+"' " +
+                "                                                          and d.fecha between '" + fei + "' and '" + fef + "' " +
                 "                                                          and td.clasedoc IN('FV' , 'FP')" +
-                "                                                          AND d.ccostoID = '"+ccosto+"')" +
+                "                                                          AND d.ccostoID = '" + ccosto + "')" +
                 "      select final.LINEA," +
                 "             final.VENTASS," +
                 "             CONCAT(porcent, ' %') AS PORCENT" +
@@ -748,9 +758,9 @@ namespace Intranet.modelo
                 "                 inner  join linea ln on art.lineaID = ln.codigo" +
                 "                   INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
                 "                                           where d.anulado = 0" +
-                "                                                    and d.fecha between '"+fei+"' and '"+fef+"'" +
+                "                                                    and d.fecha between '" + fei + "' and '" + fef + "'" +
                 "                                               and  td.clasedoc IN('FV', 'FP')" +
-                "                               AND d.ccostoID = '"+ccosto+"'" +
+                "                               AND d.ccostoID = '" + ccosto + "'" +
                 "                                group by ln.nombre)ventas" +
                 "                                group by ventas.nombre, ventas.V_ANTES_IVAs)final";
             return dataload.sqlconsulta(sql);
@@ -758,7 +768,7 @@ namespace Intranet.modelo
         internal DataSet MRoracioninventarioProveedor(string fei, string fef, string proveedor)//aqui ventas resumido tabla ventas por linea
         {
             sql = " SET NOCOUNT ON;  " +
-                "declare @fecha1 as date = '"+ fei + "'" +
+                "declare @fecha1 as date = '" + fei + "'" +
                 "       ,@fecha2 as date = '" + fef + "'" +
                 " SELECT s.articuloID," +
                 "                   a.detalle Articulo," +
@@ -865,13 +875,13 @@ namespace Intranet.modelo
                 "    and s.bodegaID = sx.bodegaID" +
                 "    AND sx.clasedoc IN('NT')" +
                 " )r order by r.fecha desc" +
-                " )UltimoTraslado where UltCompra.proveedorID = '"+proveedor+"' ";
+                " )UltimoTraslado where UltCompra.proveedorID = '" + proveedor + "' ";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet Mrotacion(string fechadesde,  string nit)//AQUI ROTACION DE INVENTARIOS
+        internal DataSet Mrotacion(string fechadesde, string nit)//AQUI ROTACION DE INVENTARIOS
         {
             sql = " SET NOCOUNT ON;" +
-                "  declare @fecha1 as date = '"+fechadesde+"'" +
+                "  declare @fecha1 as date = '" + fechadesde + "'" +
                 "       ,@fecha2 as date = getdate() " +
                 " SELECT s.articuloID, " +
                 "	   a.detalle Articulo," +
@@ -971,12 +981,12 @@ namespace Intranet.modelo
                 "    AND sx.clasedoc IN('NT') " +
                 ")r order by r.fecha desc " +
                 ")UltimoTraslado " +
-                "where lc.proveedorID = '"+nit+"'";
+                "where lc.proveedorID = '" + nit + "'";
             return dataload.sqlconsulta(sql);
         }
 
 
-        internal DataSet MBajasFruver(string fechadesde, string hasta,string ccosto)//AQUI ROTACION DE INVENTARIOS
+        internal DataSet MBajasFruver(string fechadesde, string hasta, string ccosto)//AQUI ROTACION DE INVENTARIOS
         {
             sql = $" declare @fecha1 as date='{fechadesde}'" +
              $"  declare @fecha2 as date = '{hasta}'" +
@@ -995,11 +1005,11 @@ namespace Intranet.modelo
              $"                                              group by a.codigo,a.detalle";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet Mventastotalesporlinea(string fei, string fef, string ccosto,string metrosc)//aquiventas totales para formulario ventas por linea
+        internal DataSet Mventastotalesporlinea(string fei, string fef, string ccosto, string metrosc)//aquiventas totales para formulario ventas por linea
         {
-            sql = " declare @fecha1 as date='"+fei+"'" +
-                "               declare @fecha2 as date = '"+fef+"'" +
-                "                declare @pro as int = (select r.vrproyectado from dbo.Luisao_Proyectado r where r.ccostoID = '"+ccosto+"') " +
+            sql = " declare @fecha1 as date='" + fei + "'" +
+                "               declare @fecha2 as date = '" + fef + "'" +
+                "                declare @pro as int = (select r.vrproyectado from dbo.Luisao_Proyectado r where r.ccostoID = '" + ccosto + "') " +
                 "                 declare @dias as int = (SELECT DATEDIFF(day, @fecha1, @fecha2) + 1) " +
                 "                 Declare @diasmes as int = (SELECT datepart(DD, dateadd(ms, -3, DATEADD(mm, DATEDIFF(m, 0, @fecha2) + 1, 0)))) " +
                 "                 declare @diasmas as int = (select @diasmes - @dias) " +
@@ -1023,7 +1033,7 @@ namespace Intranet.modelo
                 "                        , final.PROM_COMPRA" +
                 "                        , FORMAT((final.P_VENTA_DIARA), '$ ###,###.##')AS PROM_VENTAS_DIARIAS" +
                 "                        , sum((P_VENTA_DIARA * @diasmas) + final.Ventas_antes_iva) AS PROYECTADO" +
-                "                        , FORMAT((Ventas_antes_iva / '"+metrosc+"'), '$ ###,###.##') as VENTAS_METROCUADRADO" +
+                "                        , FORMAT((Ventas_antes_iva / '" + metrosc + "'), '$ ###,###.##') as VENTAS_METROCUADRADO" +
                 "                      from" +
                 "                        (" +
                 "                SELECT(ventas.V_ANTES_IVA) as Ventas_antes_iva, ventas.cantidad," +
@@ -1039,7 +1049,7 @@ namespace Intranet.modelo
                 "                               inner join dbo.Luisao_Proyectado lp on lp.ccostoId =do.ccostoID" +
                 "                                WHERE fecha between @fecha1 and @fecha2" +
                 "                                AND td.clasedoc in('FP', 'FV')" +
-                "                                 AND do.ccostoID = '"+ccosto+"'" +
+                "                                 AND do.ccostoID = '" + ccosto + "'" +
                 "                                  and do.anulado = 0" +
                 "                                  GROUP BY lp.vrProyectado" +
                 "                                 )ventas GROUP BY ventas.V_ANTES_IVA,ventas.cantidad,ventas.vrProyectado)final                                       " +
@@ -1058,26 +1068,26 @@ namespace Intranet.modelo
                 "    select  ln.nombre AS Linea" +
                 "                        , count(distinct it.documentID)N_fact" +
                 "                        , Sum(it.vrtotal) AS V_ANTES_IVA" +
-                "                 from documento d inner join itart it on d.id = it.documentID and d.fecha between '"+fei+"' and '"+fef+"'" +
+                "                 from documento d inner join itart it on d.id = it.documentID and d.fecha between '" + fei + "' and '" + fef + "'" +
                 "                 inner join articulo art ON it.articuloID = art.codigo" +
                 "                 inner join linea ln on art.lineaID = ln.codigo" +
                 "                 INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
                 "                 where" +
                 "                    AND td.clasedoc in('FP','FV','FE')" +
-                "                    AND d.ccostoID = '"+ccosto+"'" +
+                "                    AND d.ccostoID = '" + ccosto + "'" +
                 "                    and d.anulado = 0" +
                 "                 group by ln.nombre)r";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet Mventascontramesanterior(string fei, string fef, string ccosto)//aqui trae las ventas contra el mes anterior
         {
-            sql = "     declare @fecha1 as date='"+fei+"'" +
-                " declare @fecha2 as date = '"+fef+"'" +
+            sql = "     declare @fecha1 as date='" + fei + "'" +
+                " declare @fecha2 as date = '" + fef + "'" +
                 "    Declare @mesctual as float = (SELECT      Sum(do.vrsubtotal) AS V_ANTES_IVA" +
                 "                       FROM dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
                 "                           WHERE fecha between @fecha1 and @fecha2" +
                 "                               AND td.clasedoc in('FP', 'FV')" +
-                "                                 AND do.ccostoID = '"+ccosto+"'" +
+                "                                 AND do.ccostoID = '" + ccosto + "'" +
                 "                                  and do.anulado = 0)" +
                 "                                  declare @fanterior1 as date = (SELECT DATEADD(MM, -1, @fecha1))" +
                 "                                   declare @fanterior2 as date = (SELECT DATEADD(MM, -1, @fecha2))                                  " +
@@ -1085,7 +1095,7 @@ namespace Intranet.modelo
                 "                       FROM dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
                 "                           WHERE fecha between @fanterior1 and @fanterior2" +
                 "                                AND td.clasedoc in('FP', 'FV')" +
-                "                                 AND do.ccostoID = '"+ccosto+"'" +
+                "                                 AND do.ccostoID = '" + ccosto + "'" +
                 "                                  and do.anulado = 0)" +
                 "                                 select FORMAT(((@mesctual -@mesanterior)/ @mesanterior)*100, '###,###.#')  as dato  ";
             return dataload.sqlconsulta(sql);
@@ -1111,8 +1121,8 @@ namespace Intranet.modelo
                 "                                 select FORMAT(((@mesctual -@añoanterior)/ @añoanterior)*100, '###,###.#')  as dato,format(@añoanterior,'###,###.#') as dato2  ";
             return dataload.sqlconsulta(sql);
         }
-       
-        internal DataSet Rotaciondias(string fecha, string fechaf,string sala)
+
+        internal DataSet Rotaciondias(string fecha, string fechaf, string sala)
         {
             sql = $"SET NOCOUNT ON; " +
                 $"declare @fecha1 as date = '{fecha}'" +
@@ -1123,12 +1133,12 @@ namespace Intranet.modelo
                 $"			 CAST(CantidadInicial AS INT)as [cantidad Inicial]," +
                 $"			CAST(fin.cantventa AS INT) as[Ventas]," +
                 $"			CAST(fin.saldocant AS INT)as [cantidad Final]," +
-              
+
                 $"			cast(fin.dias_sin_venta as Float) as [Dias sin Venta]," +
                 $"					cast(cast((fin.saldocant / fin.PromedioCantidadVentaDia)as DECIMAL(20,2))as varchar) DiasInventario" +
                 $"					,FechaUltimoTraslado" +
                 $"					,FechaUltimaVENTA," +
-              
+
                 $"			fin.Marca," +
                 $"			fin.Grupo," +
                 $"			fin.Linea," +
@@ -1234,6 +1244,26 @@ namespace Intranet.modelo
                 $"			)fin where fin.[Nombre Bodega] = '{sala}' order by [Dias sin Venta] desc";
             return dataload.sqlconsulta(sql);
         }
+
+        internal DataSet Mventasgrupo(string fechai, string fechaf, string parametro)
+        {
+            sql = "select grupoID,g.nombre, d.ccostoId,c.nombre, " +
+                "                                cast(sum(i.cantidad) as float) cantidad,cast(sum(i.vrcostototal) as float)Costo" +
+                "                                       from itart i inner join documento d on i.documentID=d.id" +
+                "   inner join articulo a on a.codigo=i.articuloID" +
+                "   inner join tipodoc td on td.codigo=d.tipo" +
+                "   inner join grupo g on g.codigo=a.grupoID" +
+                "   inner join ccosto c on c.codigo=d.ccostoID" +
+                "                                           where " +
+                "                                               fecha between  '" + fechai + "' and '" + fechaf + "'" +
+                "                                                and td.clasedoc in (" + parametro + ")" +
+                "                                               -- and grupoID = '00000357'" +
+                "                                              --and d.ccostoId = '000002'" +
+                "                                               AND d.anulado = 0" +
+                "                                               group by grupoID,g.nombre,d.ccostoId ,c.nombre " +
+                "                                               order by g.nombre ";
+            return dataload.sqlconsulta(sql);
+        }
         internal DataSet listadoventa13total(string fecha)
         {
             sql = "SELECT   format(Sum(do.vrsubtotal)," +
@@ -1279,9 +1309,9 @@ namespace Intranet.modelo
                 " AND td.clasedoc in('FP','FV')  AND do.ccostoID = '000005'  and do.anulado=0 ";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listadoventa(string fei, string fef,string ccosto)
+        internal DataSet listadoventa(string fei, string fef, string ccosto)
         {
-            sql = $"    declare @fecha1 as date='{ fei}' "+
+            sql = $"    declare @fecha1 as date='{fei}' " +
                 $"      declare @fecha2 as date = '{fef}'" +
                 $"   Declare @devoluciones as float = (SELECT      Sum(do.vrsubtotal) AS V_ANTES_IVA" +
                 $"                                       FROM dbo.documento AS do INNER JOIN  dbo.tipodoc AS td ON do.tipo = td.codigo" +
@@ -1338,7 +1368,7 @@ namespace Intranet.modelo
         }
         internal DataSet MClista_la14VENTAS(string fei, string fef)
         {
-           // string H = ".,";
+            // string H = ".,";
             sql = "SELECT  '$'||TO_CHAR(Sum(VENT_TOT_SIN_IVA),'999G999G999G999G999','NLS_NUMERIC_CHARACTERS =.,')  VALOR ,VENDEDOR FROM V_VENTAS  WHERE FECHA BETWEEN TO_DATE('" + fei + "','YYYY-MM-DD') AND TO_DATE('" + fef + "','YYYY-MM-DD') GROUP BY VENDEDOR  ORDER BY VALOR DESC";
             return dataload.orala14consulta(sql);
         }
@@ -1348,7 +1378,7 @@ namespace Intranet.modelo
             sql = "SELECT " +
                 " '$' || TO_CHAR(Sum(VENT_TOT_SIN_IVA), '999G999G999G999G999', 'NLS_NUMERIC_CHARACTERS =.,')  VALOR ,GRUPO,V_VENTAS.PRODUCTO, " +
                 " VENDEDOR,CANTIDAD,VENT_TOT_SIN_IVA," +
-                "        VENT_TOT_CON_IVA,CLIENTE FROM V_VENTAS  WHERE FECHA BETWEEN TO_DATE('"+fei+"','YYYY-MM-DD') AND TO_DATE('"+fef+"','YYYY-MM-DD') GROUP BY VENDEDOR,GRUPO,CANTIDAD,V_VENTAS.PRODUCTO,VENT_TOT_SIN_IVA," +
+                "        VENT_TOT_CON_IVA,CLIENTE FROM V_VENTAS  WHERE FECHA BETWEEN TO_DATE('" + fei + "','YYYY-MM-DD') AND TO_DATE('" + fef + "','YYYY-MM-DD') GROUP BY VENDEDOR,GRUPO,CANTIDAD,V_VENTAS.PRODUCTO,VENT_TOT_SIN_IVA," +
                 "        VENT_TOT_CON_IVA,CLIENTE ORDER BY VALOR DESC";
             return dataload.orala14consulta(sql);
         }
@@ -1362,7 +1392,7 @@ namespace Intranet.modelo
         internal int Mupdate_mant_valores(string pid, string pvalormano, string pvalorRepuesto, string pnumeroexterno, string pbd)
         {
             sql = "CALL P_UPDATE_MANT_FISCAL('" + pid + "','" + pvalormano + "','" + pvalorRepuesto + "','" + pnumeroexterno + "')";
-            return dataload.MysqlProcedimiento(sql,pbd);
+            return dataload.MysqlProcedimiento(sql, pbd);
         }
         internal int mlimpiaconteo(string codigo)
         {
@@ -1371,7 +1401,7 @@ namespace Intranet.modelo
         }
         internal int Mconteo_revisado(string zona_name)
         {
-            sql = "update invenfis set estado='ConteoRevisado' where nombre='"+ zona_name + "'";
+            sql = "update invenfis set estado='ConteoRevisado' where nombre='" + zona_name + "'";
             return dataload.sqlProcedimiento(sql);
         }
         internal DataSet mlista_Dif_Items_conteos(String zona)
@@ -1386,7 +1416,7 @@ namespace Intranet.modelo
                 "                                                        FROM invenfisdet" +
                 "                                                                inner join invenfis on invenfisdet.invenfisID = invenfis.id" +
                 "                                                                inner join articulo on articulo.codigo = invenfisdet.articuloID" +
-                "                                                        WHERE invenfis.nombre = '"+zona+"' and invenfis.grupoinvenfisID = 31" +
+                "                                                        WHERE invenfis.nombre = '" + zona + "' and invenfis.grupoinvenfisID = 31" +
                 "                                                                  UNION ALL" +
                 "                                                        SELECT invenfisdet.articuloID, articulo.detalle, CAST(0 as numeric(12, 4)) AS cantidad1, invenfisdet.cantidad as cantidad2" +
                 "                                                        FROM invenfisdet" +
@@ -1398,7 +1428,7 @@ namespace Intranet.modelo
                 "                        group by final.articuloID,Cant_Conteo1,Cant_Conteo2,dif,detalle";
             return dataload.sqlconsulta(sql);
         }
-      
+
         internal int mcierraconteo(string codigo2)
         {
             sql = "update invenfis set protejido=1 where id='" + codigo2 + "'";
@@ -1406,35 +1436,35 @@ namespace Intranet.modelo
         }
         internal DataSet mlista_dif_Conteos()
         {
-          sql = "declare @p_id varchar(10)" +
-                "                  declare @p_nombre varchar(50)" +
-                "               IF OBJECT_ID('tempdb..#tmpX') IS NOT NULL" +
-                "                 DROP TABLE #tmpX " +
-                "                 create table #tmpX(id1 nvarchar(100), dif numeric(15,4)) " +
-                "                 declare nombreinvenfis cursor" +
-                "                 for     select invenfis.id, invenfis.nombre from invenfis where grupoinvenfisID = 31" +
-                "                 open nombreinvenfis" +
-                "                 fetch next from nombreinvenfis into @p_id, @p_nombre while (@@FETCH_STATUS = 0) " +
-                "                 begin" +
-                "                        insert into #tmpX		" +
-                "                           SELECT  t2.id1,  ABS(SUM(t2.dif)) AS dif "+
+            sql = "declare @p_id varchar(10)" +
+                  "                  declare @p_nombre varchar(50)" +
+                  "               IF OBJECT_ID('tempdb..#tmpX') IS NOT NULL" +
+                  "                 DROP TABLE #tmpX " +
+                  "                 create table #tmpX(id1 nvarchar(100), dif numeric(15,4)) " +
+                  "                 declare nombreinvenfis cursor" +
+                  "                 for     select invenfis.id, invenfis.nombre from invenfis where grupoinvenfisID = 31" +
+                  "                 open nombreinvenfis" +
+                  "                 fetch next from nombreinvenfis into @p_id, @p_nombre while (@@FETCH_STATUS = 0) " +
+                  "                 begin" +
+                  "                        insert into #tmpX		" +
+                  "                           SELECT  t2.id1,  ABS(SUM(t2.dif)) AS dif " +
 
-                "                            FROM(" +
-                "                        SELECT t.id1,  ABS(SUM(t.cantidad1 - t.cantidad2)) AS dif" +
-                "                                                 FROM(" +
-                "                                                        SELECT invenfis.nombre as id1, invenfisdet.articuloID, invenfisdet.cantidad AS cantidad1, CAST(0 as numeric(12, 4)) as cantidad2" +
-                "                                                        FROM invenfisdet inner join invenfis on invenfisdet.invenfisID = invenfis.id" +
-                "                                                        WHERE invenfis.nombre = @p_nombre and grupoinvenfisID = 31  AND invenfis.protejido = 1 and invenfis.estado = 'Conteo Cerrado'" +
-                "                                                                  UNION ALL" +
-                "                                                        SELECT invenfis.nombre as id1, invenfisdet.articuloID, CAST(0 as numeric(12, 4)) AS cantidad1, invenfisdet.cantidad as cantidad2" +
-                "                                                        FROM invenfisdet inner join invenfis on invenfisdet.invenfisID = invenfis.id" +
-                "                                                        WHERE invenfis.nombre = @p_nombre AND grupoinvenfisID = 32  AND invenfis.protejido = 1 and invenfis.estado = 'Conteo Cerrado') t" +
-                "                                                group by t.id1,t.articuloID) t2" +
-                "                                                  GROUP BY t2.id1 " +
-                "                                               fetch next from nombreinvenfis into @p_id,@p_nombre" +
-                "                         end" +
-                "                 select id1 as [Nombre Conteo],FORMAT(dif, '##,###.##') as Diferencias  from #tmpX " +
-                "                 close nombreinvenfis DEALLOCATE nombreinvenfis";
+                  "                            FROM(" +
+                  "                        SELECT t.id1,  ABS(SUM(t.cantidad1 - t.cantidad2)) AS dif" +
+                  "                                                 FROM(" +
+                  "                                                        SELECT invenfis.nombre as id1, invenfisdet.articuloID, invenfisdet.cantidad AS cantidad1, CAST(0 as numeric(12, 4)) as cantidad2" +
+                  "                                                        FROM invenfisdet inner join invenfis on invenfisdet.invenfisID = invenfis.id" +
+                  "                                                        WHERE invenfis.nombre = @p_nombre and grupoinvenfisID = 31  AND invenfis.protejido = 1 and invenfis.estado = 'Conteo Cerrado'" +
+                  "                                                                  UNION ALL" +
+                  "                                                        SELECT invenfis.nombre as id1, invenfisdet.articuloID, CAST(0 as numeric(12, 4)) AS cantidad1, invenfisdet.cantidad as cantidad2" +
+                  "                                                        FROM invenfisdet inner join invenfis on invenfisdet.invenfisID = invenfis.id" +
+                  "                                                        WHERE invenfis.nombre = @p_nombre AND grupoinvenfisID = 32  AND invenfis.protejido = 1 and invenfis.estado = 'Conteo Cerrado') t" +
+                  "                                                group by t.id1,t.articuloID) t2" +
+                  "                                                  GROUP BY t2.id1 " +
+                  "                                               fetch next from nombreinvenfis into @p_id,@p_nombre" +
+                  "                         end" +
+                  "                 select id1 as [Nombre Conteo],FORMAT(dif, '##,###.##') as Diferencias  from #tmpX " +
+                  "                 close nombreinvenfis DEALLOCATE nombreinvenfis";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet mtotalconteo1()
@@ -1470,59 +1500,71 @@ namespace Intranet.modelo
             return dataload.sqlconsulta(sql);
         }
         //espacio para cumpleñeros
-        internal int MClog_cumple(string pnombre, string ptel,string psms, string pusuario,string db)
+        internal int MClog_cumple(string pnombre, string ptel, string psms, string pusuario, string db)
         {
             sql = "CALL PCREA_LOG_CUMPLE('" + pnombre + "','" + ptel + "','" + psms + "','" + pusuario + "')";
-            return dataload.MysqlProcedimiento(sql,db);
+            return dataload.MysqlProcedimiento(sql, db);
         }
 
         internal DataSet MListalog_cumple(string db)
         {
             sql = "CALL P_LISTA_ENVIOS()";
-            return dataload.MySqlQuery(sql,db);
+            return dataload.MySqlQuery(sql, db);
         }
-        internal DataSet MListaprecio(string barra,string lista)
+        internal DataSet MListaprecio(string barra, string lista)
         {
-            sql = "  SELECT r.codigo, " +
-                "                    r.detalle, " +
-                "                	r.codbarra," +
-                "                	r.valormiva," +
-                "                	r.peso," +
-                "                	r.descuento," +
-                "                	coalesce(pres.nombrepres, ' ') nombrepres," +
-                "                   r.nombrelinea," +
-                "                   r.nombregrupo," +
-                "                   r.nombremarca" +
-                "                 from(" +
-                "                    SELECT a.codigo," +
-                "                        a.detalle," +
-                "                        cd.codbarra," +
-                "                        cast(valormiva as int) as valormiva," +
-                "                        cast(a.peso as int) as peso," +
-                "                        coalesce(cast(condiprom.vrveneficio as int), 0.0) as descuento," +
-                "                        cd.presentacionID," +
-                "                        l.nombre as nombrelinea," +
-                "                       g.nombre as nombregrupo," +
-                "                       m.nombre as nombremarca" +
-                "                    from articulo a with(nolock)" +
-                "                    left join dbo.artspromo aprom with(nolock)  ON a.codigo = aprom.articuloID" +
-                "                    left join dbo.condicionpromo condiprom with(nolock) ON aprom.promocionID = condiprom.promocionID" +
-                "                    left JOIN dbo.promocion promo with(nolock) ON condiprom.promocionID = promo.id" +
-                "                    left join codbar cd with(nolock) on cd.articuloID = a.codigo" +
-                "                    LEFT JOIN marca m with(nolock) on m.codigo = a.marcaID" +
-                "                    LEFT JOIN linea l with(nolock) on l.codigo = a.lineaID" +
-                "                    LEFT JOIN grupo g with(nolock) on g.codigo = a.grupoID" +
-                "                    left join precio pc with(nolock) on pc.articuloID = a.codigo and(pc.presentacionID = cd.presentacionID or(pc.presentacionID is null and cd.presentacionID is null))" +
-                "                    where cd.CODBARRA = '"+barra+"'" +
-                "                    and pc.listprecioID = '"+lista+"'" +
-                "                    and inactivo = 0)r left join dbo.presentacion pres with(nolock) on pres.id = r.presentacionID";
+            sql = " SELECT " +
+                "    r.codigo, " +
+                "    r.detalle," +
+                "	r.codbarra," +
+                "    r.valormiva," +
+                "    r.peso," +
+                "    r.descuento," +
+                "    coalesce(pres.nombrepres, ' ') nombrepres," +
+                "    r.nombrelinea," +
+                "    r.nombregrupo," +
+                "    r.nombremarca," +
+                "    r.dtocomovalor," +
+                "	r.nombre," +
+                "	(SELECT CONVERT(datetime, GETDATE()))ahora," +
+                "	r.fdesde," +
+                "	r.fhasta" +
+                "        from(" +
+                "            SELECT a.codigo," +
+                "                 a.detalle," +
+                "                 cd.codbarra," +
+                "                 cast(valormiva as int) as valormiva," +
+                "                 cast(a.peso as int) as peso," +
+                "                 coalesce(cast(condiprom.vrveneficio as int), 0.0) as descuento," +
+                "                 cd.presentacionID," +
+                "                 l.nombre as nombrelinea," +
+                "                 g.nombre as nombregrupo," +
+                "                 m.nombre as nombremarca," +
+                "                 condiprom.dtocomovalor," +
+                "                 promo.nombre," +
+                "                 promo.fdesde," +
+                "                 promo.fhasta" +
+                "                        from articulo a with(nolock)" +
+                "                          left join dbo.artspromo aprom with(nolock)  ON a.codigo = aprom.articuloID" +
+                "                          left join dbo.condicionpromo condiprom with(nolock) ON aprom.promocionID = condiprom.promocionID" +
+                "                          left JOIN dbo.promocion promo with(nolock) ON condiprom.promocionID = promo.id" +
+                "                          left join codbar cd with(nolock) on cd.articuloID = a.codigo" +
+                "                          LEFT JOIN marca m with(nolock) on m.codigo = a.marcaID" +
+                "                          LEFT JOIN linea l with(nolock) on l.codigo = a.lineaID" +
+                "                          LEFT JOIN grupo g with(nolock) on g.codigo = a.grupoID" +
+                "                          left join precio pc with(nolock) on pc.articuloID = a.codigo and(pc.presentacionID = cd.presentacionID or(pc.presentacionID is null and cd.presentacionID is null))" +
+                "                          where cd.CODBARRA = '" + barra + "'" +
+                "                            and pc.listprecioID = '" + lista + "'" +
+                "                         and inactivo = 0" +
+
+                "                         )r left join dbo.presentacion pres with(nolock) on pres.id = r.presentacionID";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet MListasaldo(string articulo,string bodega)
+        internal DataSet MListasaldo(string articulo, string bodega)
         {
             sql = "SELECT articuloID ," +
-                "                                        cast(saldocant as int) as saldocant" +
-                "                                FROM dbo.fnInventInventariosBaseInventariosConBodegas(getdate(), NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0) fn where articuloID = '" + articulo+"' and bodegaID = '"+ bodega + "'; ";
+            "                                        cast(saldocant as int) as saldocant" +
+                "                                FROM dbo.fnInventInventariosBaseInventariosConBodegas(getdate(), NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0) fn where articuloID = '" + articulo + "' and bodegaID = '" + bodega + "'; ";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet MListadescuentoarticuloid(string plu)
@@ -1532,7 +1574,12 @@ namespace Intranet.modelo
                 "                     join promocion p on ap.promocionID = p.id" +
                 " inner" +
                 "                    join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
-                "                     where (SELECT CONVERT(datetime, GETDATE())) <= p.fhasta AND(SELECT CONVERT(datetime, GETDATE())) >= p.fdesde  and activa = 1 and ap.articuloID = '"+plu+"'";
+                "                     where (" +
+                "                         SELECT CONVERT(date, GETDATE())) <= p.fhasta" +
+                "                         AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde  and activa = 1" +
+                "                         and(select CONVERT(time, GETDATE())) <= p.hhasta" +
+                "                         and(select CONVERT(time, GETDATE())) >= p.hdesde" +
+                "                         and ap.articuloID = '" + plu + "'";
             return dataload.sqlconsulta(sql);
         }
         internal DataSet MListadescuentolinea(string linea)
@@ -1542,9 +1589,12 @@ namespace Intranet.modelo
                 " join promocion p on ap.promocionID = p.id inner" +
                 " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
                 " INNER JOIN linea l on l.codigo = ap.lineaID " +
-                " where(SELECT CONVERT(datetime, GETDATE())) <= p.fhasta AND(SELECT CONVERT(datetime, GETDATE())) >= p.fdesde" +
-                "        and activa = 1" +
-                "        and l.nombre = '"+linea+"'" +
+                " where(" +
+                "       SELECT CONVERT(date, GETDATE())) <= p.fhasta" +
+                "                         AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde  and activa = 1" +
+                "                         and(select CONVERT(time, GETDATE())) <= p.hhasta" +
+                "                         and(select CONVERT(time, GETDATE())) >= p.hdesde" +
+                "        and l.nombre = '" + linea + "'" +
                 "        ORDER BY  ap.articuloID asc";
             return dataload.sqlconsulta(sql);
         }
@@ -1555,8 +1605,11 @@ namespace Intranet.modelo
                 " join promocion p on ap.promocionID = p.id inner" +
                 " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
                 " INNER JOIN grupo g on g.codigo = ap.grupoID " +
-                " where(SELECT CONVERT(datetime, GETDATE())) <= p.fhasta AND(SELECT CONVERT(datetime, GETDATE())) >= p.fdesde" +
-                "        and activa = 1" +
+                " where(" +
+               "          SELECT CONVERT(date, GETDATE())) <= p.fhasta" +
+                "                         AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde  and activa = 1" +
+                "                         and(select CONVERT(time, GETDATE())) <= p.hhasta" +
+                "                         and(select CONVERT(time, GETDATE())) >= p.hdesde" +
                 "        and g.nombre = '" + grupo + "'" +
                 "        ORDER BY  ap.articuloID asc";
             return dataload.sqlconsulta(sql);
@@ -1568,15 +1621,18 @@ namespace Intranet.modelo
                 " join promocion p on ap.promocionID = p.id inner" +
                 " join dbo.condicionpromo condip on ap.promocionID = condip.promocionID" +
                 " INNER JOIN marca m on m.codigo = ap.marcaID " +
-                " where(SELECT CONVERT(datetime, GETDATE())) <= p.fhasta AND(SELECT CONVERT(datetime, GETDATE())) >= p.fdesde" +
-                "        and activa = 1" +
+                " where(" +
+                "       SELECT CONVERT(date, GETDATE())) <= p.fhasta" +
+                "                         AND(SELECT CONVERT(date, GETDATE())) >= p.fdesde  and activa = 1" +
+                "                         and(select CONVERT(time, GETDATE())) <= p.hhasta" +
+                "                         and(select CONVERT(time, GETDATE())) >= p.hdesde" +
                 "        and m.nombre = '" + marca + "'" +
                 "        ORDER BY  ap.articuloID asc";
             return dataload.sqlconsulta(sql);
         }
-        internal int Mdeleteitems_kardex(string id,string db)
+        internal int Mdeleteitems_kardex(string id, string db)
         {
-            sql = "call PDELETE_ITEM_KARDEX('"+id+"')";
+            sql = "call PDELETE_ITEM_KARDEX('" + id + "')";
             return dataload.MysqlProcedimiento(sql, db);
         }
         internal DataSet mlistacumpleañeros()
@@ -1644,7 +1700,99 @@ namespace Intranet.modelo
                 " ORDER BY cantidad DESC";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listadoventaXarticulocajeratop(string fei, string fef, string articuloid,string ccosto)
+        internal DataSet listadoTopVentas(string fei, string fef, string top)
+        {
+            sql = "SET NOCOUNT ON; " +
+                "                declare @fecha1 as date = '" + fei + "'" +
+                "                ,@fecha2 as date = '" + fef + "'" +
+                "                select top(" + top + ") final.articuloID," +
+                "	final.detalle," +
+                "	FORMAT(final.cantidad, 'n', 'en-US')Cantidad," +
+                "	Format(final.Ventas, 'C', 'EN-US')Ventas," +
+                "	FORMAT(final.costo, 'C', 'EN-US')Costo," +
+                "	FOrMAT(final.[Vr Utilidad], 'C', 'EN-US')[Vr Utilidad]," +
+                "	SUM((final.[Vr Utilidad] / final.Ventas) * 100)[% Rent]," +
+                "	cast(final.dev as decimal)Dev," +
+                "	format(final.[vr Dev], 'C', 'EN-US')[Vr Dev]" +
+                "            from(SELECT util.articuloID," +
+                "                        util.detalle," +
+                "                        util.cantidad," +
+                "                        util.valores  Ventas," +
+                "                        util.costo costo," +
+                "                        SUM(util.valores - util.costo)[Vr Utilidad]," +
+                "                        (util.dev)dev," +
+                "                        util.[vr Dev]" +
+                "                                    FROM(select  COALESCE(ventas.articuloID, s.articuloID) articuloID," +
+                "                                    ventas.detalle," +
+                "                                    round(sum(ventas.cantidad - coalesce(s.cantidad, 0)), 1)cantidad," +
+                "                                    sum(ventas.valores - coalesce(s.valores, 0)) valores," +
+                "                                    sum(ventas.costo - coalesce(s.costo, 0))costo," +
+                "                                    round(coalesce(s.cantidad, 0), 2) as dev," +
+                "                                    round(coalesce(sum(s.valores), 0), 1)[vr Dev]," +
+                "                                    coalesce(SUM(s.costo), 0)[Vr CostoDev]" +
+                "                                    FROM(select i.articuloID, a.detalle," +
+                "            SUM(i.cantidad) cantidad," +
+                "                                            sum(i.vrtotal)valores," +
+                "                                            SUM(i.vrcostototal)costo" +
+                "                                                from itart i" +
+                "                                                inner" +
+                "                                                join documento d on i.documentID = d.id" +
+                "                                                inner" +
+                "                                               join articulo a on a.codigo = i.articuloID" +
+                "                                                inner" +
+                "                                                join tipodoc td on td.codigo = d.tipo" +
+                "                                                where d.fecha between @fecha1 and @fecha2" +
+                "                                                        and td.clasedoc in ('FV', 'FP')" +
+                "                                                        group by i.articuloID, a.detalle)ventas" +
+                "                                                        left  JOIN" +
+                "                                                                (select  i.articuloID, a.detalle," +
+                "                                                                SUM(i.cantidad) cantidad," +
+                "                                                                sum(i.vrtotal)valores," +
+                "                                                                SUM(i.vrcostototal)costo" +
+                "                                                                    from itart i" +
+                "                                                                    inner" +
+                "                                                                    join documento d on i.documentID = d.id" +
+                "                                                                    inner" +
+                "                                                                    join articulo a on a.codigo = i.articuloID" +
+                "                                                                    inner" +
+                "                                                                    join tipodoc td on td.codigo = d.tipo" +
+                "                                                                    where d.fecha between @fecha1 and @fecha2" +
+                "                                                                            and td.clasedoc in ('DV', 'DP')" +
+                "                                                                            group by i.articuloID, a.detalle) s ON s.articuloID = ventas.articuloID" +
+                "                                                                            group by ventas.articuloID, s.articuloID, ventas.detalle, ventas.cantidad, ventas.valores, ventas.costo, s.cantidad" +
+                "                                                                        )util" +
+                "                                                                            group by util.articuloID, util.detalle, util.cantidad, util.valores, util.costo, util.dev, util.[vr Dev])final" +
+                "                                                                           group by final.articuloID, final.detalle,final.cantidad,final.Ventas,final.costo,final.[Vr Utilidad],final.[vr Dev],final.dev" +
+                "                                                                            order by final.cantidad desc  ";
+            return dataload.sqlconsulta(sql);
+        }
+        internal DataSet listadoventaXlineacajera(string fei, string fef, string marcaid)
+        {
+            sql = "SELECT " +
+                "  articulo.detalle,documento.logusucreo, " +
+                " SUM(CAST(itart.cantidad AS float)) AS cantidad, " +
+                " SUM(itart.vrtotal) AS valor_total  " +
+                " FROM itart INNER JOIN articulo ON itart.articuloID = articulo.codigo " +
+                " INNER JOIN documento ON itart.documentID = documento.id " +
+                " INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo " +
+                " WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "') " +
+                " AND(tipodoc.clasedoc in ('FV', 'FP')) " +
+                " AND(articulo.codigo = '" + marcaid + "')" +
+                " GROUP BY documento.logusucreo,articulo.detalle " +
+                " ORDER BY cantidad DESC";
+            return dataload.sqlconsulta(sql);
+        }
+        internal DataSet listadoComprasrecibidas(string fei, string fef)//trae las proveedores con compras en fechas especificas
+        {
+            sql = "SELECT t.id, t.nombrecompleto FROM documento D " +
+                "    inner join tercero t on D.terceroID1 = t.id" +
+                "    inner join tipodoc td on td.codigo = D.tipo" +
+                "    where td.clasedoc = 'FC'" +
+                "    AND D.fecha between '" + fei + "' and '" + fef + "'" +
+                "    group by t.nombrecompleto,t.id";
+            return dataload.sqlconsulta(sql);
+        }
+        internal DataSet listadoventaXarticulocajeratop(string fei, string fef, string articuloid, string ccosto)
         {
             sql = "SELECT  Top(10) articulo.detalle" +
                 " ,documento.logusucreo," +
@@ -1656,13 +1804,31 @@ namespace Intranet.modelo
                 " INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo" +
                 " WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
                 " AND(tipodoc.clasedoc in ('FV', 'FP')) " +
-                " AND(articulo.codigo = '" + articuloid + "') and(documento.ccostoID='"+ccosto+"')" +
+                " AND(articulo.codigo = '" + articuloid + "') and(documento.ccostoID='" + ccosto + "')" +
                 " GROUP BY documento.logusucreo,articulo.detalle" +
                 " ORDER BY cantidad DESC";
             return dataload.sqlconsulta(sql);
         }
-       
-     
+        internal DataSet listadoventaXmarcacajeratop(string fei, string fef, string marca, string ccosto)
+        {
+            sql = "SELECT " +
+                "                 documento.logusucreo, " +
+                "                 SUM(CAST(itart.cantidad AS float)) AS cantidad," +
+                "                 SUM(itart.vrtotal) AS valor_total" +
+                "                 FROM itart INNER JOIN articulo ON itart.articuloID = articulo.codigo" +
+                "                 INNER JOIN documento ON itart.documentID = documento.id" +
+                "                 INNER JOIN tipodoc ON documento.tipo = tipodoc.codigo" +
+                "                 INNER JOIN marca M ON M.codigo = articulo.marcaID" +
+                "                 WHERE(documento.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
+                "                 AND(tipodoc.clasedoc in ('FV', 'FP'))" +
+                "                 AND(M.nombre = '" + marca + "')" +
+                "                 and documento.bodegaID = '" + ccosto + "' " +
+                "                 GROUP BY documento.logusucreo" +
+                "                 ORDER BY cantidad DESC";
+            return dataload.sqlconsulta(sql);
+        }
+
+
         internal DataSet listadoventaDomicilio(string fei, string fef)
         {
             sql = "SELECT TOP (100) PERCENT DATEPART(DD, documento.logfecreo) AS DIAS," +
@@ -1678,7 +1844,7 @@ namespace Intranet.modelo
                 "        INNER JOIN tercero on tercero.id = documento.vendedorID" +
                 "        inner join bodega on bodega.codigo = documento.bodegaID" +
                 "                WHERE" +
-                "                        (documento.fecha BETWEEN '"+ fei + "' AND '"+ fef + "')" +
+                "                        (documento.fecha BETWEEN '" + fei + "' AND '" + fef + "')" +
                 "                        AND(tipodoc.clasedoc in ('FV', 'FP'))   AND(articulo.codigo in ('22221', '22233', '22234'))" +
                 "                        GROUP BY DATEPART(DD, documento.logfecreo), tercero.nombrecompleto,bodega.nombre,articulo.detalle" +
                 "                        ORDER BY DIAS DESC";
@@ -1716,7 +1882,55 @@ namespace Intranet.modelo
         }
         internal DataSet mactabaja()
         {
-            sql = "select * from actas a inner join baja_articulos b on b.baja_idacta=a.act_id ";
+            sql = "select act_id," +
+                "                 act_fecha," +
+                "                 act_ubicacion, " +
+                "                 act_area," +
+                "                  act_usuario," +
+                "                        act_fcreo," +
+                "                         baja_id," +
+                "                         baja_fecha," +
+                "                         baja_estado, " +
+                "                         baja_destino," +
+                "                         baja_fcreo," +
+                "                         baja_usucreo," +
+                "                         baja_idacta," +
+                "                         ar.nombreArt, " +
+                "                           ar.fcompArt," +
+                "                         area.nombrearea," +
+                "                         u.nombUbica" +
+                "                          from actas a" +
+                "                                inner join baja_articulos b on b.baja_idacta = a.act_id" +
+                "                                inner join articulo ar on ar.idArt = b.baja_idarticulo" +
+                "                                inner join area area on area.id = act_area" +
+                "                                inner join ubicacion u on u.idUbica = act_ubicacion";
+            return dataload.sqlconsultamysql(sql);
+        }
+        internal DataSet mlistaactabaja(string id)
+        {
+            sql = "select act_id," +
+                "                 act_fecha," +
+                "                 act_ubicacion, " +
+                "                 act_area," +
+                "                  act_usuario," +
+                "                        act_fcreo," +
+                "                         baja_id," +
+                "                         baja_fecha," +
+                "                         baja_estado, " +
+                "                         baja_destino," +
+                "                         baja_fcreo," +
+                "                         baja_usucreo," +
+                "                         baja_idacta," +
+                "                         ar.nombreArt, " +
+                "                           ar.fcompArt," +
+                "                         area.nombrearea," +
+                "                         u.nombUbica" +
+                "                          from actas a" +
+                "                                inner join baja_articulos b on b.baja_idacta = a.act_id" +
+                "                                inner join articulo ar on ar.idArt = b.baja_idarticulo" +
+                "                                inner join area area on area.id = act_area" +
+                "                                inner join ubicacion u on u.idUbica = act_ubicacion" +
+                "                                where act_id = " + id + "";
             return dataload.sqlconsultamysql(sql);
         }
         internal DataSet mlista_activos_asg(String pnombre, String pbd) //trae activos a cargo de cada empleado
@@ -1725,7 +1939,7 @@ namespace Intranet.modelo
             return dataload.MySqlQuery(sql, pbd);
         }
 
-        internal DataSet ventashoralinea(string Fecha, string linea,string bodega)
+        internal DataSet ventashoralinea(string Fecha, string linea, string bodega)
         {
             sql = "select " +
                 "TOP (100) PERCENT DATEPART(HH, d.logfecreo) AS Rango_Hora, format(Sum(it.vrtotal), '$ #,###.##') AS V_Facturas " +
@@ -1738,7 +1952,7 @@ namespace Intranet.modelo
                 "and d.fecha='" + Fecha + "' " +
                 "and ln.codigo='" + linea + "' " +
                 "and  td.clasedoc IN('FP','FV')" +
-                " AND d.ccostoID='"+bodega+"'  " +
+                " AND d.ccostoID='" + bodega + "'  " +
                 "GROUP BY DATEPART(HH, d.logfecreo) " +
                 "order by Rango_Hora  ";
             return dataload.sqlconsulta(sql);
@@ -1752,10 +1966,10 @@ namespace Intranet.modelo
                 "      inner   join linea ln on art.lineaID = ln.codigo " +
                 "          INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo " +
                 "    where d.anulado = 0 " +
-                "       and d.fecha between '"+fechadesde+"' and '"+fechahasta+"'" +
-                "          and ln.codigo = '"+linea+"'" +
+                "       and d.fecha between '" + fechadesde + "' and '" + fechahasta + "'" +
+                "          and ln.codigo = '" + linea + "'" +
                 "    and td.clasedoc IN('FV' , 'FP','DP','DV') " +
-                "   AND d.ccostoID = '"+ccosto+"' " +
+                "   AND d.ccostoID = '" + ccosto + "' " +
                 "    group by art.codigo,art.detalle";
             return dataload.sqlconsulta(sql);
         }
@@ -1780,7 +1994,8 @@ namespace Intranet.modelo
                 "GROUP BY DATEPART(HH, d.logfecreo) " +
                 "order by Rango_Hora  ";
             return dataload.sqlconsulta(sql);
-        }internal DataSet Ventaslinearesumido(string fecha1, string fecha2)
+        }
+        internal DataSet Ventaslinearesumido(string fecha1, string fecha2)
         {
             sql = "   select " +
                 " r.Linea," +
@@ -1791,7 +2006,7 @@ namespace Intranet.modelo
                 " select  ln.nombre AS Linea" +
                 "                        , count(distinct it.documentID)N_fact" +
                 "                        , Sum(it.vrtotal) AS V_ANTES_IVA" +
-                "                 from documento d inner join itart it on d.id = it.documentID and d.fecha between '"+fecha1+"' and '"+fecha2+"'" +
+                "                 from documento d inner join itart it on d.id = it.documentID and d.fecha between '" + fecha1 + "' and '" + fecha2 + "'" +
                 "                 inner join articulo art ON it.articuloID = art.codigo" +
                 "                 inner join linea ln on art.lineaID = ln.codigo" +
                 "                 INNER JOIN dbo.tipodoc AS td ON d.tipo = td.codigo" +
@@ -1818,7 +2033,7 @@ namespace Intranet.modelo
                 "order by Rango_Hora  ";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listaventashora(string Fecha,string costo)
+        internal DataSet listaventashora(string Fecha, string costo)
         {
             sql = "SELECT  TOP (100) PERCENT DATEPART(HH, do.logfecreo) AS HORA " +
                 ",format(Sum(do.vrsubtotal), '$ #,###.##') AS V_Facturas " +
@@ -1828,7 +2043,7 @@ namespace Intranet.modelo
                 " INNER JOIN dbo.tipodoc AS td ON do.tipo = td.codigo " +
                 "WHERE (do.fecha = '" + Fecha + "')" +
                 " AND td.clasedoc IN ('FP','FV')" +
-                " AND do.ccostoID='"+costo+"'" + 
+                " AND do.ccostoID='" + costo + "'" +
                 " and do.anulado=0" +
                 " GROUP BY DATEPART(HH, do.logfecreo)";
             return dataload.sqlconsulta(sql);
@@ -1852,7 +2067,7 @@ namespace Intranet.modelo
                 " WHERE (do.fecha = '" + Fecha + "') AND (td.clasedoc in ('FV', 'FP')) AND do.ccostoID='000005' and do.anulado=0 GROUP BY DATEPART(HH, do.logfecreo)";
             return dataload.sqlconsulta(sql);
         }
-        internal DataSet listSalesDomicilios(string fecha1,string fecha2)
+        internal DataSet listSalesDomicilios(string fecha1, string fecha2)
         {
             sql = "SELECT  documento.logfecreo AS Fecha,documento.numero as Numero_Factura, " +
                 "        bodega.nombre as Sala_De_Ventas," +
@@ -1867,7 +2082,7 @@ namespace Intranet.modelo
                 "        INNER JOIN tercero on tercero.id = documento.vendedorID" +
                 "        inner join bodega on bodega.codigo = documento.bodegaID" +
                 "                WHERE" +
-                "                        (documento.fecha BETWEEN '"+fecha1+"' AND '"+fecha2+"')" +
+                "                        (documento.fecha BETWEEN '" + fecha1 + "' AND '" + fecha2 + "')" +
                 "                        AND(tipodoc.clasedoc in ('FV', 'FP'))  " +
                 "                        AND(articulo.codigo in ('22221', '22233', '22234', '22266', '22267', '22268'))" +
                 "                        group by documento.logfecreo,documento.numero,bodega.nombre," +
@@ -1899,7 +2114,7 @@ namespace Intranet.modelo
             }
         }
 
-        internal DataTable McreaFormato( String pName, String pFullPath, String pUser, String pArea,String plabel, String pbd)
+        internal DataTable McreaFormato(String pName, String pFullPath, String pUser, String pArea, String plabel, String pbd)
         {
             try
             {
@@ -1910,7 +2125,7 @@ namespace Intranet.modelo
                 crearp.Add(new parametro("PUSER", pUser, "VARCHAR", ParameterDirection.Input));
                 crearp.Add(new parametro("PAREA", pArea, "VARCHAR", ParameterDirection.Input));
                 crearp.Add(new parametro("PLABEL", plabel, "VARCHAR", ParameterDirection.Input));
-               return con.ProcedureSelectDB("PRCREAR_FORMATO", crearp, pbd);
+                return con.ProcedureSelectDB("PRCREAR_FORMATO", crearp, pbd);
 
             }
             catch (Exception ex)
@@ -2014,7 +2229,7 @@ namespace Intranet.modelo
             sql = "select PERS_CC AS CC, PERS_NOMBRE1 AS NOMBRE_1 , PERS_NOMBRE2 AS NOMBRE_2 , PERS_APELLIDO1 as AP_PATERNO ,PERS_APELLIDO2 AS AP_MATERNO ,PERS_TEL AS TEL ,PERS_DIRECCION AS DIRECCION ,PERS_SEXO AS SEXO     ,(SELECT TIPP_NOMBRE FROM TIPOPERSONA WHERE TIPP_ID = PERS_TIPP_ID) AS ROL   from persona";
             return dataload.oraconsulta(sql, pbd);
         }
-      
+
         internal DataTable MlistFiles(String area, String pbd)
         {
             try
@@ -2035,9 +2250,9 @@ namespace Intranet.modelo
             sql = "SELECT max(idArt+1) as idArt from articulo";
             return dataload.MySqlQuery(sql, bd);
         }
-        internal DataSet listaconsultor(String codbar, String Listaprecio,String bd)
+        internal DataSet listaconsultor(String codbar, String Listaprecio, String bd)
         {
-            sql = "SELECT a.codigo,  a.detalle, cd.codbarra,cast(valormiva as int)as "+
+            sql = "SELECT a.codigo,  a.detalle, cd.codbarra,cast(valormiva as int)as " +
              " valormiva,cast(a.peso as int) as unidadmedida,cast(valormiva / peso as float) as precioxgramo, getdate() as fechaimpresion from articulo a " +
                 " left " +
                      "          join dbo.artspromo aprom ON a.codigo = aprom.articuloID " +
@@ -2046,7 +2261,7 @@ namespace Intranet.modelo
                "          left JOIN dbo.promocion promo ON condiprom.promocionID = promo.id " +
                " left join codbar cd on cd.articuloID = a.codigo " +
              " left join precio pc on pc.articuloID = a.codigo and(pc.presentacionID = cd.presentacionID or(pc.presentacionID is null and cd.presentacionID is null)) " +
-            " where inactivo = 0 and cd.CODBARRA = '"+ codbar + "' and pc.listprecioID='"+ Listaprecio + "' ";
+            " where inactivo = 0 and cd.CODBARRA = '" + codbar + "' and pc.listprecioID='" + Listaprecio + "' ";
             return dataload.MySqlQuery(sql, bd);
         }
         internal int Mcreaactivo(String pid, String pserial, String pnombre, String pmodelo, String pfabricante,
@@ -2131,7 +2346,7 @@ namespace Intranet.modelo
         }
         internal DataSet mlistaNUEVONUMERObaja(String bd)
         {
-            sql = "SELECT max(act_numero)+1 as id from actas";
+            sql = "SELECT max(act_id)+1 as id from actas";
             return dataload.MySqlQuery(sql, bd);
         }
         internal DataSet mtraemanteni(String pserial, String bd)
@@ -2218,38 +2433,38 @@ namespace Intranet.modelo
         internal DataSet mtraeconsecutivosmante(String bd)//este es jajajaja
         {
             sql = "call PLISTAR_MANTENIMIENTO('')";
-            return dataload.MySqlQuery(sql,bd);
+            return dataload.MySqlQuery(sql, bd);
         }
-        internal int mupdatedetalle_actasm(string pserial,string p_tipomante,string pdetalle,
-            string pcosto_mano_obra,string prepuestos,string pnumero_externo,
-            string pcosto_repuestos, string pidmantenimiento,string pidacta,string pgarantia,String bd)
+        internal int mupdatedetalle_actasm(string pserial, string p_tipomante, string pdetalle,
+            string pcosto_mano_obra, string prepuestos, string pnumero_externo,
+            string pcosto_repuestos, string pidmantenimiento, string pidacta, string pgarantia, String bd)
         {
-            sql = "update detamantenimientos set detm_idarticulo=(select idArt from articulo where serialArt='"+pserial+"')," +
-                " detm_tipomantenimiento='"+p_tipomante+"',detm_detalle='"+pdetalle+"',detm_costomanoobra='"+pcosto_mano_obra+"'," +
-                " detm_repuestos='"+prepuestos+"'  ,detm_numeroexterno='"+pnumero_externo+"',detm_costorepuestos='"+pcosto_repuestos+"', " +
-                " detm_garantia='"+pgarantia+"' " +
-                " where detm_idmantenimiento='"+pidmantenimiento+ "' and detm_id='"+pidacta+"'";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "update detamantenimientos set detm_idarticulo=(select idArt from articulo where serialArt='" + pserial + "')," +
+                " detm_tipomantenimiento='" + p_tipomante + "',detm_detalle='" + pdetalle + "',detm_costomanoobra='" + pcosto_mano_obra + "'," +
+                " detm_repuestos='" + prepuestos + "'  ,detm_numeroexterno='" + pnumero_externo + "',detm_costorepuestos='" + pcosto_repuestos + "', " +
+                " detm_garantia='" + pgarantia + "' " +
+                " where detm_idmantenimiento='" + pidmantenimiento + "' and detm_id='" + pidacta + "'";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int mdeletedeta_mante(string pidacta,String bd)
+        internal int mdeletedeta_mante(string pidacta, String bd)
         {
             sql = "delete from detamantenimientos where detm_id='" + pidacta + "'";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int mupdate_actasm(string p_idproveedor, string pfecha, string pobservaciones, string pidacta,String bd)
+        internal int mupdate_actasm(string p_idproveedor, string pfecha, string pobservaciones, string pidacta, String bd)
         {
-            sql = "update mantenimientos set mant_idProveedor=(select idResp from persona where nomb='"+ p_idproveedor + "'),mant_fecha='"+ pfecha + "',mant_observaciones='"+pobservaciones+"' where mant_id='"+pidacta+"'";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "update mantenimientos set mant_idProveedor=(select idResp from persona where nomb='" + p_idproveedor + "'),mant_fecha='" + pfecha + "',mant_observaciones='" + pobservaciones + "' where mant_id='" + pidacta + "'";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
         internal DataSet mtraeproveedor(String bd)
         {
             sql = "select CONCAT(idResp, ' / ',id, ' / ',nomb) Proveedor FROM persona where esempleado=false and esproveedor=true";
-            return dataload.MySqlQuery(sql,bd);
+            return dataload.MySqlQuery(sql, bd);
         }
         internal DataSet mtraeEmpleado(String bd)
         {
             sql = "select CONCAT(nomb) Proveedor FROM persona where esempleado=true";
-            return dataload.MySqlQuery(sql,bd);
+            return dataload.MySqlQuery(sql, bd);
 
         }
         internal DataSet Mmployee(String bd)
@@ -2262,7 +2477,7 @@ namespace Intranet.modelo
         {
             sql = "SELECT p.PERS_CC || '/' || p.PERS_NOMBRE1 ||' ' || p.PERS_APELLIDO1 NOMB from persona  p " +
                 "WHERE NOT EXISTS(SELECT 1 FROM usuario u WHERE p.pers_id = u.usua_idpers)";
-            return dataload.oraconsulta(sql,bd);
+            return dataload.oraconsulta(sql, bd);
 
         }
         //-------------------------------------------------------------------------------------------------------
@@ -2279,12 +2494,12 @@ namespace Intranet.modelo
             Sqls = "call P_LISTA_ITEMS_RECIBIDA('" + ntipo + "','" + nNumero + "')";
             return dataload.MySqlQuery(Sqls, bd);
         }
-        internal int Mcreafactura(String ntipo,String nNumero,String puser, String bd)
+        internal int Mcreafactura(String ntipo, String nNumero, String puser, String bd)
         {
             sql = "call p_crea_rmercancia('" + ntipo + "','" + nNumero + "','" + puser + "')";
             return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int Mcreaitemsfactura(String nOrdenCompra, 
+        internal int Mcreaitemsfactura(String nOrdenCompra,
             String pPlu,
             String pCant,
             String pDetalle,
@@ -2311,13 +2526,13 @@ namespace Intranet.modelo
                 "'" + pcosto + "'," +
                 "'" + pedido + "'," +
                 "'" + pisDev + "'," +
-                "'" + iva + "',"+
+                "'" + iva + "'," +
                 "'" + pcodigo + "', " +
-                " '"+factor+"'," +
-                " '"+namepres+"','"+ costordencompra + "','"+ refProv + "')";
+                " '" + factor + "'," +
+                " '" + namepres + "','" + costordencompra + "','" + refProv + "')";
             return dataload.MysqlProcedimiento(sql, bd);
-        } 
-        internal int Mupdateitemsfactura(String nid, String pCant, String ncostonuevo,String pestado, String pboserva, String bd) //RECIBIR MERCANCIA PEDIDA
+        }
+        internal int Mupdateitemsfactura(String nid, String pCant, String ncostonuevo, String pestado, String pboserva, String bd) //RECIBIR MERCANCIA PEDIDA
         {
 
             sql = "call P_UDATE_ITEMS_COMPRA('" + nid + "','" + pCant + "','" + ncostonuevo + "','" + pestado + "','" + pboserva + "')";
@@ -2349,13 +2564,13 @@ namespace Intranet.modelo
         }
         internal DataSet mtrae_count_recibo(String idfactura, String bd)
         {
-            sql = "select count(*) from detaordencompra dc inner join ordencompra oc on  oc.id=dc.Idordencompra where oc.numero='"+idfactura+"'";
+            sql = "select count(*) from detaordencompra dc inner join ordencompra oc on  oc.id=dc.Idordencompra where oc.numero='" + idfactura + "'";
             return dataload.MySqlQuery(sql, bd);
 
         }
         internal DataSet mtrae_count_devo(String idfactura, String bd)
         {
-            sql = "select count(*) from devo_mercancia where idfactura='"+ idfactura + "'";
+            sql = "select count(*) from devo_mercancia where idfactura='" + idfactura + "'";
             return dataload.MySqlQuery(sql, bd);
 
         }
@@ -2366,39 +2581,39 @@ namespace Intranet.modelo
         //-------------------------------------------------------------------------------------------------------
         //aqui inicia incapacidades
         //-------------------------------------------------------------------------------------------------------
-        internal int mcrea_incapacidad(string p_idempleado, string pobservaciones, 
+        internal int mcrea_incapacidad(string p_idempleado, string pobservaciones,
             string pfechaini, string pfechafin, string puser, String bd)
         {
-            sql = "insert into incapacidades (INCA_IDPERSONA,INCA_MOTIVO,INCA_FECHAINICIAL,INCA_FECHAFINAL,INCA_FCREA,INCA_USUCREA)VALUE((select idResp  from persona where nomb='"+p_idempleado+"'),'"+pobservaciones+"','"+pfechaini+"','"+pfechafin+"',(select sysdate()),'"+puser+"')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "insert into incapacidades (INCA_IDPERSONA,INCA_MOTIVO,INCA_FECHAINICIAL,INCA_FECHAFINAL,INCA_FCREA,INCA_USUCREA)VALUE((select idResp  from persona where nomb='" + p_idempleado + "'),'" + pobservaciones + "','" + pfechaini + "','" + pfechafin + "',(select sysdate()),'" + puser + "')";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int mborraincapacidad(string p_idincapacidad,String bd)
+        internal int mborraincapacidad(string p_idincapacidad, String bd)
         {
-            sql ="delete from incapacidades where inca_id='"+p_idincapacidad+"'";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "delete from incapacidades where inca_id='" + p_idincapacidad + "'";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int Mcreanovedadincapacidad(string p_idincapacidad,string p_estado,string p_observa,
-            string p_fecha,string p_user, String bd)
+        internal int Mcreanovedadincapacidad(string p_idincapacidad, string p_estado, string p_observa,
+            string p_fecha, string p_user, String bd)
         {
-            sql = "insert into estadoincapa (esti_idincapacidad,esti_estado,esti_observacion,esti_fecha,esti_fcreo,esti_usucreo)values('" + p_idincapacidad+"','"+p_estado+"','"+p_observa+"','"+p_fecha+ "',(select sysdate()),'" +p_user+"')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "insert into estadoincapa (esti_idincapacidad,esti_estado,esti_observacion,esti_fecha,esti_fcreo,esti_usucreo)values('" + p_idincapacidad + "','" + p_estado + "','" + p_observa + "','" + p_fecha + "',(select sysdate()),'" + p_user + "')";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
         internal DataSet mtraeincapacidades(String bd)
         {
             sql = "select i.inca_id as ID,p.nomb as Nombre_Empleado, DATEDIFF(i.inca_fechafinal,i.inca_fechainicial)+1 as dias,i.inca_fechainicial as F_Inicial,i.inca_fechafinal as F_Final,i.inca_motivo as Motivo,inca_usucrea from incapacidades i inner join persona p on p.idResp=i.inca_idpersona";
-            return dataload.MySqlQuery(sql,bd);
+            return dataload.MySqlQuery(sql, bd);
 
         }
         internal DataSet Mtraenovedadesincapacidad(string idincap, String bd)
         {
-            sql = "select esti_estado as Estado,esti_observacion as Observacion,esti_fecha as Fecha,esti_usucreo as User from estadoincapa where esti_idincapacidad='"+idincap+"'";
-            return dataload.MySqlQuery(sql,bd);
+            sql = "select esti_estado as Estado,esti_observacion as Observacion,esti_fecha as Fecha,esti_usucreo as User from estadoincapa where esti_idincapacidad='" + idincap + "'";
+            return dataload.MySqlQuery(sql, bd);
 
         }
-        internal int Mupdateincapacidad(string p_idempleado, string pobservaciones, string pfechaini, string pfechafin, string puser,string pidincapacidad,String bd)
+        internal int Mupdateincapacidad(string p_idempleado, string pobservaciones, string pfechaini, string pfechafin, string puser, string pidincapacidad, String bd)
         {
-            sql = "update incapacidades set INCA_IDPERSONA=(select idResp from persona where nomb='"+p_idempleado+"'),INCA_MOTIVO='"+pobservaciones+"',INCA_FECHAINICIAL='"+pfechaini+"',INCA_FECHAFINAL='"+pfechafin+"',INCA_USUCREA='"+puser+"' WHERE INCA_ID='"+pidincapacidad+"' ";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "update incapacidades set INCA_IDPERSONA=(select idResp from persona where nomb='" + p_idempleado + "'),INCA_MOTIVO='" + pobservaciones + "',INCA_FECHAINICIAL='" + pfechaini + "',INCA_FECHAFINAL='" + pfechafin + "',INCA_USUCREA='" + puser + "' WHERE INCA_ID='" + pidincapacidad + "' ";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
 
         //-------------------------------------------------------------------------------------------------------
@@ -2409,13 +2624,13 @@ namespace Intranet.modelo
         //AQUI TERMINA ACTAS DE MANTENIMIENTOS 
         //-------------------------------------------------------------------------------------------------------
         //aqui ingreso cantidades al kardex
-        internal int Mcreakardex(String pid, String entrada, String salida,  String observa, String pusuario,String BodegaId,String pfechamov,String bd)
+        internal int Mcreakardex(String pid, String entrada, String salida, String observa, String pusuario, String BodegaId, String pfechamov, String bd)
         {
 
-            sql = "call P_CREA_KARDEX('"+pid+ "','"+entrada+ "','"+salida+ "','"+observa+ "','"+pusuario+ "','"+BodegaId+ "','"+pfechamov+"')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "call P_CREA_KARDEX('" + pid + "','" + entrada + "','" + salida + "','" + observa + "','" + pusuario + "','" + BodegaId + "','" + pfechamov + "')";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int McreaBAJA( String pfecha, String particulo, String pestado, String pdestino, String pusucreo,String pidacta, String bd)
+        internal int McreaBAJA(String pfecha, String particulo, String pestado, String pdestino, String pusucreo, String pidacta, String bd)
         {
 
             sql = "call P_CREA_BAJA_ARTICULO('" + pfecha + "','" + particulo + "','" + pestado + "','" + pdestino + "','" + pusucreo + "','" + pidacta + "')";
@@ -2427,84 +2642,84 @@ namespace Intranet.modelo
             sql = "call P_CREA_ACTA('" + pid + "','" + pfecha + "','" + pubicacion + "','" + parea + "','" + pusuario + "')";
             return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int McreaUbicacion(String nombre, String usuario,String bd)
+        internal int McreaUbicacion(String nombre, String usuario, String bd)
         {
             sql = "INSERT INTO ubicacion (nombUbica,fcreacion,user) VALUES ('" + nombre + "',(select sysdate()),'" + usuario + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int Mcreacantidadactivo(String pid,String pserial, String cantidad,String bd)
+        internal int Mcreacantidadactivo(String pid, String pserial, String cantidad, String bd)
         {
-            sql = "INSERT INTO cantproducto(id,idproducto,cantidad,idresponsable) VALUES('"+pid+"',(select idArt from articulo where serialArt='"+pserial+"'), '"+cantidad+"', 0)";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "INSERT INTO cantproducto(id,idproducto,cantidad,idresponsable) VALUES('" + pid + "',(select idArt from articulo where serialArt='" + pserial + "'), '" + cantidad + "', 0)";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int masigarticulo(String fecha,String bd)
+        internal int masigarticulo(String fecha, String bd)
         {
             sql = "insert into asigarticulos(fcreacion)values('" + fecha + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-      
+
 
         internal DataSet mselectfiscal(String pids, String bd)
         {
             sql = "select * from fiscal where idarticulo = (select idArt from articulo where serialArt='" + pids + "')";
-            return dataload.MySqlQuery(sql,bd);
+            return dataload.MySqlQuery(sql, bd);
         }
-       
-        internal int Mupdatefiscal(String pid, String pidubica, String pidar,String pidartic,String pidacta,String bd)
+
+        internal int Mupdatefiscal(String pid, String pidubica, String pidar, String pidartic, String pidacta, String bd)
         {
-            sql = "update fiscal set idresponsable = (select idResp from persona where nomb='" + pid+ "')" +
+            sql = "update fiscal set idresponsable = (select idResp from persona where nomb='" + pid + "')" +
                 " , idubicacion = (select idubica from ubicacion where nombUbica= '" + pidubica + "')" +
                 " , idarea =(select id from area where nombrearea='" + pidar + "')" +
-                " , idacta='"+pidacta+"'" +
+                " , idacta='" + pidacta + "'" +
                 "  where idarticulo = (select idArt from articulo where serialArt='" + pidartic + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int Mcreamodelo(String nombre,String usuario,String bd)
+        internal int Mcreamodelo(String nombre, String usuario, String bd)
         {
-            sql = "INSERT INTO modelo (nombMod,fcreacion,user) VALUES ('"+nombre+"',(select sysdate()),'" + usuario + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "INSERT INTO modelo (nombMod,fcreacion,user) VALUES ('" + nombre + "',(select sysdate()),'" + usuario + "')";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int Mcreafabricante(String nombre, String usuario,String bd)
+        internal int Mcreafabricante(String nombre, String usuario, String bd)
         {
             sql = "INSERT INTO fabricante (nombFabric,fcreacion,user) VALUES ('" + nombre + "',(select sysdate()),'" + usuario + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int Mcreacategoria(String nombre, String vida,String usuario,String bd)
+        internal int Mcreacategoria(String nombre, String vida, String usuario, String bd)
         {
             sql = "INSERT INTO categoria (nombCat,fcreacion,vidaUtil,user,usermod) VALUES ('" + nombre + "',(select sysdate())," + vida + ",'" + usuario + "','" + usuario + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int McreaTercero(String cc,String nombre, String dir, String tele,
-            String ciudad, String email, String usuario,String bd)
+        internal int McreaTercero(String cc, String nombre, String dir, String tele,
+            String ciudad, String email, String usuario, String bd)
         {
             sql = "INSERT INTO persona (id,nomb,fcreacion,esempleado,usuario,pass,email,dir,tel,idciudad,esproveedor,user) VALUES ('" + cc + "','" + nombre + "',(select sysdate()),0,'','','" + email + "','" + dir + "','" + tele + "','" + ciudad + "',1,'" + usuario + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
         internal int McreaTerceroempleado(String cc, String nombre, String dir, String tele,
-            String ciudad, String email, String usuario,String bd)
+            String ciudad, String email, String usuario, String bd)
         {
             sql = "INSERT INTO persona (id,nomb,fcreacion,esempleado,usuario,pass,email,dir,tel,idciudad,esproveedor,user) VALUES ('" + cc + "','" + nombre + "',(select sysdate()),1,'','','" + email + "','" + dir + "','" + tele + "','" + ciudad + "',0,'" + usuario + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int Mcreafiscal(String pidartic, String pid, String usua,String pubica, 
-            String pidar,String fecha,String pidacta,String bd)
+        internal int Mcreafiscal(String pidartic, String pid, String usua, String pubica,
+            String pidar, String fecha, String pidacta, String bd)
         {
-            sql =  "INSERT INTO fiscal (idarticulo,idresponsable,usuario,idubicacion,idarea,fmod1,idacta) VALUES ((select idArt from articulo where serialArt='" + pidartic + "'),(select idResp from persona where nomb='" + pid + "'),'"+usua+ "'," +
+            sql = "INSERT INTO fiscal (idarticulo,idresponsable,usuario,idubicacion,idarea,fmod1,idacta) VALUES ((select idArt from articulo where serialArt='" + pidartic + "'),(select idResp from persona where nomb='" + pid + "'),'" + usua + "'," +
                 " (select idubica from ubicacion where nombUbica= '" + pubica + "')," +
-                " (select id from area where nombrearea='" + pidar + "'),'"+fecha+"','"+pidacta+"')";
-            return dataload.MysqlProcedimiento(sql,bd);
+                " (select id from area where nombrearea='" + pidar + "'),'" + fecha + "','" + pidacta + "')";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
-        internal int Mcrea_area(string idubica, string pnombre, string puser,String bd)
+        internal int Mcrea_area(string idubica, string pnombre, string puser, String bd)
         {
             sql = "INSERT INTO AREA SET IDUBICACION=(select idubica from ubicacion where nombUbica='" + idubica + "'),NOMBREAREA='" + pnombre + "',USER='" + puser + "'";
-            return dataload.MysqlProcedimiento(sql,bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
         internal int Mcreadetalleacta(String pidacta, String particulo, String presponsable
                 , String pubicacion, String parea, String pobserva,
-            String pfechaa, String pfechacrea, String user,String bd )
+            String pfechaa, String pfechacrea, String user, String bd)
         {
-            sql = "INSERT INTO detalleactas (idacta,idarticulo,idresponsable,idubicacion,idarea,observaciones,fechaAsignado,fechacreacion,user) VALUES ('"+pidacta+"',(select idArt from articulo where serialArt='" + particulo + "'),(select idResp from persona where nomb='" + presponsable + "'),(select idubica from ubicacion where nombUbica= '" + pubicacion + "'),(select id from area where nombrearea='" + parea + "'),'" + pobserva + "','" + pfechaa + "','" + pfechacrea + "','" + user + "')";
-            return dataload.MysqlProcedimiento(sql,bd);
+            sql = "INSERT INTO detalleactas (idacta,idarticulo,idresponsable,idubicacion,idarea,observaciones,fechaAsignado,fechacreacion,user) VALUES ('" + pidacta + "',(select idArt from articulo where serialArt='" + particulo + "'),(select idResp from persona where nomb='" + presponsable + "'),(select idubica from ubicacion where nombUbica= '" + pubicacion + "'),(select id from area where nombrearea='" + parea + "'),'" + pobserva + "','" + pfechaa + "','" + pfechacrea + "','" + user + "')";
+            return dataload.MysqlProcedimiento(sql, bd);
         }
         internal DataSet listadoprecios()
         {

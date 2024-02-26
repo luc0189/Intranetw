@@ -20,6 +20,11 @@ namespace Intranet.Vista
         {
             if (!Page.IsPostBack)
             {
+                ReportViewer1.ProcessingMode = ProcessingMode.Local;
+
+                LocalReport localReport = ReportViewer1.LocalReport;
+                localReport.ReportPath = "actas.rdlc";
+                Imprime.Visible = false;
                 llenaubicacion();
                 llenaarea();
                 llenaarticulo();
@@ -36,17 +41,22 @@ namespace Intranet.Vista
         private DataTable GetData(string acta)
         {
             DataTable dt = new DataTable();
-            string connex = "server=192.168.1.133;port=3306;database='" + Session["BD"].ToString() + "';Uid=root;pwd=dibal;SslMode=none ";
-            using (MySqlConnection cn = new MySqlConnection(connex))
+            try
             {
-                MySqlCommand cmd = new MySqlCommand("PLISTAR_MANTENIMIENTO", cn);
-                // cmd.CommandType = CommandType.Text;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@ID", MySqlDbType.String).Value = acta;
-                MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-                adp.Fill(dt);
+               //-- String bd = Session["BD"].ToString();
+                var registros = Controlasql.clistaactasbaja(acta);
+                if (registros.Tables[0].Rows.Count > 0)
+                {
+                    dt = registros.Tables[0];
+
+                }
 
             }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
             return dt;
         }
         private void mostrarreporte()
@@ -60,7 +70,7 @@ namespace Intranet.Vista
             ReportViewer1.LocalReport.DataSources.Add(rds);
 
             //path
-            ReportViewer1.LocalReport.ReportPath = "actasmantenimiento.rdlc";
+            ReportViewer1.LocalReport.ReportPath = "BajaActivos.rdlc";
 
             //param
             // ReportParameter[] rptparamet = new ReportParameter[]
@@ -94,7 +104,8 @@ namespace Intranet.Vista
                 GridViewdetalle.DataSource = table;
                 GridViewdetalle.DataBind();
                 Session.Add("Tabla", table);
-                nuevo();
+            GridViewdetalle.EditIndex = -1;
+            nuevo();
                 txtobserva.Value = "";
                
 
@@ -288,6 +299,15 @@ namespace Intranet.Vista
 
             // Response.Write("<script language=javascript>window.Print();</script>");
 
+        }
+
+        protected void LinkButton2_Click(object sender, EventArgs e)
+        {
+            imprimir();
+        }
+        protected void btncerrarimprime_Click(object sender, EventArgs e)
+        {
+            Imprime.Visible = false;
         }
     }
 }

@@ -348,6 +348,15 @@ namespace Intranet.Vista
         protected global::System.Web.UI.HtmlControls.HtmlAnchor V2;
 
         /// <summary>
+        /// Control A9.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A9;
+
+        /// <summary>
         /// Control A7.
         /// </summary>
         /// <remarks>
@@ -355,6 +364,15 @@ namespace Intranet.Vista
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A7;
+
+        /// <summary>
+        /// Control V11.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor V11;
 
         /// <summary>
         /// Control V8.
@@ -382,6 +400,15 @@ namespace Intranet.Vista
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor V4;
+
+        /// <summary>
+        /// Control V10.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor V10;
 
         /// <summary>
         /// Control V5.

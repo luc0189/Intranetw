@@ -57,6 +57,7 @@ namespace Intranet.Vista
                     V6.Visible = false;
                     V7.Visible = false;
                     V8.Visible = false;
+                    V11.Visible = false;
                     K.Visible = false;
                     K1.Visible = false;
                     K2.Visible = false;
@@ -235,6 +236,9 @@ namespace Intranet.Vista
                                         break;
                                     case "G1":
                                         G1.Visible = true;
+                                        break;
+                                    case "V11":
+                                        V11.Visible = true;
                                         break;
 
                                     default:

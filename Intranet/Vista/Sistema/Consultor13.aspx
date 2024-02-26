@@ -13,8 +13,8 @@
     <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Consultor</title>
 
     <style>
@@ -45,193 +45,202 @@
         <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top transbox">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                 
-                        <input class="form-control me-2" type="search" runat="server" id="txtbarra" placeholder="Buscar Articulo" autofocus="autofocus" />
 
-                        <asp:Button ID="ir" type="submit" runat="server" class="btn btn-app" Text=">" OnClick="ir_Click" />
-                    
+                    <input class="form-control me-2" type="search" runat="server" id="txtbarra" placeholder="Buscar Articulo" autofocus="autofocus" />
+
+                    <asp:Button ID="ir" type="submit" runat="server" class="btn btn-app" Text=">" OnClick="ir_Click" />
+
                 </div>
             </div>
         </nav>
-       
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-        <li data-target="#myCarousel" data-slide-to="4"></li>
-        <li data-target="#myCarousel" data-slide-to="5"></li>
-        <li data-target="#myCarousel" data-slide-to="6"></li>
-        <li data-target="#myCarousel" data-slide-to="7"></li>
-         <li data-target="#myCarousel" data-slide-to="8"></li>
-        <li data-target="#myCarousel" data-slide-to="9"></li>
-    </ol>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-          <img src="img/1.png" style="width:100%;" />
-    
-      </div>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+                <li data-target="#myCarousel" data-slide-to="5"></li>
+                <li data-target="#myCarousel" data-slide-to="6"></li>
+                <li data-target="#myCarousel" data-slide-to="7"></li>
+                <li data-target="#myCarousel" data-slide-to="8"></li>
+                <li data-target="#myCarousel" data-slide-to="9"></li>
+            </ol>
 
-      <div class="item">
-          <img src="img/2.png" style="width:100%;" />
-      
-      </div>
-    
-      <div class="item">
-          <img src="img/3.png" style="width:100%;" />
-        
-      </div>
-         <div class="item">
-          <img src="img/4.png" style="width:100%;" />
-        
-      </div>
-         <div class="item">
-          <img src="img/5.png" style="width:100%;" />
-        
-      </div>
-         <div class="item">
-          <img src="img/6.png" style="width:100%;" />
-        
-      </div>
-         <div class="item">
-          <img src="img/7.png" style="width:100%;" />
-        
-      </div>
-         <div class="item">
-          <img src="img/8.png" style="width:100%;" />
-        
-      </div>
-        
-         <div class="item">
-          <img src="img/9.png" style="width:100%;" />
-        
-      </div>
-         <div class="item">
-          <img src="img/10.png" style="width:100%;" />
-        
-      </div>
-    </div>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="img/1.png" style="width: 100%;" />
 
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-          
+                </div>
 
+                <div class="item">
+                    <img src="img/2.png" style="width: 100%;" />
+
+                </div>
+
+                <div class="item">
+                    <img src="img/3.png" style="width: 100%;" />
+
+                </div>
+                <div class="item">
+                    <img src="img/4.png" style="width: 100%;" />
+
+                </div>
+                <div class="item">
+                    <img src="img/5.png" style="width: 100%;" />
+
+                </div>
+                <div class="item">
+                    <img src="img/6.png" style="width: 100%;" />
+
+                </div>
+                <div class="item">
+                    <img src="img/7.png" style="width: 100%;" />
+
+                </div>
+                <div class="item">
+                    <img src="img/8.png" style="width: 100%;" />
+
+                </div>
+
+                <div class="item">
+                    <img src="img/9.png" style="width: 100%;" />
+
+                </div>
+                <div class="item">
+                    <img src="img/10.png" style="width: 100%;" />
+
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
 
 
-                <script>
 
-                    if (!("autofocus" in document.createElement("input"))) {
+        <script>
 
-                        document.getElementById("codbarr").focus();
+            if (!("autofocus" in document.createElement("input"))) {
 
-                    }
+                document.getElementById("codbarr").focus();
 
-                </script>
+            }
 
-        
+        </script>
 
-           
-         <div class="modal" id="moda" style="display: block;  z-index: 2;">
-                <div class=" modal-dialog modal-xl" style="width: 800px;"  id="modal" runat="server">
-                    <div class="modal-content" style="width: 800px;">
-                        <div class="modal-header">
-                            <center>
-                            <h1> <asp:LABEL text="Articulo" runat="server" ID="lbarticulo" /></h1>
+
+
+
+        <div class="modal" id="moda" style="display: block; z-index: 2;">
+            <div class=" modal-dialog modal-lg center" id="modal" runat="server">
+                <div class="modal-content" style="width: 900px; height: 640px">
+                    <div class="modal-header">
+                        <center>
+                            <h1 style="font-size: 35px;">
+                                <asp:Label Text="Articulo" runat="server" ID="lbarticulo" /></h1>
                         </center>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-12" runat="server" id="boxvalor">
-                                    <center><h1>
-                                     <strong>$ <asp:label text="0" ID="lbvalor" runat="server" /></strong>
-                                </h1> </center>
-                                </div>
-                                <div class="col-md-4" runat="server" id="dvalor1">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <strong>Antes</strong>
-                                        </div>
-                                        <div class="card-body ">
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" runat="server" id="boxvalor">
+                                <center>
+                                    <h1 style="font-size: 200px;">
+                                        <strong>$
+                                            <asp:Label Text="0" ID="lbvalor" runat="server" /></strong>
+                                    </h1>
+                                </center>
+                            </div>
+                            <div class="col-md-4" runat="server" id="dvalor1">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Antes</strong>
+                                    </div>
+                                    <div class="card-body ">
 
-                                            <h1 class="tamañoantes"><strong>$ 
+                                        <h1 class="tamañoantes"><strong>$ 
                                                 <asp:Label Text="-" runat="server" ID="lbvalor1" /></strong></h1>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3" runat="server" id="ddescuento">
-                                    <div class="card alert-danger ">
-                                        <div class="card-header">
-                                            <strong>Descuento</strong>
-                                        </div>
-                                        <div class="card-body ">
-                                            <center>
-                                                <h1><strong>
-                                                <asp:Label Text="-" runat="server" ID="lbdescuento" />%</strong></h1>
-                                            </center>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-5" runat="server" id="dvalor2">
-                                    <div class="card ">
-                                        <div class="card-header">
-                                            <strong>Ahora</strong>
-                                        </div>
-                                        <div class="card-body ">
-                                           
-                                            <h1><strong> $
-                                                <asp:Label Text="-" ID="lbvalordes" runat="server" />
-                                            </strong></h1>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    PLU: 
-                                <asp:Label Text="-" ID="LblPlu" runat="server" />
-                                </div>
-                                <div class="col-md-4">
-                                    Saldo: 
-                                <asp:Label Text="-" ID="lbsaldo" runat="server" />
-                                </div>
-                                <div class="col-md-4">
-                                    P*U.M: $
-                                <asp:Label Text="-" ID="lbpxunidad" runat="server" />
-                                </div>
-                            </div>
+                            <div class="col-md-3" runat="server" id="ddescuento">
+                                <div class="card alert-danger ">
+                                    <div class="card-header">
+                                        <strong>Descuento</strong>
+                                    </div>
+                                    <div class="card-body ">
+                                        <center>
+                                            <h1><strong>
+                                                <asp:Label Text="-" runat="server" ID="lbdescuento" /></strong></h1>
+                                        </center>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5" runat="server" id="dvalor2">
+                                <div class="card ">
+                                    <div class="card-header">
+                                        <strong>Ahora</strong>
+                                    </div>
+                                    <div class="card-body ">
+
+                                        <h1><strong>$
+                                                <asp:Label Text="-" ID="lbvalordes" runat="server" />
+                                        </strong></h1>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h1 style="font-size: 30px;">PLU: 
+                                <asp:Label Text="-" ID="LblPlu" runat="server" /></h1>
+
+                            </div>
+                            <div class="col-md-4">
+                                <h1 style="font-size: 30px;">Saldo: 
+                                <asp:Label Text="-" ID="lbsaldo" runat="server" />
+                                </h1>
+
+                            </div>
+                            <div class="col-md-4">
+                                <h1 style="font-size: 30px;">P*U.M: $
+                                <asp:Label Text="-" ID="lbpxunidad" runat="server" />
+                                </h1>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-      
+        </div>
+
+
     </form>
 
-   
+
 </body>
 
-     <script type="text/javascript">
-         setTimeout(function () {
-             document.getElementById('modal').style.display = 'none';
-         }, 5000);
+<script type="text/javascript">
+    setTimeout(function () {
+        document.getElementById('modal').style.display = 'none';
+    }, 8000);
 
 
-     </script>
+</script>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

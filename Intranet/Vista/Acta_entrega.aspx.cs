@@ -93,8 +93,7 @@ namespace Intranet.Vista
                 table = (System.Data.DataTable)(Session["Tabla"]);
                 row = table.NewRow();
                 row["Serial_Nombre"] = Selectarticulo.Value;
-               
-            row["Observacion"] = observatxt.Value.ToUpper();
+                row["Observacion"] = observatxt.Value.ToUpper();
                 table.Rows.Add(row);
                 GridViewdetalle.DataSource = table;
                 GridViewdetalle.DataBind();

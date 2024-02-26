@@ -143,17 +143,17 @@
 
         
          <div class="modal" id="moda" style="display: block;  z-index: 2;">
-                <div class=" modal-dialog modal-xl" style="width: 800px;"  id="modal" runat="server">
-                    <div class="modal-content" style="width: 800px;">
+                <div class=" modal-dialog modal-lg center"   id="modal" runat="server">
+                    <div class="modal-content" style="width: 900px; height:640px">
                         <div class="modal-header">
                             <center>
-                            <h1> <asp:LABEL text="Articulo" runat="server" ID="lbarticulo" /></h1>
+                            <h1 style="font-size:35px;"> <asp:LABEL text="Articulo" runat="server" ID="lbarticulo" /></h1>
                         </center>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-12" runat="server" id="boxvalor">
-                                    <center><h1>
+                                    <center><h1 style="font-size: 200px;">
                                      <strong>$ <asp:label text="0" ID="lbvalor" runat="server" /></strong>
                                 </h1> </center>
                                 </div>
@@ -177,7 +177,7 @@
                                         <div class="card-body ">
                                             <center>
                                                 <h1><strong>
-                                                <asp:Label Text="-" runat="server" ID="lbdescuento" />%</strong></h1>
+                                                <asp:Label Text="-" runat="server" ID="lbdescuento" /></strong></h1>
                                             </center>
                                             
                                         </div>
@@ -201,16 +201,21 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-md-4">
-                                    PLU: 
-                                <asp:Label Text="-" ID="LblPlu" runat="server" />
+                                    <h1 style="font-size:30px;">PLU: 
+                                <asp:Label Text="-" ID="LblPlu" runat="server" /></h1>
+                                   
                                 </div>
                                 <div class="col-md-4">
-                                    Saldo: 
+                                    <h1 style="font-size: 30px;">Saldo: 
                                 <asp:Label Text="-" ID="lbsaldo" runat="server" />
+                                    </h1>
+                                   
                                 </div>
                                 <div class="col-md-4">
-                                    P*U.M: $
+                                    <h1 style="font-size: 30px;">P*U.M: $
                                 <asp:Label Text="-" ID="lbpxunidad" runat="server" />
+                                    </h1>
+                                  
                                 </div>
                             </div>
 
@@ -228,7 +233,7 @@
      <script type="text/javascript">
          setTimeout(function () {
              document.getElementById('modal').style.display = 'none';
-         }, 5000);
+         }, 8000);
 
 
      </script>

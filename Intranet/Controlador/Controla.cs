@@ -528,13 +528,27 @@ namespace Intranet.Controlador
             {
                 throw ex; // para lanzar la exception o complementar la capturada
             }
-        } public static DataSet CRotaciondias(string fechai,string fechaf,string salav)//espacio para cumpleañeros
+        } 
+        public static DataSet CRotaciondias(string fechai,string fechaf,string salav)//espacio para cumpleañeros
         {
             Modelos usu = new Modelos();
 
             try
             {
                 return usu.Rotaciondias(fechai,fechaf,salav);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
+        public static DataSet CVentasgrupo(string fechai,string fechaf,string parametro)//espacio para cumpleañeros
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.Mventasgrupo(fechai,fechaf,parametro);
             }
             catch (Exception ex)
             {
@@ -999,12 +1013,68 @@ namespace Intranet.Controlador
             }
 
         }
+        public static DataSet listaventasXmarcatop(string fechai, string fechaf, string articuloid,string pccosto)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.listadoventaXmarcacajeratop(fechai, fechaf, articuloid,pccosto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
         public static DataSet listaventasXarticulo(string fechai,string fechaf,string articuloid)
         {
             Modelos usu = new Modelos();
             try
             {
                 return usu.listadoventaXarticulocajera(fechai,fechaf,articuloid);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
+        public static DataSet listaTopVentas(string fechai, string fechaf,string top)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.listadoTopVentas(fechai, fechaf,top);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
+        public static DataSet listaventasXmarca(string fechai,string fechaf,string marcaid)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.listadoventaXarticulocajera(fechai,fechaf, marcaid);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
+        public static DataSet listacomprasrecibo(string fechai,string fechaf)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.listadoComprasrecibidas(fechai,fechaf);
             }
             catch (Exception ex)
             {
@@ -2250,6 +2320,19 @@ namespace Intranet.Controlador
             try
             {
                 return usu2.mactabaja();
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o compleme
+            }
+        }
+        public static DataSet clistaactasbaja(string id)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.mlistaactabaja(id);
             }
             catch (Exception ex)
             {

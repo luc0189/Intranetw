@@ -397,11 +397,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item"><a id="V1" href="infocomparativo.aspx" runat="server" class="nav-link">
                                     <p>Comparativo Ventas</p>
                                 </a></li>
-                                <li class="nav-item"><a id="V2" href="VentasXhora.aspx" runat="server" class="nav-link">
+                                <li class="nav-item"><a id="V2" href="Comprasrecibidas.aspx" runat="server" class="nav-link">
+                                    <p>Compras recibidas</p>
+                                </a></li>
+                                <li class="nav-item"><a id="A9" href="VentasXhora.aspx" runat="server" class="nav-link">
                                     <p>Ventas por Hora</p>
                                 </a></li>
                                 <li class="nav-item"><a id="A7" href="V_linea.aspx" runat="server" class="nav-link">
                                     <p>Ventas por Linea</p>
+                                </a></li>
+                                <li class="nav-item"><a id="V11" href="RVtop.aspx" runat="server" class="nav-link">
+                                    <p>Top Ventas</p>
                                 </a></li>
                                 <li class="nav-item"><a id="V8" href="VentasXLinea.aspx" runat="server" class="nav-link">
                                     <p>Cumplimientos</p>
@@ -414,6 +420,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a></li>
                                 <li class="nav-item"><a id="V4" href="recordcajerasarticulo.aspx" runat="server" class="nav-link">
                                     <p>Record Cajera X Articulo</p>
+                                </a></li> 
+                                <li class="nav-item"><a id="V10" href="recordcajerasmarca.aspx" runat="server" class="nav-link">
+                                    <p>Record Cajera X Marca</p>
                                 </a></li>
                                 <li class="nav-item"><a id="V5" href="Info_carnes.aspx" runat="server" class="nav-link">
                                     <p>Comparativo Carnicos</p>
