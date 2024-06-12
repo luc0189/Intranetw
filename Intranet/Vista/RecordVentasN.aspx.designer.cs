@@ -7,47 +7,47 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Intranet.Vista.Sistema
+namespace Intranet.Vista
 {
 
 
-    public partial class PermisosApp
+    public partial class RecordVentasN
     {
 
         /// <summary>
-        /// Control btnOn.
+        /// Control date1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOn;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl date1;
 
         /// <summary>
-        /// Control btnOff.
+        /// Control date2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOff;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl date2;
 
         /// <summary>
-        /// Control txtfecha.
+        /// Control LinkButton3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtfecha;
+        protected global::System.Web.UI.WebControls.Button LinkButton3;
 
         /// <summary>
-        /// Control Button2.
+        /// Control GridviewRotacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.GridView GridviewRotacion;
     }
 }

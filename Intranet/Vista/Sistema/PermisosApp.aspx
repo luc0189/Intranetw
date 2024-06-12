@@ -24,8 +24,23 @@
 
       </div>
             </div>
+           
             
         </div>
+        <div class="card">
+            <div class="card-header">
+                <label>CUENTAS SIN DOCUMENTOS RELACIONADOS</label>
+            </div>
+            <div class="card-body">
+                
+                <div class="btn-group">
+                    <input type="date" class="datepicker" id="txtfecha" runat="server" name="fecha" value="" />
+                    <asp:Button Text="Ejecutar Procedimiento" runat="server" ID="Button2" CssClass="btn btn-primary" OnClick="btnOff_Click" />
+
+                </div>
         </div>
+        </div>
+        </div>
+       
   </form>
 </asp:Content>

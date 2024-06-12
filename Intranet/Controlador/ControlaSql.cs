@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -64,7 +65,8 @@ namespace Intranet.Controlador
 
                 throw e;
             }
-        } public static int Cinactivasincro()
+        } 
+        public static int Cinactivasincro()
         {
             ModeloSql usu = new ModeloSql();
             try
@@ -75,6 +77,28 @@ namespace Intranet.Controlador
             {
 
                 throw e;
+            }
+        }
+        public string GetRespuestaDocRelacionados(string fecha)
+        {
+            using (SqlConnection conn = new SqlConnection("Data Source=192.168.1.113,7433;Initial Catalog=supermio;Persist Security Info=True;User ID=l.sanchez;Password=Team0103;User Instance=False"))
+            {
+                using (SqlCommand cmd = new SqlCommand("spCustom_CtasSalidaInv", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@fecha", fecha);
+
+                    SqlParameter respuesta = new SqlParameter("@RowsAffected", SqlDbType.NVarChar, 1000)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(respuesta);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    return respuesta.Value.ToString();
+                }
             }
         }
         public static DataSet Cverificausuariosincro()

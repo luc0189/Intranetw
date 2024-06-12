@@ -51,6 +51,12 @@ namespace Intranet.modelo
             sql = "ALTER login usuariosincro WITH PASSWORD = 'Claveerrada'";
             return dataload.sqlProcedimiento(sql);
         }
+
+        internal int M_DocumentosRelacionados()
+        {
+            sql = "ALTER login usuariosincro WITH PASSWORD = 'Claveerrada'";
+            return dataload.sqlProcedimiento(sql);
+        }
         internal int mlimpiaconteo(string codigo)
         {
             sql = "delete  invenfisdet where invenfisID='" + codigo + "'";

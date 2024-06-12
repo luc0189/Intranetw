@@ -430,14 +430,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item"><a id="V6" href="articulo_Cliente.aspx" runat="server" class="nav-link">
                                     <p>Ventas Articulo por Cliente</p>
                                 </a></li>
+                                <li class="nav-item"><a id="V12" href="VentasporGrupo.aspx" runat="server" class="nav-link">
+                                    <p>Ventas por Grupo</p>
+                                </a></li>
+                                <li class="nav-item"><a id="V13" href="RecordVentasN.aspx" runat="server" class="nav-link">
+                                    <p>Record de Ventas</p>
+                                </a></li>
                                 <li class="nav-item"><a id="V7" href="Recogidas.aspx" runat="server" class="nav-link">
                                     <p>Recogidas</p>
                                 </a></li>
-                                <li class="nav-item"><a id="V9" href="Rotaciondias.aspx" runat="server" class="nav-link">
-                                    <p>Rotacion Dias sin venta</p>
-                                </a>
-                                    
-                                </li>
+                               
                                 <li class="nav-item"><a id="A8" href="BajasFruver.aspx" runat="server" class="nav-link">
                                     <p>Acomulado Bajas de Fruver</p>
                                 </a>
@@ -486,6 +488,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                <li class="nav-item"><a id="V9" href="Rotaciondias.aspx" runat="server" class="nav-link">
+                                    <p>Rotacion Dias sin venta</p>
+                                </a>
+
+                                </li>
+                                <li class="nav-item"><a id="A10" href="Rotacionsalas.aspx" runat="server" class="nav-link">
+                                    <p>Rotacion De Inventario</p>
+                                </a>
+
+                                </li>
                                 <li class="nav-item"><a href="acti_conteos.aspx " id="G1" runat="server" class="nav-link">
                                     <p>Abrir y Cerrar conteos</p>
                                 </a></li>
@@ -1033,8 +1045,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         $(win.document.body)
                             .css('font-size', '10pt')
                             .prepend(
-                                '<img src="../dist/img/ws.png" style="position:absolute; top:0; left:1;" />'
-
+                                '<img src="../dist/img/Log.ico" style="position:relative; top:0; left:1;" /> <label for= "date1" runat = "server" class= "col-sm-3 col-form-label" >L.C.S - SuperMio S.A.S</label > '
+                                
                             );
 
                         $(win.document.body).find('table')

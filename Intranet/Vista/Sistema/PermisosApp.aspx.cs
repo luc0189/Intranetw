@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -68,6 +69,46 @@ namespace Intranet.Vista.Sistema
             {
 
                 var registros = ControlaSql.Cinactivasincro();
+                if (registros >= -1)
+                {
+                    btnOn.Enabled = true;
+                    btnOff.Enabled = false;
+                }
+                else
+                {
+                    btnOn.Enabled = false;
+                    btnOff.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public IActionResult UpdateEmployeeEmail(int employeeId, string newEmail)
+        {
+            int rowsAffected = _employeeService.UpdateEmployeeEmail(employeeId, newEmail);
+
+            if (rowsAffected == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { RowsAffected = rowsAffected });
+        }
+
+
+
+
+
+
+
+        protected void btnDocRelacionados(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string registros = ControlaSql.GetRespuestaDocRelacionados(txtfecha.Value.ToString());
                 if (registros >= -1)
                 {
                     btnOn.Enabled = true;

@@ -541,6 +541,45 @@ namespace Intranet.Controlador
             {
                 throw ex; // para lanzar la exception o complementar la capturada
             }
+        } 
+        public static DataSet CRotacionsalasventas(string fechai,string nit,string salav)//rotacion de inventarios
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.Mrotacionsaladeventas(fechai,nit,salav);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
+        public static DataSet CVentasporGrupo(string fechai, string fechaf)//ventas por grupo
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.ListadoVentasGrupo(fechai, fechaf);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
+        public static DataSet CRecordVentas(string fechai, string fechaf)//ventas por grupo
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.RecordVentas(fechai, fechaf);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
         }
         public static DataSet CVentasgrupo(string fechai,string fechaf,string parametro)//espacio para cumpleañeros
         {
