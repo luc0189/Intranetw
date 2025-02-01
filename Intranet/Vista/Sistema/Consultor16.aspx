@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
     <title>Consultor</title>
 
     <style>
@@ -72,46 +74,47 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="img/1.png" style="width: 100%;" />
+                    <img src="img/1.webp" style="width: 100%;" />
 
                 </div>
 
                 <div class="item">
-                    <img src="img/2.png" style="width: 100%;" />
+                    <img src="img/2.webp" style="width: 100%;" />
 
                 </div>
 
                 <div class="item">
-                    <img src="img/3.png" style="width: 100%;" />
+                    <img src="img/3.webp" style="width: 100%;" />
 
                 </div>
                 <div class="item">
-                    <img src="img/4.png" style="width: 100%;" />
+                    <img src="img/4.webp" style="width: 100%;" />
 
                 </div>
                 <div class="item">
-                    <img src="img/5.png" style="width: 100%;" />
+                    <img src="img/5.webp" style="width: 100%;" />
 
                 </div>
                 <div class="item">
-                    <img src="img/6.png" style="width: 100%;" />
+                    <img src="img/6.webp" style="width: 100%;" />
 
                 </div>
                 <div class="item">
-                    <img src="img/7.png" style="width: 100%;" />
+                    <img src="img/7.webp" style="width: 100%;" />
 
                 </div>
                 <div class="item">
-                    <img src="img/8.png" style="width: 100%;" />
+                    <img src="img/8.webp" style="width: 100%;" />
 
                 </div>
 
                 <div class="item">
-                    <img src="img/9.png" style="width: 100%;" />
+                    <img src="img/9.webp" style="width: 100%;" />
 
                 </div>
                 <div class="item">
-                    <img src="img/10.png" style="width: 100%;" />
+                    <img src="img/10.webp" class="d-block w-100" alt="Imagen 1"/>
+                   
 
                 </div>
             </div>

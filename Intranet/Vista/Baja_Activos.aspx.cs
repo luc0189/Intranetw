@@ -251,9 +251,9 @@ namespace Intranet.Vista
                     {
                         foreach (GridViewRow row in GridViewdetalle.Rows)
                         {
-                             string serialtemp = row.Cells[1].Text;
-                               string detallemant = row.Cells[2].Text.Trim();
-                                string destino = row.Cells[3].Text;
+                             string serialtemp = Page.Server.HtmlDecode(row.Cells[1].Text);
+                               string detallemant = Page.Server.HtmlDecode(row.Cells[2].Text.Trim());
+                                string destino = Page.Server.HtmlDecode(row.Cells[3].Text);
                                  string test = serialtemp;
                                 string[] palabras = test.Split('/');
                                 string serial = palabras[0];

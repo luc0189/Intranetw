@@ -71,7 +71,7 @@ namespace Intranet.Vista.Sistema
 
                         foreach (DataRow row in Tdescuento.Rows)
                         {
-
+                            esDesvalor = (Convert.ToString(row["dtocomovalor"]));
                             des = (Convert.ToInt32(row["vrveneficio"]));
                         }
                         lbarticulo.Text = detalle;

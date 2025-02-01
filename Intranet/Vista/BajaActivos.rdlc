@@ -6,16 +6,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.09346cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>4.61508cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>7.07954cm</Width>
+              <Width>5.89241cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.93041cm</Width>
+              <Width>3.3366cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -27,14 +27,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox14">
+                    <Textbox Name="Textbox42">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>ID</Value>
+                              <Value>serial Art</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -43,7 +43,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox14</rd:DefaultName>
+                      <rd:DefaultName>Textbox42</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -292,14 +292,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="baja_id">
+                    <Textbox Name="serialArt">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!baja_id.Value</Value>
+                              <Value>=Fields!serialArt.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                               </Style>
@@ -308,7 +308,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>baja_id</rd:DefaultName>
+                      <rd:DefaultName>serialArt</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -569,10 +569,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.50085cm</Top>
+        <Top>0.86585cm</Top>
         <Left>0.32929cm</Left>
         <Height>1.2cm</Height>
-        <Width>19.21849cm</Width>
+        <Width>18.84409cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -598,7 +598,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox28</rd:DefaultName>
-        <Top>0.72446cm</Top>
+        <Top>0.08946cm</Top>
         <Left>0.32929cm</Left>
         <Height>0.6cm</Height>
         <Width>1.70422cm</Width>
@@ -633,7 +633,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox31</rd:DefaultName>
-        <Top>0.72446cm</Top>
+        <Top>0.08946cm</Top>
         <Left>10.25775cm</Left>
         <Height>0.6cm</Height>
         <Width>1.00826cm</Width>
@@ -666,7 +666,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>act_ubicacion</rd:DefaultName>
-        <Top>0.72446cm</Top>
+        <Top>0.08946cm</Top>
         <Left>2.03351cm</Left>
         <Height>0.6cm</Height>
         <Width>8.22424cm</Width>
@@ -718,7 +718,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>act_area</rd:DefaultName>
-        <Top>0.72446cm</Top>
+        <Top>0.08946cm</Top>
         <Left>11.30129cm</Left>
         <Height>0.6cm</Height>
         <Width>8.24649cm</Width>
@@ -770,7 +770,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox7</rd:DefaultName>
-        <Top>2.79933cm</Top>
+        <Top>3.11683cm</Top>
         <Left>4.89161cm</Left>
         <Height>0.52062cm</Height>
         <Width>1.36229cm</Width>
@@ -800,7 +800,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>2.79933cm</Top>
+        <Top>3.11683cm</Top>
         <Left>1.77394cm</Left>
         <Height>0.52062cm</Height>
         <Width>2.94129cm</Width>
@@ -1127,7 +1127,7 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>3.46106cm</Top>
+        <Top>3.77856cm</Top>
         <Left>0.32929cm</Left>
         <Height>3.34238cm</Height>
         <Width>19.21849cm</Width>
@@ -1147,7 +1147,7 @@
       <BackgroundColor>White</BackgroundColor>
     </Style>
   </Body>
-  <Width>7.91889in</Width>
+  <Width>8.48809in</Width>
   <Page>
     <PageHeader>
       <Height>4.52438cm</Height>
@@ -1818,6 +1818,10 @@
         <Field Name="baja_idacta">
           <DataField>baja_idacta</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="serialArt">
+          <DataField>serialArt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="nombreArt">
           <DataField>nombreArt</DataField>

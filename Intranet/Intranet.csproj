@@ -6443,6 +6443,8 @@
     <Content Include="Vista\Sistema\vendor\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="Vista\Sistema\vendor\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Vista\Sistema\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Vista\Sistema\img\1.webp" />
+    <Content Include="Vista\Sistema\img\pruebahd.webp" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -7295,7 +7297,6 @@
     <Folder Include="pages\" />
     <Folder Include="text\" />
     <Folder Include="Vista\INVENTARIO\Datasource\" />
-    <Folder Include="Vista\Sistema\img\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="actas.rdlc" />
@@ -7304,13 +7305,16 @@
     <EmbeddedResource Include="Copia.rdlc" />
     <EmbeddedResource Include="nomi_mediacarta.rdlc" />
     <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="Report2.rdlc" />
     <EmbeddedResource Include="Vista\actas.rdlc" />
     <EmbeddedResource Include="Vista\actasmantenimiento.rdlc" />
+    <EmbeddedResource Include="Vista\BajaActivos - Copia.rdlc" />
     <EmbeddedResource Include="Vista\BajaActivos.rdlc" />
     <EmbeddedResource Include="Vista\Documentos\Report1.rdlc" />
     <EmbeddedResource Include="Vista\Mod\Report1.rdlc" />
     <EmbeddedResource Include="Vista\Mod\Report2.rdlc" />
     <EmbeddedResource Include="Vista\Report1.rdlc" />
+    <EmbeddedResource Include="Vista\Report2.rdlc" />
     <EmbeddedResource Include="Vista\reportes\actasmantenimiento.rdlc" />
     <EmbeddedResource Include="Vista\reportes\Copia.rdlc" />
     <EmbeddedResource Include="Vista\reportes\nomi_mediacarta.rdlc" />

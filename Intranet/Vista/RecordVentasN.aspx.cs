@@ -28,7 +28,7 @@ namespace Intranet.Vista
             try
             {
 
-                var registros = Controlador.Controlasql.CRecordVentas(date1.Value, date2.Value);
+                var registros = Controlador.Controlasql.CRecordVentas(date1.Value, date2.Value,prov.Value);
                 if (registros.Tables[0].Rows.Count > 0)
                 {
                     GridviewRotacion.DataSource = registros;

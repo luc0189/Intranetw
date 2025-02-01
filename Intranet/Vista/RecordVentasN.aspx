@@ -153,7 +153,10 @@
                                     <label for="date2" runat="server" class="col-sm-3 col-form-label">Fecha Fin:</label>
                                     <input type="date" class="col-sm-9 form-control" name="name" value="" runat="server" id="date2" />
                                 </div>
-
+                                <div class="form-group row">
+                                    <label for="prov" runat="server" class="col-sm-3 col-form-label">Nit Proveedor:</label>
+                                    <input type="text" class="col-sm-9 form-control" name="name" value="" runat="server" id="prov" />
+                                </div>
 
                             </div>
                             <div class="card-footer">

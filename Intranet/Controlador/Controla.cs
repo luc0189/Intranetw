@@ -136,6 +136,21 @@ namespace Intranet.Controlador
 
                 throw e;
             }
+        } 
+        public static DataSet ClistaprecioOferta(string pbarra,string plista)
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.MListaprecioOferta(pbarra,plista);
+            }
+            catch (Exception e)
+
+            {
+
+                throw e;
+            }
         }
         public static DataSet Clistasaldo(string articulo,string pbodega)
         {
@@ -568,13 +583,13 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
-        public static DataSet CRecordVentas(string fechai, string fechaf)//ventas por grupo
+        public static DataSet CRecordVentas(string fechai, string fechaf,string proveedor)//ventas por grupo
         {
             Modelos usu = new Modelos();
 
             try
             {
-                return usu.RecordVentas(fechai, fechaf);
+                return usu.RecordVentas(fechai, fechaf,proveedor);
             }
             catch (Exception ex)
             {
@@ -2263,6 +2278,18 @@ namespace Intranet.Controlador
             try
             {
                 return usu2.MRoracioninventarioProveedor(pfechaini, pfechahasta, pproveedor);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o compleme
+            }
+        }  public static DataSet CVentasProveedor(string pfechaini, string pfechahasta, string pproveedor) // record de ventas por proveedor
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.MVentasProveedor(pfechaini, pfechahasta, pproveedor);
             }
             catch (Exception ex)
             {

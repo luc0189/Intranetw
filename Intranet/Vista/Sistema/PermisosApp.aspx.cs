@@ -85,44 +85,21 @@ namespace Intranet.Vista.Sistema
             }
         }
 
-        public IActionResult UpdateEmployeeEmail(int employeeId, string newEmail)
+    
+
+
+        protected  void btnDocRelacionados(object sender, EventArgs e)
         {
-            int rowsAffected = _employeeService.UpdateEmployeeEmail(employeeId, newEmail);
-
-            if (rowsAffected == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(new { RowsAffected = rowsAffected });
-        }
-
-
-
-
-
-
-
-        protected void btnDocRelacionados(object sender, EventArgs e)
-        {
+            ControlaSql cInstance = new ControlaSql();
             try
             {
 
-                string registros = ControlaSql.GetRespuestaDocRelacionados(txtfecha.Value.ToString());
-                if (registros >= -1)
-                {
-                    btnOn.Enabled = true;
-                    btnOff.Enabled = false;
-                }
-                else
-                {
-                    btnOn.Enabled = false;
-                    btnOff.Enabled = true;
-                }
+                string registros = cInstance.GetRespuestaDocRelacionados(txtfecha.Value.ToString());
+                response.InnerText=registros;
             }
             catch (Exception ex)
             {
-
+                response.InnerText=ex.Message;
             }
         }
     }

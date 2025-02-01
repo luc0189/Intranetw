@@ -12,34 +12,48 @@
           </li>
           <li class="breadcrumb-item active">Principal</li>
         </ol>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <label>Sincronizacion BNET POS</label>
+                    </div>
+                    <div class="card-body">
+                        <div class="btn-group">
+                            <asp:Button Text="On" runat="server" ID="btnOn" CssClass="btn btn-success" OnClick="btnOn_Click" />
+                            <asp:Button Text="Off" runat="server" ID="btnOff" CssClass="btn btn-primary" OnClick="btnOff_Click" />
 
-        <div class="card">
-            <div class="card-header">
-                <label>Sincronizacion BNET POS</label>
-            </div>
-            <div class="card-body">
-                <div class="btn-group">
-          <asp:Button Text="On" runat="server" ID="btnOn" CssClass="btn btn-success" OnClick="btnOn_Click" />
-          <asp:Button Text="Off" runat="server" ID="btnOff" CssClass="btn btn-primary" OnClick="btnOff_Click" />
-
-      </div>
-            </div>
-           
-            
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <label>CUENTAS SIN DOCUMENTOS RELACIONADOS</label>
-            </div>
-            <div class="card-body">
-                
-                <div class="btn-group">
-                    <input type="date" class="datepicker" id="txtfecha" runat="server" name="fecha" value="" />
-                    <asp:Button Text="Ejecutar Procedimiento" runat="server" ID="Button2" CssClass="btn btn-primary" OnClick="btnOff_Click" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <label></label>
+                    </div>
 
                 </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <label>CUENTAS SIN DOCUMENTOS RELACIONADOS</label>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="btn-group">
+                            <input type="date" class="datepicker" id="txtfecha" runat="server" name="fecha" value="" />
+                            <asp:Button Text="Ejecutar Procedimiento" runat="server" ID="Button2" CssClass="btn btn-primary" OnClick="btnDocRelacionados" />
+
+                        </div>
+
+                    </div>
+                   
+                    <div class="card-footer">
+                        <label id="response" runat="server"></label>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
+       
+      
         </div>
        
   </form>

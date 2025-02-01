@@ -33,6 +33,15 @@ namespace Intranet.Vista
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl date2;
 
         /// <summary>
+        /// Control prov.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText prov;
+
+        /// <summary>
         /// Control LinkButton3.
         /// </summary>
         /// <remarks>
