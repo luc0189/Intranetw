@@ -7,146 +7,164 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Intranet.Vista.Sistema
+namespace Intranet.Vista
 {
 
 
-    public partial class ConsultorV
+    public partial class Novedades
     {
 
         /// <summary>
-        /// Control txtbarra.
+        /// Control selectempleado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtbarra;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect selectempleado;
 
         /// <summary>
-        /// Control ir.
+        /// Control txtfechaini.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ir;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtfechaini;
 
         /// <summary>
-        /// Control modal.
+        /// Control hours.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modal;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl hours;
 
         /// <summary>
-        /// Control lbarticulo.
+        /// Control id39.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbarticulo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton id39;
 
         /// <summary>
-        /// Control boxvalor.
+        /// Control id40.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl boxvalor;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton id40;
 
         /// <summary>
-        /// Control lbvalor.
+        /// Control txtobserva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbvalor;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtobserva;
 
         /// <summary>
-        /// Control dvalor1.
+        /// Control btnguardar_Click.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvalor1;
+        protected global::System.Web.UI.WebControls.LinkButton btnguardar_Click;
 
         /// <summary>
-        /// Control lbvalor1.
+        /// Control GridViewNovedades.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbvalor1;
+        protected global::System.Web.UI.WebControls.GridView GridViewNovedades;
 
         /// <summary>
-        /// Control ddescuento.
+        /// Control Nuevotercero.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ddescuento;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Nuevotercero;
 
         /// <summary>
-        /// Control lbdescuento.
+        /// Control txtccoNit.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbdescuento;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtccoNit;
 
         /// <summary>
-        /// Control dvalor2.
+        /// Control txtNomb.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvalor2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNomb;
 
         /// <summary>
-        /// Control lbvalordes.
+        /// Control txtdir.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbvalordes;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtdir;
 
         /// <summary>
-        /// Control LblPlu.
+        /// Control txttel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblPlu;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txttel;
 
         /// <summary>
-        /// Control lbsaldo.
+        /// Control txtCiudad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbsaldo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtCiudad;
 
         /// <summary>
-        /// Control lbpxunidad.
+        /// Control txtEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbpxunidad;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtEmail;
+
+        /// <summary>
+        /// Control Btncancela.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Btncancela;
+
+        /// <summary>
+        /// Control btnguardaempleado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnguardaempleado;
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="Incap.aspx.cs" Inherits="Intranet.Vista.Incap" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Vista/Main.Master" AutoEventWireup="true" CodeBehind="ListaNovedades.aspx.cs" Inherits="Intranet.Vista.ListaNovedades" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
       <head>
@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Reporte Incapacidades</h1>
+                    <h1>Ingreso de Novedades</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,19 +25,12 @@
         <div class="container-fluid">
     <form runat="server">
         <section class="content">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><b></b></h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            <div class="col-md-6">
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">Mas...</h3>
                     </div>
-                </div>
-                <div class="box-footer">
-
-                    <div class="col-md-4">
-                        <!-- /articulo a mantenimiento-->
+                    <div class="card-body">
 
                         <div class="form-group has-feedback">
                             <div class="input-group">
@@ -47,46 +40,56 @@
                             </div>
 
                         </div>
-
-                        <div class="form-group has-feedback">
-
-                            <textarea id="txtobserva" runat="server" style="width: 100%;" placeholder="Comentarios" rows="6"></textarea>
-                        </div>
-
-
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group has-feedback">
-                            <div class="input-group">
-                                <span class="input-group-addon">Fecha Inicial:</span>
-                                <input id="txtfechaini" runat="server" type="date" class="form-control" />
+                            
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group has-feedback">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Fecha:</span>
+                                        <input id="txtfechaini" runat="server" type="date" class="form-control" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group has-feedback">
-                            <div class="input-group">
-                                <span class="input-group-addon">Fecha Final:</span>
-                                <input id="txtfechafin" runat="server" type="date" class="form-control" />
+                            <div class="col-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Horas:</span>
+                                    <input type="number" name="Horas" value="1" class="form-control" />
+                                </div>
                             </div>
+                            <div class="col-4">
+                                <div class="form-group">
+
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radio1" data-has-listeners="true" wfd-id="id39">
+                                        <label class="form-check-label">Diurno</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radio1" checked="" data-has-listeners="true" wfd-id="id40">
+                                        <label class="form-check-label">Nocturno</label>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                           
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                         <div class="btn-group">
-                        <asp:LinkButton ID="btnnuevo" runat="server" Text="Volver" class="btn btn-app" OnClick="btnnuevo_Click">
-                                    <i aria-hidden="true"  class="fa fa-plus-circle"></i>Nuevo
+                       
+                           
+                            <div class="form-group has-feedback">
+
+                                <textarea id="txtobserva" runat="server" style="width: 100%;" placeholder="Novedad" rows="4"></textarea>
+                            </div>
+                      
+                        </div>
+                    <div class="card-footer">
+                        <asp:LinkButton ID="btnguardar" runat="server" Text="Volver" class="btn btn-app" >
+                             <i aria-hidden="true"  class="fa fa-save"></i>Guardar
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnguardar" runat="server" Text="Volver" class="btn btn-app" OnClick="btnguardar_Click">
-                                    <i aria-hidden="true"  class="fa fa-save"></i>Guardar
-                        </asp:LinkButton>
                     </div>
-                    <asp:LinkButton ID="btnnuevoempleado" runat="server" Text="Volver" class="btn btn-app" OnClick="btnnuevoempleado_Click">
-                                    <i aria-hidden="true"  class="fa fa-user-circle"></i>Nuevo Empleado
-                    </asp:LinkButton>
-                        <a href="1.aspx" class="btn btn-app botonesx">
-                                            <i aria-hidden="true" class="fa fa-home"></i>Inicio
-                                        </a>
                     </div>
                 </div>
-            </div>
             <div class="modal modal-warning fade in" id="Nuevotercero" style="display: block;" runat="server">
                 <div class="modal-dialog">
                     <div class="modal-content">

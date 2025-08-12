@@ -122,6 +122,21 @@ namespace Intranet.Controlador
                 throw e;
             }
         }
+        public static DataSet CNewlistaprecio(string pbarra, string plista)
+        {
+            Modelos usu = new Modelos();
+
+            try
+            {
+                return usu.MNewListaprecio(pbarra, plista);
+            }
+            catch (Exception e)
+
+            {
+
+                throw e;
+            }
+        }
         public static DataSet Clistaprecio(string pbarra,string plista)
         {
             Modelos usu = new Modelos();
@@ -2655,6 +2670,73 @@ namespace Intranet.Controlador
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+        public static int ccrea_Novedades(
+            string pidempleado,
+            string fechaini,
+            int hours,
+            bool diurno,
+            bool nocturno,
+            string pobserva,
+            string puser,
+            string pbd)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.mcrea_Novedades(
+                    pidempleado,
+                    fechaini,
+                    hours,
+                    diurno,
+                    nocturno,
+                    pobserva,
+                    puser,
+                    pbd);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public static DataSet listaNovedades(string usuario,string pbd)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.listadoNovedades(usuario,pbd);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
+        public static DataSet listaNovedadesAdmon(string fini,string ffin, string pbd)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.listNovedades(fini,ffin,pbd);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
+        public static DataSet listNovedadesAdmonDetails(string fini, string ffin,string employee, string pbd)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.listNovedadesAdmonDetails(fini, ffin,employee, pbd);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
             }
         }
         public static int ccrea_novedadincapacidades(string p_idincapacidad, string p_estado,

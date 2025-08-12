@@ -35,24 +35,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <%--<body runat="server" class="layout-footer-fixed layout-fixed layout-navbar-fixed control-sidebar-slide-open" id="eltodo" style="height: auto;">--%>
 <body runat="server" class="layout-footer-fixed layout-fixed layout-navbar-fixed" id="eltodo" style="height: auto;">
 
-    <div class="box box-warning box-solid notifica" runat="server" id="excepcion">
-        <div class="box-header with-border">
-            <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Excp Controlada</font></font></h3>
-
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-            <!-- /.box-tools -->
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                <label id="error" runat="server"></label>
-            </font></font>
-        </div>
-        <!-- /.box-body -->
-    </div>
-
     <div class="box box-success box-solid notifica" runat="server" id="notificacion">
         <div class="box-header with-border">
             <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Notificacion</font></font></h3>
@@ -363,12 +345,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link" id="RH" runat="server">
                                 <i class="nav-icon fas fa-tree"></i>
                                 <p>
-                                    Recursos &amp; Humanos
+                                    Recursos  Humanos
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
 
                             <ul class="nav nav-treeview">
+                                <li class="nav-item"><a href="Novedades.aspx" id="A11" runat="server" class="nav-link"><i class="far fa-circle nav-icon"></i>
+                                    <p>Registro Novedades </p>
+                                </a></li>
+                                <li class="nav-item"><a href="List_Novedades.aspx" id="A12" runat="server" class="nav-link"><i class="far fa-circle nav-icon"></i>
+                                    <p>Lista de Novedades </p>
+                                </a></li>
                                 <li class="nav-item"><a href="Incap.aspx" id="RH1" runat="server" class="nav-link"><i class="far fa-circle nav-icon"></i>
                                     <p>Ingresar Incapacidad </p>
                                 </a></li>

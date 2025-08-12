@@ -48,8 +48,16 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-                    <input class="form-control me-2" type="search" runat="server" id="txtbarra" placeholder="Buscar Articulo" autofocus="autofocus" />
+                    <input class="form-control me-2" type="text" runat="server" id="txtbarra" placeholder="Buscar Articulo" autofocus="autofocus" />
+                    <script>
 
+                        if (!("autofocus" in document.createElement("input"))) {
+
+                            document.getElementById("txtbarra").focus();
+
+                        }
+
+                    </script>
                     <asp:Button ID="ir" type="submit" runat="server" class="btn btn-app" Text=">" OnClick="ir_Click" />
 
                 </div>

@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <head>
-        <title>LCSystem 3 | Ventas Por Grupo</title>
+        <title>LCSystem 3 | Record De Ventas</title>
     </head>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -117,7 +117,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Reporte Ventas por Grupo</h1>
+                    <h1>Record de Ventas</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">

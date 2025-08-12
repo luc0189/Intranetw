@@ -8,6 +8,19 @@ using System.Collections.Generic;
 using System.Data;
 using DataTable = System.Data.DataTable;
 using System.Web.WebPages;
+using DocumentFormat.OpenXml.EMMA;
+using DocumentFormat.OpenXml.Math;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Presentation;
+using Intranet.Vista.Documentos;
+using Microsoft.ReportingServices.ReportProcessing.OnDemandReportObjectModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using System.Reflection;
+using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Office2010.Word;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Vml;
+using System.Security.Cryptography;
 
 namespace Intranet.modelo
 {
@@ -1784,6 +1797,137 @@ namespace Intranet.modelo
                 "                         )r left join dbo.presentacion pres with(nolock) on pres.id = r.presentacionID";
             return dataload.sqlconsulta(sql);
         }
+        internal DataSet MNewListaprecio(string barra, string lista)
+        {
+            sql = "SET NOCOUNT ON;" +
+                "DECLARE @CodigoBarra VARCHAR(50) = '"+barra+"';" +
+                " DECLARE @CodigoArticulo VARCHAR(50), @LineaID VARCHAR(10), @MarcaID VARCHAR(10), @GrupoID VARCHAR(10);" +
+                "            DECLARE @SaldoCantidad INT;" +
+
+                " SELECT DISTINCT" +
+                "    r.CodigoArticulo, " +
+                "    r.detalle," +
+                "    r.valormiva," +
+                "    r.peso," +
+                "    r.marcaID," +
+                "    r.lineaID," +
+                "    r.grupoID," +
+                "    COALESCE(pres.nombrepres, ' ') AS nombrepres" +
+                " INTO #ArticuloTemplcd " +
+                "FROM(" +
+                "    SELECT a.codigo AS CodigoArticulo," +
+                "           a.detalle," +
+                "           a.marcaID," +
+                "           a.lineaID," +
+                "           a.grupoID," +
+                "           CAST(pc.valormiva AS INT) AS valormiva," +
+                "           CAST(a.peso AS INT) AS peso," +
+                "            cd.presentacionID" +
+                "    FROM articulo a WITH(NOLOCK)" +
+                "    LEFT JOIN codbar cd WITH(NOLOCK) ON cd.articuloID = a.codigo" +
+                "    LEFT JOIN precio pc WITH(NOLOCK) ON pc.articuloID = a.codigo" +
+                "          AND(pc.presentacionID = cd.presentacionID" +
+                "          OR(pc.presentacionID IS NULL AND cd.presentacionID IS NULL))" +
+                "    WHERE cd.CODBARRA = @CodigoBarra" +
+                "          AND a.inactivo = 0" +
+                " ) r " +
+                "LEFT JOIN dbo.presentacion pres WITH(NOLOCK) ON pres.id = r.presentacionID;" +
+
+                "IF NOT EXISTS(SELECT 1 FROM #ArticuloTemplcd) " +
+                "BEGIN" +
+                "    PRINT 'No se encontró un artículo con ese código de barras';" +
+                "            RETURN;" +
+                "            END" +
+          
+                "            SELECT" +
+                "    @CodigoArticulo = CodigoArticulo," +
+                "    @LineaID = LineaID," +
+                "    @MarcaID = MarcaID," +
+                "    @GrupoID = GrupoID " +
+                "FROM #ArticuloTemplcd; " +
+            
+                "SELECT @SaldoCantidad = CAST(saldocant AS INT) " +
+                "FROM dbo.fnInventInventariosBaseInventariosConBodegas(GETDATE(), NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0) fn " +
+                "WHERE articuloID = @CodigoArticulo AND bodegaID = '"+lista+"';" +
+              
+                "            IF EXISTS(" +
+                "            SELECT 1" +
+                "                FROM Promocion p" +
+                "                INNER JOIN condicionpromo cp ON p.id = cp.promocionID" +
+                "                LEFT JOIN artspromo ap ON p.Id = ap.promocionID" +
+                "                WHERE" +
+                "                    (SELECT CONVERT(date, GETDATE())) BETWEEN p.fdesde AND p.fhasta" +
+                "                    AND(SELECT CONVERT(time, GETDATE())) <= p.hhasta " +
+                "                   and(select CONVERT(time, GETDATE())) >= p.hdesde" +
+                "                    AND p.activa = 1" +
+                "                   AND cp.excluir != 1" +
+                "                    AND(" +
+                "                        ap.articuloID = @CodigoArticulo" +
+                "                        OR(ap.LineaID = @LineaID AND ap.MarcaID IS NULL AND ap.GrupoID IS NULL)" +
+                "                        OR(ap.MarcaID = @MarcaID AND ap.LineaID IS NULL AND ap.GrupoID IS NULL)" +
+                "                        OR(ap.GrupoID = @GrupoID AND ap.LineaID IS NULL AND ap.MarcaID IS NULL)" +
+                "                        OR(ap.MarcaID = @MarcaID AND ap.GrupoID = @GrupoID AND ap.LineaID IS NULL)" +
+                "                       OR(ap.LineaID = @LineaID AND ap.MarcaID = @MarcaID AND ap.GrupoID IS NULL)" +
+                "                       OR(ap.LineaID = @LineaID AND ap.GrupoID = @GrupoID AND ap.MarcaID IS NULL)" +
+                "                        OR(ap.LineaID = @LineaID AND ap.MarcaID = @MarcaID AND ap.GrupoID = @GrupoID)" +
+                "                 )      )" +
+                " BEGIN" +
+        
+                "    SELECT DISTINCT" +
+                "        at.CodigoArticulo," +
+                "        at.detalle," +
+                "        at.valormiva AS PrecioOriginal," +
+          
+                "        CASE" +
+                "            WHEN cp.dtocomovalor = 1 THEN cast(at.valormiva -cp.vrveneficio as int) " +
+                "            WHEN cp.dtocomovalor = 0 THEN cast(at.valormiva -(at.valormiva * (cp.vrveneficio / 100)) as int) " +
+                "            ELSE at.valormiva " +
+                "        END AS PrecioFinal," +
+                "        at.peso," +
+                "        at.marcaID," +
+                "        at.lineaID," +
+                "        at.grupoID," +
+                "        at.nombrepres," +
+                "        @SaldoCantidad AS saldocant, " +
+                "        p.Nombre AS NombrePromocion," +
+                "        ap.grupoID AS GrupoPromocion," +
+                "        ap.marcaID AS MarcaPromocion," +
+                "        p.tipobeneficio," +
+                "        cp.dtocomovalor," +
+                "        cp.montovalor," +
+                "        cp.vrveneficio," +
+                "        p.fdesde," +
+                "        p.fhasta" +
+                "    FROM #ArticuloTemplcd at" +
+                "    INNER JOIN Promocion p ON 1 = 1" +
+                "    INNER JOIN condicionpromo cp ON p.id = cp.promocionID" +
+                "    LEFT JOIN artspromo ap ON p.Id = ap.promocionID" +
+                "    WHERE" +
+                "        (SELECT CONVERT(date, GETDATE())) BETWEEN p.fdesde AND p.fhasta" +
+                "        AND(SELECT CONVERT(time, GETDATE())) <= p.hhasta " +
+                "       and(select CONVERT(time, GETDATE())) >= p.hdesde " +
+                "        AND p.activa = 1" +
+                "        AND cp.excluir != 1" +
+                "        AND(" +
+                "            ap.articuloID = @CodigoArticulo" +
+                "            OR(ap.LineaID = @LineaID AND ap.MarcaID IS NULL AND ap.GrupoID IS NULL)" +
+                "            OR(ap.MarcaID = @MarcaID AND ap.LineaID IS NULL AND ap.GrupoID IS NULL)" +
+                "            OR(ap.GrupoID = @GrupoID AND ap.LineaID IS NULL AND ap.MarcaID IS NULL)" +
+                "            OR(ap.MarcaID = @MarcaID AND ap.GrupoID = @GrupoID AND ap.LineaID IS NULL)" +
+                "            OR(ap.LineaID = @LineaID AND ap.MarcaID = @MarcaID AND ap.GrupoID IS NULL)" +
+                "            OR(ap.LineaID = @LineaID AND ap.GrupoID = @GrupoID AND ap.MarcaID IS NULL)" +
+                "            OR(ap.LineaID = @LineaID AND ap.MarcaID = @MarcaID AND ap.GrupoID = @GrupoID)" +
+                "        );" +
+                "            END" +
+                "            ELSE " +
+                "BEGIN" +
+             
+                "    SELECT *, @SaldoCantidad AS saldocant FROM #ArticuloTemplcd; " +
+                " END " +
+              
+                "DROP TABLE #ArticuloTemplcd;";
+            return dataload.sqlconsulta(sql);
+        }
         internal DataSet MListaprecioOferta(string barra, string lista)
         {
             sql = " SELECT " +
@@ -2121,192 +2265,224 @@ namespace Intranet.modelo
             if (!proveedor.IsEmpty())
             {
                 sql = "SET NOCOUNT ON; " +
-                "    declare @fecha1 as date = '" + fei + "'" +
-                "    ,@fecha2 as date = '" + fef + "'" +
-                " SELECT" +
-                "        util.codigo," +
-                "		util.detalle," +
-                "		util.[Nombre Linea]," +
-                "		util.[Nombre Grupo]," +
-                "		prov.proveedorID," +
-                "		prov.nomprov[Nombre Proveedor]," +
-                "		cast(util.cantidad as int)[Cant Ventas]," +
-                "		cast(Util.valores as bigint)[Vr Ventas]," +
-                "		cast(util.costo as bigint)[vr costo]," +
-                "		cast(SUM(util.valores - util.costo) as bigint)[Vr Utilidad]," +
-                "		cast((util.dev) as bigint)[Cant Dev]," +
-                "		cast(util.[vr Dev] as bigint)[Vr Dev]" +
-                "        FROM" +
-                "        (select" +
-                "            ventas.codigo," +
-                "            ventas.detalle," +
-                "            ventas.lineaID LineaID," +
-                "            ventas.[Nombre Linea]," +
-                "            ventas.grupoID," +
-                "            ventas.[Nombre Grupo]," +
-                "            sum(ventas.cantidad - cantidadDevol)cantidad," +
-                "            sum(ventas.valores - valoresDevol) valores," +
-                "            sum(ventas.costo - costoDevol)costo," +
-                "            sum(cantidadDevol) as dev," +
-                "            sum(valoresDevol)[vr Dev]," +
-                "            SUM(costoDevol)[Vr CostoDev]" +
-                "            FROM(select" +
-                "                        a.codigo," +
-                "                        a.detalle," +
-                "                        a.lineaID," +
-                "                        l.nombre[Nombre Linea]," +
-                "                        a.grupoID," +
-                "                        g.nombre[Nombre Grupo]," +
-                "                        SUM(case when td.clasedoc in('FV', 'FP', 'FS') THEN i.cantidad else 0.00 end) cantidad," +
-                "                        sum(case when td.clasedoc in('FV', 'FP', 'FS') then i.vrtotal else 0.00 end)valores," +
-                "                        SUM(case when td.clasedoc in('FV', 'FP', 'FS') then i.vrcostototal else 0.00 end)costo," +
-                "                        SUM(case when td.clasedoc in('DV', 'DP') then i.cantidad else 0.00 end) cantidadDevol," +
-                "                        SUM(case when td.clasedoc in('DV', 'DP') then i.vrtotal else 0.00 end) valoresDevol," +
-                "                        SUM(case when td.clasedoc in('DV', 'DP') then i.vrcostototal else 0.00 end) costoDevol" +
-                "                 from itart i" +
-                "                            inner join documento d on i.documentID = d.id" +
-                "                            inner join articulo a on a.codigo = i.articuloID" +
-                "                            inner join tipodoc td on td.codigo = d.tipo" +
-                "                            inner join grupo g on a.grupoID = g.codigo" +
-                "                            inner join linea l on a.lineaID = l.codigo" +
-                "                where d.fecha between @fecha1 and @fecha2" +
-                "                and td.clasedoc in ('FV', 'FP', 'DV', 'DP')" +
-                "                group by a.codigo," +
-                "					a.detalle," +
-                "					a.lineaID," +
-                "					l.nombre," +
-                "					a.grupoID," +
-                "					g.nombre" +
-                "				)ventas" +
-                "                group by" +
-                "                    ventas.detalle," +
-                "					ventas.codigo," +
-                "					ventas.lineaID," +
-                "					ventas.[Nombre Linea]," +
-                "					ventas.grupoID," +
-                "					ventas.[Nombre Grupo]," +
-                "					ventas.cantidad," +
-                "					ventas.valores," +
-                "					ventas.costo" +
-                "			)util OUTER APPLY" +
-                "               (" +
-                "                select top 1 proveedorID," +
-                "                    coalesce(terp.nombrec, terp.nombre) nomprov" +
-                "                from dbo.vwProvArt pa inner" +
-                "                join dbo.tercero terp on pa.proveedorID = terp.id" +
-                "                where pa.articuloID = util.codigo" +
-                "                order by fecha desc" +
-                "                ) as prov" +
-                "                where prov.proveedorID = '" + proveedor + "'" +
-                "            group by util.codigo," +
-                "					util.detalle, " +
-                "					util.grupoID," +
-                "					util.[Nombre Linea]," +
-                "					util.[Nombre Grupo],   " +
-                "					util.LineaID, " +
-                "					util.cantidad, " +
-                "					util.valores, " +
-                "					util.costo, " +
-                "					util.dev, " +
-                "					util.[vr Dev]," +
-                "					prov.proveedorID," +
-                "					prov.nomprov" +
-                "            order by codigo asc";
+                    "                    declare @fecha1 as date = '"+fei+"'" +
+                    "                    ,@fecha2 as date = '"+fef+"'" +
+                    "                 SELECT" +
+                    "                        util.codigo," +
+                    "                		util.detalle," +
+                    "                		util.[Nombre Linea]," +
+                    "                		util.[Nombre Grupo]," +
+                    "						util.[Nombre Marca]," +
+                    "                		prov.proveedorID," +
+                    "                		prov.nomprov[Nombre Proveedor]," +
+                    "                		cast(util.cantidad as int)[Cant Ventas]," +
+                    "                		cast(Util.valores as bigint)[Vr Ventas]," +
+                    "                		cast(util.costo as bigint)[vr costo]," +
+                    "                		cast(SUM(util.valores - util.costo) as bigint)[Vr Utilidad]," +
+                    "                		cast((util.dev) as bigint)[Cant Dev]," +
+                    "                		cast(util.[vr Dev] as bigint)[Vr Dev], " +
+                    "                       cast(util.[Vr Dscto] as bigint)[Vr Dscto]" +
+                    "                       FROM" +
+                    "                        (select" +
+                    "                            ventas.codigo," +
+                    "                            ventas.detalle," +
+                    "                            ventas.lineaID LineaID," +
+                    "                            ventas.[Nombre Linea]," +
+                    "                            ventas.grupoID," +
+                    "                ventas.[Nombre Grupo]," +
+                    "                            ventas.marcaID," +
+                    "                            ventas.[Nombre Marca]," +
+                    "                            sum(ventas.cantidad)cantidad," +
+                    "                            sum(ventas.valores) valores," +
+                    "                            sum(ventas.costo - costoDevol)costo," +
+                    "                            sum(cantidadDevol) as dev," +
+                    "                            sum(valoresDevol)[vr Dev]," +
+                    "                            SUM(costoDevol)[Vr CostoDev]," +
+                    "                            SUM(ValoresDscto)[Vr Dscto]" +
+                    "                            FROM(select" +
+                    "                                        a.codigo," +
+                    "                                        a.detalle," +
+                    "                                        a.lineaID," +
+                    "                                        l.nombre[Nombre Linea]," +
+                    "                                        a.grupoID," +
+                    "                                        g.nombre[Nombre Grupo]," +
+                    "                                        a.marcaID," +
+                    "                m.nombre[Nombre Marca]," +
+                    "                                        SUM(case when td.clasedoc in('FV', 'FP', 'FS') THEN i.cantidad else 0.00 end) cantidad," +
+                    "                                        sum(case when td.clasedoc in('FV', 'FP', 'FS') then i.vrtotal else 0.00 end)valores," +
+                    "                                        SUM(case when td.clasedoc in('FV', 'FP', 'FS') then i.vrcostototal else 0.00 end)costo," +
+                    "                                        SUM(case when td.clasedoc in('DV', 'DP') then i.cantidad else 0.00 end) cantidadDevol," +
+                    "                                        SUM(case when td.clasedoc in('DV', 'DP') then i.vrtotal else 0.00 end) valoresDevol," +
+                    "                                        SUM(case when td.clasedoc in('DV', 'DP') then i.vrcostototal else 0.00 end) costoDevol, " +
+                    "                                        SUM(case when td.clasedoc in('FV', 'FP', 'FS', 'DV', 'DP') then i.vrdto else 0.00 end) ValoresDscto" +
+                    "                                 from itart i" +
+                    "                                            inner join documento d on i.documentID = d.id" +
+                    "                                            inner join articulo a on a.codigo = i.articuloID" +
+                    "                                            inner join tipodoc td on td.codigo = d.tipo" +
+                    "                                            inner join grupo g on a.grupoID = g.codigo" +
+                    "                                            inner join linea l on a.lineaID = l.codigo" +
+                    "                                            inner join marca m on a.marcaID = m.codigo" +
+                    "                                where d.fecha between @fecha1 and @fecha2" +
+                    "                                and td.clasedoc in ('FV', 'FP', 'DV', 'DP')" +
+                    "                                group by a.codigo," +
+                    "                					a.detalle," +
+                    "                					a.lineaID," +
+                    "									a.marcaID," +
+                    "									m.nombre," +
+                    "                					l.nombre," +
+                    "                					a.grupoID," +
+                    "                					g.nombre" +
+                    "                				)ventas" +
+                    "                                group by" +
+                    "                                    ventas.detalle," +
+                    "                					ventas.codigo," +
+                    "                					ventas.lineaID," +
+                    "                					ventas.[Nombre Linea]," +
+                    "                					ventas.grupoID," +
+                    "									ventas.marcaID," +
+                    "									ventas.[Nombre Marca]," +
+                    "                					ventas.[Nombre Grupo]," +
+                    "                					ventas.cantidad," +
+                    "                					ventas.valores," +
+                    "                					ventas.costo" +
+                    "                			)util OUTER APPLY" +
+                    "                               (" +
+                    "                                select top 1 proveedorID," +
+                    "                                    coalesce(terp.nombrec, terp.nombre) nomprov" +
+                    "                                from dbo.vwProvArt pa inner" +
+                    "                                join dbo.tercero terp on pa.proveedorID = terp.id" +
+                    "                                where pa.articuloID = util.codigo" +
+                    "                                order by fecha desc" +
+                    "                                ) as prov" +
+                    "                                where prov.proveedorID = '"+proveedor+"'" +
+                    "                            group by util.codigo," +
+                    "                					util.detalle, " +
+                    "                					util.grupoID," +
+                    "                					util.[Nombre Linea]," +
+                    "                					util.[Nombre Grupo], " +
+                    "									util.[Nombre Marca]," +
+                    "									util.marcaID," +
+                    "                					util.LineaID, " +
+                    "                					util.cantidad, " +
+                    "                					util.valores, " +
+                    "                					util.costo, " +
+                    "                					util.dev, " +
+                    "                					util.[vr Dev]," +
+                    "                                   util.[Vr Dscto]," +
+                    "                					prov.proveedorID," +
+                    "                					prov.nomprov" +
+                    "                            order by codigo asc";
             }
             else
             {
                 sql = "SET NOCOUNT ON; " +
-                "    declare @fecha1 as date = '" + fei + "'" +
-                "    ,@fecha2 as date = '" + fef + "'" +
-                " SELECT" +
-                "        util.codigo," +
-                "		util.detalle," +
-                "		util.[Nombre Linea]," +
-                "		util.[Nombre Grupo]," +
-                "		prov.proveedorID," +
-                "		prov.nomprov[Nombre Proveedor]," +
-                "		cast(util.cantidad as int)[Cant Ventas]," +
-                "		cast(Util.valores as bigint)[Vr Ventas]," +
-                "		cast(util.costo as bigint)[vr costo]," +
-                "		cast(SUM(util.valores - util.costo) as bigint)[Vr Utilidad]," +
-                "		cast((util.dev) as bigint)[Cant Dev]," +
-                "		cast(util.[vr Dev] as bigint)[Vr Dev]" +
-                "        FROM" +
-                "        (select" +
-                "            ventas.codigo," +
-                "            ventas.detalle," +
-                "            ventas.lineaID LineaID," +
-                "            ventas.[Nombre Linea]," +
-                "            ventas.grupoID," +
-                "            ventas.[Nombre Grupo]," +
-                "            sum(ventas.cantidad - cantidadDevol)cantidad," +
-                "            sum(ventas.valores - valoresDevol) valores," +
-                "            sum(ventas.costo - costoDevol)costo," +
-                "            sum(cantidadDevol) as dev," +
-                "            sum(valoresDevol)[vr Dev]," +
-                "            SUM(costoDevol)[Vr CostoDev]" +
-                "            FROM(select" +
-                "                        a.codigo," +
-                "                        a.detalle," +
-                "                        a.lineaID," +
-                "                        l.nombre[Nombre Linea]," +
-                "                        a.grupoID," +
-                "                        g.nombre[Nombre Grupo]," +
-                "                        SUM(case when td.clasedoc in('FV', 'FP', 'FS') THEN i.cantidad else 0.00 end) cantidad," +
-                "                        sum(case when td.clasedoc in('FV', 'FP', 'FS') then i.vrtotal else 0.00 end)valores," +
-                "                        SUM(case when td.clasedoc in('FV', 'FP', 'FS') then i.vrcostototal else 0.00 end)costo," +
-                "                        SUM(case when td.clasedoc in('DV', 'DP') then i.cantidad else 0.00 end) cantidadDevol," +
-                "                        SUM(case when td.clasedoc in('DV', 'DP') then i.vrtotal else 0.00 end) valoresDevol," +
-                "                        SUM(case when td.clasedoc in('DV', 'DP') then i.vrcostototal else 0.00 end) costoDevol" +
-                "                 from itart i" +
-                "                            inner join documento d on i.documentID = d.id" +
-                "                            inner join articulo a on a.codigo = i.articuloID" +
-                "                            inner join tipodoc td on td.codigo = d.tipo" +
-                "                            inner join grupo g on a.grupoID = g.codigo" +
-                "                            inner join linea l on a.lineaID = l.codigo" +
-                "                where d.fecha between @fecha1 and @fecha2" +
-                "                and td.clasedoc in ('FV', 'FP', 'DV', 'DP')" +
-                "                group by a.codigo," +
-                "					a.detalle," +
-                "					a.lineaID," +
-                "					l.nombre," +
-                "					a.grupoID," +
-                "					g.nombre" +
-                "				)ventas" +
-                "                group by" +
-                "                    ventas.detalle," +
-                "					ventas.codigo," +
-                "					ventas.lineaID," +
-                "					ventas.[Nombre Linea]," +
-                "					ventas.grupoID," +
-                "					ventas.[Nombre Grupo]," +
-                "					ventas.cantidad," +
-                "					ventas.valores," +
-                "					ventas.costo" +
-                "			)util OUTER APPLY" +
-                "               (" +
-                "                select top 1 proveedorID," +
-                "                    coalesce(terp.nombrec, terp.nombre) nomprov" +
-                "                from dbo.vwProvArt pa inner" +
-                "                join dbo.tercero terp on pa.proveedorID = terp.id" +
-                "                where pa.articuloID = util.codigo" +
-                "                order by fecha desc" +
-                "                ) as prov" +
-             
-                "            group by util.codigo," +
-                "					util.detalle, " +
-                "					util.grupoID," +
-                "					util.[Nombre Linea]," +
-                "					util.[Nombre Grupo],   " +
-                "					util.LineaID, " +
-                "					util.cantidad, " +
-                "					util.valores, " +
-                "					util.costo, " +
-                "					util.dev, " +
-                "					util.[vr Dev]," +
-                "					prov.proveedorID," +
-                "					prov.nomprov" +
-                "            order by codigo asc";
+                    "                    declare @fecha1 as date = '" + fei + "'" +
+                    "                    ,@fecha2 as date = '" + fef + "'" +
+                    "                 SELECT" +
+                    "                        util.codigo," +
+                    "                		util.detalle," +
+                    "                		util.[Nombre Linea]," +
+                    "                		util.[Nombre Grupo]," +
+                    "						util.[Nombre Marca]," +
+                    "                		prov.proveedorID," +
+                    "                		prov.nomprov[Nombre Proveedor]," +
+                    "                		cast(util.cantidad as int)[Cant Ventas]," +
+                    "                		cast(Util.valores as bigint)[Vr Ventas]," +
+                    "                		cast(util.costo as bigint)[vr costo]," +
+                    "                		cast(SUM(util.valores - util.costo) as bigint)[Vr Utilidad]," +
+                    "                		cast((util.dev) as bigint)[Cant Dev]," +
+                    "                		cast(util.[vr Dev] as bigint)[Vr Dev], " +
+                    "                       cast(util.[Vr Dscto] as bigint)[Vr Dscto]" +
+                    "                       FROM" +
+                    "                        (select" +
+                    "                            ventas.codigo," +
+                    "                            ventas.detalle," +
+                    "                            ventas.lineaID LineaID," +
+                    "                            ventas.[Nombre Linea]," +
+                    "                            ventas.grupoID," +
+                    "                ventas.[Nombre Grupo]," +
+                    "                            ventas.marcaID," +
+                    "                            ventas.[Nombre Marca]," +
+                    "                            sum(ventas.cantidad)cantidad," +
+                    "                            sum(ventas.valores) valores," +
+                    "                            sum(ventas.costo - costoDevol)costo," +
+                    "                            sum(cantidadDevol) as dev," +
+                    "                            sum(valoresDevol)[vr Dev]," +
+                    "                            SUM(costoDevol)[Vr CostoDev]," +
+                    "                            SUM(ValoresDscto)[Vr Dscto]" +
+                    "                            FROM(select" +
+                    "                                        a.codigo," +
+                    "                                        a.detalle," +
+                    "                                        a.lineaID," +
+                    "                                        l.nombre[Nombre Linea]," +
+                    "                                        a.grupoID," +
+                    "                                        g.nombre[Nombre Grupo]," +
+                    "                                        a.marcaID," +
+                    "                m.nombre[Nombre Marca]," +
+                    "                                        SUM(case when td.clasedoc in('FV', 'FP', 'FS') THEN i.cantidad else 0.00 end) cantidad," +
+                    "                                        sum(case when td.clasedoc in('FV', 'FP', 'FS') then i.vrtotal else 0.00 end)valores," +
+                    "                                        SUM(case when td.clasedoc in('FV', 'FP', 'FS') then i.vrcostototal else 0.00 end)costo," +
+                    "                                        SUM(case when td.clasedoc in('DV', 'DP') then i.cantidad else 0.00 end) cantidadDevol," +
+                    "                                        SUM(case when td.clasedoc in('DV', 'DP') then i.vrtotal else 0.00 end) valoresDevol," +
+                    "                                        SUM(case when td.clasedoc in('DV', 'DP') then i.vrcostototal else 0.00 end) costoDevol, " +
+                    "                                        SUM(case when td.clasedoc in('FV', 'FP', 'FS', 'DV', 'DP') then i.vrdto else 0.00 end) ValoresDscto" +
+                    "                                 from itart i" +
+                    "                                            inner join documento d on i.documentID = d.id" +
+                    "                                            inner join articulo a on a.codigo = i.articuloID" +
+                    "                                            inner join tipodoc td on td.codigo = d.tipo" +
+                    "                                            inner join grupo g on a.grupoID = g.codigo" +
+                    "                                            inner join linea l on a.lineaID = l.codigo" +
+                    "                                            inner join marca m on a.marcaID = m.codigo" +
+                    "                                where d.fecha between @fecha1 and @fecha2" +
+                    "                                and td.clasedoc in ('FV', 'FP', 'DV', 'DP')" +
+                    "                                group by a.codigo," +
+                    "                					a.detalle," +
+                    "                					a.lineaID," +
+                    "									a.marcaID," +
+                    "									m.nombre," +
+                    "                					l.nombre," +
+                    "                					a.grupoID," +
+                    "                					g.nombre" +
+                    "                				)ventas" +
+                    "                                group by" +
+                    "                                    ventas.detalle," +
+                    "                					ventas.codigo," +
+                    "                					ventas.lineaID," +
+                    "                					ventas.[Nombre Linea]," +
+                    "                					ventas.grupoID," +
+                    "									ventas.marcaID," +
+                    "									ventas.[Nombre Marca]," +
+                    "                					ventas.[Nombre Grupo]," +
+                    "                					ventas.cantidad," +
+                    "                					ventas.valores," +
+                    "                					ventas.costo" +
+                    "                			)util OUTER APPLY" +
+                    "                               (" +
+                    "                                select top 1 proveedorID," +
+                    "                                    coalesce(terp.nombrec, terp.nombre) nomprov" +
+                    "                                from dbo.vwProvArt pa inner" +
+                    "                                join dbo.tercero terp on pa.proveedorID = terp.id" +
+                    "                                where pa.articuloID = util.codigo" +
+                    "                                order by fecha desc" +
+                    "                                ) as prov" +
+                 
+                    "                            group by util.codigo," +
+                    "                					util.detalle, " +
+                    "                					util.grupoID," +
+                    "                					util.[Nombre Linea]," +
+                    "                					util.[Nombre Grupo], " +
+                    "									util.[Nombre Marca]," +
+                    "									util.marcaID," +
+                    "                					util.LineaID, " +
+                    "                					util.cantidad, " +
+                    "                					util.valores, " +
+                    "                					util.costo, " +
+                    "                					util.dev, " +
+                    "                					util.[vr Dev]," +
+                    "                                   util.[Vr Dscto]," +
+                    "                					prov.proveedorID," +
+                    "                					prov.nomprov" +
+                    "                            order by codigo asc";
             }
             return dataload.sqlconsulta(sql);
         }//ventas por grupo
@@ -3132,6 +3308,115 @@ namespace Intranet.modelo
         {
             sql = "insert into incapacidades (INCA_IDPERSONA,INCA_MOTIVO,INCA_FECHAINICIAL,INCA_FECHAFINAL,INCA_FCREA,INCA_USUCREA)VALUE((select idResp  from persona where nomb='" + p_idempleado + "'),'" + pobservaciones + "','" + pfechaini + "','" + pfechafin + "',(select sysdate()),'" + puser + "')";
             return dataload.MysqlProcedimiento(sql, bd);
+        }
+        internal int mcrea_Novedades(
+            string p_idempleado,
+            string pfechaini,
+            int hours,
+            bool diurno,
+            bool nocturno,
+            string pobservaciones,
+           string puser,
+           String bd)
+        {
+            sql = "insert into novedades (fecha, " +
+                "empleado, " +
+                "horas, " +
+                "diurno, " +
+                "Nocturno, " +
+                "novedad, " +
+                "datetimecreation, " +
+                "usucrea ) " +
+                $" VALUE('{pfechaini}',(select idResp from persona where nomb= '{p_idempleado}'),{hours},{diurno},{nocturno},'{pobservaciones}',(select sysdate()),'{puser}')";
+            return dataload.MysqlProcedimiento(sql, bd);
+        }
+        internal DataSet listadoNovedadesAdmon(string fechaini,string fechafin, String bd)
+        {
+         
+                sql = "SELECT " +
+               "   n.Empleado, p.nomb Empleado," +
+               "    SUM(CASE WHEN n.Diurno = 1 THEN n.horas ELSE 0 END) AS Horas_Diurnas," +
+               "   SUM(CASE WHEN n.Nocturno = 1 THEN n.horas ELSE 0 END) AS Horas_Nocturnas," +
+               "   SUM(n.horas) AS Total_horas," +
+               "    n.usucrea Usuario " +
+               " FROM" +
+               "   Novedades n" +
+               " INNER JOIN " +
+               "   persona p ON p.idResp = n.Empleado" +
+               $"    WHERE fecha BETWEEN " +
+               $"    '{fechaini}' " +
+               $"    AND '{fechafin}' " +
+               " GROUP BY " +
+               "    p.nomb, n.usucrea;";
+       
+
+            return dataload.MySqlQuery(sql, bd);
+        }
+        internal DataSet listNovedades(string datein, string date_end,String bd)
+        {
+            sql = $"CALL P_LISTA_NOVEDADES('{datein}','{date_end}');";
+            return dataload.MySqlQuery(sql, bd);
+        }
+        internal DataSet listNovedadesAdmonDetails(string fechaini, string fechafin,string employee, String bd)
+        {
+
+            sql = "select n.Fecha, " +
+               
+                " n.novedad, " +
+                " n.horas, " +
+                " n.Diurno, " +
+                " n.Nocturno, " +
+                " n.DateTimeCreation, " +
+                " n.usucrea " +
+                " from" +
+                "         novedades n" +
+                "         inner join persona p on n.Empleado = p.idResp" +
+                $"          where n.empleado ='{employee}' and n.fecha between '{fechaini}' and '{fechafin}' ";
+
+
+            return dataload.MySqlQuery(sql, bd);
+        }
+
+        internal DataSet listadoNovedades(string usuario,String bd)
+        {
+            if (usuario == "")
+            {
+                sql = "SELECT " +
+               "   p.nomb Empleado," +
+               "    SUM(CASE WHEN n.Diurno = 1 THEN n.horas ELSE 0 END) AS Horas_Diurnas," +
+               "   SUM(CASE WHEN n.Nocturno = 1 THEN n.horas ELSE 0 END) AS Horas_Nocturnas," +
+               "   SUM(n.horas) AS Total_horas," +
+               "    n.usucrea Usuario " +
+               " FROM" +
+               "   Novedades n" +
+               " INNER JOIN " +
+               "   persona p ON p.idResp = n.Empleado" +
+               $"    WHERE fecha BETWEEN " +
+               "    DATE_SUB(CURDATE(), INTERVAL (DAYOFWEEK(CURDATE()) + 5) % 7 DAY)" +
+               "    AND DATE_ADD(CURDATE(), INTERVAL (7 - DAYOFWEEK(CURDATE())) DAY) " +
+               " GROUP BY " +
+               "    p.nomb, n.usucrea;";
+            }
+            else
+            {
+                sql = "SELECT " +
+               "   p.nomb Empleado," +
+               "    SUM(CASE WHEN n.Diurno = 1 THEN n.horas ELSE 0 END) AS Horas_Diurnas," +
+               "   SUM(CASE WHEN n.Nocturno = 1 THEN n.horas ELSE 0 END) AS Horas_Nocturnas," +
+               "   SUM(n.horas) AS Total_horas," +
+               "    n.usucrea Usuario " +
+               " FROM" +
+               "   Novedades n" +
+               " INNER JOIN " +
+               "   persona p ON p.idResp = n.Empleado" +
+               $"    WHERE n.usucrea='{usuario}' and fecha BETWEEN" +
+               "    DATE_SUB(CURDATE(), INTERVAL (DAYOFWEEK(CURDATE()) + 5) % 7 DAY)" +
+               "    AND DATE_ADD(CURDATE(), INTERVAL (7 - DAYOFWEEK(CURDATE())) DAY) " +
+               " GROUP BY " +
+               "    p.nomb, n.usucrea;";
+            }
+           
+            return dataload.MySqlQuery(sql, bd);
         }
         internal int mborraincapacidad(string p_idincapacidad, String bd)
         {

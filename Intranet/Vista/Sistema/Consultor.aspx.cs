@@ -11,258 +11,128 @@ namespace Intranet.Vista.Sistema
         {
             if (!Page.IsPostBack)
             {
-                modal.Visible = true;
-                dvalor1.Visible = false;
-                ddescuento.Visible = false;
-                dvalor2.Visible = false;
+                InicializarPagina();
             }
         }
+        private void InicializarPagina()
+        {
+            modal.Visible = true;
+            dvalor1.Visible = false;
+            ddescuento.Visible = false;
+            dvalor2.Visible = false;
+            txtbarra.Value = "";
 
+        }
 
 
         protected void ir_Click(object sender, EventArgs e)
         {
+            EjecutarSonido("/plugins/store4.mp3");
             try
             {
-                var varArticulo = "";
-                var des = 0;
-                var detalle = "";
-                var valor = 0;
-                var peso = 1;
-                lbarticulo.Text = "";
-                lbdescuento.Text = "";
-                lbpxunidad.Text = "";
-                lbsaldo.Text = "";
-                lbvalor.Text = "";
-                lbvalor1.Text = "";
-                lbvalordes.Text = "";
-                LblPlu.Text = "";
-                var varlinea = "";
-                var vargrupo = "";
-                var varmarca = "";
-                var esDesvalor = "";
-                var descuentossss =  0;
-                var lbtxtvalor = "";
-                var articulo = Controlasql.Clistaprecio(txtbarra.Value, "005");
-                if (articulo.Tables[0].Rows.Count > 0)
+                ResetControles();
+
+                var newArticulo = Controlasql.CNewlistaprecio(txtbarra.Value, "015");
+                if (newArticulo.Tables[0].Rows.Count > 0)
                 {
-                    DataTable Tablearticulo = articulo.Tables[0];
+                    var row = newArticulo.Tables[0].Rows[0];
+                    int vrbeneficio = SafeGetInt(row, "vrveneficio");
 
-                    foreach (DataRow row in Tablearticulo.Rows)
+                    if (vrbeneficio == 0)
                     {
-                        varArticulo = (Convert.ToString(row["codigo"]));
-                        detalle = (Convert.ToString(row["detalle"])) + "-" + (Convert.ToString(row["nombrepres"]));
-                        valor = (Convert.ToInt32(row["valormiva"]));
-                        peso = (Convert.ToInt32(row["peso"]));
-                        varlinea = (Convert.ToString(row["nombrelinea"]));
-                        varmarca = (Convert.ToString(row["nombremarca"]));
-                        vargrupo = (Convert.ToString(row["nombregrupo"]));
-                        esDesvalor = (Convert.ToString(row["dtocomovalor"]));
-                        if (peso == 0)
-                        {
-                            peso = 1;
-                        }
-                    }
-                    var descuento = Controlasql.Clistadescarticuloid(varArticulo);
-                    if (descuento.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable Tdescuento = descuento.Tables[0];
-
-                        foreach (DataRow row in Tdescuento.Rows)
-                        {
-                            esDesvalor = (Convert.ToString(row["dtocomovalor"]));
-                            des = (Convert.ToInt32(row["vrveneficio"]));
-                            
-                        }
-                        lbarticulo.Text = detalle;
-                        boxvalor.Visible = false;
-                        dvalor1.Visible = true;
-                        ddescuento.Visible = true;
-                        dvalor2.Visible = true;
-                        LblPlu.Text = varArticulo;
-                        lbvalor1.Text = valor.ToString();
-                        if (esDesvalor == "False" || esDesvalor == "")
-                        {
-                            descuentossss = (valor - ((valor * des) / 100));
-                            lbtxtvalor = String.Format("{0}%", des);
-                        }
-                        else
-                        {
-                            descuentossss = valor - des;
-                            lbtxtvalor = String.Format("${0}", des);
-                        }
-
-                        lbdescuento.Text = lbtxtvalor;
-                        lbvalordes.Text = descuentossss.ToString();
-                        lbpxunidad.Text = (descuentossss / peso).ToString();
-
-
+                        MostrarSinDescuento(row);
                     }
                     else
                     {
-                        boxvalor.Visible = true;
-                        dvalor1.Visible = false;
-                        ddescuento.Visible = false;
-                        dvalor2.Visible = false;
-                        lbvalor.Text = valor.ToString();
-                        lbarticulo.Text = detalle;
-                        lbpxunidad.Text = (valor / peso).ToString();
-                        LblPlu.Text = varArticulo;
-                        txtbarra.Value = "";
-                    }
-
-                    var descuentolinea = Controlasql.Clistadeslinea(varlinea);//consulta por linea
-                    if (descuentolinea.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable Tdescuento = descuentolinea.Tables[0];
-
-                        foreach (DataRow row in Tdescuento.Rows)
-                        {
-
-                            des = (Convert.ToInt32(row["vrveneficio"]));
-                        }
-                        lbarticulo.Text = detalle;
-                        boxvalor.Visible = false;
-                        dvalor1.Visible = true;
-                        ddescuento.Visible = true;
-                        dvalor2.Visible = true;
-                        LblPlu.Text = varArticulo;
-                        lbvalor1.Text = valor.ToString();
-                        if (esDesvalor == "False" || esDesvalor == "")
-                        {
-                            descuentossss = (valor - ((valor * des) / 100));
-                            lbtxtvalor = String.Format("{0}%", des);
-                        }
-                        else
-                        {
-                            descuentossss = valor - des;
-                            lbtxtvalor = String.Format("${0}", des);
-                        }
-
-                        lbdescuento.Text = lbtxtvalor;
-                        lbvalordes.Text = descuentossss.ToString();
-                        lbpxunidad.Text = (descuentossss / peso).ToString();
-
-
-                    }
-
-                    var descuentogrupo = Controlasql.Clistadesgrupo(vargrupo);//consulta por linea
-                    if (descuentogrupo.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable Tdescuento = descuentogrupo.Tables[0];
-
-                        foreach (DataRow row in Tdescuento.Rows)
-                        {
-
-                            des = (Convert.ToInt32(row["vrveneficio"]));
-                        }
-                        lbarticulo.Text = detalle;
-                        boxvalor.Visible = false;
-                        dvalor1.Visible = true;
-                        ddescuento.Visible = true;
-                        dvalor2.Visible = true;
-                        LblPlu.Text = varArticulo;
-                        lbvalor1.Text = valor.ToString();
-                        if (esDesvalor == "False")
-                        {
-                            descuentossss = (valor - ((valor * des) / 100));
-                            lbtxtvalor = String.Format("{0}%", des);
-                        }
-                        else
-                        {
-                            descuentossss = valor - des;
-                            lbtxtvalor = String.Format("${0}", des);
-                        }
-
-                        lbdescuento.Text = lbtxtvalor;
-                        lbvalordes.Text = descuentossss.ToString();
-                        lbpxunidad.Text = (descuentossss / peso).ToString();
-
-
-                    }
-
-                    var descuentomarca = Controlasql.Clistadesmarca(varmarca);//consulta por linea
-                    if (descuentomarca.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable Tdescuento = descuentomarca.Tables[0];
-
-                        foreach (DataRow row in Tdescuento.Rows)
-                        {
-
-                            des = (Convert.ToInt32(row["vrveneficio"]));
-                        }
-                        modal.Visible = true;
-
-                        lbarticulo.Text = detalle;
-                        boxvalor.Visible = false;
-                        dvalor1.Visible = true;
-                        ddescuento.Visible = true;
-                        dvalor2.Visible = true;
-                        LblPlu.Text = varArticulo;
-                        lbvalor1.Text = valor.ToString();
-                        if (esDesvalor == "False" || esDesvalor == "")
-                        {
-                            descuentossss = (valor - ((valor * des) / 100));
-                            lbtxtvalor = String.Format("{0}%", des);
-                        }
-                        else
-                        {
-                            descuentossss = valor - des;
-                            lbtxtvalor = String.Format("${0}", des);
-                        }
-
-                        lbdescuento.Text = lbtxtvalor;
-                        lbvalordes.Text = descuentossss.ToString();
-                        lbpxunidad.Text = (descuentossss / peso).ToString();
-                        txtbarra.Value = "";
-
-
-                    }
-
-                    var saldo = Controlasql.Clistasaldo(varArticulo, "015");
-                    if (saldo.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable Tsaldo = saldo.Tables[0];
-
-                        foreach (DataRow row in Tsaldo.Rows)
-                        {
-                            lbsaldo.Text = (Convert.ToString(row["saldocant"]));
-                        }
-
-
-                    }
-                    else
-                    {
-
-                        lbsaldo.Text = "Articulo Sin Saldo";
+                        MostrarConDescuento(row);
                     }
                 }
                 else
                 {
-                    boxvalor.Visible = true;
-                    dvalor1.Visible = false;
-                    ddescuento.Visible = false;
-                    dvalor2.Visible = false;
-                    lbvalor.Text = valor.ToString();
-                    lbarticulo.Text = detalle;
-                    lbpxunidad.Text = (valor / peso).ToString();
-                    LblPlu.Text = varArticulo;
-                    txtbarra.Value = "";
-                    modal.Visible = true;
-                    dvalor1.Visible = false;
-                    ddescuento.Visible = false;
-                    dvalor2.Visible = false;
+                    MostrarArticuloNoEncontrado();
                 }
-
-
-
-                txtbarra.Value = "";
             }
-            catch (Exception EX)
+            catch (Exception ex)
             {
 
-                alerta.MessageBox(this, $" {EX}");
             }
+            finally
+            {
+                txtbarra.Value = "";
+            }
+        }
+
+        private void ResetControles()
+        {
+            lbarticulo.Text = lbdescuento.Text = lbpxunidad.Text = lbsaldo.Text = lbvalor.Text = lbvalor1.Text = lbvalordes.Text = LblPlu.Text = "";
+            boxvalor.Visible = true;
+            dvalor1.Visible = false;
+            ddescuento.Visible = false;
+            dvalor2.Visible = false;
+        }
+
+        private void MostrarSinDescuento(DataRow row)
+        {
+            var detalle = $"{row["detalle"]}-{row["nombrepres"]}";
+            int vrbeneficio = SafeGetInt(row, "vrveneficio");
+            var valor = SafeGetInt(row, "valormiva");
+
+            var peso = SafeGetInt(row, "peso");
+            if (peso == 0) peso = 1;
+
+            lbarticulo.Text = detalle;
+            LblPlu.Text = Convert.ToString(row["CodigoArticulo"]);
+            lbvalor.Text = valor.ToString();
+            lbsaldo.Text = Convert.ToString(row["saldocant"]);
+            lbpxunidad.Text = (valor / peso).ToString();
+        }
+
+        private void MostrarConDescuento(DataRow row)
+        {
+            var detalle = $"{row["detalle"]}-{row["nombrepres"]}";
+            var valor = SafeGetInt(row, "PrecioOriginal");
+            var peso = SafeGetInt(row, "peso");
+            var descuento = SafeGetInt(row, "vrveneficio");
+            var precioFinal = SafeGetInt(row, "PrecioFinal");
+            var esDesvalor = Convert.ToString(row["dtocomovalor"]);
+
+            if (peso == 0) peso = 1;
+            var descuentoTexto = (esDesvalor == "False" || string.IsNullOrEmpty(esDesvalor)) ? $"{descuento}%" : $"${descuento}";
+
+            lbarticulo.Text = detalle;
+            LblPlu.Text = Convert.ToString(row["CodigoArticulo"]);
+            lbvalor1.Text = valor.ToString();
+            lbvalordes.Text = precioFinal.ToString();
+            lbsaldo.Text = Convert.ToString(row["saldocant"]);
+            lbdescuento.Text = descuentoTexto;
+            lbpxunidad.Text = (precioFinal / peso).ToString();
+
+            boxvalor.Visible = false;
+            dvalor1.Visible = true;
+            ddescuento.Visible = true;
+            dvalor2.Visible = true;
+        }
+
+        private void MostrarArticuloNoEncontrado()
+        {
+            modal.Visible = true;
+            ResetControles();
+        }
+        private int SafeGetInt(DataRow row, string columnName)
+        {
+            if (row.Table.Columns.Contains(columnName) && row[columnName] != DBNull.Value)
+            {
+                return Convert.ToInt32(row[columnName]);
+            }
+            return 0; // o el valor por defecto que prefieras
+        }
+        private void EjecutarSonido(string urlSonido)
+        {
+            string script = $@"
+        var audio = new Audio('{urlSonido}');
+        audio.play();
+    ";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), script, true);
         }
     }
 }
