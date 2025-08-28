@@ -1,26 +1,29 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.EMMA;
+using DocumentFormat.OpenXml.ExtendedProperties;
+using DocumentFormat.OpenXml.Math;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Office2010.Word;
+using DocumentFormat.OpenXml.Presentation;
+using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.VariantTypes;
+using DocumentFormat.OpenXml.Vml;
 using Intranet.conexiona;
-using Intranet.Vista.INVENTARIO;
 using Intranet.Vista;
+using Intranet.Vista.Documentos;
+using Intranet.Vista.INVENTARIO;
+using Microsoft.ReportingServices.ReportProcessing.OnDemandReportObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using DataTable = System.Data.DataTable;
-using System.Web.WebPages;
-using DocumentFormat.OpenXml.EMMA;
-using DocumentFormat.OpenXml.Math;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Presentation;
-using Intranet.Vista.Documentos;
-using Microsoft.ReportingServices.ReportProcessing.OnDemandReportObjectModel;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using System.Reflection;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Office2010.Word;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Vml;
 using System.Security.Cryptography;
+using System.Web.WebPages;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using DataTable = System.Data.DataTable;
 
 namespace Intranet.modelo
 {
@@ -3357,6 +3360,11 @@ namespace Intranet.modelo
             sql = $"CALL P_LISTA_NOVEDADES('{datein}','{date_end}');";
             return dataload.MySqlQuery(sql, bd);
         }
+        internal DataSet listNovedadesUsuarios(string usuario, String bd)
+        {
+            sql = $"CALL P_LISTA_NOVEDADESUSUARIO('{usuario}');";
+            return dataload.MySqlQuery(sql, bd);
+        }
         internal DataSet listNovedadesAdmonDetails(string fechaini, string fechafin,string employee, String bd)
         {
 
@@ -3381,7 +3389,7 @@ namespace Intranet.modelo
         {
             if (usuario == "")
             {
-                sql = "SELECT " +
+                sql = "SELECT n.id, " +
                "   p.nomb Empleado," +
                "    SUM(CASE WHEN n.Diurno = 1 THEN n.horas ELSE 0 END) AS Horas_Diurnas," +
                "   SUM(CASE WHEN n.Nocturno = 1 THEN n.horas ELSE 0 END) AS Horas_Nocturnas," +
@@ -3399,7 +3407,7 @@ namespace Intranet.modelo
             }
             else
             {
-                sql = "SELECT " +
+                sql = "SELECT n.id, " +
                "   p.nomb Empleado," +
                "    SUM(CASE WHEN n.Diurno = 1 THEN n.horas ELSE 0 END) AS Horas_Diurnas," +
                "   SUM(CASE WHEN n.Nocturno = 1 THEN n.horas ELSE 0 END) AS Horas_Nocturnas," +
@@ -3416,6 +3424,47 @@ namespace Intranet.modelo
                "    p.nomb, n.usucrea;";
             }
            
+            return dataload.MySqlQuery(sql, bd);
+        }
+        internal DataSet listadoNovedadesusuario(string usuario, String bd)
+        {
+            if (usuario == "")
+            {
+                sql = "SELECT n.Id, n.fecha, " +
+                   "                  p.nomb Empleado," +
+                   "                  n.Novedad," +
+                   "                   CASE WHEN n.Diurno = 1 THEN n.horas ELSE 0 END AS Horas_Diurnas," +
+                   "                  CASE WHEN n.Nocturno = 1 THEN n.horas ELSE 0 END AS Horas_Nocturnas, n.horas," +
+                   "      n.usucrea Usuario" +
+                   "                FROM novedades n" +
+                   "               INNER JOIN" +
+                   "                  persona p ON p.idResp = n.Empleado" +
+                   "                   WHERE  fecha BETWEEN" +
+                   "                   DATE_SUB(CURDATE(), INTERVAL(DAYOFWEEK(CURDATE()) + 5) % 7 DAY)" +
+                   "                  AND DATE_ADD(CURDATE(), INTERVAL (7 - DAYOFWEEK(CURDATE())) DAY) ";
+            }
+            else
+            {
+                sql = "SELECT n.Id, n.fecha, " +
+                    "                  p.nomb Empleado," +
+                    "                  n.Novedad," +
+                    "                   CASE WHEN n.Diurno = 1 THEN n.horas ELSE 0 END AS Horas_Diurnas," +
+                    "                  CASE WHEN n.Nocturno = 1 THEN n.horas ELSE 0 END AS Horas_Nocturnas, n.horas," +
+                    "      n.usucrea Usuario" +
+                    "                FROM novedades n" +
+                    "               INNER JOIN" +
+                    "                  persona p ON p.idResp = n.Empleado" +
+                    $"                   WHERE n.usucrea = '{usuario}' and fecha BETWEEN" +
+                    "                   DATE_SUB(CURDATE(), INTERVAL(DAYOFWEEK(CURDATE()) + 5) % 7 DAY)" +
+                    "                  AND DATE_ADD(CURDATE(), INTERVAL (7 - DAYOFWEEK(CURDATE())) DAY) ";
+            }
+
+            return dataload.MySqlQuery(sql, bd);
+        }
+        internal DataSet DeleteNovedades(string id, String bd)
+        {
+          sql="delete from novedades where id='"+id+"'";
+
             return dataload.MySqlQuery(sql, bd);
         }
         internal int mborraincapacidad(string p_idincapacidad, String bd)
@@ -3444,6 +3493,19 @@ namespace Intranet.modelo
         internal int Mupdateincapacidad(string p_idempleado, string pobservaciones, string pfechaini, string pfechafin, string puser, string pidincapacidad, String bd)
         {
             sql = "update incapacidades set INCA_IDPERSONA=(select idResp from persona where nomb='" + p_idempleado + "'),INCA_MOTIVO='" + pobservaciones + "',INCA_FECHAINICIAL='" + pfechaini + "',INCA_FECHAFINAL='" + pfechafin + "',INCA_USUCREA='" + puser + "' WHERE INCA_ID='" + pidincapacidad + "' ";
+            return dataload.MysqlProcedimiento(sql, bd);
+        }
+        internal int MupdateNovedades(string id,string p_idempleado,string horas,bool diurno,bool nocturno, string pobservaciones, string pfechaini,  string puser, String bd)
+        {
+            sql = "update novedades       " +
+                $"set fecha = '{pfechaini}'," +
+                $"       Empleado = (select idResp from persona p where p.nomb= '{p_idempleado}')," +
+                $"        Horas = '{horas}'," +
+                $"        Diurno = {diurno} ," +
+                $"       Nocturno = {nocturno} ," +
+                $"        Novedad = '{pobservaciones}'," +
+                $"      DateTimeCreation = sysdate(), usucrea= '{puser}' " +
+                $" where id='{id}' ";
             return dataload.MysqlProcedimiento(sql, bd);
         }
 

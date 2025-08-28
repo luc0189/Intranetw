@@ -36,10 +36,14 @@
                     <div class="modal-dialog modal-lg modalprint " runat="server">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <asp:LinkButton ID="btncerrarimprime" class="close" data-dismiss="modal" runat="server" Text="Insertar" OnClick="btncerrarimprime_Click">
-                                             <span aria-hidden="true" class="fa fa-close"></span>
-                                </asp:LinkButton>
                                 <h4 class="modal-title">Imprimir</h4>
+                                <div class="card card-tools">
+                                      <asp:LinkButton ID="btncerrarimprime" class="close" data-dismiss="modal" runat="server" Text="Insertar" OnClick="btncerrarimprime_Click">
+                 <span aria-hidden="true" class="fa fa-times"></span>
+  </asp:LinkButton>
+                                </div>
+                              
+                                
                             </div>
                             <div class="modal-body">
                                 <div class="card card-body">

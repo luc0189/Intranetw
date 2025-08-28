@@ -26,11 +26,14 @@
     <form runat="server">
         <section class="content">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card card-dark">
                         <div class="card-header">
                             <h3 class="card-title">Mas...</h3>
+                            <div  class="box-tools"> <label runat="server" id="IdNovedad"></label>
+                            </div>
                         </div>
+                      
                         <div class="card-body">
 
                             <div class="form-group has-feedback">
@@ -76,27 +79,43 @@
 
 
                             <div class="form-group has-feedback">
-
                                 <textarea id="txtobserva" runat="server" style="width: 100%;" placeholder="Novedad" rows="10"></textarea>
                             </div>
 
                         </div>
                         <div class="card-footer">
                             <asp:LinkButton ID="btnguardar_Click" runat="server" OnClick="btnguardar_Click2" Text="Volver" class="btn btn-app">
-                 <i aria-hidden="true"  class="fa fa-save"></i>Guardar
+                                <i aria-hidden="true"  class="fa fa-save"></i>Guardar
                             </asp:LinkButton>
+                            <asp:LinkButton ID="btnActualiza" runat="server" OnClick="btnActualiza_Click" Text="Volver" class="btn btn-app">
+                                <i aria-hidden="true"  class="fa fa-save"></i>Actualizar
+                            </asp:LinkButton>
+                            <asp:Button ID="btnCancela" runat="server" class="btn btn-outline" Text="Cancelar" OnClick="btnCancela_Click1" />
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="card card-dark">
                         <div class="card-header">
                             Listado Semanal
                         </div>
                         <div class="card-body">
-                            <asp:GridView ID="GridViewNovedades" runat="server" GridLines="None"
+                            <asp:GridView ID="GridViewNovedades" runat="server" GridLines="None" AutoGenerateColumns="False"
                                 CssClass="table gvuser  table-hover table-responsive text-sm"
-                                CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros <b>indicados</b>.">
+                                CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros <b>indicados</b>." OnSelectedIndexChanged="GridViewNovedades_SelectedIndexChanged">
+                                <Columns>
+                                    <asp:CommandField ShowSelectButton="true" ButtonType="Image" SelectText="Selecciona" SelectImageUrl="~/dist/img/ok.png" ControlStyle-CssClass="c" />
+                                    <asp:BoundField DataField="Id" HeaderText="ID" />
+                                    <asp:BoundField DataField="fecha" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false" />
+                                    <asp:BoundField DataField="Empleado" HeaderText="Empleado" />
+                                    <asp:BoundField DataField="Novedad" HeaderText="Novedad" />
+                                    <asp:BoundField DataField="H_E_D" HeaderText="H_Diurnas" />
+                                    <asp:BoundField DataField="H_E_N" HeaderText="H_Nocturas" />
+                                    <asp:BoundField DataField="Total" HeaderText="Horas" />
+                                    <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
+                                </Columns>
+
                             </asp:GridView>
                         </div>
                     </div>
@@ -124,7 +143,7 @@
                             <input id="txtEmail" runat="server" type="email" class="form-control" placeholder="Correo Electronico">
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="Btncancela" runat="server" class="btn btn-outline" Text="Cancelar" OnClick="Btncancela_Click" />
+                    <%--        <asp:Button ID="Btncancela" runat="server" class="btn btn-outline" Text="Cancelar" OnClick="Btncancela_Click" />--%>
 
                             <asp:Button ID="btnguardaempleado" runat="server" class="btn btn-outline" Text="Guardar" OnClick="btnguardaempleado_Click" />
 

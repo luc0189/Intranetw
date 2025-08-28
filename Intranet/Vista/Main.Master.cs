@@ -19,31 +19,36 @@ namespace Intranet.Vista
         {
             if (!Page.IsPostBack)
             {
-              
-                titlecosto.Text = Session["salaventas"].ToString();
+                // Verifica si la sesión ha expirado antes de acceder a cualquier variable de sesión
+                if (Session["USUARIO"] == null || Session["BD"] == null)
+                {
+                    string mensaje = "Se ha terminado su sesión";
+                    string script = $@"<script type='text/javascript'>
+                    alert('Error: {mensaje}');
+                        </script>";
+
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                    Response.Redirect("~/Login.aspx");
+                    return;
+                }
+
                 try
                 {
-      
+                    titlecosto.Text = Session["salaventas"].ToString();
                     ListarCumpleñeros();
-                    if (Session["USUARIO"] != null)
-                    {
-                        profi = Session["perfil"].ToString();
-                        Label2.Text = Session["USUARIO"].ToString();
-                       
-                        perfiles.InnerText = Session["perfilnombre"].ToString();
-                        labelcc.InnerText = Session["CC"].ToString();
-                        traedatos(Session["CC"].ToString());
 
-                    }
-                    else
-                    {
-                        Response.Redirect("~/Login.aspx");
-                    }
-                          
+                    profi = Session["perfil"].ToString();
+                    Label2.Text = Session["USUARIO"].ToString();
+                    perfiles.InnerText = Session["perfilnombre"].ToString();
+                    labelcc.InnerText = Session["CC"].ToString();
+                    traedatos(Session["CC"].ToString());
+
                     if (Label2.Text == "")
                     {
+                        // Puedes redirigir aquí si lo deseas
                         // Response.Redirect("../Login.aspx");
                     }
+
                     try
                     {
                         var refdatos = Controlasql.Clistamenuid(Session["BD"].ToString(), Session["perfilid"].ToString());
@@ -78,10 +83,9 @@ namespace Intranet.Vista
                 }
                 catch (Exception)
                 {
-
-                    // Response.Redirect("..//Login.aspx");
+                    // Si ocurre cualquier excepción, redirige al login
+                    Response.Redirect("~/Login.aspx");
                 }
-
             }
             
 }

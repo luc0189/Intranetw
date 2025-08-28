@@ -20,6 +20,7 @@ namespace Intranet.Vista
                 llenaempleados();
                 Nuevotercero.Visible = false;
                 ListaNovedades();
+                btnActualiza.Visible = false;
             }
 
         }
@@ -61,7 +62,7 @@ namespace Intranet.Vista
             try
             {
                 String bd = Session["BD"].ToString();
-                var registros = Controlasql.listaNovedades(Session["USUARIO"].ToString(),bd);
+                var registros = Controlasql.listaNovedadesusuario(Session["USUARIO"].ToString(),bd);
                 if (registros.Tables[0].Rows.Count > 0)
                 {
                     GridViewNovedades.DataSource = registros;
@@ -84,7 +85,12 @@ namespace Intranet.Vista
         {
             selectempleado.Value = "";
             txtobserva.Value = "";
+            IdNovedad.InnerText = "";
+            txtfechaini.Value = "";
+            hours.Value = "";
 
+            id39.Checked = false;
+            id40.Checked = false;
         }
         protected void btnguardar_Click2(object sender, EventArgs e)
         {
@@ -187,6 +193,84 @@ namespace Intranet.Vista
         protected void btnnuevoempleado_Click(object sender, EventArgs e)
         {
             Nuevotercero.Visible = true;
+        }
+
+        protected void btnActualiza_Click(object sender, EventArgs e)
+        {
+            var diurno = id39.Checked;
+            var nocturno = id40.Checked;
+           
+            try
+            {
+                String bd = Session["BD"].ToString();
+                var registros = Controlasql.cUpdateNovedades(IdNovedad.InnerText,
+                    selectempleado.Value.ToUpper(),
+                    hours.Value,diurno, nocturno,txtobserva.Value.ToUpper().ToString(), txtfechaini.Value, Session["USUARIO"].ToString(), bd);
+                if (registros >0)
+                {
+                    string mensaje = "Registro Exitoso";
+                    string script = $@"<script type='text/javascript'>
+                    alert(' {mensaje}');
+                        </script>";
+
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                    Limpia();
+                    ListaNovedades();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            btnActualiza.Visible = false;
+            btnguardar_Click.Visible = true;
+            btnCancela.Visible = false;
+
+        }
+
+        protected void GridViewNovedades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow gr = GridViewNovedades.SelectedRow;
+            IdNovedad.InnerText = gr.Cells[1].Text;
+            selectempleado.Value = gr.Cells[3].Text;
+            txtfechaini.Value = gr.Cells[2].Text;
+            
+            txtobserva.Disabled = false;
+            txtobserva.Value = Page.Server.HtmlDecode(gr.Cells[4].Text);
+            hours.Value = gr.Cells[7].Text;
+           
+            if (gr.Cells[5].Text == "1")
+            {
+                id39.Checked = true;
+            }
+            else
+            {
+                id39.Checked = false;
+            }
+            if (gr.Cells[6].Text == "1")
+            {
+                id40.Checked = true;
+            }
+            else
+            {
+                id40.Checked = false;
+            }
+            btnActualiza.Visible = true;
+            btnguardar_Click.Visible = false;
+            btnCancela.Visible = true;
+
+
+        }
+
+        protected void btnCancela_Click1(object sender, EventArgs e)
+        {
+            btnActualiza.Visible = false;
+            btnguardar_Click.Visible = true;
+            btnCancela.Visible = false;
+          
+            Limpia();
+
         }
     }
 }

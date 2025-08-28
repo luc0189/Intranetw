@@ -2713,6 +2713,19 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
+        public static DataSet listaNovedadesusuario(string usuario, string pbd)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.listNovedadesUsuarios(usuario, pbd);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
         public static DataSet listaNovedadesAdmon(string fini,string ffin, string pbd)
         {
             Modelos usu2 = new Modelos();
@@ -2746,6 +2759,20 @@ namespace Intranet.Controlador
             try
             {
                 return usu.Mcreanovedadincapacidad(p_idincapacidad, p_estado, pobserva, p_fecha, puser,pbd);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static int cUpdateNovedades(string id,string idEmpleado,string horas, bool diurno,bool nocturno,
+           string pobserva, string p_fecha, string puser, string pbd)
+        {
+            Modelos usu = new Modelos();
+            try
+            {
+                return usu.MupdateNovedades(id,idEmpleado,horas,diurno,nocturno,pobserva,p_fecha, puser, pbd);
             }
             catch (Exception e)
             {

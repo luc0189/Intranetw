@@ -15,6 +15,15 @@ namespace Intranet.Vista
     {
 
         /// <summary>
+        /// Control IdNovedad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl IdNovedad;
+
+        /// <summary>
         /// Control selectempleado.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,24 @@ namespace Intranet.Vista
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnguardar_Click;
+
+        /// <summary>
+        /// Control btnActualiza.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnActualiza;
+
+        /// <summary>
+        /// Control btnCancela.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancela;
 
         /// <summary>
         /// Control GridViewNovedades.
@@ -148,15 +175,6 @@ namespace Intranet.Vista
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtEmail;
-
-        /// <summary>
-        /// Control Btncancela.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btncancela;
 
         /// <summary>
         /// Control btnguardaempleado.
