@@ -19,6 +19,7 @@ namespace Intranet.Vista
         {
             if (!Page.IsPostBack)
             {
+                A4.Visible = false;
                 // Verifica si la sesión ha expirado antes de acceder a cualquier variable de sesión
                 if (Session["USUARIO"] == null || Session["BD"] == null)
                 {
@@ -52,22 +53,21 @@ namespace Intranet.Vista
                     try
                     {
                         var refdatos = Controlasql.Clistamenuid(Session["BD"].ToString(), Session["perfilid"].ToString());
+                        var controlesPermitidos = refdatos.Tables[0]
+                        .AsEnumerable()
+                        .Select(r => r[0].ToString())
+                        .ToList();
 
-                        if (refdatos.Tables[0].Rows.Count > 0)
+                        foreach (string id in controlesPermitidos)
                         {
-                            notificacion.Visible = false;
-
-                            foreach (DataRow row in refdatos.Tables[0].Rows)
+                            var control = FindControlRecursivo(this, id);
+                            if (control != null)
                             {
-                                string idControl = row[0].ToString();
-
-                                Control control = FindControlRecursivo(this, idControl);
-                                if (control != null)
-                                {
-                                    control.Visible = true;
-                                }
+                                control.Visible = true;
                             }
                         }
+
+                        
                     }
                     catch (Exception ex)
                     {

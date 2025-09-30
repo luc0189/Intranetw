@@ -101,11 +101,22 @@
                             Listado Semanal
                         </div>
                         <div class="card-body">
-                            <asp:GridView ID="GridViewNovedades" runat="server" GridLines="None" AutoGenerateColumns="False"
-                                CssClass="table gvuser  table-hover table-responsive text-sm"
-                                CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros <b>indicados</b>." OnSelectedIndexChanged="GridViewNovedades_SelectedIndexChanged">
+                            <asp:GridView ID="GridViewNovedades" 
+                                    runat="server" GridLines="None"
+                                    AutoGenerateColumns="False"
+                                    CssClass="table gvuser  table-hover table-responsive text-sm"
+                                    EmptyDataText="No se encontraron Registros con los parametros <b>indicados</b>." 
+                                    OnSelectedIndexChanged="GridViewNovedades_SelectedIndexChanged"
+                                    OnRowCommand="GridViewNovedades_RowCommand">
                                 <Columns>
                                     <asp:CommandField ShowSelectButton="true" ButtonType="Image" SelectText="Selecciona" SelectImageUrl="~/dist/img/ok.png" ControlStyle-CssClass="c" />
+                                     <asp:TemplateField HeaderText="Eliminar">
+                                        <ItemTemplate>
+                                            <asp:Button ID="btnOtraAccion" runat="server" Text="Eliminar" 
+                                                CommandName="OtraAccion" 
+                                                CommandArgument='<%# Eval("Id") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:BoundField DataField="Id" HeaderText="ID" />
                                     <asp:BoundField DataField="fecha" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false" />
                                     <asp:BoundField DataField="Empleado" HeaderText="Empleado" />

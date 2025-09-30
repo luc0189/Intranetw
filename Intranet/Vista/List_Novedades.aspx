@@ -104,7 +104,7 @@
                                             CellSpacing="0" EmptyDataText="No se encontraron Registros con los parametros <b>indicados</b>." OnSelectedIndexChanged="GridViewdetalle_SelectedIndexChanged">
                                             <Columns>
                                                 <asp:CommandField ShowSelectButton="true" ButtonType="Image" SelectText="Selecciona" SelectImageUrl="~/dist/img/ok.png" ControlStyle-CssClass="c" />
-
+                                              
                                             </Columns>
                                         </asp:GridView>
 

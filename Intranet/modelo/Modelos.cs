@@ -3461,11 +3461,12 @@ namespace Intranet.modelo
 
             return dataload.MySqlQuery(sql, bd);
         }
-        internal DataSet DeleteNovedades(string id, String bd)
+      
+        internal int DeleteNovedades(string id, String bd)
         {
-          sql="delete from novedades where id='"+id+"'";
+          sql= "delete from novedades where id='" + id + "'";
 
-            return dataload.MySqlQuery(sql, bd);
+            return dataload.MysqlProcedimiento(sql, bd);
         }
         internal int mborraincapacidad(string p_idincapacidad, String bd)
         {

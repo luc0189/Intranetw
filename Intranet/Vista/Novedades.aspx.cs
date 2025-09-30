@@ -228,7 +228,49 @@ namespace Intranet.Vista
             btnCancela.Visible = false;
 
         }
+        protected void GridViewNovedades_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "OtraAccion")
+            {
+                String bd = Session["BD"].ToString();
+                string id = e.CommandArgument.ToString();
+                // Llamar a tu método con el ID seleccionado
+                try
+                {
+                    var dato = Controlasql.DeleteNovedades(id, bd);
 
+                    if (dato > 0)
+                    {
+                       
+                       
+                        string mensaje = $"Registro {id} Eliminado";
+                        string script = $@"<script type='text/javascript'>
+                    alert(' {mensaje}');
+                        </script>";
+
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                        ListaNovedades();
+                    }
+                    else
+                    {
+
+                        string mensaje = $"El Registro {id} No pudo ser eliminado";
+                        string script = $@"<script type='text/javascript'>
+                    alert(' {mensaje}');
+                        </script>";
+
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, false);
+                        ListaNovedades();
+                    }
+                }
+                catch (Exception)
+                {
+
+                    Response.Redirect("Exceptionnet.aspx");
+                }
+            }
+            
+        }
         protected void GridViewNovedades_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow gr = GridViewNovedades.SelectedRow;

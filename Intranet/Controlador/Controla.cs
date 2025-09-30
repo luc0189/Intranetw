@@ -2713,6 +2713,19 @@ namespace Intranet.Controlador
                 throw ex; // para lanzar la exception o complementar la capturada
             }
         }
+        public static int  DeleteNovedades(string id, string pbd)
+        {
+            Modelos usu2 = new Modelos();
+
+            try
+            {
+                return usu2.DeleteNovedades(id, pbd);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // para lanzar la exception o complementar la capturada
+            }
+        }
         public static DataSet listaNovedadesusuario(string usuario, string pbd)
         {
             Modelos usu2 = new Modelos();
